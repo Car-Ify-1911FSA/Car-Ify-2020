@@ -5,6 +5,11 @@ import {Link} from 'react-router-dom'
 import {loadAllProducts} from '../store'
 
 class Sidebar extends Component {
+  constructor() {
+    super()
+    this.state = {}
+  }
+
   componentDidMount() {
     this.props.fetchAllProducts()
   }
@@ -27,7 +32,7 @@ class Sidebar extends Component {
     return (
       <div className="sideBarDiv">
         <Link to="/allProducts" className="linkText">
-          All Products
+          View All Products
         </Link>
 
         <div className="sideBarBrandDiv">
