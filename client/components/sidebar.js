@@ -8,7 +8,7 @@ class Sidebar extends Component {
     return (
       <div className="sideBarDiv">
         <Link to="/allProducts" className="linkText">
-          All Products [BUILD!]
+          All Products
         </Link>
 
         <div className="sideBarBrandDiv">
