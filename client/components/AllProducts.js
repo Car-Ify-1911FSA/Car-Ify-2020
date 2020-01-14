@@ -1,15 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {loadAllProducts} from '../store/allProducts'
+import {loadAllProducts} from '../store'
 import ProductCard from './ProductCard'
 
 class AllProducts extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
-    this.props.onLoadAllProducts()
+    this.props.fetchAllProducts()
   }
 
   render() {
@@ -20,7 +16,7 @@ class AllProducts extends Component {
           return (
             <div key={product.id}>
               <ProductCard product={product} />
-              {/* <BuyButton /> component has to be added*/}
+              {/* <AddToCartButton /> component has to be added*/}
             </div>
           )
         })}
@@ -37,7 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadAllProducts: () => {
+    fetchAllProducts: () => {
       dispatch(loadAllProducts())
     }
   }

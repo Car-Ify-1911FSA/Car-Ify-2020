@@ -15,7 +15,7 @@ const gotAllProducts = allProducts => {
 export const loadAllProducts = () => {
   return async dispatch => {
     try {
-      // FIXME: need to check route naming
+      //need to check route naming
       const {data} = await axios.get('/api/allproducts')
       dispatch(gotAllProducts(data))
     } catch (error) {
