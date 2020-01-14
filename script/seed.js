@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Payment} = require('../server/db/models')
+const {User, Payment, Product} = require('../server/db/models')
 
 const userSeed = [
   {
@@ -26,7 +26,7 @@ const paymentSeed = [
   }
 ]
 
-const products = [
+const productSeed = [
   {
     brand: 'Lexus',
     model: 'RX350',
@@ -94,6 +94,7 @@ async function seed() {
 
   await User.bulkCreate(userSeed)
   await Payment.bulkCreate(paymentSeed)
+  await Product.bulkCreate(productSeed)
 
   console.log(`seeded successfully`)
 }
