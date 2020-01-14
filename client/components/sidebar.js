@@ -6,10 +6,12 @@ import {loadAllProducts} from '../store'
 
 class Sidebar extends Component {
   componentDidMount() {
-    console.log('sidebar -', this.props)
+    this.props.fetchAllProducts()
+    console.log('sidebar Hi -', this.props)
   }
 
   render() {
+    console.log('sidebar render -', this.props)
     return (
       <div className="sideBarDiv">
         <Link to="/allProducts" className="linkText">
@@ -45,7 +47,8 @@ class Sidebar extends Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id,
+    hello: 'hello',
+    // isLoggedIn: !!state.user.id,
     allProducts: state.AllProducts
   }
 }
