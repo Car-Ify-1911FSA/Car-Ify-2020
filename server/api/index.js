@@ -1,6 +1,8 @@
 const router = require('express').Router()
 
 router.use('/users', require('./users'))
+router.use('/payments', require('./payments'))
+router.use('/payment-accounts', require('./paymentAccounts'))
 router.use('/products', require('./products'))
 
 router.use((req, res, next) => {

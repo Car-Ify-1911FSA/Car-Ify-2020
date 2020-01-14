@@ -6,20 +6,16 @@ import ProductCard from './ProductCard'
 class AllProducts extends Component {
   componentDidMount() {
     this.props.fetchAllProducts()
-    console.log('all product test 1')
   }
 
   render() {
-    console.log('all product test')
     return (
       <div>
-        {/* Sidebar Component (filters) has to be added*/}
-        <h1>HELLO ALL PRODUCTS</h1>
+        <h1>Our Inventory:</h1>
         {this.props.allProducts.map(product => {
           return (
             <div key={product.id}>
               <ProductCard product={product} />
-              {/* <AddToCartButton />  */}
             </div>
           )
         })}
