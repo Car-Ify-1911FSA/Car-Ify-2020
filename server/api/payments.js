@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     if (allPayments) {
       res.json(allPayments)
     } else {
-      res.sendSstatus(404)
+      res.sendStatus(404)
     }
   } catch (error) {
     next(error)
