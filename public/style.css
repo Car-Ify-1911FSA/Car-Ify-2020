@@ -45,6 +45,15 @@ h3 {
   margin: 0px;
 }
 
+.linkText {
+  color: black;
+  text-decoration: none;
+}
+
+.linkText:hover {
+  text-decoration: underline;
+}
+
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarDiv {
   background-color: lightpink;
@@ -76,8 +85,12 @@ h3 {
   background-color: lightskyblue;
 }
 
-/* ----------------- AUTH FORM ELEMENT ----------------- */
+/* ----------------- HOME PAGE ELEMENT ----------------- */
 .homePageDiv {
   padding: 15px;
   width: 100%;
+}
+
+.hpLoggedInWelcome {
+  color: rgba(0, 152, 195, 1);
 }
