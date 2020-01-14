@@ -14,7 +14,7 @@ class AllProducts extends Component {
     return (
       <div>
         {/* Sidebar Component (filters) has to be added*/}
-        <h1>HELLO ALL PRODUCTS</h1>
+        <h1>Our Inventory:</h1>
         {this.props.allProducts.map(product => {
           return (
             <div key={product.id}>
