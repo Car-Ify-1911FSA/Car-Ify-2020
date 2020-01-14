@@ -25,6 +25,10 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  margin: 0;
+}
+
 /* ----------------- GLOBAL ELEMENT ----------------- */
 .belowNavDiv {
   display: flex;
@@ -44,17 +48,16 @@ h2 {
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarDiv {
   background-color: lightpink;
+  width: 10vw;
   height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
   padding: 0 10px;
 }
 
 /* ----------------- AUTH FORM ELEMENT ----------------- */
 .authFormDiv {
-  background-color: orange;
   margin: auto;
   width: 30vw;
   height: 50vh;
@@ -63,4 +66,18 @@ h2 {
   justify-content: space-evenly;
   align-items: center;
   border-radius: 10px;
+}
+
+.login-authFormDiv {
+  background-color: orange;
+}
+
+.signup-authFormDiv {
+  background-color: lightskyblue;
+}
+
+/* ----------------- AUTH FORM ELEMENT ----------------- */
+.homePageDiv {
+  padding: 15px;
+  width: 100%;
 }
