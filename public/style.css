@@ -65,6 +65,18 @@ h3 {
   padding: 0 10px;
 }
 
+.sideBarSelect {
+  width: 80%;
+  font-size: medium;
+}
+
+.sideBarSubmitBtn {
+  background-color: lightseagreen;
+  width: 80%;
+  font-size: medium;
+  border-radius: 5px;
+}
+
 /* ----------------- AUTH FORM ELEMENT ----------------- */
 .authFormDiv {
   margin: 50px auto;
