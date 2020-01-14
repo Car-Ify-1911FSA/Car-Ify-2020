@@ -90,6 +90,19 @@ const productSeed = [
     quantity: 17,
     imageUrl:
       'https://www.cstatic-images.com/car-pictures/xl/USC80MAS061C021001.jpg'
+  },
+  {
+    brand: 'BMW',
+    model: 'S-350',
+    category: 'Sedan',
+    color: 'White',
+    price: 68000,
+    condition: 'new',
+    description:
+      'A performance automobile is a vehicle that is designed specifically for speed.',
+    quantity: 12,
+    imageUrl:
+      'https://www.autoblog.com/img/research/styles/photos/performance.jpg'
   }
 ]
 
