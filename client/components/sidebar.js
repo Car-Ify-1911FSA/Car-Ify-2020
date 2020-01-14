@@ -7,7 +7,12 @@ import {loadAllProducts} from '../store'
 class Sidebar extends Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      brand: '',
+      category: '',
+      condition: '',
+      price: ''
+    }
   }
 
   componentDidMount() {
@@ -36,7 +41,7 @@ class Sidebar extends Component {
         </Link>
 
         <div className="sideBarBrandDiv">
-          <span>Brand: </span>
+          <strong>Brand: </strong>
           <br />
           <select className="sideBarSelect">
             {brand.map((idvBrand, idx) => (
@@ -46,7 +51,7 @@ class Sidebar extends Component {
         </div>
 
         <div className="sideBarCategoryDiv">
-          <span>Category: </span>
+          <strong>Category: </strong>
           <br />
           <select className="sideBarSelect">
             {category.map((idvCtgy, idx) => (
@@ -56,7 +61,7 @@ class Sidebar extends Component {
         </div>
 
         <div className="sideBarConditionDiv">
-          <span>Condition: </span>
+          <strong>Condition: </strong>
           <br />
           <select className="sideBarSelect">
             {condition.map((idvCndtn, idx) => (
@@ -68,7 +73,7 @@ class Sidebar extends Component {
         </div>
 
         <div className="sideBarPriceDiv">
-          <span>Price: </span>
+          <strong>Price: </strong>
           <br />
           <select className="sideBarSelect">
             <option>Low</option>
