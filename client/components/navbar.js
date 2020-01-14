@@ -16,7 +16,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             </Link>
 
             <Link to="/cart" className="navBarText linkText">
-              Cart [BUILD!]
+              Cart
             </Link>
 
             <a href="#" onClick={handleClick} className="linkText">

@@ -34,6 +34,15 @@ h3 {
   display: flex;
 }
 
+.linkText {
+  color: blue;
+  text-decoration: none;
+}
+
+.linkText:hover {
+  text-decoration: underline;
+}
+
 /* ----------------- NAVBAR ELEMENT ----------------- */
 .navBarInsideDiv {
   background-color: lightgray;
@@ -43,15 +52,6 @@ h3 {
   justify-content: space-between;
   padding: 0 10px;
   margin: 0px;
-}
-
-.linkText {
-  color: black;
-  text-decoration: none;
-}
-
-.linkText:hover {
-  text-decoration: underline;
 }
 
 /* ----------------- SIDEBAR ELEMENT ----------------- */
@@ -93,4 +93,9 @@ h3 {
 
 .hpLoggedInWelcome {
   color: rgba(0, 152, 195, 1);
+}
+
+/* ----------------- CART ELEMENT ----------------- */
+.cartFullDiv {
+  padding: 0 10px;
 }
