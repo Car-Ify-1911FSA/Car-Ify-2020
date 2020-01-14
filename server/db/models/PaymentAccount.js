@@ -5,8 +5,8 @@ const PaymentAccounts = db.define('payment_accounts', {
   type: {
     type: Sequelize.STRING
   },
-  number: {
-    type: Sequelize.INTEGER
+  name: {
+    type: Sequelize.STRING
   }
 })
 
