@@ -6,11 +6,11 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {email, isLoggedIn} = props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      {isLoggedIn ? <h3>Welcome, {email}</h3> : <h3>Welcome Guest !</h3>}
     </div>
   )
 }
@@ -20,6 +20,7 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
+    isLoggedIn: !!state.user.id,
     email: state.user.email
   }
 }
