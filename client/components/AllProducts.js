@@ -5,21 +5,24 @@ import ProductCard from './ProductCard'
 
 class AllProducts extends Component {
   componentDidMount() {
-    this.props.fetchAllProducts()
+    // this.props.fetchAllProducts()
+    console.log('all product test 1')
   }
 
   render() {
+    console.log('all product test')
     return (
       <div>
         {/* Sidebar Component (filters) has to be added*/}
-        {this.props.allProducts.map(product => {
+        <h1>HELLO ALL PRODUCTS</h1>
+        {/* {this.props.allProducts.map(product => {
           return (
             <div key={product.id}>
               <ProductCard product={product} />
-              {/* <AddToCartButton /> component has to be added*/}
+              <AddToCartButton /> component has to be added
             </div>
           )
-        })}
+        })} */}
       </div>
     )
   }
