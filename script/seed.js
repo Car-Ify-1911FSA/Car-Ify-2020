@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Payment, Product} = require('../server/db/models')
+const {
+  User,
+  Payment,
+  Product,
+  PaymentAccount,
+  Order
+} = require('../server/db/models')
 
 const userSeed = [
   {
@@ -106,6 +112,51 @@ const productSeed = [
   }
 ]
 
+const orderSeed = [
+  {
+    cartId: 1,
+    userId: 1,
+    productId: 1,
+    paymentAccountId: 1
+  },
+  {
+    cartId: 1,
+    userId: 1,
+    productId: 2,
+    paymentAccountId: 1
+  },
+  {
+    cartId: 2,
+    userId: 1,
+    productId: 1,
+    paymentAccountId: 2
+  },
+  {
+    cartId: 1,
+    userId: 2,
+    productId: 2,
+    paymentAccountId: 3
+  }
+]
+
+const paymentAccountSeed = [
+  {
+    name: 'cc123',
+    paymentId: 1,
+    userId: 1
+  },
+  {
+    name: 'paypal123',
+    paymentId: 2,
+    userId: 1
+  },
+  {
+    name: 'stripe123',
+    paymentId: 3,
+    userId: 2
+  }
+]
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -113,13 +164,12 @@ async function seed() {
   await User.bulkCreate(userSeed)
   await Payment.bulkCreate(paymentSeed)
   await Product.bulkCreate(productSeed)
+  await PaymentAccount.bulkCreate(paymentAccountSeed) // TEMP REMOVE
+  await Order.bulkCreate(orderSeed) // TEMP REMOVE
 
   console.log(`seeded successfully`)
 }
 
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {
@@ -134,12 +184,8 @@ async function runSeed() {
   }
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
 if (module === require.main) {
   runSeed()
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed

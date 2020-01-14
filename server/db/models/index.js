@@ -9,6 +9,7 @@ Product.hasMany(Order)
 PaymentAccount.hasOne(Order)
 
 PaymentAccount.belongsTo(Payment)
+PaymentAccount.belongsTo(User)
 
 module.exports = {
   User,
