@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Payment = db.define('payments', {
+
+const Payment = db.define('payment', {
   type: {
-    type: Sequelize.ENUM('credit card', 'paypal', 'stripe')
+    type: Sequelize.STRING
   }
 })
+
 module.exports = Payment
