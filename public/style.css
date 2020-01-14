@@ -58,7 +58,7 @@ h3 {
 
 /* ----------------- AUTH FORM ELEMENT ----------------- */
 .authFormDiv {
-  margin: auto;
+  margin: 50px auto;
   width: 30vw;
   height: 50vh;
   display: flex;

@@ -18,7 +18,7 @@ class Routes extends Component {
 
     return (
       <Switch>
-        <Route path="/home" component={UserHome} />
+        <Route exact path="/" component={UserHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {/* {isLoggedIn && (
