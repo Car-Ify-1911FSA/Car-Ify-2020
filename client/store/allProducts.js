@@ -25,7 +25,6 @@ export const loadAllProducts = () => {
 }
 
 // Reducer
-
 const allProductsReducer = (allProductsState = [], action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS:

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {loadAllProducts} from '../store'
 
 class Sidebar extends Component {
   componentDidMount() {
@@ -44,8 +45,17 @@ class Sidebar extends Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    allProducts: state.AllProducts
   }
 }
 
-export default connect(mapState)(Sidebar)
+const mapDispatch = dispatch => {
+  return {
+    fetchAllProducts: () => {
+      dispatch(loadAllProducts())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(Sidebar)
