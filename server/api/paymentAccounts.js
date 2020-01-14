@@ -6,7 +6,7 @@ router.get('/', async (req, res, next) => {
   try {
     const allPaymentAccounts = await PaymentAccounts.findAll()
     if (allPaymentAccounts) {
-      escape.json(allPaymentAccounts)
+      res.json(allPaymentAccounts)
     } else {
       res.sendStatus(404)
     }
@@ -70,3 +70,5 @@ router.put('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+module.exports = router
