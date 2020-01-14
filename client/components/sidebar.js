@@ -4,6 +4,10 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class Sidebar extends Component {
+  componentDidMount() {
+    console.log('sidebar -', this.props)
+  }
+
   render() {
     return (
       <div className="sideBarDiv">

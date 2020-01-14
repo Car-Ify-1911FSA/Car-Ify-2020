@@ -36,6 +36,7 @@ const productSeed = [
     condition: 'used',
     description:
       'The 2020 Lexus RX 350 is a solid entry in the midsize SUV class, offering a roomy and comfortable cabin and typically excellent build quality.',
+    quantity: 10,
     imageUrl:
       'https://www.lexusofrockvillecentre.com/inventoryphotos/7416/2t2bzmca2kc168351/sp/1.jpg?height=400'
   },
@@ -48,6 +49,7 @@ const productSeed = [
     condition: 'new',
     description:
       "The 10th-generation Accord was a winner out of the gate in 2018, making us fall in love with Honda's midsize sedan all over again.",
+    quantity: 8,
     imageUrl:
       'https://blogmedia.dealerfire.com/wp-content/uploads/sites/1050/2019/04/Radiant-Red-Metallic_o.jpg'
   },
@@ -60,6 +62,7 @@ const productSeed = [
     condition: 'new',
     description:
       "Step into most any modern luxury car and you'll find a cabin with enough buttons and switches to make an airline pilot feel right at home.",
+    quantity: 9,
     imageUrl:
       'https://file.kbb.com/kbb/images/content/editorial/slideshow/2016-volvo-xc90-r-design-unveiled/2016-volvo-xc9-r-design-front-static1-600-001.jpg'
   },
@@ -72,6 +75,7 @@ const productSeed = [
     condition: 'new',
     description:
       "It's easy to see why the 2020 BMW X5 is one of the more appealing midsize luxury SUVs on the market.",
+    quantity: 15,
     imageUrl: 'https://en.crimerussia.com/upload/iblock/352/BMWX5.jpg'
   },
   {
@@ -83,6 +87,7 @@ const productSeed = [
     condition: 'new',
     description:
       'Sharp style and sporting performance remain hallmarks of the 2019 Mazda CX-5, a small crossover SUV designed for those who enjoy a spirited drive.',
+    quantity: 17,
     imageUrl:
       'https://www.cstatic-images.com/car-pictures/xl/USC80MAS061C021001.jpg'
   }
