@@ -8,7 +8,7 @@ const Sidebar = () => (
     <Link to="/allProducts">All Products! [BUILD]</Link>
 
     <div className="sideBarBrandDiv">
-      <span>Brand:</span>
+      <span>Brand: </span>
       <select>
         <option>Option 1</option>
         <option>Option 2</option>
@@ -17,13 +17,15 @@ const Sidebar = () => (
     </div>
 
     <div className="sideBarModelDiv">
-      <span>Model:</span>
+      <span>Model: </span>
       <select>
         <option>Option 1</option>
         <option>Option 2</option>
         <option>Option 3</option>
       </select>
     </div>
+
+    <button type="submit">Find Cars!</button>
   </div>
 )
 

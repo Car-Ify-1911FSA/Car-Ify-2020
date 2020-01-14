@@ -1,25 +1,30 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email, isLoggedIn} = props
+// export const UserHome = props => {
+class UserHome extends Component {
+  render() {
+    const {email, isLoggedIn} = this.props
 
-  return (
-    <div className="homePageDiv">
-      {isLoggedIn ? (
-        <h3>Welcome, {email}</h3>
-      ) : (
-        <h3>Welcome Guest! Remember to login or sign-up!</h3>
-      )}
-      <div className="homePagePara">
-        <p>Welcome to Car-Ify! Where your car shopping dreams can come true!</p>
+    return (
+      <div className="homePageDiv">
+        {isLoggedIn ? (
+          <h3>Welcome, {email}</h3>
+        ) : (
+          <h3>Welcome Guest! Remember to login or sign-up!</h3>
+        )}
+        <div className="homePagePara">
+          <p>
+            Welcome to Car-Ify! Where your car shopping dreams can come true!
+          </p>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 /**
