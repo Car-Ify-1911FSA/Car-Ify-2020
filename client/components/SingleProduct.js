@@ -17,10 +17,10 @@ class SingleProduct extends Component {
       description
     } = this.props.product
     return (
-      <div>
+      <div className="single-prod-cont">
         <h2>{`${brand} ${model}`}</h2>
-        <h3>{price}</h3>
-        <img src={imageUrl} />
+        <h3>{`$ ${price}`}</h3>
+        <img src={imageUrl} className="single-image" />
         <h3>{rating}</h3>
         <p>{description}</p>
       </div>
@@ -28,13 +28,13 @@ class SingleProduct extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapState = state => {
   return {
     product: state.singleProduct
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatch = dispatch => {
   return {
     fetchProduct: productId => {
       dispatch(loadProduct(productId))
@@ -42,4 +42,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+export default connect(mapState, mapDispatch)(SingleProduct)
