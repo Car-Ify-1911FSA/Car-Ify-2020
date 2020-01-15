@@ -1,11 +1,16 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import {getOrdersByUser} from '../store'
 
 class AddToCartButton extends Component {
   constructor(props) {
     super(props)
     this.handleAddClick = this.handleAddClick.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.getOrdersByUser(this.props.userId)
   }
 
   handleAddClick() {
@@ -28,8 +33,17 @@ class AddToCartButton extends Component {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id
   }
 }
 
-export default withRouter(connect(mapState)(AddToCartButton))
+const mapDispatch = dispatch => {
+  return {
+    getOrdersByUser: userId => {
+      dispatch(getOrdersByUser(userId))
+    }
+  }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(AddToCartButton))
