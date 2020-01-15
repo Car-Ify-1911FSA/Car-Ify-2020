@@ -5,6 +5,7 @@ import ProductCard from './ProductCard'
 
 class AllProducts extends Component {
   componentDidMount() {
+    console.log('All Product Mount - ', this.props)
     this.props.fetchAllProducts()
   }
 

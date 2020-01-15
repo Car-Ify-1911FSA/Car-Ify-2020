@@ -17,6 +17,7 @@ class Sidebar extends Component {
     this.handleCategoryChange = this.handleCategoryChange.bind(this)
     this.handleConditionChange = this.handleConditionChange.bind(this)
     this.handlePriceChange = this.handlePriceChange.bind(this)
+    this.sendSidebarState = this.sendSidebarState.bind(this)
   }
 
   componentDidMount() {
@@ -43,6 +44,10 @@ class Sidebar extends Component {
     this.setState({price: newPrice})
   }
 
+  sendSidebarState() {
+    console.log('sendBar -', this.state)
+  }
+
   render() {
     const products = this.props.allProducts
     const brand = [],
@@ -56,7 +61,7 @@ class Sidebar extends Component {
       if (!price.includes(car.price)) price.push(car.price)
     })
 
-    console.log('render -', this.state)
+    // console.log('render -', this.state)
 
     return (
       <div className="sideBarDiv">
@@ -126,9 +131,21 @@ class Sidebar extends Component {
           </select>
         </div>
 
-        <button type="submit" className="sideBarSubmitBtn">
+        {/* <button type="submit"
+          className="sideBarSubmitBtn"
+          onClick={this.sendSidebarState}>
           Find Cars!
-        </button>
+        </button> */}
+
+        <Link
+          to="/allProducts"
+          type="submit"
+          className="sideBarSubmitBtn"
+          params={this.state}
+          onClick={this.sendSidebarState}
+        >
+          Find Cars!
+        </Link>
       </div>
     )
   }
