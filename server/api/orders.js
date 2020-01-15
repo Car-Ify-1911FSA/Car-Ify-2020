@@ -1,5 +1,5 @@
-const router = require('express').Router()
-const {Order} = require('../db/models')
+const router = require('express').Router();
+const {Order} = require('../db/models');
 
 router.get('/:userId', async (req, res, next) => {
   try {
@@ -7,12 +7,12 @@ router.get('/:userId', async (req, res, next) => {
       where: {
         userId: req.params.userId
       }
-    })
-    res.send(allOrders)
+    });
+    res.send(allOrders);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 
 // router.post('/:userId', async (req, res, next) => {
 //   try {
@@ -23,4 +23,4 @@ router.get('/:userId', async (req, res, next) => {
 //   }
 // })
 
-module.exports = router
+module.exports = router;

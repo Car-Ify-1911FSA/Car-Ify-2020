@@ -75,7 +75,7 @@ class Sidebar extends Component {
           <br />
           <select
             className="sideBarSelect"
-            // value={this.state.brand}
+            value={this.state.brand}
             onChange={this.handleBrandChange}
           >
             <option>All</option>
@@ -130,21 +130,12 @@ class Sidebar extends Component {
           </select>
         </div>
 
-        {/* <button type="submit"
-          className="sideBarSubmitBtn"
-          onClick={this.sendSidebarState}>
-          Find Cars!
-        </button> */}
-
         <Link
           to={{
             pathname: '/allProducts',
             state: {state: this.state}
           }}
           className="sideBarSubmitBtn"
-          // type="submit"
-          // params={this.state}
-          // onClick={this.sendSidebarState}
         >
           Find Cars!
         </Link>
