@@ -1,26 +1,32 @@
 import axios from 'axios'
 
-const GOT_PAYMENT_ACCOUNTS = 'GOT_ALL_PAYMENTS'
+const GET_PAYMENT_ACCOUNTS = 'GET_PAYMENT_ACCOUNTS'
 
 const gotPaymentAccounts = paymentAccounts => {
   return {
-    type: GOT_ALL_PAYMENTACCOUNTS,
+    type: GET_PAYMENT_ACCOUNTS,
     paymentAccounts
   }
 }
 
-export const getAllPaymentsThunk = () => async dispatch => {
-  const {data} = await axios.get('/api/allPayments')
-  dispatch(gotAllPayments(data))
-}
-
-const allPaymentsReducer = (allPaymentsState = [], action) => {
-  switch (action.type) {
-    case GOT_ALL_PAYMENTS:
-      return action.payments
-    default:
-      return allPaymentsState
+export const getPaymentAccountsThunk = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/payment-accounts')
+      dispatch(gotPaymentAccounts(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
-export default allPaymentsReducer
+const paymentAccountsReducer = (paymentAccountsState = [], action) => {
+  switch (action.type) {
+    case GET_PAYMENT_ACCOUNTS:
+      return action.paymentAccounts
+    default:
+      return paymentAccountsState
+  }
+}
+
+export default paymentAccountsReducer

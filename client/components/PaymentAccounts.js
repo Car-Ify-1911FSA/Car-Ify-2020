@@ -1,20 +1,26 @@
 import React, {Component} from 'react'
-import {getAllPaymentsThunk} from '../store/allPayments'
+import {getPaymentAccountsThunk} from '../store/paymentAccounts'
 import {connect} from 'react-redux'
-import Payment from './Payment'
+import PaymentCard from './PaymentCard'
 
-class AllPayments extends Component {
+class PaymentAccounts extends Component {
   componentDidMount() {
-    this.props.fetchAllPayments()
+    this.props.fetchAllPaymentAccounts()
   }
+
   render() {
+    // console.log(this.props.paymentAccounts)
+    const allAccounts = this.props.paymentAccounts
+    const filterAccounts = allAccounts.filter(
+      acct => acct.userId === this.props.userId
+    )
+
+    console.log('render -', this.props.userId, allAccounts, filterAccounts)
     return (
       <div>
-        <h3>All Payments</h3>
-        {this.props.allPayments.map(payment => (
-          <div key={payment.id}>
-            <Payment payment={payment} />
-          </div>
+        <h3>All Payment Accounts</h3>
+        {filterAccounts.map((acct, idx) => (
+          <PaymentCard acct={acct} key={idx} />
         ))}
       </div>
     )
@@ -23,16 +29,17 @@ class AllPayments extends Component {
 
 const mapState = state => {
   return {
-    allPayments: state.allPaymets
+    userId: state.user.id,
+    paymentAccounts: state.paymentAccounts
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    fetchAllPayments: () => {
-      dispatch(getAllPaymentsThunk())
+    fetchAllPaymentAccounts: () => {
+      dispatch(getPaymentAccountsThunk())
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(AllPayments)
+export default connect(mapState, mapDispatch)(PaymentAccounts)

@@ -9,7 +9,7 @@ import {
   AllProducts,
   Cart,
   SingleProduct,
-  AllPayments
+  PaymentAccounts
 } from './components'
 import {me} from './store'
 // import SingleProduct from './components/SingleProduct'
@@ -33,7 +33,7 @@ class Routes extends Component {
         <Route path="/allProducts" component={AllProducts} />
         <Route path="/product/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
-        <Route path="/allPayments" component={AllPayments} />
+        <Route path="/payment-accounts" component={PaymentAccounts} />
         {/* {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />

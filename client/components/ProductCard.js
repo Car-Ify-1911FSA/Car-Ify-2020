@@ -6,7 +6,12 @@ const ProductCard = props => {
   const {id, imageUrl, brand, model, price, rating} = props.product
   return (
     <div className="product-card">
-      <Link to={`/product/${id}`}>
+      <Link
+        to={{
+          pathname: `/product/${id}`,
+          state: {state: props.product}
+        }}
+      >
         <h4>{`${brand} ${model}`}</h4>
         <img src={imageUrl} className="card-img" />
         <h3>{`$ ${price}`}</h3>
