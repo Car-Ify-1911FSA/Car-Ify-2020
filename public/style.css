@@ -116,4 +116,12 @@ h3 {
 
 .card-img {
   width: 200px;
+  height: 150px;
+}
+
+.product-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
