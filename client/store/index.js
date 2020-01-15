@@ -15,12 +15,14 @@ const reducer = combineReducers({
   order,
   paymentAccounts
 })
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-)
-const store = createStore(reducer, middleware)
+);
+const store = createStore(reducer, middleware);
 
-export default store
-export * from './user'
-export * from './allProducts'
-export * from './singleProduct'
+export default store;
+export * from './user';
+export * from './allProducts';
+export * from './singleProduct';
+export * from './order';
