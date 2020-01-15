@@ -75,7 +75,7 @@ class Sidebar extends Component {
           <br />
           <select
             className="sideBarSelect"
-            value={this.state.brand}
+            // value={this.state.brand}
             onChange={this.handleBrandChange}
           >
             <option>All</option>

@@ -155,3 +155,15 @@ h3 {
 .single-image {
   width: 400px;
 }
+
+.singleProdBtnDiv {
+  width: 350px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.singleProdBtn {
+  width: 100px;
+  height: 35px;
+  border-radius: 5px;
+}
