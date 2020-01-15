@@ -13,10 +13,15 @@ class Sidebar extends Component {
       condition: '',
       price: ''
     }
+    this.handelBrandChange = this.handelBrandChange.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchAllProducts()
+  }
+
+  handelBrandChange(evt) {
+    const brand = evt.target.value
   }
 
   render() {
@@ -43,7 +48,12 @@ class Sidebar extends Component {
         <div className="sideBarBrandDiv">
           <strong>Brand: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.brand}
+            onChange={this.state.handelBrandChange}
+          >
+            <option>All</option>
             {brand.map((idvBrand, idx) => (
               <option key={idx}>{idvBrand}</option>
             ))}
@@ -54,6 +64,7 @@ class Sidebar extends Component {
           <strong>Category: </strong>
           <br />
           <select className="sideBarSelect">
+            <option>All</option>
             {category.map((idvCtgy, idx) => (
               <option key={idx}>{idvCtgy}</option>
             ))}
@@ -64,6 +75,7 @@ class Sidebar extends Component {
           <strong>Condition: </strong>
           <br />
           <select className="sideBarSelect">
+            <option>All</option>
             {condition.map((idvCndtn, idx) => (
               <option key={idx}>
                 {idvCndtn[0].toUpperCase() + idvCndtn.slice(1)}
@@ -76,6 +88,7 @@ class Sidebar extends Component {
           <strong>Price: </strong>
           <br />
           <select className="sideBarSelect">
+            <option>All</option>
             <option>Low</option>
             <option>Medium</option>
             <option>High</option>
