@@ -6,44 +6,42 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, email}) => (
   <div className="navBarDiv">
-    <div className="navBarInsideDiv">
+    {isLoggedIn ? (
+      <h1>
+        Welcome back, <span className="hpLoggedInWelcome">{email}</span>!
+      </h1>
+    ) : (
+      <h1>Welcome to Car-ify !</h1>
+    )}
+    <nav>
       {isLoggedIn ? (
-        <h1>
-          Welcome back, <span className="hpLoggedInWelcome">{email}</span>!
-        </h1>
+        <div>
+          <Link to="/" className="navBarText linkText">
+            Home
+          </Link>
+
+          <Link to="/cart" className="navBarText linkText">
+            Cart
+          </Link>
+
+          <a href="#" onClick={handleClick} className="linkText">
+            Logout
+          </a>
+        </div>
       ) : (
-        <h1>Welcome to Car-ify !</h1>
+        <div>
+          <Link to="/" className="linkText">
+            Home
+          </Link>
+          <Link to="/login" className="linkText">
+            Login
+          </Link>
+          <Link to="/signup" className="linkText">
+            Sign Up
+          </Link>
+        </div>
       )}
-      <nav>
-        {isLoggedIn ? (
-          <div>
-            <Link to="/" className="navBarText linkText">
-              Home
-            </Link>
-
-            <Link to="/cart" className="navBarText linkText">
-              Cart
-            </Link>
-
-            <a href="#" onClick={handleClick} className="linkText">
-              Logout
-            </a>
-          </div>
-        ) : (
-          <div>
-            <Link to="/" className="linkText">
-              Home
-            </Link>
-            <Link to="/login" className="linkText">
-              Login
-            </Link>
-            <Link to="/signup" className="linkText">
-              Sign Up
-            </Link>
-          </div>
-        )}
-      </nav>
-    </div>
+    </nav>
   </div>
 )
 
