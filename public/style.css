@@ -114,8 +114,12 @@ h3 {
   padding: 0 10px;
 }
 
-/* ----------------- PRODUCT CARD ------------------ */
+/* ----------------- ALL PRODUCT ------------------ */
+.allProductFullDiv {
+  padding: 0 15px;
+}
 
+/* ----------------- PRODUCT CARD ------------------ */
 .card-img {
   width: 200px;
   height: 150px;

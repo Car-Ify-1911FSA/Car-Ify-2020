@@ -5,13 +5,17 @@ import ProductCard from './ProductCard'
 
 class AllProducts extends Component {
   componentDidMount() {
-    console.log('All Product Mount - ', this.props)
     this.props.fetchAllProducts()
   }
 
   render() {
+    const state = this.props.location.state,
+      filteredState = !state ? state.state : false
+
+    console.log('All Product Render - ', state, filteredState)
+
     return (
-      <div>
+      <div className="allProductFullDiv">
         <h1>Our Inventory:</h1>
         <div className="product-card-container">
           {this.props.allProducts.map(product => {

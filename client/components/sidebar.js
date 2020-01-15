@@ -49,11 +49,12 @@ class Sidebar extends Component {
   }
 
   render() {
-    const products = this.props.allProducts
-    const brand = [],
+    const products = this.props.allProducts,
+      brand = [],
       category = [],
       condition = [],
       price = []
+
     products.forEach(car => {
       if (!brand.includes(car.brand)) brand.push(car.brand)
       if (!category.includes(car.category)) category.push(car.category)
@@ -138,11 +139,14 @@ class Sidebar extends Component {
         </button> */}
 
         <Link
-          to="/allProducts"
-          type="submit"
+          to={{
+            pathname: '/allProducts',
+            state: {state: this.state}
+          }}
           className="sideBarSubmitBtn"
-          params={this.state}
-          onClick={this.sendSidebarState}
+          // type="submit"
+          // params={this.state}
+          // onClick={this.sendSidebarState}
         >
           Find Cars!
         </Link>
