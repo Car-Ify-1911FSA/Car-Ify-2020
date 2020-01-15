@@ -4,13 +4,19 @@ import {connect} from 'react-redux'
 import CartItem from './CartItem'
 
 class Cart extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.fetchAllOrders()
+  }
 
   render() {
+    const orders = this.props.orders
+
     return (
       <div className="cartFullDiv">
         <h1>Cart</h1>
-        <CartItem />
+        {orders.map((order, idx) => (
+          <CartItem key={idx} order={order} />
+        ))}
         <div className="cartTotalDiv">
           <h5>Cart Summary [BUILD]</h5>
         </div>
@@ -20,7 +26,15 @@ class Cart extends Component {
 }
 
 const mapState = state => {
-  return {}
+  return {
+    orders: state.orders
+  }
 }
 
-export default connect(mapState)(Cart)
+const mapDispatch = dispatch => {
+  return {
+    fetchAllOrders: () => dispatch(getOrdersByUser())
+  }
+}
+
+export default connect(mapState, mapDispatch)(Cart)
