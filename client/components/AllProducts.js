@@ -9,11 +9,22 @@ class AllProducts extends Component {
   }
 
   render() {
+    const state = this.props.location.state,
+      allCars = this.props.allProducts,
+      newState = state ? state.state : false
+
+    let filteredCars = allCars.filter(car => {
+      for (let key in newState) {
+        if (newState[key] !== 'All' && car[key] !== newState[key]) return false
+      }
+      return true
+    })
+
     return (
-      <div>
+      <div className="allProductFullDiv">
         <h1>Our Inventory:</h1>
         <div className="product-card-container">
-          {this.props.allProducts.map(product => {
+          {filteredCars.map(product => {
             return (
               <div key={product.id}>
                 <ProductCard product={product} />

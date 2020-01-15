@@ -34,6 +34,11 @@ h3 {
   display: flex;
 }
 
+/* .routeFullDiv {
+  position: static; */
+/* left: 180px; */
+/* } */
+
 .linkText {
   color: blue;
   text-decoration: none;
@@ -44,9 +49,11 @@ h3 {
 }
 
 /* ----------------- NAVBAR ELEMENT ----------------- */
-.navBarInsideDiv {
+.navBarDiv {
+  position: sticky;
+  top: 0;
   background-color: lightgray;
-  height: 8vh;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -56,8 +63,10 @@ h3 {
 
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarDiv {
+  position: sticky;
+  top: 60px;
   background-color: lightpink;
-  width: 10vw;
+  width: 180px;
   height: 92vh;
   display: flex;
   flex-direction: column;
@@ -112,8 +121,12 @@ h3 {
   padding: 0 10px;
 }
 
-/* ----------------- PRODUCT CARD ------------------ */
+/* ----------------- ALL PRODUCT ------------------ */
+.allProductFullDiv {
+  padding: 0 15px;
+}
 
+/* ----------------- PRODUCT CARD ------------------ */
 .card-img {
   width: 200px;
   height: 150px;
