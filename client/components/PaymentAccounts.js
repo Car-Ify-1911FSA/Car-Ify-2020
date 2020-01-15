@@ -15,7 +15,6 @@ class PaymentAccounts extends Component {
       acct => acct.userId === this.props.userId
     )
 
-    console.log('render -', this.props.userId, allAccounts, filterAccounts)
     return (
       <div>
         <h3>All Payment Accounts</h3>
