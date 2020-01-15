@@ -1,16 +1,16 @@
 import axios from 'axios'
 
-const GOT_ALL_PAYMENTS = 'GOT_ALL_PAYMENTS'
+const GOT_PAYMENT_ACCOUNTS = 'GOT_ALL_PAYMENTS'
 
-const gotAllPayments = payments => {
+const gotPaymentAccounts = paymentAccounts => {
   return {
-    type: GOT_ALL_PAYMENTS,
-    payments
+    type: GOT_ALL_PAYMENTACCOUNTS,
+    paymentAccounts
   }
 }
 
 export const getAllPaymentsThunk = () => async dispatch => {
-  const {data} = await axios.get('/api/countries')
+  const {data} = await axios.get('/api/allPayments')
   dispatch(gotAllPayments(data))
 }
 

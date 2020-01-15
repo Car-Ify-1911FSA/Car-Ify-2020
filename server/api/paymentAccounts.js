@@ -1,10 +1,13 @@
 const router = require('express').Router()
 
 const PaymentAccounts = require('../db/models/paymentAccount.js')
+const Users = require('../db/models/user.js')
 
 router.get('/', async (req, res, next) => {
   try {
-    const allPaymentAccounts = await PaymentAccounts.findAll()
+    const allPaymentAccounts = await PaymentAccounts.findAll({
+      include: [{model: Users}]
+    })
     if (allPaymentAccounts) {
       res.json(allPaymentAccounts)
     } else {

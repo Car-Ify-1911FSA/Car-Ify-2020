@@ -1,13 +1,23 @@
 import React, {Component} from 'react'
 import {getAllPaymentsThunk} from '../store/allPayments'
 import {connect} from 'react-redux'
+import Payment from './Payment'
 
 class AllPayments extends Component {
   componentDidMount() {
     this.props.fetchAllPayments()
   }
   render() {
-    return <h3>All Payments</h3>
+    return (
+      <div>
+        <h3>All Payments</h3>
+        {this.props.allPayments.map(payment => (
+          <div key={payment.id}>
+            <Payment payment={payment} />
+          </div>
+        ))}
+      </div>
+    )
   }
 }
 
