@@ -39,7 +39,7 @@ const productSeed = [
     category: 'SUV',
     color: 'Black',
     price: 34500,
-    condition: 'used',
+    condition: 'Used',
     description:
       'The 2020 Lexus RX 350 is a solid entry in the midsize SUV class, offering a roomy and comfortable cabin and typically excellent build quality.',
     quantity: 10,
@@ -52,7 +52,7 @@ const productSeed = [
     category: 'Sedan',
     color: 'Red',
     price: 24700,
-    condition: 'new',
+    condition: 'New',
     description:
       "The 10th-generation Accord was a winner out of the gate in 2018, making us fall in love with Honda's midsize sedan all over again.",
     quantity: 8,
@@ -65,7 +65,7 @@ const productSeed = [
     category: 'SUV',
     color: 'Blue',
     price: 39000,
-    condition: 'new',
+    condition: 'New',
     description:
       "Step into most any modern luxury car and you'll find a cabin with enough buttons and switches to make an airline pilot feel right at home.",
     quantity: 9,
@@ -78,7 +78,7 @@ const productSeed = [
     category: 'SUV',
     color: 'Yellow',
     price: 54000,
-    condition: 'new',
+    condition: 'New',
     description:
       "It's easy to see why the 2020 BMW X5 is one of the more appealing midsize luxury SUVs on the market.",
     quantity: 15,
@@ -90,7 +90,7 @@ const productSeed = [
     category: 'SUV',
     color: 'White',
     price: 28000,
-    condition: 'new',
+    condition: 'New',
     description:
       'Sharp style and sporting performance remain hallmarks of the 2019 Mazda CX-5, a small crossover SUV designed for those who enjoy a spirited drive.',
     quantity: 17,
@@ -103,7 +103,7 @@ const productSeed = [
     category: 'Sedan',
     color: 'White',
     price: 68000,
-    condition: 'new',
+    condition: 'Used',
     description:
       'A performance automobile is a vehicle that is designed specifically for speed.',
     quantity: 12,

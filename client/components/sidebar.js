@@ -110,9 +110,7 @@ class Sidebar extends Component {
           >
             <option>All</option>
             {condition.map((idvCndtn, idx) => (
-              <option key={idx}>
-                {idvCndtn[0].toUpperCase() + idvCndtn.slice(1)}
-              </option>
+              <option key={idx}>{idvCndtn}</option>
             ))}
           </select>
         </div>
