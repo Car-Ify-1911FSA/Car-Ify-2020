@@ -21,7 +21,9 @@ class Sidebar extends Component {
   }
 
   handelBrandChange(evt) {
-    const brand = evt.target.value
+    const newBrand = evt.target.value
+    console.log('brand - ', brand)
+    this.setState({brand: newBrand})
   }
 
   render() {
@@ -37,7 +39,7 @@ class Sidebar extends Component {
       if (!price.includes(car.price)) price.push(car.price)
     })
 
-    console.log('render -', products, brand, category, condition, price)
+    // console.log('render -', products, brand, category, condition, price)
 
     return (
       <div className="sideBarDiv">
@@ -50,7 +52,7 @@ class Sidebar extends Component {
           <br />
           <select
             className="sideBarSelect"
-            value={this.state.brand}
+            // value={this.state.brand}
             onChange={this.state.handelBrandChange}
           >
             <option>All</option>
