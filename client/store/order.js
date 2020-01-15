@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const ADD_TO_ORDER = 'ADD_TO_ORDER'
-const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
+const ADD_TO_ORDER = 'ADD_TO_ORDER';
+const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
 
 const initialState = {
   orders: {}
@@ -18,21 +18,21 @@ const gotOrders = orders => {
   return {
     type: GET_ALL_ORDERS,
     orders
-  }
-}
+  };
+};
 
 // thunks
 
 export const getOrdersByUser = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/orders/${userId}`)
-      dispatch(gotOrders(data))
+      const {data} = await axios.get(`/api/orders/${userId}`);
+      dispatch(gotOrders(data));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
-}
+  };
+};
 
 export const addNewOrder = (newOrder, routeVerb) => {
   // return routeVerb ? post : put
@@ -48,8 +48,8 @@ const OrderReducer = (state = initialState, action) => {
     case GET_ALL_ORDERS:
       return {...state, orders: action.orders}
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default OrderReducer
+export default OrderReducer;

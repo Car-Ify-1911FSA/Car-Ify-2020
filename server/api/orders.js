@@ -22,7 +22,7 @@ router.post('/:userId', async (req, res, next) => {
   } catch (error) {
     console.log(error)
   }
-})
+});
 
 router.put('/:userId', async (req, res, next) => {
   try {
@@ -33,4 +33,4 @@ router.put('/:userId', async (req, res, next) => {
   }
 })
 
-module.exports = router
+module.exports = router;
