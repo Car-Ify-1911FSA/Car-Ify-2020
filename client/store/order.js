@@ -3,12 +3,16 @@ import axios from 'axios';
 const ADD_TO_ORDER = 'ADD_TO_ORDER';
 const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
 
-// const addToOrder = order => {
-//   return {
-//     type: ADD_TO_ORDER,
-//     order
-//   }
-// }
+const initialState = {
+  orders: {}
+}
+
+const addToOrder = newOrder => {
+  return {
+    type: ADD_TO_ORDER,
+    newOrder
+  }
+}
 
 const gotOrders = orders => {
   return {
@@ -30,12 +34,19 @@ export const getOrdersByUser = userId => {
   };
 };
 
-const OrderReducer = (state = {}, action) => {
+export const addNewOrder = (newOrder, routeVerb) => {
+  // return routeVerb ? post : put
+}
+
+const OrderReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case ADD_TO_ORDER:
-    //   return action.order
+    case ADD_TO_ORDER:
+      return {
+        ...state,
+        orders: {...state.orders, ...action.newOrder}
+      }
     case GET_ALL_ORDERS:
-      return action.orders;
+      return {...state, orders: action.orders}
     default:
       return state;
   }
