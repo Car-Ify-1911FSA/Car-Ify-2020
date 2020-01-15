@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {loadProduct} from '../store'
+import {AddToCartButton} from './index'
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -9,6 +10,7 @@ class SingleProduct extends Component {
 
   render() {
     const {
+      id,
       imageUrl,
       brand,
       model,
@@ -17,24 +19,25 @@ class SingleProduct extends Component {
       description
     } = this.props.product
     return (
-      <div>
+      <div className="single-prod-cont">
         <h2>{`${brand} ${model}`}</h2>
-        <h3>{price}</h3>
-        <img src={imageUrl} />
+        <h3>{`$ ${price}`}</h3>
+        <img src={imageUrl} className="single-image" />
         <h3>{rating}</h3>
         <p>{description}</p>
+        <AddToCartButton productId={id} />
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
+const mapState = state => {
   return {
     product: state.singleProduct
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatch = dispatch => {
   return {
     fetchProduct: productId => {
       dispatch(loadProduct(productId))
@@ -42,4 +45,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+export default connect(mapState, mapDispatch)(SingleProduct)

@@ -16,7 +16,7 @@ export const loadProduct = productId => {
   return async dispatch => {
     try {
       //need to check route naming
-      const {data} = await axios.get(`api/allproducts/${productId}`)
+      const {data} = await axios.get(`/api/products/${productId}`)
       dispatch(gotProduct(data))
     } catch (error) {
       console.error(error)

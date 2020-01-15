@@ -118,4 +118,31 @@ h3 {
 
 .card-img {
   width: 200px;
+  height: 150px;
+}
+
+.product-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  background-color: rgb(225, 205, 209);
+  padding: 1em;
+  margin: 0 1em 1em 1em;
+  border-radius: 40px;
+}
+
+/* ----------------- SINGLE PRODUCT----------------- */
+.single-prod-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.single-image {
+  width: 400px;
 }

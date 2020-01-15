@@ -12,13 +12,15 @@ class AllProducts extends Component {
     return (
       <div>
         <h1>Our Inventory:</h1>
-        {this.props.allProducts.map(product => {
-          return (
-            <div key={product.id}>
-              <ProductCard product={product} />
-            </div>
-          )
-        })}
+        <div className="product-card-container">
+          {this.props.allProducts.map(product => {
+            return (
+              <div key={product.id}>
+                <ProductCard product={product} />
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }
