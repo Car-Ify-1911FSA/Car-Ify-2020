@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Cart = db.define('cart', {
-  states: {
+  status: {
     type: Sequelize.STRING,
     validate: {
       isIn: [['active', 'paid', 'shipped', 'complete']]

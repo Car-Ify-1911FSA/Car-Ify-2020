@@ -12,10 +12,14 @@ const {
 
 const userSeed = [
   {
+    admin: true,
+    name: 'cody',
     email: 'cody@email.com',
     password: '123'
   },
   {
+    admin: false,
+    name: 'murphy',
     email: 'murphy@email.com',
     password: '123'
   }
@@ -158,6 +162,51 @@ const paymentAccountSeed = [
   }
 ];
 
+const cartProductSeed = [
+  {
+    cartId: 1,
+    productId: 1,
+    quantity: 2,
+    totalPrice: 50000
+  },
+  {
+    cartId: 1,
+    productId: 2,
+    quantity: 1,
+    totalPrice: 30000
+  },
+  {
+    cartId: 2,
+    productId: 2,
+    quantity: 1,
+    totalPrice: 30000
+  },
+  {
+    cartId: 3,
+    productId: 4,
+    quantity: 1,
+    totalPrice: 20000
+  },
+  {
+    cartId: 4,
+    productId: 5,
+    quantity: 1,
+    totalPrice: 30000
+  },
+  {
+    cartId: 4,
+    productId: 6,
+    quantity: 3,
+    totalPrice: 90000
+  },
+  {
+    cartId: 4,
+    productId: 3,
+    quantity: 2,
+    totalPrice: 60000
+  }
+];
+
 async function seed() {
   await db.sync({force: true});
   console.log('db synced!');
@@ -167,6 +216,7 @@ async function seed() {
   await Product.bulkCreate(productSeed);
   await PaymentAccount.bulkCreate(paymentAccountSeed); // TEMP REMOVE
   await Cart.bulkCreate(cartSeed); // TEMP REMOVE
+  await CartProduct.bulkCreate(cartProductSeed); // TEMP REMOVE
 
   console.log(`seeded successfully`);
 }
