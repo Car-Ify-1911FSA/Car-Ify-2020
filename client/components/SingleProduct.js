@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {loadProduct} from '../store'
+import {AddToCartButton} from './index'
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -9,6 +10,7 @@ class SingleProduct extends Component {
 
   render() {
     const {
+      id,
       imageUrl,
       brand,
       model,
@@ -23,6 +25,7 @@ class SingleProduct extends Component {
         <img src={imageUrl} className="single-image" />
         <h3>{rating}</h3>
         <p>{description}</p>
+        <AddToCartButton productId={id} />
       </div>
     )
   }
