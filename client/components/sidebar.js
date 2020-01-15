@@ -8,22 +8,39 @@ class Sidebar extends Component {
   constructor() {
     super()
     this.state = {
-      brand: '',
-      category: '',
-      condition: '',
-      price: ''
+      brand: 'All',
+      category: 'All',
+      condition: 'All',
+      price: 'All'
     }
-    this.handelBrandChange = this.handelBrandChange.bind(this)
+    this.handleBrandChange = this.handleBrandChange.bind(this)
+    this.handleCategoryChange = this.handleCategoryChange.bind(this)
+    this.handleConditionChange = this.handleConditionChange.bind(this)
+    this.handlePriceChange = this.handlePriceChange.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchAllProducts()
   }
 
-  handelBrandChange(evt) {
+  handleBrandChange(evt) {
     const newBrand = evt.target.value
-    console.log('brand - ', brand)
     this.setState({brand: newBrand})
+  }
+
+  handleCategoryChange(evt) {
+    const newCategory = evt.target.value
+    this.setState({category: newCategory})
+  }
+
+  handleConditionChange(evt) {
+    const newCondition = evt.target.value
+    this.setState({condition: newCondition})
+  }
+
+  handlePriceChange(evt) {
+    const newPrice = evt.target.value
+    this.setState({price: newPrice})
   }
 
   render() {
@@ -39,7 +56,7 @@ class Sidebar extends Component {
       if (!price.includes(car.price)) price.push(car.price)
     })
 
-    // console.log('render -', products, brand, category, condition, price)
+    console.log('render -', this.state)
 
     return (
       <div className="sideBarDiv">
@@ -52,8 +69,8 @@ class Sidebar extends Component {
           <br />
           <select
             className="sideBarSelect"
-            // value={this.state.brand}
-            onChange={this.state.handelBrandChange}
+            value={this.state.brand}
+            onChange={this.handleBrandChange}
           >
             <option>All</option>
             {brand.map((idvBrand, idx) => (
@@ -65,7 +82,11 @@ class Sidebar extends Component {
         <div className="sideBarCategoryDiv">
           <strong>Category: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.category}
+            onChange={this.handleCategoryChange}
+          >
             <option>All</option>
             {category.map((idvCtgy, idx) => (
               <option key={idx}>{idvCtgy}</option>
@@ -76,7 +97,11 @@ class Sidebar extends Component {
         <div className="sideBarConditionDiv">
           <strong>Condition: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.condition}
+            onChange={this.handleConditionChange}
+          >
             <option>All</option>
             {condition.map((idvCndtn, idx) => (
               <option key={idx}>
@@ -89,7 +114,11 @@ class Sidebar extends Component {
         <div className="sideBarPriceDiv">
           <strong>Price: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.price}
+            onChange={this.handlePriceChange}
+          >
             <option>All</option>
             <option>Low</option>
             <option>Medium</option>
