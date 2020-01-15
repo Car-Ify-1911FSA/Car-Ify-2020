@@ -7,19 +7,54 @@ import {loadAllProducts} from '../store'
 class Sidebar extends Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      brand: 'All',
+      category: 'All',
+      condition: 'All',
+      price: 'All'
+    }
+    this.handleBrandChange = this.handleBrandChange.bind(this)
+    this.handleCategoryChange = this.handleCategoryChange.bind(this)
+    this.handleConditionChange = this.handleConditionChange.bind(this)
+    this.handlePriceChange = this.handlePriceChange.bind(this)
+    this.sendSidebarState = this.sendSidebarState.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchAllProducts()
   }
 
+  handleBrandChange(evt) {
+    const newBrand = evt.target.value
+    this.setState({brand: newBrand})
+  }
+
+  handleCategoryChange(evt) {
+    const newCategory = evt.target.value
+    this.setState({category: newCategory})
+  }
+
+  handleConditionChange(evt) {
+    const newCondition = evt.target.value
+    this.setState({condition: newCondition})
+  }
+
+  handlePriceChange(evt) {
+    const newPrice = evt.target.value
+    this.setState({price: newPrice})
+  }
+
+  sendSidebarState() {
+    console.log('sendBar -', this.state)
+  }
+
   render() {
-    const products = this.props.allProducts
-    const brand = [],
+    const products = this.props.allProducts,
+      brand = [],
       category = [],
       condition = [],
       price = []
+
     products.forEach(car => {
       if (!brand.includes(car.brand)) brand.push(car.brand)
       if (!category.includes(car.category)) category.push(car.category)
@@ -27,7 +62,7 @@ class Sidebar extends Component {
       if (!price.includes(car.price)) price.push(car.price)
     })
 
-    console.log('render -', products, brand, category, condition, price)
+    // console.log('render -', this.state)
 
     return (
       <div className="sideBarDiv">
@@ -36,9 +71,14 @@ class Sidebar extends Component {
         </Link>
 
         <div className="sideBarBrandDiv">
-          <span>Brand: </span>
+          <strong>Brand: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.brand}
+            onChange={this.handleBrandChange}
+          >
+            <option>All</option>
             {brand.map((idvBrand, idx) => (
               <option key={idx}>{idvBrand}</option>
             ))}
@@ -46,9 +86,14 @@ class Sidebar extends Component {
         </div>
 
         <div className="sideBarCategoryDiv">
-          <span>Category: </span>
+          <strong>Category: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.category}
+            onChange={this.handleCategoryChange}
+          >
+            <option>All</option>
             {category.map((idvCtgy, idx) => (
               <option key={idx}>{idvCtgy}</option>
             ))}
@@ -56,30 +101,53 @@ class Sidebar extends Component {
         </div>
 
         <div className="sideBarConditionDiv">
-          <span>Condition: </span>
+          <strong>Condition: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.condition}
+            onChange={this.handleConditionChange}
+          >
+            <option>All</option>
             {condition.map((idvCndtn, idx) => (
-              <option key={idx}>
-                {idvCndtn[0].toUpperCase() + idvCndtn.slice(1)}
-              </option>
+              <option key={idx}>{idvCndtn}</option>
             ))}
           </select>
         </div>
 
         <div className="sideBarPriceDiv">
-          <span>Price: </span>
+          <strong>Price: </strong>
           <br />
-          <select className="sideBarSelect">
+          <select
+            className="sideBarSelect"
+            value={this.state.price}
+            onChange={this.handlePriceChange}
+          >
+            <option>All</option>
             <option>Low</option>
             <option>Medium</option>
             <option>High</option>
           </select>
         </div>
 
-        <button type="submit" className="sideBarSubmitBtn">
+        {/* <button type="submit"
+          className="sideBarSubmitBtn"
+          onClick={this.sendSidebarState}>
           Find Cars!
-        </button>
+        </button> */}
+
+        <Link
+          to={{
+            pathname: '/allProducts',
+            state: {state: this.state}
+          }}
+          className="sideBarSubmitBtn"
+          // type="submit"
+          // params={this.state}
+          // onClick={this.sendSidebarState}
+        >
+          Find Cars!
+        </Link>
       </div>
     )
   }

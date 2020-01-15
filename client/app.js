@@ -9,7 +9,9 @@ const App = () => {
       <Navbar />
       <div className="belowNavDiv">
         <Sidebar />
-        <Routes />
+        <div className="routeFullDiv">
+          <Routes />
+        </div>
       </div>
     </div>
   )
