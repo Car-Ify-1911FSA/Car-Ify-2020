@@ -1,13 +1,14 @@
-'use strict'
+'use strict';
 
-const db = require('../server/db')
+const db = require('../server/db');
 const {
   User,
   Payment,
   Product,
   PaymentAccount,
-  Order
-} = require('../server/db/models')
+  Cart,
+  CartProduct
+} = require('../server/db/models');
 
 const userSeed = [
   {
@@ -18,7 +19,7 @@ const userSeed = [
     email: 'murphy@email.com',
     password: '123'
   }
-]
+];
 
 const paymentSeed = [
   {
@@ -30,7 +31,7 @@ const paymentSeed = [
   {
     type: 'stripe'
   }
-]
+];
 
 const productSeed = [
   {
@@ -110,34 +111,34 @@ const productSeed = [
     imageUrl:
       'https://www.autoblog.com/img/research/styles/photos/performance.jpg'
   }
-]
+];
 
-const orderSeed = [
+const cartSeed = [
   {
-    cartId: 1,
+    status: 'shipped',
+    time: '03/25/2018',
     userId: 1,
-    productId: 1,
     paymentAccountId: 1
   },
   {
-    cartId: 1,
+    status: 'paid',
+    time: '08/22/2019',
     userId: 1,
-    productId: 2,
     paymentAccountId: 1
   },
   {
-    cartId: 2,
+    status: 'active',
+    time: '10/15/2019',
     userId: 1,
-    productId: 1,
     paymentAccountId: 2
   },
   {
-    cartId: 1,
+    status: 'active',
+    time: '09/23/2019',
     userId: 2,
-    productId: 2,
     paymentAccountId: 3
   }
-]
+];
 
 const paymentAccountSeed = [
   {
@@ -155,37 +156,37 @@ const paymentAccountSeed = [
     paymentId: 3,
     userId: 2
   }
-]
+];
 
 async function seed() {
-  await db.sync({force: true})
-  console.log('db synced!')
+  await db.sync({force: true});
+  console.log('db synced!');
 
-  await User.bulkCreate(userSeed)
-  await Payment.bulkCreate(paymentSeed)
-  await Product.bulkCreate(productSeed)
-  await PaymentAccount.bulkCreate(paymentAccountSeed) // TEMP REMOVE
-  await Order.bulkCreate(orderSeed) // TEMP REMOVE
+  await User.bulkCreate(userSeed);
+  await Payment.bulkCreate(paymentSeed);
+  await Product.bulkCreate(productSeed);
+  await PaymentAccount.bulkCreate(paymentAccountSeed); // TEMP REMOVE
+  await Cart.bulkCreate(cartSeed); // TEMP REMOVE
 
-  console.log(`seeded successfully`)
+  console.log(`seeded successfully`);
 }
 
 async function runSeed() {
-  console.log('seeding...')
+  console.log('seeding...');
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
+    console.error(err);
+    process.exitCode = 1;
   } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log('closing db connection');
+    await db.close();
+    console.log('db connection closed');
   }
 }
 
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
-module.exports = seed
+module.exports = seed;

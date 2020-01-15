@@ -1,20 +1,23 @@
-const User = require('./user')
-const Product = require('./product')
-const Order = require('./order')
-const Payment = require('./payment')
-const PaymentAccount = require('./paymentAccount')
+const User = require('./user');
+const Product = require('./product');
+const Cart = require('./cart');
+const Payment = require('./payment');
+const PaymentAccount = require('./paymentAccount');
+const CartProduct = require('./cartProduct');
 
-Order.belongsTo(User)
-Product.hasMany(Order)
-PaymentAccount.hasOne(Order)
+Cart.hasMany(Product);
+Product.belongsToMany(Cart, {through: 'cartProduct'});
 
-PaymentAccount.belongsTo(Payment)
-PaymentAccount.belongsTo(User)
+Cart.belongsTo(User);
+
+Cart.hasOne(PaymentAccount);
+PaymentAccount.hasOne(Payment);
 
 module.exports = {
   User,
   Product,
-  Order,
+  Cart,
   Payment,
-  PaymentAccount
-}
+  PaymentAccount,
+  CartProduct
+};

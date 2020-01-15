@@ -6,7 +6,7 @@ import {getOrdersByUser} from '../store';
 
 class Cart extends Component {
   componentDidMount() {
-    console.log('mount -', this.props);
+    // console.log('mount -', this.props);
     this.props.fetchAllOrders(this.props.userId);
   }
 

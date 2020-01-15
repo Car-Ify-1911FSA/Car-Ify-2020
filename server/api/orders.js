@@ -1,5 +1,5 @@
-const router = require('express').Router()
-const {Order, Product} = require('../db/models')
+const router = require('express').Router();
+const {Order, Product} = require('../db/models');
 
 router.get('/:userId', async (req, res, next) => {
   try {
@@ -8,19 +8,19 @@ router.get('/:userId', async (req, res, next) => {
         userId: req.params.userId
       },
       include: [{model: Product}]
-    })
-    res.send(allOrders)
+    });
+    res.send(allOrders);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 router.post('/:userId', async (req, res, next) => {
   try {
-    const newOrder = await Order.create(req.body)
-    res.send(newOrder)
+    const newOrder = await Order.create(req.body);
+    res.send(newOrder);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
 
@@ -29,8 +29,8 @@ router.put('/:userId', async (req, res, next) => {
     //find order
     //update order
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 
 module.exports = router;
