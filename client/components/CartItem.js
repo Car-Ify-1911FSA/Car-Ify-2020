@@ -7,7 +7,10 @@ const CartItem = ({order, id}) => {
       <h4>{id}</h4>
       Model:<h4>{order.model}</h4>
       Brand:<h4>{order.brand}</h4>
-      Price:<h4>{order.price}</h4>
+      Price:
+      <h4>{`$${order.price
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
     </div>
   );
 };

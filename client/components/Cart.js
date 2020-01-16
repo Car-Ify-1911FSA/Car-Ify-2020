@@ -4,16 +4,30 @@ import {getActiveCart, getCartDetail} from '../store';
 import CartItem from './CartItem';
 
 class Cart extends Component {
+  constructor() {
+    super();
+    this.calcTotalPrice = this.calcTotalPrice.bind(this);
+  }
+
   componentDidMount() {
     console.log('mount -', this.props, this.props.userId, this.props.cartId);
     this.props.fetchCart(this.props.userId);
-    this.props.fetchCartDetail(this.props.cartId);
+    // this.props.fetchCartDetail(this.props.cartId);
+    this.props.fetchCartDetail(3);
+  }
+
+  calcTotalPrice(cartDetail) {
+    let total = 0;
+    cartDetail.forEach(item => {
+      total += item.totalPrice;
+    });
+    return `$${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   }
 
   render() {
-    const cart = this.props.cart;
+    const {cart, cartDetail} = this.props;
     const products = cart.products;
-    console.log('cart render -', this.props);
+    // console.log('cart render -', this.props, cartDetail);
 
     return (
       <div className="cartFullDiv">
@@ -32,15 +46,15 @@ class Cart extends Component {
           </div>
         )}
 
-        {!products ? (
+        {!Array.isArray(cartDetail) ? (
           <div className="cartTotalDiv">
             <p>Loading Cart Summary</p>
           </div>
         ) : (
           <div className="cartTotalDiv">
             <h3>Cart Summary</h3>
-            <h5>Total Quantity: {products.length}</h5>
-            <h5>Total Price: {products.length}</h5>
+            <h5>Total Quantity: {cartDetail.length}</h5>
+            <h5>Total Price: {this.calcTotalPrice(cartDetail)}</h5>
           </div>
         )}
 
@@ -62,7 +76,7 @@ const mapState = state => {
     userName: state.user.name,
     cartId: state.cart.id,
     cart: state.cart,
-    cartDetail: state.cartDetail
+    cartDetail: state.cartProduct
   };
 };
 

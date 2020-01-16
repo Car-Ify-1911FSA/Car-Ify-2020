@@ -19,9 +19,10 @@ const getCartItems = cartDetail => {
 export const getCartDetail = cartId => {
   return async dispatch => {
     try {
-      console.log('detail thunk -', cartId);
+      // console.log('detail thunk 1 -', cartId);
       const {data} = await axios.get(`/api/cart-product/${cartId}`);
       // const activeCart = data.filter(cart => cart.status === 'active')[0];
+      // console.log('detail thunk 2 -', data);
       dispatch(getCartItems(data));
     } catch (error) {
       console.error(error);
