@@ -5,7 +5,6 @@ import PaymentCard from './PaymentCard';
 
 class PaymentAccounts extends Component {
   componentDidMount() {
-    console.log('payment mount -', this.props);
     this.props.fetchAllPaymentAcct();
   }
 
@@ -14,8 +13,6 @@ class PaymentAccounts extends Component {
     const filterAccounts = allAccounts.filter(
       acct => acct.userId === this.props.userId
     );
-
-    console.log('payment render -', allAccounts, filterAccounts);
 
     return (
       <div>
@@ -32,6 +29,7 @@ class PaymentAccounts extends Component {
 
 const mapState = state => {
   return {
+    userId: state.user.id,
     paymentAccounts: state.paymentAccounts
   };
 };

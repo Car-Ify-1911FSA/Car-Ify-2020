@@ -130,6 +130,13 @@ h3 {
   background-color: rgba(0, 152, 195, 0.7);
   border-radius: 15px;
   padding: 10px;
+  margin-bottom: 25px;
+}
+
+.linkToPayment {
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 /* ----------------- CART ITEM ELEMENT ----------------- */
@@ -188,4 +195,16 @@ h3 {
   width: 100px;
   height: 35px;
   border-radius: 5px;
+}
+
+/* ----------------- PAYMENT CARD ----------------- */
+.paymentCardFullDiv {
+  background-color: lightskyblue;
+  width: 50vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-radius: 10px;
 }

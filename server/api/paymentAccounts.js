@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const {Payment, PaymentAccounts} = require('../db/models/');
+const {Payment, PaymentAccount} = require('../db/models');
 
 router.get('/', async (req, res, next) => {
   try {
-    const allPaymentAccounts = await PaymentAccounts.findAll({
+    const allPaymentAccounts = await PaymentAccount.findAll({
       include: [{model: Payment}]
     });
     if (allPaymentAccounts) {
@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    let paymentAccount = await PaymentAccounts.findByPk(id);
+    let paymentAccount = await PaymentAccount.findByPk(id);
     if (paymentAccount) {
       res.json(paymentAccount);
     } else {
@@ -32,7 +32,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    let newPaymentAccount = PaymentAccounts.create(req.body);
+    let newPaymentAccount = PaymentAccount.create(req.body);
     if (newPaymentAccount) {
       res.send(newPaymentAccount);
     } else {
@@ -46,7 +46,7 @@ router.post('/', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     let paymentAccountId = req.params.id;
-    let paymentAccount = await PaymentAccounts.findByPk(paymentAccountId);
+    let paymentAccount = await PaymentAccount.findByPk(paymentAccountId);
     if (paymentAccount) {
       await paymentAccount.destroy();
       res.send(paymentAccount);
@@ -61,7 +61,7 @@ router.delete('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    let paymentAccount = await PaymentAccounts.findByPk(id);
+    let paymentAccount = await PaymentAccount.findByPk(id);
     paymentAccount.type = req.body.type;
     paymentAccount.name = req.body.name;
 

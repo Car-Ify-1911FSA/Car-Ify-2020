@@ -45,7 +45,9 @@ class Cart extends Component {
           </div>
         )}
 
-        <Link to="/paymentAccounts">Continue to Payment</Link>
+        <Link to="/paymentAccounts" className="linkToPayment">
+          Continue to Payment
+        </Link>
       </div>
     );
   }

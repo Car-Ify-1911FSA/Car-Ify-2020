@@ -159,6 +159,11 @@ const paymentAccountSeed = [
     name: 'stripe123',
     paymentId: 3,
     userId: 2
+  },
+  {
+    name: 'cc456',
+    paymentId: 1,
+    userId: 2
   }
 ];
 

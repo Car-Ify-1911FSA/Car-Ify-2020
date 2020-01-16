@@ -9,9 +9,10 @@ Cart.belongsToMany(Product, {through: CartProduct});
 Product.belongsToMany(Cart, {through: CartProduct});
 
 Cart.belongsTo(User);
-
 Cart.belongsTo(PaymentAccount);
+
 PaymentAccount.belongsTo(Payment);
+PaymentAccount.belongsTo(User);
 
 module.exports = {
   User,
