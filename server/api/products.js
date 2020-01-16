@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const {Product} = require('../db/models');
-const {isAdmin, isUserOrAdmin} = require('./security');
 
 router.get('/', async (req, res, next) => {
   try {
