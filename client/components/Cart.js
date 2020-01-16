@@ -1,30 +1,51 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {getActiveCart, getCartDetail} from '../store';
 import CartItem from './CartItem';
-import {getActiveCart} from '../store';
 
 class Cart extends Component {
   componentDidMount() {
-    console.log('mount -', this.props, this.props.userId);
+    console.log('mount -', this.props, this.props.userId, this.props.cartId);
     this.props.fetchCart(this.props.userId);
+    this.props.fetchCartDetail(this.props.cartId);
   }
 
   render() {
     const cart = this.props.cart;
     const products = cart.products;
-    console.log('cart render -', cart, products);
+    console.log('cart render -', this.props);
 
     return (
       <div className="cartFullDiv">
-        <h1>Cart</h1>
+        <h1>{this.props.userName}'s Cart</h1>
+
         {!products ? (
-          <p>Loading Cart</p>
+          <div className="cartProductDiv">
+            <p>Loading Cart Items</p>
+          </div>
         ) : (
-          products.map((order, idx) => <CartItem key={idx} order={order} />)
+          <div className="cartProductDiv">
+            <h3>Cart Items</h3>
+            {products.map((order, idx) => (
+              <CartItem key={idx} order={order} id={idx} />
+            ))}
+          </div>
         )}
-        <div className="cartTotalDiv">
-          <h5>Cart Summary [BUILD]</h5>
-        </div>
+
+        {!products ? (
+          <div className="cartTotalDiv">
+            <p>Loading Cart Summary</p>
+          </div>
+        ) : (
+          <div className="cartTotalDiv">
+            <h3>Cart Summary</h3>
+            <h5>Total Quantity: {products.length}</h5>
+            <h5>Total Price: {products.length}</h5>
+          </div>
+        )}
+
+        <Link to="/paymentAccounts">Continue to Payment</Link>
       </div>
     );
   }
@@ -33,13 +54,17 @@ class Cart extends Component {
 const mapState = state => {
   return {
     userId: state.user.id,
-    cart: state.cart
+    userName: state.user.name,
+    cartId: state.cart.id,
+    cart: state.cart,
+    cartDetail: state.cartDetail
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    fetchCart: userId => dispatch(getActiveCart(userId))
+    fetchCart: userId => dispatch(getActiveCart(userId)),
+    fetchCartDetail: cartId => dispatch(getCartDetail(cartId))
   };
 };
 

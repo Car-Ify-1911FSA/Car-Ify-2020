@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const PaymentAccounts = db.define('payment_accounts', {
+const PaymentAccounts = db.define('paymentAccounts', {
   name: {
     type: Sequelize.STRING
   }

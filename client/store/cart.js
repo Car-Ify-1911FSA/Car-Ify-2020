@@ -27,7 +27,6 @@ export const getActiveCart = userId => {
     try {
       const {data} = await axios.get(`/api/cart/${userId}`);
       const activeCart = data.filter(cart => cart.status === 'active')[0];
-      console.log('Cart Thunk -', activeCart);
       dispatch(getCart(activeCart));
     } catch (error) {
       console.error(error);
@@ -35,10 +34,7 @@ export const getActiveCart = userId => {
   };
 };
 
-export const addNewOrder = (newOrder, routeVerb) => {
-  // return routeVerb ? post : put
-};
-
+// REDUCER
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ORDER:

@@ -3,9 +3,6 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {auth} from '../store';
 
-/**
- * COMPONENT
- */
 const AuthForm = props => {
   const {formName, displayName, handleSubmit, error} = props;
 
@@ -68,12 +65,14 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
-      console.log('dispatch -', evt.target.formName, evt.target.userName.value);
       const formName = evt.target.name;
       const email = evt.target.email.value;
-      const name = evt.target.userName.value;
       const password = evt.target.password.value;
-      dispatch(auth(email, name, password, formName));
+
+      if (formName === 'signup') {
+        const name = evt.target.userName.value;
+        dispatch(auth(email, password, formName, name));
+      } else dispatch(auth(email, password, formName));
     }
   };
 };

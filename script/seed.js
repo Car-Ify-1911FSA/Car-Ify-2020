@@ -188,6 +188,18 @@ const cartProductSeed = [
     totalPrice: 20000
   },
   {
+    cartId: 3,
+    productId: 1,
+    quantity: 1,
+    totalPrice: 15000
+  },
+  {
+    cartId: 3,
+    productId: 3,
+    quantity: 2,
+    totalPrice: 45000
+  },
+  {
     cartId: 4,
     productId: 5,
     quantity: 1,

@@ -4,15 +4,15 @@ import thunkMiddleware from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import user from './user';
 import allProducts from './allProducts';
-import singleProduct from './singleProduct';
 import cart from './cart';
+import cartProduct from './cartProduct';
 import paymentAccounts from './paymentAccounts';
 
 const reducer = combineReducers({
   user,
   allProducts,
-  singleProduct,
   cart,
+  cartProduct,
   paymentAccounts
 });
 
@@ -27,6 +27,6 @@ const store = createStore(reducer, middleware);
 export default store;
 export * from './user';
 export * from './allProducts';
-export * from './singleProduct';
 export * from './cart';
 export * from './paymentAccounts';
+export * from './cartProduct';
