@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {addNewCart} from '../store';
+import {getActiveCart, addNewCart} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
     console.log('home mount - ', this.props);
+    if (!this.props.cartId) this.props.getCart(this.props.userId);
   }
 
   render() {
@@ -58,6 +59,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getCart: userId => dispatch(getActiveCart(userId)),
     addNewCart: newCart => dispatch(addNewCart(newCart))
   };
 };
