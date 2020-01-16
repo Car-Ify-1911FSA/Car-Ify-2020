@@ -1,14 +1,14 @@
-const router = require('express').Router()
-const {Product} = require('../db/models')
+const router = require('express').Router();
+const {Product} = require('../db/models');
 
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll()
-    res.send(products)
+    const products = await Product.findAll();
+    res.send(products);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -16,11 +16,11 @@ router.get('/:id', async (req, res, next) => {
       where: {
         id: req.params.id
       }
-    })
-    res.send(product)
+    });
+    res.send(product);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-module.exports = router
+module.exports = router;

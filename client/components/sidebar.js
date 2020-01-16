@@ -140,17 +140,17 @@ class Sidebar extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
     allProducts: state.allProducts
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchAllProducts: () => dispatch(loadAllProducts())
   };
 };
 
-export default connect(mapState, mapDispatch)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

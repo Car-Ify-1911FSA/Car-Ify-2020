@@ -41,14 +41,14 @@ class UserHome extends Component {
   }
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
     name: state.user.name
   };
 };
 
-export default connect(mapState)(UserHome);
+export default connect(mapStateToProps)(UserHome);
 
 // PROP TYPES
 UserHome.propTypes = {
