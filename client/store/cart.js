@@ -29,14 +29,15 @@ export const getActiveCart = userId => {
     try {
       const {data} = await axios.get(`/api/cart/${userId}`);
       const activeCart = data.filter(cart => cart.status === 'active')[0];
-      dispatch(getCart(activeCart));
+      const adjActiveCart = activeCart === undefined ? {} : activeCart;
+      dispatch(getCart(adjActiveCart));
     } catch (error) {
       console.error(error);
     }
   };
 };
 
-export const adddNewCart = newCart => {
+export const addNewCart = newCart => {
   return async dispatch => {
     try {
       console.log('thunky add -', newCart);
