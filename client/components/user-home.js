@@ -1,22 +1,20 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-/**
- * COMPONENT
- */
 class UserHome extends Component {
   render() {
-    const {email, isLoggedIn} = this.props
+    const {name, isLoggedIn} = this.props;
 
     return (
       <div className="homePageDiv">
         {isLoggedIn ? (
           <h3>
-            Welcome back, <span className="hpLoggedInWelcome">{email}!</span>
+            Let's Keep on Shopping,{' '}
+            <span className="hpLoggedInWelcome">{name}!</span>
           </h3>
         ) : (
-          <h3>Welcome Guest! Remember to login or sign-up!</h3>
+          <h3>Remember to login or sign-up!</h3>
         )}
 
         <div className="homePagePara">
@@ -39,26 +37,21 @@ class UserHome extends Component {
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTTY_jTD1wj-EqDLJ3rD534a5cRNR4atMrzQrp__ytKIT0IrNaW" />
         </div>
       </div>
-    )
+    );
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    email: state.user.email
-  }
-}
+    name: state.user.name
+  };
+};
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(UserHome);
 
-/**
- * PROP TYPES
- */
+// PROP TYPES
 UserHome.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  email: PropTypes.string
-}
+  name: PropTypes.string
+};
