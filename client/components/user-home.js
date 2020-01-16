@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {addNewCart} from '../store';
 
 class UserHome extends Component {
+  componentDidMount() {
+    console.log('home mount - ', this.props);
+  }
+
   render() {
     const {name, isLoggedIn} = this.props;
+    console.log('home render -', this.props);
 
     return (
       <div className="homePageDiv">
@@ -44,11 +50,19 @@ class UserHome extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
-    name: state.user.name
+    userId: state.user.id,
+    name: state.user.name,
+    cartId: state.cart.id
   };
 };
 
-export default connect(mapStateToProps)(UserHome);
+const mapDispatchToProps = dispatch => {
+  return {
+    addNewCart: newCart => dispatch(addNewCart(newCart))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserHome);
 
 // PROP TYPES
 UserHome.propTypes = {

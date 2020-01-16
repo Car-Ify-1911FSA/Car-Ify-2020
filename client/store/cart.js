@@ -36,7 +36,7 @@ export const getActiveCart = userId => {
   };
 };
 
-export const adddNewCart = newCart => {
+export const addNewCart = newCart => {
   return async dispatch => {
     try {
       console.log('thunky add -', newCart);
