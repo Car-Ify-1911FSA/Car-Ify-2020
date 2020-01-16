@@ -32,7 +32,13 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newPaymentAccount = PaymentAccount.create(req.body);
+    const {name, paymentId, userId} = req.body;
+    const postedPaymentAccount = {
+      name: name,
+      paymentId: paymentId,
+      userId: userId
+    };
+    const newPaymentAccount = await PaymentAccount.create(postedPaymentAccount);
     if (newPaymentAccount) {
       res.send(newPaymentAccount);
     } else {
