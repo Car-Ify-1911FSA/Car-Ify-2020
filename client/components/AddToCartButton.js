@@ -4,26 +4,33 @@ import {withRouter} from 'react-router-dom';
 import {getActiveCart} from '../store';
 
 class AddToCartButton extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.handleAddClick = this.handleAddClick.bind(this);
   }
 
   componentDidMount() {
-    // this.props.getCart(this.props.userId);
+    this.props.getCart(this.props.userId);
   }
 
-  handleAddClick() {
-    this.props.isLoggedIn
-      ? // [BUILD] function that manages adding to Cart, need to work on store prior to that in order to get CartId
-        console.log('Nothing added yet')
-      : this.props.history.push('/login');
+  handleAddClick(productId) {
+    const {isLoggedIn, userId, cartId} = this.props;
+    isLoggedIn
+      ? // FOLLOWING LOGIC:
+        // IF CARTID AVAILABLE (SIGNIFYING "ACTIVE" ONE), POST THERE WITH PRODID
+        // OTHERWISE CREATE NEW CARTID WITH USERID AND POST TO BOTH TABLES
+        console.log('Nothing Yet')
+      : console.log('Need Local Storage Functionality for Guests');
   }
 
   render() {
     return (
       <div className="addBtnDiv">
-        <button type="button" onClick={this.handleAddClick} className="addBtn">
+        <button
+          type="button"
+          onClick={() => this.handleAddClick(this.props.productId)}
+          className="addBtn"
+        >
           Add to Cart
         </button>
       </div>
@@ -34,7 +41,8 @@ class AddToCartButton extends Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    userId: state.user.id
+    userId: state.user.id,
+    cartId: state.cart.id
   };
 };
 

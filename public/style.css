@@ -44,7 +44,8 @@ h4 {
 }
 
 .linkText {
-  color: blue;
+  font-weight: bold;
+  color: black;
   text-decoration: none;
 }
 

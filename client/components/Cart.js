@@ -10,10 +10,10 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    console.log('mount -', this.props, this.props.userId, this.props.cartId);
+    // console.log('mount -', this.props, this.props.userId, this.props.cartId);
     this.props.fetchCart(this.props.userId);
     // this.props.fetchCartDetail(this.props.cartId);
-    this.props.fetchCartDetail(3);
+    this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
   }
 
   calcTotalPrice(cartDetail) {
