@@ -31,17 +31,17 @@ class PaymentAccounts extends Component {
   }
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     userId: state.user.id,
     paymentAccounts: state.paymentAccounts
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchAllPaymentAcct: () => dispatch(getPaymentAccountsThunk())
   };
 };
 
-export default connect(mapState, mapDispatch)(PaymentAccounts);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentAccounts);

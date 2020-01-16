@@ -70,7 +70,7 @@ class AddToCartButton extends Component {
   }
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
@@ -80,7 +80,7 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
     getCartDetail: cartId => dispatch(getCartDetail(cartId)),
@@ -91,4 +91,6 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default withRouter(connect(mapState, mapDispatch)(AddToCartButton));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AddToCartButton)
+);

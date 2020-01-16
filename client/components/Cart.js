@@ -70,7 +70,7 @@ class Cart extends Component {
   }
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     userId: state.user.id,
     userName: state.user.name,
@@ -80,11 +80,11 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchCart: userId => dispatch(getActiveCart(userId)),
     fetchCartDetail: cartId => dispatch(getCartDetail(cartId))
   };
 };
 
-export default connect(mapState, mapDispatch)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

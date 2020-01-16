@@ -37,13 +37,13 @@ class AllProducts extends Component {
   }
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     allProducts: state.allProducts
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchAllProducts: () => {
       dispatch(loadAllProducts());
@@ -51,4 +51,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState, mapDispatch)(AllProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);
