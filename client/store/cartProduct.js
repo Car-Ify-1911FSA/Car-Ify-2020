@@ -43,6 +43,34 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
         dispatch(addCartItems(data));
       } else {
         console.log('GUEST LOCAL STORAGE!');
+        let currentCart;
+        // if cart already exist in local storage
+        if (localStorage.getItem('cart')) {
+          currentCart = JSON.parse(localStorage.getItem('cart'));
+
+          let searchId;
+          currentCart.forEach(el => {
+            if (el.productId === newCartItem.productId) {
+              searchId = currentCart.indexOf(el);
+            }
+          });
+          if (searchId > -1) {
+            currentCart[searchId].quantity += newCartItem.quantity;
+            currentCart[searchId].totalPrice += newCartItem.totalPrice;
+          } else {
+            currentCart.push(newCartItem);
+          }
+
+          dispatch(addCartItems(currentCart));
+          localStorage.setItem('cart', JSON.stringify(currentCart));
+        }
+        // if not, create a new cart in local storage
+        else {
+          console.log('No LSCart');
+          currentCart = [newCartItem];
+          localStorage.setItem('cart', JSON.stringify(currentCart));
+          dispatch(currentCart);
+        }
       }
     } catch (error) {
       console.error(error);
