@@ -29,6 +29,10 @@ h3 {
   margin: 0;
 }
 
+h4 {
+  margin: 0;
+}
+
 /* ----------------- GLOBAL ELEMENT ----------------- */
 .belowNavDiv {
   display: flex;
@@ -40,7 +44,8 @@ h3 {
 }
 
 .linkText {
-  color: blue;
+  font-weight: bold;
+  color: black;
   text-decoration: none;
 }
 
@@ -83,7 +88,10 @@ h3 {
   background-color: lightseagreen;
   width: 80%;
   font-size: medium;
+  padding: 5px;
   border-radius: 5px;
+  border-style: solid;
+  border-color: black;
 }
 
 /* ----------------- AUTH FORM ELEMENT ----------------- */
@@ -114,22 +122,12 @@ h3 {
   color: rgba(0, 152, 195, 1);
 }
 
-/* ----------------- CART ELEMENT ----------------- */
-.cartFullDiv {
-  padding: 0 10px;
-}
-
 /* ----------------- ALL PRODUCT ------------------ */
 .allProductFullDiv {
   padding: 0 15px;
 }
 
 /* ----------------- PRODUCT CARD ------------------ */
-.card-img {
-  width: 200px;
-  height: 150px;
-}
-
 .product-card-container {
   display: flex;
   flex-direction: row;
@@ -139,9 +137,24 @@ h3 {
 
 .product-card {
   background-color: rgb(225, 205, 209);
+  min-height: 350px;
   padding: 1em;
-  margin: 0 1em 1em 1em;
   border-radius: 40px;
+}
+
+.productCardInsideDiv {
+  height: 90%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: black;
+}
+
+.card-img {
+  width: 200px;
+  height: 150px;
 }
 
 /* ----------------- SINGLE PRODUCT----------------- */
@@ -156,14 +169,71 @@ h3 {
   width: 400px;
 }
 
-.singleProdBtnDiv {
-  width: 350px;
+/* ----------------- ADD BUTTON ----------------- */
+.addBtnDiv {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
-.singleProdBtn {
+.addBtn {
+  font-size: medium;
   width: 100px;
-  height: 35px;
+  height: 30px;
   border-radius: 5px;
+}
+
+/* ----------------- CART ELEMENT ----------------- */
+.cartFullDiv {
+  padding: 0 10px;
+}
+
+.cartProductDiv {
+  background-color: lightgray;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 25px;
+}
+
+.cartTotalDiv {
+  background-color: rgba(0, 152, 195, 0.7);
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 25px;
+}
+
+.paymentLinkBtn {
+  font-size: medium;
+  background: linear-gradient(rgba(0, 152, 195, 0.3), #eaeaea);
+  /* background-color: lightgray; */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* ----------------- CART ITEM ELEMENT ----------------- */
+.cartItemFullDiv {
+  display: flex;
+  width: 75%;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+}
+
+/* ----------------- PAYMENT ACCOUNTS ----------------- */
+.checkoutBtn {
+  font-size: medium;
+  height: 35px;
+  width: 200px;
+  border-radius: 5px;
+}
+
+/* ----------------- PAYMENT CARD ----------------- */
+.paymentCardFullDiv {
+  background-color: lightskyblue;
+  width: 50vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 15px;
+  border-radius: 10px;
 }

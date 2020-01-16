@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Product = db.define('product', {
   brand: {
@@ -33,7 +33,13 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
     defaultValue:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpaOexXQpRpu85_Xz8xHnJOL6nycw-pZZ1bezgK1Fp8VptDdBk'
+  },
+  totalRating: {
+    type: Sequelize.INTEGER
+  },
+  numberRating: {
+    type: Sequelize.INTEGER
   }
-})
+});
 
-module.exports = Product
+module.exports = Product;
