@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {Cart, Product} = require('../db/models');
-const {isAdmin, isUserOrAdmin} = require('./security');
+const {isUserOrAdmin} = require('./security');
 
 router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
@@ -16,7 +16,7 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
     console.log('cart post -', req.body);
     const newOrder = await Cart.create(req.body);
