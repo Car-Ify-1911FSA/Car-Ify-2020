@@ -37,11 +37,12 @@ export const getActiveCart = userId => {
   };
 };
 
-export const addNewCart = newCart => {
+export const addNewCart = (userId, newCart) => {
   return async dispatch => {
     try {
-      console.log('thunky add -', newCart);
-      const {data} = await axios.post(`/api/cart/`, newCart);
+      console.log('thunky add 1 -', newCart);
+      const {data} = await axios.post(`/api/cart/${userId}`, newCart);
+      console.log('thunky add 2 -', data);
       dispatch(addCart(data));
     } catch (error) {
       console.error(error);
