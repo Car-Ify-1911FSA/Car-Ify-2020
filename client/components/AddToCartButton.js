@@ -5,7 +5,8 @@ import {
   getActiveCart,
   getCartDetail,
   adddNewCart,
-  addNewCartDetail
+  addNewCartDetail,
+  editNewCartDetail
 } from '../store';
 
 class AddToCartButton extends Component {
@@ -26,7 +27,14 @@ class AddToCartButton extends Component {
       if (cartId) {
         let prodIdArr = cartDetail.map(prod => prod.productId);
         if (prodIdArr.includes(productId)) {
-          console.log('PUT || ONLY TO CARTPROD', productId, cart, cartDetail);
+          const editCartItemObj = {
+            cartId: cartId,
+            productId: productId,
+            quantity: 1,
+            totalPrice: productPrice
+          };
+          console.log('PUT || ONLY TO CARTPROD', editCartItemObj);
+          // this.props.editCartItem(isLoggedIn, editCartItemObj);
         } else {
           const addCartItemObj = {
             cartId: cartId,
@@ -76,7 +84,9 @@ const mapDispatch = dispatch => {
     getCart: userId => dispatch(getActiveCart(userId)),
     getCartDetail: cartId => dispatch(getCartDetail(cartId)),
     addCartItem: (isLoggedIn, newCartItem) =>
-      dispatch(addNewCartDetail(isLoggedIn, newCartItem))
+      dispatch(addNewCartDetail(isLoggedIn, newCartItem)),
+    editCartItem: (isLoggedIn, editCartItem) =>
+      dispatch(editNewCartDetail(isLoggedIn, editCartItem))
   };
 };
 

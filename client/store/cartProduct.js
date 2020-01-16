@@ -50,7 +50,7 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
   };
 };
 
-export const editNewCartDetail = cartId => {
+export const editNewCartDetail = (isLoggedIn, editCartItem) => {
   return async dispatch => {
     try {
       const {data} = await axios.put(`/api/cart-product/${cartId}`, [
