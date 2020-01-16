@@ -6,7 +6,7 @@ function isAdmin(req, res, next) {
 
 //loggedin users and admin rights
 function isUserOrAdmin(req, res, next) {
-  req.params.id === req.user.id || req.user.admin
+  req.params.userId == req.user.id || req.user.admin
     ? next()
     : res.sendStatus(403);
 }
