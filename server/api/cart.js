@@ -17,19 +17,11 @@ router.get('/:userId', async (req, res, next) => {
 
 router.post('/:userId', async (req, res, next) => {
   try {
+    console.log('cart post -', req.body);
     const newOrder = await Cart.create(req.body);
     res.send(newOrder);
   } catch (error) {
     console.error(error);
-  }
-});
-
-router.put('/:userId', async (req, res, next) => {
-  try {
-    //find order
-    //update order
-  } catch (error) {
-    console.log(error);
   }
 });
 

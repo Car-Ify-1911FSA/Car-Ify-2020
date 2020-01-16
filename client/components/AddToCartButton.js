@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {getActiveCart} from '../store';
+import {getActiveCart, adddNewCart, addNewCartDetail} from '../store';
 
 class AddToCartButton extends Component {
   constructor() {
@@ -15,12 +15,17 @@ class AddToCartButton extends Component {
 
   handleAddClick(productId) {
     const {isLoggedIn, userId, cartId} = this.props;
-    isLoggedIn
-      ? // FOLLOWING LOGIC:
-        // IF CARTID AVAILABLE (SIGNIFYING "ACTIVE" ONE), POST THERE WITH PRODID
-        // OTHERWISE CREATE NEW CARTID WITH USERID AND POST TO BOTH TABLES
-        console.log('Nothing Yet')
-      : console.log('Need Local Storage Functionality for Guests');
+
+    // FOLLOWING LOGIC:
+    // IF CARTID AVAILABLE (SIGNIFYING "ACTIVE" ONE), POST THERE WITH PRODID
+    // OTHERWISE CREATE NEW CARTID WITH USERID AND POST TO BOTH TABLES
+
+    if (isLoggedIn) {
+      if (cartId) console.log('POST TO CARTPROD');
+      else console.log('POST TO CART AND CARTPROD');
+    } else {
+      console.log('Need Local Storage Functionality for Guests');
+    }
   }
 
   render() {

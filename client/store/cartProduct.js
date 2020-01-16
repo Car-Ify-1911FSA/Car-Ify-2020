@@ -6,6 +6,7 @@ const initialState = {
 
 // ACTION TYPES
 const GET_CART_ITEMS = 'GET_CART_ITEMS';
+const ADD_CART_ITEMS = 'ADD_CART_ITEMS';
 
 // ACTION CREATORS
 const getCartItems = cartDetail => {
@@ -15,15 +16,32 @@ const getCartItems = cartDetail => {
   };
 };
 
+const addCartItems = newCartItem => {
+  return {
+    type: ADD_CART_ITEMS,
+    newCartItem
+  };
+};
+
 // THUNKY THUNKS
 export const getCartDetail = cartId => {
   return async dispatch => {
     try {
-      // console.log('detail thunk 1 -', cartId);
       const {data} = await axios.get(`/api/cart-product/${cartId}`);
-      // const activeCart = data.filter(cart => cart.status === 'active')[0];
-      // console.log('detail thunk 2 -', data);
       dispatch(getCartItems(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const addNewCartDetail = cartId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post(`/api/cart-product/${cartId}`, [
+        '! FILL ME OUT !'
+      ]);
+      dispatch(addCartItems(data));
     } catch (error) {
       console.error(error);
     }
@@ -35,6 +53,8 @@ const cartProductReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CART_ITEMS:
       return action.cartDetail;
+    case ADD_CART_ITEMS:
+      return {...state.cartDetail, ...action.newCartItem};
     default:
       return state;
   }
