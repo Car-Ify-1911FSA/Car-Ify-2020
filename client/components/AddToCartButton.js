@@ -48,6 +48,7 @@ class AddToCartButton extends Component {
         console.log('POST TO CART AND CARTPROD', cartId, this.props);
       }
     } else {
+      console.log(localStorage);
       console.log('Need Local Storage Functionality for Guests');
     }
   }

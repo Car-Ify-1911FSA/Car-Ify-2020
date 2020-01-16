@@ -43,6 +43,29 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
         dispatch(addCartItems(data));
       } else {
         console.log('GUEST LOCAL STORAGE!');
+        let currentCart;
+        // if cart already exist in local storage
+        if (localStorage.getItem('cart')) {
+          currentCart = JSON.parse(localStorage.getItem('cart'));
+
+          let searchId = currentCart.findIndex(
+            el => el.id === newCartItem.productid
+          );
+
+          if (searchId > -1) {
+            currentCart[searchId].quantity += newCartItem.quantity;
+          } else {
+            currentCart.push(newCartItem);
+          }
+
+          dispatch(addCartItems(currentCart));
+          localStorage.setItem('cart', JSON.stringify(currentCart));
+        } else {
+          console.log('No LSCart');
+          currentCart = [newCartItem];
+          localStorage.setItem('cart', JSON.stringify(currentCart));
+          dispatch(currentCart);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -69,10 +92,18 @@ const cartProductReducer = (state = initialState, action) => {
     case GET_CART_ITEMS:
       return action.cartDetail;
     case ADD_CART_ITEMS:
+      // console.log(action.newCartItem);
       return {...state.cartDetail, ...action.newCartItem};
     default:
       return state;
   }
 };
+
+//-------------LocalStorage -----------
+
+// let currentCart;
+// if (localStorage.getItem('cart')) {
+//   currentCart = JSON.parse(localStorage.getItem('cart'))
+// }
 
 export default cartProductReducer;
