@@ -11,10 +11,11 @@ class UserHome extends Component {
     // } catch (error) {
     //   console.error(error);
     // }
-    if (!this.props.cartId)
-      Promise.resolve(this.props.getCart(this.props.userId)).then(resp =>
+    if (!this.props.cartId) {
+      Promise.all([this.props.getCart(this.props.userId)]).then(resp =>
         console.log(resp)
       );
+    }
 
     // try {
     //   console.log('home mount 2 -', this.props);
