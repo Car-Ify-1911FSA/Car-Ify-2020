@@ -1,13 +1,8 @@
 const router = require('express').Router();
 const {User} = require('../db/models');
-// const {ensureAuthenticated} = require('./index');
+const {isAdmin} = require('./security');
 
-function ensureAuthenticated(req, res, next) {
-  if (req.user.admin) next();
-  else res.sendStatus(403);
-}
-
-router.get('/', ensureAuthenticated, async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
