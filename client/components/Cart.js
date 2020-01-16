@@ -11,9 +11,11 @@ class Cart extends Component {
 
   async componentDidMount() {
     // console.log('mount -', this.props, this.props.userId, this.props.cartId);
-    await this.props.fetchCart(this.props.userId);
-    // await this.props.fetchCartDetail(this.props.cartId);
-    this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
+    if (this.props.userId) await this.props.fetchCart(this.props.userId);
+    if (this.props.cartId) {
+      await this.props.fetchCartDetail(this.props.cartId);
+      // this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
+    }
   }
 
   calcTotalPrice(cartDetail) {
@@ -27,7 +29,7 @@ class Cart extends Component {
   render() {
     const {cart, cartDetail} = this.props;
     const products = cart.products;
-    // console.log('cart render -', this.props, cartDetail);
+    console.log('cart render -', this.props, cartDetail);
 
     return (
       <div className="cartFullDiv">
@@ -35,7 +37,7 @@ class Cart extends Component {
 
         {!products ? (
           <div className="cartProductDiv">
-            <p>Loading Cart Items</p>
+            <p>No Current Cart Items</p>
           </div>
         ) : (
           <div className="cartProductDiv">
@@ -48,7 +50,7 @@ class Cart extends Component {
 
         {!Array.isArray(cartDetail) ? (
           <div className="cartTotalDiv">
-            <p>Loading Cart Summary</p>
+            <p>Empty Cart !</p>
           </div>
         ) : (
           <div className="cartTotalDiv">
@@ -76,7 +78,8 @@ const mapStateToProps = state => {
     userName: state.user.name,
     cartId: state.cart.id,
     cart: state.cart,
-    cartDetail: state.cartProduct
+    cartDetail: state.cartProduct,
+    state: state
   };
 };
 

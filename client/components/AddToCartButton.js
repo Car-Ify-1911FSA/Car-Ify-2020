@@ -16,39 +16,45 @@ class AddToCartButton extends Component {
   }
 
   async componentDidMount() {
-    await this.props.getCart(this.props.userId);
-    await this.props.getCartDetail(this.props.cartId);
+    if (this.props.cartId) {
+      await this.props.getCart(this.props.userId);
+      await this.props.getCartDetail(this.props.cartId);
+    }
   }
 
   handleAddClick(productId, productPrice) {
-    const {isLoggedIn, userId, cartId, cart, cartDetail} = this.props;
+    const {isLoggedIn, userId, cartId, cart, cartDetail} = this.props,
+      cartItemObj = {
+        cartId: cartId,
+        productId: productId,
+        quantity: 1,
+        totalPrice: productPrice
+      },
+      newCart = {
+        status: 'active',
+        time: Date(),
+        userId: userId
+      };
 
     if (isLoggedIn) {
       if (cartId) {
         let prodIdArr = cartDetail.map(prod => prod.productId);
         if (prodIdArr.includes(productId)) {
-          const editCartItemObj = {
-            cartId: cartId,
-            productId: productId,
-            quantity: 1,
-            totalPrice: productPrice
-          };
-          console.log('PUT || ONLY TO CARTPROD', editCartItemObj);
+          console.log('PUT || ONLY TO CARTPROD', cartItemObj);
+          // PUTTING
           // this.props.editCartItem(isLoggedIn, editCartItemObj);
         } else {
-          const addCartItemObj = {
-            cartId: cartId,
-            productId: productId,
-            quantity: 1,
-            totalPrice: productPrice
-          };
-          this.props.addCartItem(isLoggedIn, addCartItemObj);
+          // POSTING
+          this.props.addCartItem(isLoggedIn, cartItemObj);
         }
       } else {
-        console.log('POST TO CART AND CARTPROD', cartId, this.props);
+        console.log('POST TO CART AND CARTPROD', cartId, newCart);
+        this.props.adddNewCart(newCart);
+        // this.props.addCartItem(isLoggedIn, cartItemObj);
       }
     } else {
       console.log('Need Local Storage Functionality for Guests');
+      this.props.addCartItem(isLoggedIn, cartItemObj);
     }
   }
 
@@ -83,6 +89,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
     getCartDetail: cartId => dispatch(getCartDetail(cartId)),
+    adddNewCart: newCart => dispatch(adddNewCart(newCart)),
     addCartItem: (isLoggedIn, newCartItem) =>
       dispatch(addNewCartDetail(isLoggedIn, newCartItem)),
     editCartItem: (isLoggedIn, editCartItem) =>
