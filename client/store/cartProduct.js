@@ -35,10 +35,25 @@ export const getCartDetail = cartId => {
   };
 };
 
-export const addNewCartDetail = cartId => {
+export const addNewCartDetail = (isLoggedIn, newCartItem) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/cart-product/${cartId}`, [
+      if (isLoggedIn) {
+        const {data} = await axios.post(`/api/cart-product`, newCartItem);
+        dispatch(addCartItems(data));
+      } else {
+        console.log('GUEST LOCAL STORAGE!');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const editNewCartDetail = (isLoggedIn, editCartItem) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/cart-product/${cartId}`, [
         '! FILL ME OUT !'
       ]);
       dispatch(addCartItems(data));

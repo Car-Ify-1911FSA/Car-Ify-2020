@@ -24,8 +24,6 @@ const ProductCard = props => {
         }}
         className="productCardInsideDiv"
       >
-        {/* <div className="productCardInsideDiv"> */}
-        {/* <div> */}
         <h4>{`${brand} ${model}`}</h4>
         <img src={imageUrl} className="card-img" />
         <h4>
@@ -33,9 +31,8 @@ const ProductCard = props => {
         </h4>
         <h4>Quantity: {quantity}</h4>
         <h4>Rating: {avgRating.toFixed(1)}</h4>
-        {/* </div> */}
       </Link>
-      <AddToCartButton productId={id} />
+      <AddToCartButton product={props.product} />
     </div>
   );
 };

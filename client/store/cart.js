@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-const GET_CART = 'GET_CART';
-const ADD_CART = 'ADD_CART';
-
 const initialState = {
   cart: {}
 };
 
+// ACTION TYPES
+const GET_CART = 'GET_CART';
+const ADD_CART = 'ADD_CART';
+
+// ACTION CREATORS
 const getCart = cart => {
   return {
     type: GET_CART,

@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {AddToCartButton} from './index'
+import React, {Component} from 'react';
+import {AddToCartButton} from './index';
 
 const SingleProduct = props => {
   const {
@@ -10,7 +10,7 @@ const SingleProduct = props => {
     price,
     rating,
     description
-  } = props.location.state.state
+  } = props.location.state.state;
 
   return (
     <div className="single-prod-cont">
@@ -20,7 +20,7 @@ const SingleProduct = props => {
       <h3>{rating}</h3>
       <p>{description}</p>
       <div className="singleProdBtnDiv">
-        <AddToCartButton productId={id} />
+        <AddToCartButton product={props.location.state.state} />
         <button
           type="button"
           onClick={() => props.history.goBack()}
@@ -30,7 +30,7 @@ const SingleProduct = props => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SingleProduct
+export default SingleProduct;
