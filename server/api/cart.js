@@ -16,7 +16,7 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
   }
 });
 
-router.post('/', isAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     console.log('cart post -', req.body);
     const newOrder = await Cart.create(req.body);
