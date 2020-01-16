@@ -54,6 +54,7 @@ class AddToCartButton extends Component {
         this.props.addCartItem(isLoggedIn, cartItemObj);
       }
     } else {
+      console.log(localStorage);
       console.log('Need Local Storage Functionality for Guests');
       this.props.addCartItem(isLoggedIn, cartItemObj);
     }
