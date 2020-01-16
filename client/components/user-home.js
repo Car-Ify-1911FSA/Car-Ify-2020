@@ -5,13 +5,27 @@ import {getActiveCart, addNewCart} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
-    console.log('home mount - ', this.props);
-    if (!this.props.cartId) this.props.getCart(this.props.userId);
+    console.log('home mount 1 - ', this.props, !this.props.cartId);
+    // try {
+    //   if (!this.props.cartId) this.props.getCart(this.props.userId);
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    if (!this.props.cartId)
+      Promise.resolve(this.props.getCart(this.props.userId)).then(resp =>
+        console.log(resp)
+      );
+
+    // try {
+    //   console.log('home mount 2 -', this.props);
+    // } catch (error) {
+    //   console.error(error);
+    // }
   }
 
   render() {
     const {name, isLoggedIn} = this.props;
-    console.log('home render -', this.props);
+    // console.log('home render -', this.props);
 
     return (
       <div className="homePageDiv">

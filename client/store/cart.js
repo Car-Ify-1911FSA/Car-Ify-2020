@@ -29,7 +29,8 @@ export const getActiveCart = userId => {
     try {
       const {data} = await axios.get(`/api/cart/${userId}`);
       const activeCart = data.filter(cart => cart.status === 'active')[0];
-      dispatch(getCart(activeCart));
+      const adjActiveCart = activeCart === undefined ? {} : activeCart;
+      dispatch(getCart(adjActiveCart));
     } catch (error) {
       console.error(error);
     }
