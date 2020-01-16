@@ -5,7 +5,8 @@ const Payment = require('./payment');
 const PaymentAccount = require('./paymentAccount');
 const CartProduct = require('./cartProduct');
 
-Product.belongsToMany(Cart, {through: 'cartProduct'});
+Cart.belongsToMany(Product, {through: CartProduct});
+Product.belongsToMany(Cart, {through: CartProduct});
 
 Cart.belongsTo(User);
 

@@ -13,13 +13,13 @@ const {
 const userSeed = [
   {
     admin: true,
-    name: 'cody',
+    name: 'Cody',
     email: 'cody@email.com',
     password: '123'
   },
   {
     admin: false,
-    name: 'murphy',
+    name: 'Murphy',
     email: 'murphy@email.com',
     password: '123'
   }

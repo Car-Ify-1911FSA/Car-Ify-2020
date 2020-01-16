@@ -1,17 +1,19 @@
 const router = require('express').Router();
-const {Order, Product} = require('../db/models');
+const {Cart, Product, CartProduct} = require('../db/models');
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    const allOrders = await Order.findAll({
+    // console.log('api -', req.params);
+    const allOrders = await Cart.findAll({
       where: {
         userId: req.params.userId
       },
       include: [{model: Product}]
     });
+    // console.log('api 2 -', allOrders);
     res.send(allOrders);
   } catch (error) {
-    next(error);
+    console.error(error);
   }
 });
 
@@ -20,7 +22,7 @@ router.post('/:userId', async (req, res, next) => {
     const newOrder = await Order.create(req.body);
     res.send(newOrder);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 });
 
