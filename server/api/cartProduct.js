@@ -16,6 +16,7 @@ router.get('/:cartId', isAdmin, async (req, res, next) => {
 });
 
 router.post('/', isAdmin, async (req, res, next) => {
+  console.log(req.body);
   try {
     const {cartId, productId, quantity, totalPrice} = req.body;
     const newItem = {

@@ -19,7 +19,14 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
 router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
     console.log('cart post -', req.body);
-    const newOrder = await Cart.create(req.body);
+    const {status, time, userId, paymentAccountId} = req.body;
+    const newCart = {
+      status: status,
+      time: time,
+      userId: userId,
+      paymentAccountId: paymentAccountId
+    };
+    const newOrder = await Cart.create(newCart);
     res.send(newOrder);
   } catch (error) {
     console.error(error);
