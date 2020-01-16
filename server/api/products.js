@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {Product} = require('../db/models');
 const {isAdmin, isUserOrAdmin} = require('./security');
 
-router.get('/', isAdmin, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll();
     res.send(products);
@@ -11,7 +11,7 @@ router.get('/', isAdmin, async (req, res, next) => {
   }
 });
 
-router.get('/:id', isAdmin, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const product = await Product.findOne({
       where: {
