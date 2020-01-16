@@ -1,10 +1,32 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {getActiveCart, addNewCart} from '../store';
 
 class UserHome extends Component {
+  componentDidMount() {
+    console.log('home mount 1 - ', this.props, this.props.cartId);
+
+    if (!this.props.cartId) {
+      Promise.all([this.props.getCart(this.props.userId)])
+        .then(() => {
+          console.log('home mount 2 -', this.props, this.props.cartId);
+          if (!this.props.cartId) {
+            const newCart = {
+              status: 'active',
+              time: Date(),
+              userId: this.props.userId
+            };
+            this.props.addNewCart(this.props.userId, newCart);
+          }
+        })
+        .then(() => console.log('home mount 3 -', this.props));
+    }
+  }
+
   render() {
     const {name, isLoggedIn} = this.props;
+    // console.log('home render -', this.props);
 
     return (
       <div className="homePageDiv">
@@ -44,11 +66,20 @@ class UserHome extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
-    name: state.user.name
+    userId: state.user.id,
+    name: state.user.name,
+    cartId: state.cart.id
   };
 };
 
-export default connect(mapStateToProps)(UserHome);
+const mapDispatchToProps = dispatch => {
+  return {
+    getCart: userId => dispatch(getActiveCart(userId)),
+    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserHome);
 
 // PROP TYPES
 UserHome.propTypes = {

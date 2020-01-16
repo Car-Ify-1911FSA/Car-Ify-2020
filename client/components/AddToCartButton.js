@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {
   getActiveCart,
   getCartDetail,
-  adddNewCart,
+  addNewCart,
   addNewCartDetail,
   editNewCartDetail
 } from '../store';
@@ -49,10 +49,12 @@ class AddToCartButton extends Component {
         }
       } else {
         console.log('POST TO CART AND CARTPROD', cartId, newCart);
-        this.props.adddNewCart(newCart);
-        // this.props.addCartItem(isLoggedIn, cartItemObj);
+        this.props.addNewCart(newCart);
+        console.log('AFTER POSTING CART', this.props.cart);
+        this.props.addCartItem(isLoggedIn, cartItemObj);
       }
     } else {
+      console.log(localStorage);
       console.log('Need Local Storage Functionality for Guests');
       this.props.addCartItem(isLoggedIn, cartItemObj);
     }
@@ -89,7 +91,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
     getCartDetail: cartId => dispatch(getCartDetail(cartId)),
-    adddNewCart: newCart => dispatch(adddNewCart(newCart)),
+    addNewCart: newCart => dispatch(addNewCart(newCart)),
     addCartItem: (isLoggedIn, newCartItem) =>
       dispatch(addNewCartDetail(isLoggedIn, newCartItem)),
     editCartItem: (isLoggedIn, editCartItem) =>
