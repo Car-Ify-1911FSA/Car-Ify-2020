@@ -5,23 +5,23 @@ import {getActiveCart, addNewCart} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
-    console.log('home mount 1 - ', this.props, !this.props.cartId);
-    // try {
-    //   if (!this.props.cartId) this.props.getCart(this.props.userId);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    if (!this.props.cartId) {
-      Promise.all([this.props.getCart(this.props.userId)]).then(resp =>
-        console.log(resp)
-      );
-    }
+    console.log('home mount 1 - ', this.props, this.props.cartId);
 
-    // try {
-    //   console.log('home mount 2 -', this.props);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    if (!this.props.cartId) {
+      Promise.all([this.props.getCart(this.props.userId)])
+        .then(() => {
+          console.log('home mount 2 -', this.props, this.props.cartId);
+          if (!this.props.cartId) {
+            const newCart = {
+              status: 'active',
+              time: Date(),
+              userId: this.props.userId
+            };
+            this.props.addNewCart(this.props.userId, newCart);
+          }
+        })
+        .then(() => console.log('home mount 3 -', this.props));
+    }
   }
 
   render() {
@@ -75,7 +75,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
-    addNewCart: newCart => dispatch(addNewCart(newCart))
+    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart))
   };
 };
 
