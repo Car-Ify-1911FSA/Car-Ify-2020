@@ -29,35 +29,39 @@ class AddToCartButton extends Component {
         productId: productId,
         quantity: 1,
         totalPrice: productPrice
-      },
-      newCart = {
-        status: 'active',
-        time: Date(),
-        userId: userId
       };
 
-    if (isLoggedIn) {
-      if (cartId) {
-        let prodIdArr = cartDetail.map(prod => prod.productId);
-        if (prodIdArr.includes(productId)) {
-          console.log('PUT || ONLY TO CARTPROD', cartItemObj);
-          // PUTTING
-          // this.props.editCartItem(isLoggedIn, editCartItemObj);
-        } else {
-          // POSTING
-          this.props.addCartItem(isLoggedIn, cartItemObj);
-        }
-      } else {
-        console.log('POST TO CART AND CARTPROD', cartId, newCart);
-        this.props.addNewCart(newCart);
-        console.log('AFTER POSTING CART', this.props.cart);
-        this.props.addCartItem(isLoggedIn, cartItemObj);
-      }
+    let prodIdArr = cartDetail.map(prod => prod.productId);
+    if (prodIdArr.includes(productId)) {
+      console.log('PUT || ONLY TO CARTPROD', cartItemObj);
+      // PUTTING
+      // this.props.editCartItem(isLoggedIn, editCartItemObj);
     } else {
-      console.log(localStorage);
-      console.log('Need Local Storage Functionality for Guests');
+      // POSTING
       this.props.addCartItem(isLoggedIn, cartItemObj);
     }
+
+    // if (isLoggedIn) {
+    //   if (cartId) {
+    //     let prodIdArr = cartDetail.map(prod => prod.productId);
+    //     if (prodIdArr.includes(productId)) {
+    //       console.log('PUT || ONLY TO CARTPROD', cartItemObj);
+    //       // PUTTING
+    //       // this.props.editCartItem(isLoggedIn, editCartItemObj);
+    //     } else {
+    //       // POSTING
+    //       this.props.addCartItem(isLoggedIn, cartItemObj);
+    //     }
+    //   } else {
+    //     console.log('POST TO CART AND CARTPROD', cartId, newCart);
+    //     console.log('AFTER POSTING CART', this.props.cart);
+    //     this.props.addCartItem(isLoggedIn, cartItemObj);
+    //   }
+    // } else {
+    //   console.log(localStorage);
+    //   console.log('Need Local Storage Functionality for Guests');
+    //   this.props.addCartItem(isLoggedIn, cartItemObj);
+    // }
   }
 
   render() {

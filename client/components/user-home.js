@@ -7,7 +7,7 @@ class UserHome extends Component {
   componentDidMount() {
     console.log('home mount 1 - ', this.props, this.props.cartId);
 
-    if (!this.props.cartId) {
+    if (this.props.userId) {
       Promise.all([this.props.getCart(this.props.userId)])
         .then(() => {
           console.log('home mount 2 -', this.props, this.props.cartId);
