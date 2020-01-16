@@ -22,6 +22,12 @@ const userSeed = [
     name: 'Murphy',
     email: 'murphy@email.com',
     password: '123'
+  },
+  {
+    admin: false,
+    name: 'Sam',
+    email: 'sam@email.com',
+    password: '123'
   }
 ];
 
@@ -153,6 +159,12 @@ const cartSeed = [
     time: '09/23/2019',
     userId: 2,
     paymentAccountId: 3
+  },
+  {
+    status: 'shipped',
+    time: '07/23/2019',
+    userId: 3,
+    paymentAccountId: 4
   }
 ];
 

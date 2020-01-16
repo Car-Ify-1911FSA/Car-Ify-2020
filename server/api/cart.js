@@ -15,7 +15,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 });
 
-router.post('/:userId', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     console.log('cart post -', req.body);
     const newOrder = await Cart.create(req.body);
