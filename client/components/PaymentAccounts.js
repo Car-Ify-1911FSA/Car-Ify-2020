@@ -22,6 +22,10 @@ class PaymentAccounts extends Component {
             <PaymentCard acct={acct} key={idx} />
           ))}
         </div>
+
+        <button type="submit" className="checkoutBtn">
+          Final Checkout [BUILD]
+        </button>
       </div>
     );
   }

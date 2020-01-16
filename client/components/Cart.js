@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {getActiveCart, getCartDetail} from '../store';
 import CartItem from './CartItem';
 
@@ -45,9 +44,13 @@ class Cart extends Component {
           </div>
         )}
 
-        <Link to="/paymentAccounts" className="linkToPayment">
+        <button
+          type="button"
+          className="paymentLinkBtn"
+          onClick={() => this.props.history.push('/paymentAccounts')}
+        >
           Continue to Payment
-        </Link>
+        </button>
       </div>
     );
   }

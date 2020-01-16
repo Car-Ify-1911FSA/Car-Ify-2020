@@ -1,51 +1,46 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {loadAllProducts} from '../store'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {loadAllProducts} from '../store';
 
 class Sidebar extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       brand: 'All',
       category: 'All',
       condition: 'All',
       price: 'All'
-    }
-    this.handleBrandChange = this.handleBrandChange.bind(this)
-    this.handleCategoryChange = this.handleCategoryChange.bind(this)
-    this.handleConditionChange = this.handleConditionChange.bind(this)
-    this.handlePriceChange = this.handlePriceChange.bind(this)
-    this.sendSidebarState = this.sendSidebarState.bind(this)
+    };
+    this.handleBrandChange = this.handleBrandChange.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleConditionChange = this.handleConditionChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchAllProducts()
+    this.props.fetchAllProducts();
   }
 
   handleBrandChange(evt) {
-    const newBrand = evt.target.value
-    this.setState({brand: newBrand})
+    const newBrand = evt.target.value;
+    this.setState({brand: newBrand});
   }
 
   handleCategoryChange(evt) {
-    const newCategory = evt.target.value
-    this.setState({category: newCategory})
+    const newCategory = evt.target.value;
+    this.setState({category: newCategory});
   }
 
   handleConditionChange(evt) {
-    const newCondition = evt.target.value
-    this.setState({condition: newCondition})
+    const newCondition = evt.target.value;
+    this.setState({condition: newCondition});
   }
 
   handlePriceChange(evt) {
-    const newPrice = evt.target.value
-    this.setState({price: newPrice})
-  }
-
-  sendSidebarState() {
-    console.log('sendBar -', this.state)
+    const newPrice = evt.target.value;
+    this.setState({price: newPrice});
   }
 
   render() {
@@ -53,16 +48,14 @@ class Sidebar extends Component {
       brand = [],
       category = [],
       condition = [],
-      price = []
+      price = [];
 
     products.forEach(car => {
-      if (!brand.includes(car.brand)) brand.push(car.brand)
-      if (!category.includes(car.category)) category.push(car.category)
-      if (!condition.includes(car.condition)) condition.push(car.condition)
-      if (!price.includes(car.price)) price.push(car.price)
-    })
-
-    // console.log('render -', this.state)
+      if (!brand.includes(car.brand)) brand.push(car.brand);
+      if (!category.includes(car.category)) category.push(car.category);
+      if (!condition.includes(car.condition)) condition.push(car.condition);
+      if (!price.includes(car.price)) price.push(car.price);
+    });
 
     return (
       <div className="sideBarDiv">
@@ -135,12 +128,12 @@ class Sidebar extends Component {
             pathname: '/allProducts',
             state: {state: this.state}
           }}
-          className="sideBarSubmitBtn"
+          className="sideBarSubmitBtn linkText"
         >
           Find Cars!
         </Link>
       </div>
-    )
+    );
   }
 }
 
@@ -151,13 +144,13 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     allProducts: state.allProducts
-  }
-}
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
     fetchAllProducts: () => dispatch(loadAllProducts())
-  }
-}
+  };
+};
 
-export default connect(mapState, mapDispatch)(Sidebar)
+export default connect(mapState, mapDispatch)(Sidebar);
