@@ -11,9 +11,15 @@ class Cart extends Component {
 
   async componentDidMount() {
     // console.log('mount -', this.props, this.props.userId, this.props.cartId);
-    if (this.props.userId) await this.props.fetchCart(this.props.userId);
-    if (this.props.cartId) await this.props.fetchCartDetail(this.props.cartId);
-    // this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
+    if (this.props.userId) {
+      await this.props.fetchCart(this.props.userId);
+      if (this.props.cartId)
+        await this.props.fetchCartDetail(this.props.cartId);
+      // this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
+    } else {
+      this.props.fetchCart();
+      this.props.fetchCartDetail();
+    }
   }
 
   calcTotalPrice(cartDetail) {
@@ -27,11 +33,12 @@ class Cart extends Component {
   render() {
     const {cart, cartDetail} = this.props;
     const products = cart.products;
+    // console.log('GUEST CART', cart);
     // console.log('cart render -', this.props, cartDetail);
 
     return (
       <div className="cartFullDiv">
-        <h1>{this.props.userName}'s Cart</h1>
+        <h1>{this.props.userName ? this.props.userName : 'Guest'}'s Cart</h1>
 
         {!products ? (
           <div className="cartProductDiv">
@@ -41,7 +48,7 @@ class Cart extends Component {
           <div className="cartProductDiv">
             <h3>Cart Items</h3>
             {products.map((order, idx) => (
-              <CartItem key={idx} order={order} id={idx} />
+              <CartItem key={idx} order={order} id={idx + 1} />
             ))}
           </div>
         )}

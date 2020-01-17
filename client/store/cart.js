@@ -22,13 +22,19 @@ const addCart = newCart => {
 // THUNKY THUNKS
 export const getActiveCart = userId => {
   return async dispatch => {
-    try {
-      const {data} = await axios.get(`/api/cart/${userId}`);
-      const activeCart = data.filter(cart => cart.status === 'active')[0];
-      const adjActiveCart = activeCart === undefined ? {} : activeCart;
-      dispatch(getCart(adjActiveCart));
-    } catch (error) {
-      console.error(error);
+    if (userId) {
+      try {
+        const {data} = await axios.get(`/api/cart/${userId}`);
+        const activeCart = data.filter(cart => cart.status === 'active')[0];
+        const adjActiveCart = activeCart === undefined ? {} : activeCart;
+        dispatch(getCart(adjActiveCart));
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      const guestCart = JSON.parse(localStorage.getItem('cart'));
+      console.log('GUEST CART THUNK', guestCart);
+      dispatch(getCart(guestCart));
     }
   };
 };
