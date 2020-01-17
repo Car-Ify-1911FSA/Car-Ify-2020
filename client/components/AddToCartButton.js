@@ -30,13 +30,13 @@ class AddToCartButton extends Component {
         totalPrice: productPrice
       };
 
-    if (Array.isArray(cartDetail)) {
-      let prodIdArr = cartDetail.map(prod => prod.productId);
-      if (prodIdArr.includes(productId)) this.props.editCartItem(cartItemObj);
-      else this.props.addCartItem(isLoggedIn, cartItemObj);
-    } else {
-      this.props.addCartItem(isLoggedIn, cartItemObj);
-    }
+    // if (Array.isArray(cartDetail)) {
+    let prodIdArr = cartDetail.map(prod => prod.productId);
+    if (prodIdArr.includes(productId)) this.props.editCartItem(cartItemObj);
+    else this.props.addCartItem(isLoggedIn, cartItemObj);
+    // } else {
+    //   this.props.addCartItem(isLoggedIn, cartItemObj);
+    // }
   }
 
   render() {

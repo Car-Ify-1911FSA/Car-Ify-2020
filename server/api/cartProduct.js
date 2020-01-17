@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {CartProduct} = require('../db/models');
 const {isAdmin} = require('./security');
 
-router.get('/:cartId', isAdmin, async (req, res, next) => {
+router.get('/:cartId', async (req, res, next) => {
   try {
     const cartDetail = await CartProduct.findAll({
       where: {
@@ -15,7 +15,7 @@ router.get('/:cartId', isAdmin, async (req, res, next) => {
   }
 });
 
-router.post('/', isAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const {cartId, productId, quantity, totalPrice} = req.body;
     const newItem = {
@@ -33,7 +33,7 @@ router.post('/', isAdmin, async (req, res, next) => {
   }
 });
 
-router.put('/', isAdmin, async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     const {
       cartId,
