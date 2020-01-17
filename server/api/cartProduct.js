@@ -11,7 +11,7 @@ router.get('/:cartId', isAdmin, async (req, res, next) => {
     });
     res.send(cartDetail);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
@@ -29,7 +29,7 @@ router.post('/', isAdmin, async (req, res, next) => {
       .status(200)
       .json({newOrder, message: 'Added new cart item successfully!'});
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
@@ -38,7 +38,7 @@ router.put('/', isAdmin, async (req, res, next) => {
     await CartProduct.update(['OBJ']);
     res.status(200).send(newOrder);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 

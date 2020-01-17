@@ -12,24 +12,25 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
     });
     res.send(cart);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
-
-router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
+// isUserOrAdmin,
+router.post('/:userId', async (req, res, next) => {
   try {
-    console.log('cart post -', req.body);
     const {status, time, userId, paymentAccountId} = req.body;
     const newCart = {
       status: status,
       time: time,
-      userId: userId,
-      paymentAccountId: paymentAccountId
+      userId: userId
     };
+    if (paymentAccountId) {
+      newCart.paymentAccountId = paymentAccountId;
+    }
     const newOrder = await Cart.create(newCart);
-    res.send(newOrder);
+    res.json(newOrder);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
