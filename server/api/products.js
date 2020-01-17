@@ -12,7 +12,13 @@ router.get('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    console.log('placeholder put');
+    const {productId, quantity: newQuantity} = req.body;
+    const product = await Product.findByPk(productId);
+    await product.update({
+      quantity: product.quantity - newQuantity
+    });
+    const allProducts = await Product.findAll();
+    res.status(200).json({allProducts, message: 'Edit products successfully!'});
   } catch (err) {
     next(err);
   }

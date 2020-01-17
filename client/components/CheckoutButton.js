@@ -4,8 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {
   getActiveCart,
   getCartDetail,
-  addNewCartDetail,
-  editNewCartDetail,
+  editProducts,
   addNewCart,
   editCart
 } from '../store';
@@ -33,18 +32,29 @@ class CheckoutButton extends Component {
   }
 
   checkQuantity(cart, prodHash) {
+    let resArr = [];
     for (let item of cart) {
       if (item.quantity > prodHash[item.productId].quantity) {
-        alert(`Sorry, we don't have enough of ${item}`);
+        alert(
+          `Sorry, we don't have enough of ${prodHash[item.productId].brand} ${
+            prodHash[item.productId].model
+          } !`
+        );
+        this.props.history.push('/cart');
         return false;
+      } else {
+        let obj = {};
+        obj.productId = item.productId;
+        obj.quantity = item.quantity;
+        resArr.push(obj);
       }
     }
-    return true;
+    return resArr;
   }
 
   handleCheckOut() {
     const {userId, allProducts, cart, cartDetail} = this.props;
-    console.log('CHECK OUT', allProducts, cartDetail);
+    // console.log('CHECK OUT', allProducts, cartDetail);
 
     const test = true; // TEMP ! ONLY USING FOR TESTING PURPOSE
     if (userId && test) {
@@ -55,25 +65,27 @@ class CheckoutButton extends Component {
       }
 
       if (this.checkQuantity(cartDetail, allProdHash)) {
-        console.log('START EDITTING PRODUCT TABLE!!');
+        let prodQuantity = this.checkQuantity(cartDetail, allProdHash);
+        prodQuantity.map(item => this.props.editProducts(item));
+
+        // UPDATING CART STATUS TO PAID
+        this.props.editCart(cart.id);
+
+        // CREATE NEW ACTIVE CART WITH USERID
+        const newCart = {
+          status: 'active',
+          time: Date(),
+          userId: userId
+        };
+        this.props.addNewCart(userId, newCart);
+
+        // PUSHES WEBPAGE TO GO HOME
+        this.props.history.push('/');
       }
-
-      // UPDATING CART STATUS TO PAID
-      this.props.editCart(cart.id);
-
-      // CREATE NEW ACTIVE CART WITH USERID
-      const newCart = {
-        status: 'active',
-        time: Date(),
-        userId: userId
-      };
-      this.props.addNewCart(userId, newCart);
-
-      // PUSHES WEBPAGE TO GO HOME
-      this.props.history.push('/');
     } else {
       // FOR GUESTS: FORCE LOGIN / SIGNUP?
       console.log('LOGIC FOR GUESTS CHECKOUT');
+      this.props.history.push('/');
     }
   }
 
@@ -106,7 +118,8 @@ const mapDispatchToProps = dispatch => {
     getCart: userId => dispatch(getActiveCart(userId)),
     getCartDetail: cartId => dispatch(getCartDetail(cartId)),
     editCart: cartId => dispatch(editCart(cartId)),
-    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart))
+    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart)),
+    editProducts: editProduct => dispatch(editProducts(editProduct))
   };
 };
 
