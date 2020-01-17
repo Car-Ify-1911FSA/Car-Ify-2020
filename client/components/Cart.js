@@ -9,6 +9,7 @@ class Cart extends Component {
     super();
     this.calcTotalQuantity = this.calcTotalQuantity.bind(this);
     this.calcTotalPrice = this.calcTotalPrice.bind(this);
+    this.mergeCartProd = this.mergeCartProd.bind(this);
   }
 
   componentDidMount() {
@@ -54,6 +55,23 @@ class Cart extends Component {
     });
   }
 
+  mergeCartProd(cartDetail, products) {
+    if (!cartDetail || !products || !products[0]) return [];
+
+    let mergedArr = [];
+    cartDetail.map(item => {
+      let obj = {...item};
+      products.map(prod => {
+        if (prod.id === item.productId) {
+          obj.brand = prod.brand;
+          obj.model = prod.model;
+        }
+      });
+      mergedArr.push(obj);
+    });
+    return mergedArr;
+  }
+
   render() {
     const {cart, cartDetail, allProducts} = this.props;
     const guestCart = JSON.parse(localStorage.getItem('cart'));
@@ -63,20 +81,21 @@ class Cart extends Component {
         ? cart.products
         : undefined
       : guestProd;
-    // console.log('cart render -', this.props, cartDetail);
+
+    const productDetail = this.mergeCartProd(cartDetail, products);
 
     return (
       <div className="cartFullDiv">
         <h1>{this.props.userName ? this.props.userName : 'Guest'}'s Cart</h1>
 
-        {!products || products.length < 1 ? (
+        {!productDetail || productDetail.length < 1 ? (
           <div className="cartProductDiv">
             <h3>Cart Currently Has No Items</h3>
           </div>
         ) : (
           <div className="cartProductDiv">
             <h3 className="headerDiv">Cart Items</h3>
-            {products.map((order, idx) => (
+            {productDetail.map((order, idx) => (
               <CartItem key={idx} order={order} id={idx + 1} />
             ))}
           </div>
