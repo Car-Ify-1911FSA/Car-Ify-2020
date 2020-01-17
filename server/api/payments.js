@@ -31,12 +31,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {type} = req.body;
-    console.log(type);
-    const postedPayment = {
-      type: type
-    };
-    const newPayment = await Payments.create(postedPayment);
+    const newPayment = await Payments.create({type: req.body.type});
     if (newPayment) {
       res.send(newPayment);
     } else {

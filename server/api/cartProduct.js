@@ -16,7 +16,6 @@ router.get('/:cartId', isAdmin, async (req, res, next) => {
 });
 
 router.post('/', isAdmin, async (req, res, next) => {
-  console.log(req.body);
   try {
     const {cartId, productId, quantity, totalPrice} = req.body;
     const newItem = {
@@ -36,7 +35,6 @@ router.post('/', isAdmin, async (req, res, next) => {
 
 router.put('/', isAdmin, async (req, res, next) => {
   try {
-    console.log('cp put -', req.body);
     await CartProduct.update(['OBJ']);
     res.status(200).send(newOrder);
   } catch (error) {
