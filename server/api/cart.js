@@ -18,7 +18,6 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
 
 router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
-    console.log('cart post -', req.body);
     const newOrder = await Cart.create(req.body);
     res.send(newOrder);
   } catch (error) {

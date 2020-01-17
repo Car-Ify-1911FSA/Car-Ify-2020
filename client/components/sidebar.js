@@ -58,9 +58,7 @@ class Sidebar extends Component {
 
     return (
       <div className="sideBarDiv">
-        <Link to="/allProducts" className="linkText">
-          View All Products
-        </Link>
+        <h4>Filter Your Search</h4>
 
         <div className="sideBarBrandDiv">
           <strong>Brand: </strong>
