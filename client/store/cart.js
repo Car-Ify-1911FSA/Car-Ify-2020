@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-const initialState = {
-  cart: {}
-};
-
 // ACTION TYPES
 const GET_CART = 'GET_CART';
 const ADD_CART = 'ADD_CART';
@@ -26,21 +22,27 @@ const addCart = newCart => {
 // THUNKY THUNKS
 export const getActiveCart = userId => {
   return async dispatch => {
-    try {
-      const {data} = await axios.get(`/api/cart/${userId}`);
-      const activeCart = data.filter(cart => cart.status === 'active')[0];
-      dispatch(getCart(activeCart));
-    } catch (error) {
-      console.error(error);
+    if (userId) {
+      try {
+        const {data} = await axios.get(`/api/cart/${userId}`);
+        const activeCart = data.filter(cart => cart.status === 'active')[0];
+        const adjActiveCart = activeCart === undefined ? {} : activeCart;
+        dispatch(getCart(adjActiveCart));
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      const guestCart = JSON.parse(localStorage.getItem('cart'));
+      console.log('GUEST CART THUNK', guestCart);
+      dispatch(getCart(guestCart));
     }
   };
 };
 
-export const adddNewCart = newCart => {
+export const addNewCart = (userId, newCart) => {
   return async dispatch => {
     try {
-      console.log('thunky add -', newCart);
-      const {data} = await axios.post(`/api/cart/`, newCart);
+      const {data} = await axios.post(`/api/cart/${userId}`, newCart);
       dispatch(addCart(data));
     } catch (error) {
       console.error(error);
@@ -48,8 +50,20 @@ export const adddNewCart = newCart => {
   };
 };
 
+export const editCart = (cartId, paymentActId) => {
+  return async dispatch => {
+    try {
+      const editCartInfo = {status: 'paid', paymentAccountId: paymentActId};
+      const {data} = await axios.put(`/api/cart/${cartId}`, editCartInfo);
+      dispatch(addCart(data.activeCart));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 // REDUCER
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_CART:
       return action.cart;

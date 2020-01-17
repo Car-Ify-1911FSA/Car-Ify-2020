@@ -44,8 +44,7 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const paymentId = req.params.id;
-    const payment = await Payments.findByPk(paymentId);
+    const payment = await Payments.findByPk(req.params.id);
     if (payment) {
       await payment.destroy();
       res.send(payment);
@@ -59,8 +58,7 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const payment = await Payments.findByPk(id);
+    const payment = await Payments.findByPk(req.params.id);
     payment.type = req.body.type;
 
     await payment.save();

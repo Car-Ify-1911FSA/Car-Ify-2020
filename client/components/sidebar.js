@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {loadAllProducts} from '../store';
@@ -59,9 +58,7 @@ class Sidebar extends Component {
 
     return (
       <div className="sideBarDiv">
-        <Link to="/allProducts" className="linkText">
-          View All Products
-        </Link>
+        <h4>Filter Your Search</h4>
 
         <div className="sideBarBrandDiv">
           <strong>Brand: </strong>
@@ -137,9 +134,7 @@ class Sidebar extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
+// CONTAINER
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
