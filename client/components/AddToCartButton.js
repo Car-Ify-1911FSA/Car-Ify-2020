@@ -17,14 +17,14 @@ class AddToCartButton extends Component {
   componentDidMount() {
     if (this.props.userId)
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
-        this.props.getCartDetail(this.props.cartId);
+        this.props.getCartDetail(this.props.cart.id);
       });
   }
 
   handleAddClick(productId, productPrice) {
-    const {isLoggedIn, cartId, cartDetail} = this.props,
+    const {isLoggedIn, cart, cartDetail} = this.props,
       cartItemObj = {
-        cartId: cartId,
+        cartId: cart.id,
         productId: productId,
         quantity: 1,
         totalPrice: productPrice
@@ -56,7 +56,7 @@ const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
-    cartId: state.cart.id,
+    cart: state.cart,
     cartDetail: state.cartProduct
   };
 };

@@ -19,7 +19,7 @@ class PaymentAccounts extends Component {
       <div className="paymentActsFullDiv">
         <h2>Time to Pay!</h2>
         <div className="paymentActsDiv">
-          <h3>All Payment Accounts</h3>
+          <h3 className="headerDiv">All Payment Accounts</h3>
           {filterAccounts.map((acct, idx) => (
             <PaymentCard acct={acct} key={idx} />
           ))}

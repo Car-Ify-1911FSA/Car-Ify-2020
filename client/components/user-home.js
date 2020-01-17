@@ -8,7 +8,7 @@ class UserHome extends Component {
     this.props.fetchAllProds();
     if (this.props.userId) {
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
-        if (!this.props.cartId) {
+        if (!this.props.cart.id) {
           const newCart = {
             status: 'active',
             time: Date(),
@@ -65,7 +65,7 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
     name: state.user.name,
-    cartId: state.cart.id,
+    cart: state.cart,
     allProduct: state.allProducts
   };
 };
