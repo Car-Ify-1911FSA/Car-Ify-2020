@@ -12,14 +12,23 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
     });
     res.send(cart);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
-    const newCart = await Cart.create(req.body);
-    res.status(201).send(newCart);
+    const {status, time, userId, paymentAccountId} = req.body;
+    const newCart = {
+      status: status,
+      time: time,
+      userId: userId
+    };
+    if (paymentAccountId) {
+      newCart.paymentAccountId = paymentAccountId;
+    }
+    const newOrder = await Cart.create(newCart);
+    res.status(201).json(newOrder);
   } catch (error) {
     console.error(error);
   }
@@ -42,7 +51,7 @@ router.put('/:cartId', isUserOrAdmin, async (req, res, next) => {
     });
     res.status(200).json({activeCart, message: 'Paid cart successfully!'});
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
