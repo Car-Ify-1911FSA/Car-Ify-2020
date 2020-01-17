@@ -41,6 +41,9 @@ class CheckoutButton extends Component {
         userId: userId
       };
       this.props.addNewCart(userId, newCart);
+
+      // PUSHES WEBPAGE TO GO HOME
+      this.props.history.push('/');
     } else {
       // FOR GUESTS: FORCE LOGIN / SIGNUP?
       console.log('LOGIC FOR GUESTS CHECKOUT');
