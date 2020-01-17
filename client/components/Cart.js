@@ -12,10 +12,8 @@ class Cart extends Component {
   async componentDidMount() {
     // console.log('mount -', this.props, this.props.userId, this.props.cartId);
     if (this.props.userId) await this.props.fetchCart(this.props.userId);
-    if (this.props.cartId) {
-      await this.props.fetchCartDetail(this.props.cartId);
-      // this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
-    }
+    if (this.props.cartId) await this.props.fetchCartDetail(this.props.cartId);
+    // this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
   }
 
   calcTotalPrice(cartDetail) {
@@ -29,7 +27,7 @@ class Cart extends Component {
   render() {
     const {cart, cartDetail} = this.props;
     const products = cart.products;
-    console.log('cart render -', this.props, cartDetail);
+    // console.log('cart render -', this.props, cartDetail);
 
     return (
       <div className="cartFullDiv">
@@ -55,7 +53,12 @@ class Cart extends Component {
         ) : (
           <div className="cartTotalDiv">
             <h3>Cart Summary</h3>
-            <h5>Total Quantity: {cartDetail.length}</h5>
+            <h5>
+              Total Quantity:{' '}
+              {cartDetail.reduce((acm, val) => {
+                return (acm += val.quantity);
+              }, 0)}
+            </h5>
             <h5>Total Price: {this.calcTotalPrice(cartDetail)}</h5>
           </div>
         )}

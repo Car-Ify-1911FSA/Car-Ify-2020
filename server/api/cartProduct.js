@@ -35,9 +35,23 @@ router.post('/', isAdmin, async (req, res, next) => {
 
 router.put('/', isAdmin, async (req, res, next) => {
   try {
-    console.log('cp put -', req.body);
-    await CartProduct.update(['OBJ']);
-    res.status(200).send(newOrder);
+    const {
+      cartId,
+      productId,
+      quantity: newQuantity,
+      totalPrice: newPrice
+    } = req.body;
+    const product = await CartProduct.findOne({
+      where: {
+        cartId: cartId,
+        productId: productId
+      }
+    });
+    await product.update({
+      quantity: product.quantity + newQuantity,
+      totalPrice: product.totalPrice + newPrice
+    });
+    res.status(200).json({product, message: 'Edited cart item successfully!'});
   } catch (error) {
     console.error(error);
   }
