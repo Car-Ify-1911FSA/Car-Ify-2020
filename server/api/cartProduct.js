@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const {CartProduct} = require('../db/models');
-const {isAdmin} = require('./security');
+// const {isAdmin} = require('./security');
 
-router.get('/:cartId', isAdmin, async (req, res, next) => {
+router.get('/:cartId', async (req, res, next) => {
   try {
     const cartDetail = await CartProduct.findAll({
       where: {
@@ -15,7 +15,7 @@ router.get('/:cartId', isAdmin, async (req, res, next) => {
   }
 });
 
-router.post('/', isAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const {cartId, productId, quantity, totalPrice} = req.body;
     const newItem = {
@@ -33,11 +33,25 @@ router.post('/', isAdmin, async (req, res, next) => {
   }
 });
 
-router.put('/', isAdmin, async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    console.log('cp put -', req.body);
-    await CartProduct.update(['OBJ']);
-    res.status(200).send(newOrder);
+    const {
+      cartId,
+      productId,
+      quantity: newQuantity,
+      totalPrice: newPrice
+    } = req.body;
+    const product = await CartProduct.findOne({
+      where: {
+        cartId: cartId,
+        productId: productId
+      }
+    });
+    await product.update({
+      quantity: product.quantity + newQuantity,
+      totalPrice: product.totalPrice + newPrice
+    });
+    res.status(200).json({product, message: 'Edited cart item successfully!'});
   } catch (error) {
     console.error(error);
   }

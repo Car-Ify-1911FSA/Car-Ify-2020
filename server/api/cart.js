@@ -18,9 +18,29 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
 
 router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
-    console.log('cart post -', req.body);
-    const newOrder = await Cart.create(req.body);
-    res.send(newOrder);
+    const newCart = await Cart.create(req.body);
+    res.status(201).send(newCart);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.put('/:cartId', isUserOrAdmin, async (req, res, next) => {
+  try {
+    const activeCart = await Cart.findOne({
+      where: {
+        id: req.params.cartId
+      }
+    });
+    const {status, paymentAccountId} = req.body;
+    await activeCart.update({
+      status: status,
+      time: Date(),
+      paymentAccountId: paymentAccountId
+        ? paymentAccountId
+        : activeCart.paymentAccountId
+    });
+    res.status(200).json({activeCart, message: 'Paid cart successfully!'});
   } catch (error) {
     console.error(error);
   }

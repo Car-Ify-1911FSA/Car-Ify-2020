@@ -10,14 +10,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    const product = await Product.findOne({
-      where: {
-        id: req.params.id
-      }
+    const {productId, quantity: newQuantity} = req.body;
+    const product = await Product.findByPk(productId);
+    await product.update({
+      quantity: product.quantity - newQuantity
     });
-    res.send(product);
+    const allProducts = await Product.findAll();
+    res.status(200).json({allProducts, message: 'Edit products successfully!'});
   } catch (err) {
     next(err);
   }

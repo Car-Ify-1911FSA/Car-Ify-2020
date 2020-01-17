@@ -66,8 +66,7 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const paymentAccount = await PaymentAccount.findByPk(id);
+    const paymentAccount = await PaymentAccount.findByPk(req.params.id);
     paymentAccount.type = req.body.type;
     paymentAccount.name = req.body.name;
 

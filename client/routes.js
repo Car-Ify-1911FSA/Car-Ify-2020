@@ -12,19 +12,13 @@ import {
   PaymentAccounts
 } from './components';
 import {me} from './store';
-// import SingleProduct from './components/SingleProduct'
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
 
   render() {
-    const {isLoggedIn} = this.props;
-
     return (
       <Switch>
         <Route exact path="/" component={UserHome} />
@@ -34,24 +28,13 @@ class Routes extends Component {
         <Route path="/product/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
         <Route path="/paymentAccounts" component={PaymentAccounts} />
-        {/* {isLoggedIn && (
-          <Switch>
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )} */}
-        {/* <Route component={Login} /> */}
       </Switch>
     );
   }
 }
 
-/**
- * CONTAINER
- */
 const mapStateToProps = state => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id
   };
 };
@@ -64,13 +47,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));
 
-/**
- * PROP TYPES
- */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired

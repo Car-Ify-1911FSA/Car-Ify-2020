@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getPaymentAccountsThunk} from '../store';
 import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
+import CheckoutButton from './CheckoutButton';
 
 class PaymentAccounts extends Component {
   componentDidMount() {
@@ -15,17 +16,25 @@ class PaymentAccounts extends Component {
     );
 
     return (
-      <div>
+      <div className="paymentActsFullDiv">
+        <h2>Time to Pay!</h2>
         <div className="paymentActsDiv">
-          <h3>All Payment Accounts</h3>
+          <h3 className="headerDiv">All Payment Accounts</h3>
           {filterAccounts.map((acct, idx) => (
             <PaymentCard acct={acct} key={idx} />
           ))}
         </div>
 
-        <button type="submit" className="checkoutBtn">
-          Final Checkout [BUILD]
-        </button>
+        <div className="paymentActBtnDiv">
+          <CheckoutButton />
+          <button
+            type="button"
+            onClick={() => this.props.history.goBack()}
+            className="paymentActBackBtn backBtn linkText"
+          >
+            Go Back
+          </button>
+        </div>
       </div>
     );
   }

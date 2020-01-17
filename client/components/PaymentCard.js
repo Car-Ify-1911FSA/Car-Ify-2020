@@ -1,14 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const PaymentCard = props => {
   return (
     <div className="paymentCardFullDiv">
-      <span>Type: </span>
-      <h4>{props.acct.payment.type}</h4>
-      <span>Name: </span>
-      <h4>{props.acct.name}</h4>
+      <h4>Type: {props.acct.payment.type}</h4>
+      <h4>Account: {props.acct.name}</h4>
     </div>
-  )
-}
+  );
+};
 
-export default PaymentCard
+export default PaymentCard;
