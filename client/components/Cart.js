@@ -7,6 +7,7 @@ import CartItem from './CartItem';
 class Cart extends Component {
   constructor() {
     super();
+    this.calcTotalQuantity = this.calcTotalQuantity.bind(this);
     this.calcTotalPrice = this.calcTotalPrice.bind(this);
   }
 
@@ -23,6 +24,23 @@ class Cart extends Component {
       this.props.fetchCart();
       this.props.fetchCartDetail();
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.userId !== prevProps.userId) {
+      Promise.all([this.props.fetchCart(this.props.userId)]).then(() => {
+        if (this.props.cart) this.props.fetchCartDetail(this.props.cart.id);
+      });
+    }
+  }
+
+  calcTotalQuantity(cartDetail) {
+    let total = 0;
+    if (!cartDetail) return total;
+    cartDetail.forEach(item => {
+      total += item.quantity;
+    });
+    return total;
   }
 
   calcTotalPrice(cartDetail) {
@@ -44,7 +62,7 @@ class Cart extends Component {
 
         {!products || products.length < 1 ? (
           <div className="cartProductDiv">
-            <h3>No Current Cart Items</h3>
+            <h3>Cart Currently Has No Items</h3>
           </div>
         ) : (
           <div className="cartProductDiv">
@@ -57,14 +75,7 @@ class Cart extends Component {
 
         <div className="cartTotalDiv">
           <h3 className="headerDiv">Cart Summary</h3>
-          <h5>
-            Total Quantity:{' '}
-            {!cartDetail
-              ? 0
-              : cartDetail.reduce((acm, val) => {
-                  return (acm += val.quantity);
-                }, 0)}
-          </h5>
+          <h5>Total Quantity: {this.calcTotalQuantity(cartDetail)}</h5>
           <h5>Total Price: {this.calcTotalPrice(cartDetail)}</h5>
         </div>
 
@@ -93,8 +104,7 @@ const mapStateToProps = state => {
     userId: state.user.id,
     userName: state.user.name,
     cart: state.cart,
-    cartDetail: state.cartProduct,
-    state: state
+    cartDetail: state.cartProduct
   };
 };
 
