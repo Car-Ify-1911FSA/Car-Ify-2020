@@ -52,10 +52,24 @@ class Cart extends Component {
     return `$${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   }
 
-  render() {
-    const {cart, cartDetail} = this.props;
-    const products = cart ? cart.products : undefined;
+  getProductDataForGuest(inventory, cartProd) {
+    return cartProd.map(prod => {
+      return inventory.find(el => el.id === prod.productId);
+    });
+  }
 
+  render() {
+    const {cart, cartDetail, allProducts} = this.props;
+    const guestCart = JSON.parse(localStorage.getItem('cart'));
+    const guestProd = this.getProductDataForGuest(allProducts, guestCart);
+    const products = this.props.userId
+      ? cart
+        ? cart.products
+        : undefined
+      : guestProd;
+    console.log('GUEST_CART ====', cartDetail);
+
+    // console.log('cart render -', this.props, cartDetail);
     return (
       <div className="cartFullDiv">
         <h1>{this.props.userName ? this.props.userName : 'Guest'}'s Cart</h1>
@@ -113,7 +127,9 @@ const mapStateToProps = state => {
     userId: state.user.id,
     userName: state.user.name,
     cart: state.cart,
-    cartDetail: state.cartProduct
+    cartDetail: state.cartProduct,
+    state: state,
+    allProducts: state.allProducts
   };
 };
 
