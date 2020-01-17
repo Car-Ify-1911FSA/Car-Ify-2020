@@ -30,7 +30,7 @@ class PaymentAccounts extends Component {
           <button
             type="button"
             onClick={() => this.props.history.goBack()}
-            className="paymentActBackBtn backBtn"
+            className="paymentActBackBtn backBtn linkText"
           >
             Go Back
           </button>

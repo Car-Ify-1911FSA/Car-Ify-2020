@@ -25,7 +25,7 @@ const SingleProduct = props => {
         <button
           type="button"
           onClick={() => props.history.goBack()}
-          className="singleProdBtn backBtn"
+          className="singleProdBtn backBtn linkText"
         >
           Go Back
         </button>

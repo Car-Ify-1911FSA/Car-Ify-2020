@@ -14,7 +14,7 @@ class Cart extends Component {
   componentDidMount() {
     if (this.props.userId) {
       Promise.all([this.props.fetchCart(this.props.userId)]).then(() => {
-        if (this.props.cart) this.props.fetchCartDetail(this.props.cart.id);
+        this.props.fetchCartDetail(this.props.cart.id);
       });
 
       // if (this.props.userId) {
@@ -29,7 +29,7 @@ class Cart extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       Promise.all([this.props.fetchCart(this.props.userId)]).then(() => {
-        if (this.props.cart) this.props.fetchCartDetail(this.props.cart.id);
+        this.props.fetchCartDetail(this.props.cart.id);
       });
     }
   }

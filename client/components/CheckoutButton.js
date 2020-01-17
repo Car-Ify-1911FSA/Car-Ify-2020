@@ -14,22 +14,50 @@ class CheckoutButton extends Component {
   constructor() {
     super();
     this.handleCheckOut = this.handleCheckOut.bind(this);
+    this.checkQuantity = this.checkQuantity.bind(this);
   }
 
   componentDidMount() {
-    // console.log('mounting -', this.props);
     if (this.props.userId)
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
         this.props.getCartDetail(this.props.cart.id);
       });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.userId !== prevProps.userId) {
+      Promise.all([this.props.getCart(this.props.userId)]).then(() => {
+        this.props.getCartDetail(this.props.cart.id);
+      });
+    }
+  }
+
+  checkQuantity(cart, prodHash) {
+    for (let item of cart) {
+      if (item.quantity > prodHash[item.id].quantity) {
+        alert(`Sorry, we don't have enough of ${item}`);
+        return false;
+      }
+    }
+    return true;
+  }
+
   handleCheckOut() {
     const {userId, allProducts, cart, cartDetail} = this.props;
-    console.log('CHECKING OUT', userId, allProducts, cart, cartDetail);
+    // console.log('CHECKING OUT', userId, allProducts, cart, cartDetail);
+    console.log('CHECK OUT', allProducts, cartDetail);
 
-    if (userId) {
+    const test = false;
+    if (userId && test) {
       // UPDATING PRODUCT TABLE WITH DECREMENTED QUANTITES (CHECK)
+      let allProdHash = {};
+      for (let prod of allProducts) {
+        allProdHash[prod.id] = prod;
+      }
+
+      if (this.checkQuantity(cartDetail, allProdHash)) {
+        console.log('START EDITTING PRODUCT TABLE!!');
+      }
 
       // UPDATING CART STATUS TO PAID
       this.props.editCart(cart.id);
@@ -55,7 +83,7 @@ class CheckoutButton extends Component {
       <div>
         <button
           type="button"
-          className="checkoutBtn"
+          className="checkoutBtn linkText"
           onClick={() => this.handleCheckOut()}
         >
           Check Out !
@@ -67,7 +95,6 @@ class CheckoutButton extends Component {
 
 const mapStateToProps = state => {
   return {
-    state: state,
     userId: state.user.id,
     cart: state.cart,
     cartDetail: state.cartProduct,
