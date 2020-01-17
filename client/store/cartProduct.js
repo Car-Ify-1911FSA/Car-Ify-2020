@@ -22,11 +22,15 @@ const addCartItems = newCartItem => {
 // THUNKY THUNKS
 export const getCartDetail = cartId => {
   return async dispatch => {
-    try {
-      const {data} = await axios.get(`/api/cart-product/${cartId}`);
-      dispatch(getCartItems(data));
-    } catch (error) {
-      console.error(error);
+    if (cartId) {
+      try {
+        const {data} = await axios.get(`/api/cart-product/${cartId}`);
+        dispatch(getCartItems(data));
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      dispatch(getCartItems(JSON.parse(localStorage.getItem('cart'))));
     }
   };
 };
