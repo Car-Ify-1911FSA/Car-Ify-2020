@@ -10,14 +10,9 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    const product = await Product.findOne({
-      where: {
-        id: req.params.id
-      }
-    });
-    res.send(product);
+    console.log('placeholder put');
   } catch (err) {
     next(err);
   }

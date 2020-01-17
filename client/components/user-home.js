@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getActiveCart, addNewCart} from '../store';
+import {getActiveCart, addNewCart, loadAllProducts} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
+    this.props.fetchAllProds();
     if (this.props.userId) {
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
         if (!this.props.cartId) {
@@ -20,7 +21,7 @@ class UserHome extends Component {
   }
 
   render() {
-    const {name, isLoggedIn} = this.props;
+    const {name, isLoggedIn, allProduct} = this.props;
 
     return (
       <div className="homePageDiv">
@@ -33,18 +34,20 @@ class UserHome extends Component {
           <h3>Remember to login or sign-up!</h3>
         )}
 
+        <br />
         <div className="homePagePara">
           <p>
             Welcome to Car-Ify! Where your car shopping dreams can come true!
           </p>
         </div>
+        <br />
 
         {isLoggedIn ? (
           <div>
             <span>Recent Purchases: </span>
           </div>
         ) : (
-          <div />
+          ''
         )}
 
         <div className="homePageTop">
@@ -62,14 +65,16 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
     name: state.user.name,
-    cartId: state.cart.id
+    cartId: state.cart.id,
+    allProduct: state.allProducts
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
-    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart))
+    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart)),
+    fetchAllProds: () => dispatch(loadAllProducts())
   };
 };
 

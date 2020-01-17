@@ -25,7 +25,16 @@ class PaymentAccounts extends Component {
           ))}
         </div>
 
-        <CheckoutButton />
+        <div className="paymentActBtnDiv">
+          <CheckoutButton />
+          <button
+            type="button"
+            onClick={() => this.props.history.goBack()}
+            className="paymentActBackBtn backBtn"
+          >
+            Go Back
+          </button>
+        </div>
       </div>
     );
   }

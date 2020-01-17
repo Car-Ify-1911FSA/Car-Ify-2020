@@ -50,6 +50,18 @@ export const addNewCart = (userId, newCart) => {
   };
 };
 
+export const editCart = (cartId, paymentActId) => {
+  return async dispatch => {
+    try {
+      const editCartInfo = {status: 'paid', paymentAccountId: paymentActId};
+      const {data} = await axios.put(`/api/cart/${cartId}`, editCartInfo);
+      dispatch(addCart(data.activeCart));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 // REDUCER
 const cartReducer = (state = {}, action) => {
   switch (action.type) {

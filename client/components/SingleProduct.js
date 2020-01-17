@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {AddToCartButton} from './index';
 
 const SingleProduct = props => {
   const {
-    id,
     imageUrl,
     brand,
     model,
@@ -15,7 +14,9 @@ const SingleProduct = props => {
   return (
     <div className="single-prod-cont">
       <h2>{`${brand} ${model}`}</h2>
-      <h3>{`$ ${price}`}</h3>
+      <h3>{`Price: $${price
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h3>
       <img src={imageUrl} className="single-image" />
       <h3>{rating}</h3>
       <p>{description}</p>
@@ -24,7 +25,7 @@ const SingleProduct = props => {
         <button
           type="button"
           onClick={() => props.history.goBack()}
-          className="singleProdBtn"
+          className="singleProdBtn backBtn"
         >
           Go Back
         </button>

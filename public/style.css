@@ -21,6 +21,13 @@ form div {
   display: inline-block;
 }
 
+p {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
 h2 {
   margin: 0;
 }
@@ -88,6 +95,7 @@ h4 {
   background-color: lightseagreen;
   width: 80%;
   font-size: medium;
+  text-align: center;
   padding: 5px;
   border-radius: 5px;
   border-style: solid;
@@ -160,14 +168,33 @@ h4 {
 
 /* ----------------- SINGLE PRODUCT----------------- */
 .single-prod-cont {
+  background-color: lightgrey;
   display: flex;
+  width: 70%;
+  height: 80%;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
+  margin: auto;
+  border-radius: 15px;
 }
 
 .single-image {
   width: 400px;
+}
+
+.singleProdBtnDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+}
+
+.backBtn {
+  font-size: medium;
+  font-weight: bold;
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
 }
 
 /* ----------------- ADD BUTTON ----------------- */
@@ -178,7 +205,8 @@ h4 {
 
 .addBtn {
   font-size: medium;
-  width: 100px;
+  font-weight: bold;
+  width: 150px;
   height: 30px;
   border-radius: 5px;
 }
@@ -209,8 +237,10 @@ h4 {
 .paymentLinkBtn {
   font-size: medium;
   background: linear-gradient(rgba(0, 152, 195, 0.3), #eaeaea);
-  /* background-color: lightgray; */
   padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
   border-radius: 5px;
 }
 
@@ -238,13 +268,19 @@ h4 {
   background: linear-gradient(rgba(0, 152, 195, 0.5), rgba(234, 234, 234, 1));
   font-size: medium;
   font-weight: bold;
-  height: 35px;
-  width: 200px;
+  height: 30px;
+  width: 150px;
   border-radius: 5px;
 }
 
 .checkoutBtn:active {
   background-color: rgba(184, 0, 92, 0.8);
+}
+
+.paymentActBtnDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
 }
 
 /* ----------------- PAYMENT CARD ----------------- */
@@ -253,7 +289,7 @@ h4 {
   height: 35px;
   width: 90%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 5px;
   margin: 10px 0;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getActiveCart, getCartDetail} from '../store';
+import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
 
 class Cart extends Component {
@@ -10,7 +11,6 @@ class Cart extends Component {
   }
 
   async componentDidMount() {
-    // console.log('mount -', this.props, this.props.userId, this.props.cartId);
     if (this.props.userId) {
       await this.props.fetchCart(this.props.userId);
       if (this.props.cartId)
@@ -67,13 +67,15 @@ class Cart extends Component {
           </div>
         )}
 
-        <button
-          type="button"
-          className="paymentLinkBtn"
-          onClick={() => this.props.history.push('/paymentAccounts')}
+        <Link
+          to={{
+            pathname: '/paymentAccounts',
+            state: {cart: this.props.cart, cartDetail: this.props.cartDetail}
+          }}
+          className="paymentLinkBtn linkText"
         >
           Continue to Payment
-        </button>
+        </Link>
       </div>
     );
   }

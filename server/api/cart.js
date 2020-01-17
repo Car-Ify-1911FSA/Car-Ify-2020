@@ -25,4 +25,25 @@ router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   }
 });
 
+router.put('/:cartId', isUserOrAdmin, async (req, res, next) => {
+  try {
+    const activeCart = await Cart.findOne({
+      where: {
+        id: req.params.cartId
+      }
+    });
+    const {status, paymentAccountId} = req.body;
+    await activeCart.update({
+      status: status,
+      time: Date(),
+      paymentAccountId: paymentAccountId
+        ? paymentAccountId
+        : activeCart.paymentAccountId
+    });
+    res.status(200).json({activeCart, message: 'Paid cart successfully!'});
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;
