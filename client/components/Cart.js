@@ -79,21 +79,30 @@ class Cart extends Component {
           <h5>Total Price: {this.calcTotalPrice(cartDetail)}</h5>
         </div>
 
-        {cartDetail && cartDetail.length > 0 ? (
-          <Link
-            to={{
-              pathname: '/paymentAccounts',
-              state: {cart: this.props.cart, cartDetail: cartDetail}
-            }}
-            className="paymentLinkBtn linkText"
+        <div className="cartBtnDiv">
+          {cartDetail && cartDetail.length > 0 ? (
+            <Link
+              to={{
+                pathname: '/paymentAccounts',
+                state: {cart: this.props.cart, cartDetail: cartDetail}
+              }}
+              className="paymentLinkBtn linkText"
+            >
+              Let's Pay !
+            </Link>
+          ) : (
+            <Link to="/allProducts" className="paymentLinkBtn linkText">
+              Let's Go Shop
+            </Link>
+          )}
+          <button
+            type="button"
+            onClick={() => this.props.history.push('/allProducts')}
+            className="paymentActBackBtn backBtn linkText"
           >
-            Continue to Payment
-          </Link>
-        ) : (
-          <Link to="/allProducts" className="paymentLinkBtn linkText">
-            Let's Go Shop
-          </Link>
-        )}
+            Back to Products
+          </button>
+        </div>
       </div>
     );
   }

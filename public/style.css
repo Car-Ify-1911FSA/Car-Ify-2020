@@ -97,10 +97,12 @@ h4 {
 
 .sideBarSubmitBtn {
   background-color: lightseagreen;
-  width: 80%;
+  width: 85%;
+  height: 30px;
   font-size: medium;
-  text-align: center;
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   border-style: solid;
   border-color: black;
@@ -239,10 +241,21 @@ h4 {
   margin-bottom: 25px;
 }
 
+.cartBtnDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+}
+
 .paymentLinkBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0, 152, 195, 0.5), rgba(234, 234, 234, 1));
   font-size: medium;
-  background: linear-gradient(rgba(0, 152, 195, 0.3), #eaeaea);
-  padding: 10px;
+  font-weight: bold;
+  height: 30px;
+  width: 150px;
   border-style: solid;
   border-width: 1px;
   border-color: gray;
