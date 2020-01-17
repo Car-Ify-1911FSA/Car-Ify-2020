@@ -1,19 +1,49 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-const CartItem = ({order, id}) => {
-  return !order ? (
-    ''
-  ) : (
-    <div className="cartItemFullDiv">
-      <h4>{id}</h4>
-      Model:<h4>{order.model}</h4>
-      Brand:<h4>{order.brand}</h4>
-      Price:
-      <h4>{`$${order.price
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
-    </div>
-  );
+class CartItem extends Component {
+  constructor() {
+    super();
+    this.decrement = this.decrement.bind(this);
+  }
+
+  componentDidMount() {}
+
+  decrement() {
+    console.log('decrementing!');
+  }
+
+  render() {
+    const {order, id} = this.props;
+
+    return !order ? (
+      ''
+    ) : (
+      <div className="cartItemFullDiv">
+        <h4>{id}</h4>
+        Model:<h4>{order.model}</h4>
+        Brand:<h4>{order.brand}</h4>
+        Quantity:<h4>{order.quantity}</h4>
+        Price:
+        <h4>{`$${order.totalPrice
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
+        <button type="button" onClick={() => this.decrement(order)}>
+          Subtract from Cart
+        </button>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    state: state
+  };
 };
 
-export default CartItem;
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);
