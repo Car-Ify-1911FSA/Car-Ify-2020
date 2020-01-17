@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-const initialState = {
-  cart: {}
-};
-
 // ACTION TYPES
 const GET_CART = 'GET_CART';
 const ADD_CART = 'ADD_CART';
@@ -51,7 +47,7 @@ export const addNewCart = (userId, newCart) => {
 };
 
 // REDUCER
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_CART:
       return action.cart;

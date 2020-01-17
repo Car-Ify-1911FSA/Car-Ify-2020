@@ -5,22 +5,21 @@ import {getActiveCart, addNewCart} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
-    console.log('home mount 1 - ', this.props, this.props.cartId);
+    // console.log('home mount 1 - ', this.props, this.props.cartId);
 
     if (this.props.userId) {
-      Promise.all([this.props.getCart(this.props.userId)])
-        .then(() => {
-          console.log('home mount 2 -', this.props, this.props.cartId);
-          if (!this.props.cartId) {
-            const newCart = {
-              status: 'active',
-              time: Date(),
-              userId: this.props.userId
-            };
-            this.props.addNewCart(this.props.userId, newCart);
-          }
-        })
-        .then(() => console.log('home mount 3 -', this.props));
+      Promise.all([this.props.getCart(this.props.userId)]).then(() => {
+        // console.log('home mount 2 -', this.props, this.props.cartId);
+        if (!this.props.cartId) {
+          const newCart = {
+            status: 'active',
+            time: Date(),
+            userId: this.props.userId
+          };
+          this.props.addNewCart(this.props.userId, newCart);
+        }
+      });
+      // .then(() => console.log('home mount 3 -', this.props));
     }
   }
 
