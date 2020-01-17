@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {editNewCartDetail, deleteCartDetail} from '../store';
 
 class CartItem extends Component {
   constructor() {
@@ -9,13 +10,22 @@ class CartItem extends Component {
 
   componentDidMount() {}
 
-  decrement() {
-    console.log('decrementing!');
+  decrement(order) {
+    console.log('decrementing!', order);
+    if (order.quantity > 1) {
+      this.props.editNewCartDetail({
+        ...order,
+        quantity: -1,
+        totalPrice: -order.totalPrice / order.quantity
+      });
+    } else {
+      this.props.deleteCartDetail(order);
+    }
   }
 
   render() {
     const {order, id} = this.props;
-
+    console.log('render', this.props);
     return !order ? (
       ''
     ) : (
@@ -43,7 +53,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    editNewCartDetail: editCartItem =>
+      dispatch(editNewCartDetail(editCartItem)),
+    deleteCartDetail: editCartItem => dispatch(deleteCartDetail(editCartItem))
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

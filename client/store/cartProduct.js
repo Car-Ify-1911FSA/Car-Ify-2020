@@ -89,6 +89,17 @@ export const editNewCartDetail = editCartItem => {
   };
 };
 
+export const deleteCartDetail = editCartItem => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.delete(`/api/cart-product`);
+      dispatch(getCartItems(data.cartDetail));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 // REDUCER
 const cartProductReducer = (state = [], action) => {
   switch (action.type) {

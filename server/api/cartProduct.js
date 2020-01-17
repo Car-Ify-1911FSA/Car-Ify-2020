@@ -57,4 +57,26 @@ router.put('/', async (req, res, next) => {
   }
 });
 
+router.delete('/', async (req, res, next) => {
+  try {
+    await CartProduct.destroy({
+      where: {
+        cartId: req.body.cartId,
+        productId: req.body.productId
+      }
+    });
+    const cartDetail = await CartProduct.findAll({
+      where: {
+        cartId: req.body.cartId,
+        productId: req.body.productId
+      }
+    });
+    res
+      .status(204)
+      .json({cartDetail, message: 'Deleted cart item successfully!'});
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

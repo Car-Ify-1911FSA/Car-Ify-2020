@@ -29,6 +29,9 @@ class Cart extends Component {
         this.props.fetchCartDetail(this.props.cart.id);
       });
     }
+    // if(this.props.cartDetail !== prevProps.cartDetail) {
+    //   // this.props.fetchCartDetail(this.props.cart.id)
+    // }
   }
 
   calcTotalQuantity(cartDetail) {
