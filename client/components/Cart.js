@@ -15,7 +15,6 @@ class Cart extends Component {
       await this.props.fetchCart(this.props.userId);
       if (this.props.cartId)
         await this.props.fetchCartDetail(this.props.cartId);
-      // this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
     } else {
       this.props.fetchCart();
       this.props.fetchCartDetail();
@@ -33,8 +32,6 @@ class Cart extends Component {
   render() {
     const {cart, cartDetail} = this.props;
     const products = cart.products;
-    // console.log('GUEST CART', cart);
-    // console.log('cart render -', this.props, cartDetail);
 
     return (
       <div className="cartFullDiv">

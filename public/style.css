@@ -57,7 +57,7 @@ h4 {
 .navBarDiv {
   position: sticky;
   top: 0;
-  background-color: lightgray;
+  background-color: rgba(100, 100, 100, 0.7);
   height: 60px;
   display: flex;
   align-items: center;
@@ -224,21 +224,38 @@ h4 {
 }
 
 /* ----------------- PAYMENT ACCOUNTS ----------------- */
+.paymentActsDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  width: 70%;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 25px 0;
+}
+
 .checkoutBtn {
+  background: linear-gradient(rgba(0, 152, 195, 0.5), rgba(234, 234, 234, 1));
   font-size: medium;
+  font-weight: bold;
   height: 35px;
   width: 200px;
   border-radius: 5px;
 }
 
+.checkoutBtn:active {
+  background-color: rgba(184, 0, 92, 0.8);
+}
+
 /* ----------------- PAYMENT CARD ----------------- */
 .paymentCardFullDiv {
   background-color: lightskyblue;
-  width: 50vw;
+  height: 35px;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  margin-bottom: 15px;
-  border-radius: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
 }

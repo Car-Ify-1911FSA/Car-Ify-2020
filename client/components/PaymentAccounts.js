@@ -16,7 +16,8 @@ class PaymentAccounts extends Component {
     );
 
     return (
-      <div>
+      <div className="paymentActsFullDiv">
+        <h2>Time to Pay!</h2>
         <div className="paymentActsDiv">
           <h3>All Payment Accounts</h3>
           {filterAccounts.map((acct, idx) => (
