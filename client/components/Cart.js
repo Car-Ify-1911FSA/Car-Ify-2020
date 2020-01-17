@@ -30,21 +30,25 @@ class Cart extends Component {
     return `$${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   }
 
-  render() {
-    const {cart, cartDetail} = this.props;
-    const products = cart.products;
-    // console.log('GUEST CART', cart);
-    // console.log('cart render -', this.props, cartDetail);
+  getProductDataForGuest(inventory, cartProd) {
+    return cartProd.map(prod => {
+      return inventory.find(el => el.id === prod.productId);
+    });
+  }
 
+  render() {
+    const {cart, cartDetail, allProducts} = this.props;
+    const guestCart = JSON.parse(localStorage.getItem('cart'));
+    const guestProd = this.getProductDataForGuest(allProducts, guestCart);
+    const products = this.props.userId ? cart.products : guestProd;
+    console.log('GUEST_CART ====', cartDetail);
+
+    // console.log('cart render -', this.props, cartDetail);
     return (
       <div className="cartFullDiv">
         <h1>{this.props.userName ? this.props.userName : 'Guest'}'s Cart</h1>
 
-        {!products ? (
-          <div className="cartProductDiv">
-            <p>No Current Cart Items</p>
-          </div>
-        ) : (
+        {!products.length ? null : (
           <div className="cartProductDiv">
             <h3>Cart Items</h3>
             {products.map((order, idx) => (
@@ -53,9 +57,9 @@ class Cart extends Component {
           </div>
         )}
 
-        {!Array.isArray(cartDetail) ? (
+        {!cartDetail.length ? (
           <div className="cartTotalDiv">
-            <p>Empty Cart !</p>
+            <p>Your Cart is Empty!</p>
           </div>
         ) : (
           <div className="cartTotalDiv">
@@ -67,16 +71,15 @@ class Cart extends Component {
               }, 0)}
             </h5>
             <h5>Total Price: {this.calcTotalPrice(cartDetail)}</h5>
+            <button
+              type="button"
+              className="paymentLinkBtn"
+              onClick={() => this.props.history.push('/paymentAccounts')}
+            >
+              Continue to Payment
+            </button>
           </div>
         )}
-
-        <button
-          type="button"
-          className="paymentLinkBtn"
-          onClick={() => this.props.history.push('/paymentAccounts')}
-        >
-          Continue to Payment
-        </button>
       </div>
     );
   }
@@ -89,7 +92,8 @@ const mapStateToProps = state => {
     cartId: state.cart.id,
     cart: state.cart,
     cartDetail: state.cartProduct,
-    state: state
+    state: state,
+    allProducts: state.allProducts
   };
 };
 
