@@ -16,10 +16,6 @@ class Cart extends Component {
       Promise.all([this.props.fetchCart(this.props.userId)]).then(() => {
         this.props.fetchCartDetail(this.props.cart.id);
       });
-
-      // if (this.props.userId) {
-      //   await this.props.fetchCart(this.props.userId);
-      //   if (this.props.cart) await this.props.fetchCartDetail(this.props.cart.id);
     } else {
       this.props.fetchCart();
       this.props.fetchCartDetail();
@@ -67,9 +63,8 @@ class Cart extends Component {
         ? cart.products
         : undefined
       : guestProd;
-    console.log('GUEST_CART ====', cartDetail);
-
     // console.log('cart render -', this.props, cartDetail);
+
     return (
       <div className="cartFullDiv">
         <h1>{this.props.userName ? this.props.userName : 'Guest'}'s Cart</h1>
@@ -128,7 +123,6 @@ const mapStateToProps = state => {
     userName: state.user.name,
     cart: state.cart,
     cartDetail: state.cartProduct,
-    state: state,
     allProducts: state.allProducts
   };
 };

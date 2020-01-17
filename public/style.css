@@ -68,8 +68,9 @@ h4 {
 .navBarDiv {
   position: sticky;
   top: 0;
-  background-color: rgba(100, 100, 100, 0.7);
-  height: 60px;
+  background-color: rgba(130, 130, 130, 1);
+  height: 7vh;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,7 +84,7 @@ h4 {
   top: 60px;
   background-color: lightpink;
   width: 180px;
-  height: 92vh;
+  height: 93vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -244,7 +245,7 @@ h4 {
 .cartBtnDiv {
   display: flex;
   justify-content: space-around;
-  width: 20%;
+  width: 30%;
 }
 
 .paymentLinkBtn {
@@ -301,7 +302,7 @@ h4 {
 .paymentActBtnDiv {
   display: flex;
   justify-content: space-around;
-  width: 20%;
+  width: 30%;
 }
 
 /* ----------------- PAYMENT CARD ----------------- */

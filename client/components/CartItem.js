@@ -1,8 +1,9 @@
 import React from 'react';
 
 const CartItem = ({order, id}) => {
-  // console.log('cart item -', order);
-  return (
+  return !order ? (
+    ''
+  ) : (
     <div className="cartItemFullDiv">
       <h4>{id}</h4>
       Model:<h4>{order.model}</h4>

@@ -34,7 +34,7 @@ class CheckoutButton extends Component {
 
   checkQuantity(cart, prodHash) {
     for (let item of cart) {
-      if (item.quantity > prodHash[item.id].quantity) {
+      if (item.quantity > prodHash[item.productId].quantity) {
         alert(`Sorry, we don't have enough of ${item}`);
         return false;
       }
@@ -44,10 +44,9 @@ class CheckoutButton extends Component {
 
   handleCheckOut() {
     const {userId, allProducts, cart, cartDetail} = this.props;
-    // console.log('CHECKING OUT', userId, allProducts, cart, cartDetail);
     console.log('CHECK OUT', allProducts, cartDetail);
 
-    const test = false;
+    const test = true; // TEMP ! ONLY USING FOR TESTING PURPOSE
     if (userId && test) {
       // UPDATING PRODUCT TABLE WITH DECREMENTED QUANTITES (CHECK)
       let allProdHash = {};
