@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getActiveCart, addNewCart} from '../store';
+import {getActiveCart, addNewCart, loadAllProducts} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
-    // console.log('home mount 1 - ', this.props, this.props.cartId);
-
+    this.props.fetchAllProds();
     if (this.props.userId) {
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
-        // console.log('home mount 2 -', this.props, this.props.cartId);
-        if (!this.props.cartId) {
+        if (!this.props.cart.id) {
           const newCart = {
             status: 'active',
             time: Date(),
@@ -19,13 +17,11 @@ class UserHome extends Component {
           this.props.addNewCart(this.props.userId, newCart);
         }
       });
-      // .then(() => console.log('home mount 3 -', this.props));
     }
   }
 
   render() {
-    const {name, isLoggedIn} = this.props;
-    // console.log('home render -', this.props);
+    const {name, isLoggedIn, allProduct} = this.props;
 
     return (
       <div className="homePageDiv">
@@ -38,20 +34,23 @@ class UserHome extends Component {
           <h3>Remember to login or sign-up!</h3>
         )}
 
+        <br />
         <div className="homePagePara">
           <p>
             Welcome to Car-Ify! Where your car shopping dreams can come true!
           </p>
         </div>
+        <br />
 
         {isLoggedIn ? (
           <div>
             <span>Recent Purchases: </span>
           </div>
         ) : (
-          <div />
+          ''
         )}
 
+        {/* PLACEHOLDER PRIOR TO SHOWING TOP 3 RATED CAR */}
         <div className="homePageTop">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQtjZMMofBIsAi4F2ESDUwjtcLz72t6O0C_FcajyCSm8LWQg5X8" />
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpaOexXQpRpu85_Xz8xHnJOL6nycw-pZZ1bezgK1Fp8VptDdBk" />
@@ -67,14 +66,16 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
     name: state.user.name,
-    cartId: state.cart.id
+    cart: state.cart,
+    allProduct: state.allProducts
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
-    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart))
+    addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart)),
+    fetchAllProds: () => dispatch(loadAllProducts())
   };
 };
 

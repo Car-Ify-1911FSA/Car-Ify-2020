@@ -21,6 +21,13 @@ form div {
   display: inline-block;
 }
 
+p {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
 h2 {
   margin: 0;
 }
@@ -53,12 +60,17 @@ h4 {
   text-decoration: underline;
 }
 
+.headerDiv {
+  text-decoration: underline;
+}
+
 /* ----------------- NAVBAR ELEMENT ----------------- */
 .navBarDiv {
   position: sticky;
   top: 0;
-  background-color: lightgray;
-  height: 60px;
+  background-color: rgba(130, 130, 130, 1);
+  height: 7vh;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,7 +84,7 @@ h4 {
   top: 60px;
   background-color: lightpink;
   width: 180px;
-  height: 92vh;
+  height: 93vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -86,9 +98,12 @@ h4 {
 
 .sideBarSubmitBtn {
   background-color: lightseagreen;
-  width: 80%;
+  width: 85%;
+  height: 30px;
   font-size: medium;
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
   border-style: solid;
   border-color: black;
@@ -160,14 +175,33 @@ h4 {
 
 /* ----------------- SINGLE PRODUCT----------------- */
 .single-prod-cont {
+  background-color: lightgrey;
   display: flex;
+  width: 70%;
+  height: 80%;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
+  margin: auto;
+  border-radius: 15px;
 }
 
 .single-image {
   width: 400px;
+}
+
+.singleProdBtnDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+}
+
+.backBtn {
+  font-size: medium;
+  font-weight: bold;
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
 }
 
 /* ----------------- ADD BUTTON ----------------- */
@@ -178,7 +212,8 @@ h4 {
 
 .addBtn {
   font-size: medium;
-  width: 100px;
+  font-weight: bold;
+  width: 150px;
   height: 30px;
   border-radius: 5px;
 }
@@ -194,6 +229,7 @@ h4 {
 
 .cartProductDiv {
   background-color: lightgray;
+  min-height: 50px;
   border-radius: 15px;
   padding: 10px;
   margin-bottom: 25px;
@@ -206,11 +242,24 @@ h4 {
   margin-bottom: 25px;
 }
 
+.cartBtnDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+}
+
 .paymentLinkBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0, 152, 195, 0.5), rgba(234, 234, 234, 1));
   font-size: medium;
-  background: linear-gradient(rgba(0, 152, 195, 0.3), #eaeaea);
-  /* background-color: lightgray; */
-  padding: 10px;
+  font-weight: bold;
+  height: 30px;
+  width: 150px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
   border-radius: 5px;
 }
 
@@ -224,21 +273,47 @@ h4 {
 }
 
 /* ----------------- PAYMENT ACCOUNTS ----------------- */
+.paymentActsDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  width: 70%;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 25px 0;
+}
+
 .checkoutBtn {
+  background: linear-gradient(rgba(0, 152, 195, 0.5), rgba(234, 234, 234, 1));
   font-size: medium;
-  height: 35px;
-  width: 200px;
+  font-weight: bold;
+  height: 30px;
+  width: 150px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
   border-radius: 5px;
+}
+
+.checkoutBtn:active {
+  background-color: rgba(184, 0, 92, 0.8);
+}
+
+.paymentActBtnDiv {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
 }
 
 /* ----------------- PAYMENT CARD ----------------- */
 .paymentCardFullDiv {
   background-color: lightskyblue;
-  width: 50vw;
+  height: 35px;
+  width: 90%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 5px;
-  margin-bottom: 15px;
-  border-radius: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
 }

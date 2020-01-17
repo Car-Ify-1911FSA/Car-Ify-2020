@@ -66,7 +66,7 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
         }
         // if not, create a new cart in local storage
         else {
-          console.log('No LSCart');
+          console.log('No LS Cart');
           currentCart = [newCartItem];
           localStorage.setItem('cart', JSON.stringify(currentCart));
           dispatch(addCartItems(currentCart));

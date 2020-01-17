@@ -32,7 +32,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newPaymentAccount = PaymentAccount.create(req.body);
+    const newPaymentAccount = await PaymentAccount.create(req.body);
     if (newPaymentAccount) {
       res.send(newPaymentAccount);
     } else {
@@ -60,8 +60,7 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const paymentAccount = await PaymentAccount.findByPk(id);
+    const paymentAccount = await PaymentAccount.findByPk(req.params.id);
     paymentAccount.type = req.body.type;
     paymentAccount.name = req.body.name;
 
