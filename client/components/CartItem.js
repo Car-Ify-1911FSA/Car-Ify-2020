@@ -14,6 +14,8 @@ class CartItem extends Component {
   }
 
   render() {
+    const {order, id} = this.props;
+
     return !order ? (
       ''
     ) : (
@@ -26,7 +28,7 @@ class CartItem extends Component {
         <h4>{`$${order.totalPrice
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
-        <button type="button" onClick={() => decrement()}>
+        <button type="button" onClick={() => this.decrement(order)}>
           Subtract from Cart
         </button>
       </div>
@@ -35,7 +37,9 @@ class CartItem extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    state: state
+  };
 };
 
 const mapDispatchToProps = dispatch => {
