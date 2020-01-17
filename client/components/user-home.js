@@ -5,11 +5,8 @@ import {getActiveCart, addNewCart} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
-    // console.log('home mount 1 - ', this.props, this.props.cartId);
-
     if (this.props.userId) {
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
-        // console.log('home mount 2 -', this.props, this.props.cartId);
         if (!this.props.cartId) {
           const newCart = {
             status: 'active',
@@ -19,13 +16,11 @@ class UserHome extends Component {
           this.props.addNewCart(this.props.userId, newCart);
         }
       });
-      // .then(() => console.log('home mount 3 -', this.props));
     }
   }
 
   render() {
     const {name, isLoggedIn} = this.props;
-    // console.log('home render -', this.props);
 
     return (
       <div className="homePageDiv">

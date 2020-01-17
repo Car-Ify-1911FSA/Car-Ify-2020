@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getPaymentAccountsThunk} from '../store';
 import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
+import CheckoutButton from './CheckoutButton';
 
 class PaymentAccounts extends Component {
   componentDidMount() {
@@ -23,9 +24,7 @@ class PaymentAccounts extends Component {
           ))}
         </div>
 
-        <button type="submit" className="checkoutBtn">
-          Final Checkout [BUILD]
-        </button>
+        <CheckoutButton />
       </div>
     );
   }

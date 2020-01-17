@@ -30,13 +30,9 @@ class AddToCartButton extends Component {
         totalPrice: productPrice
       };
 
-    // if (Array.isArray(cartDetail)) {
     let prodIdArr = cartDetail.map(prod => prod.productId);
     if (prodIdArr.includes(productId)) this.props.editCartItem(cartItemObj);
     else this.props.addCartItem(isLoggedIn, cartItemObj);
-    // } else {
-    //   this.props.addCartItem(isLoggedIn, cartItemObj);
-    // }
   }
 
   render() {
@@ -61,8 +57,7 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
     cartId: state.cart.id,
-    cartDetail: state.cartProduct,
-    state: state
+    cartDetail: state.cartProduct
   };
 };
 

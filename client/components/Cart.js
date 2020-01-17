@@ -13,7 +13,6 @@ class Cart extends Component {
     // console.log('mount -', this.props, this.props.userId, this.props.cartId);
     if (this.props.userId) await this.props.fetchCart(this.props.userId);
     if (this.props.cartId) await this.props.fetchCartDetail(this.props.cartId);
-    // this.props.fetchCartDetail(3); // TEMP REMOVE !!!!!!
   }
 
   calcTotalPrice(cartDetail) {
@@ -27,7 +26,6 @@ class Cart extends Component {
   render() {
     const {cart, cartDetail} = this.props;
     const products = cart.products;
-    // console.log('cart render -', this.props, cartDetail);
 
     return (
       <div className="cartFullDiv">
