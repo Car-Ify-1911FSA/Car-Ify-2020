@@ -92,7 +92,10 @@ export const editNewCartDetail = editCartItem => {
 export const deleteCartDetail = editCartItem => {
   return async dispatch => {
     try {
-      const {data} = await axios.delete(`/api/cart-product`);
+      const {cartId, productId} = editCartItem;
+      const {data} = await axios.delete(
+        `/api/cart-product/${cartId}/${productId}`
+      );
       dispatch(getCartItems(data.cartDetail));
     } catch (error) {
       console.error(error);

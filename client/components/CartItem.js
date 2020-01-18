@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {editNewCartDetail, deleteCartDetail} from '../store';
+import {editNewCartDetail, deleteCartDetail, getCartDetail} from '../store';
 
 class CartItem extends Component {
   constructor() {
@@ -8,7 +8,9 @@ class CartItem extends Component {
     this.decrement = this.decrement.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.fetchCartDetail(this.props.order.cartId);
+  }
 
   decrement(order) {
     console.log('decrementing!', order);
@@ -25,17 +27,17 @@ class CartItem extends Component {
 
   render() {
     const {order, id} = this.props;
-    console.log('render', this.props);
+    // console.log('render item', this.props);
+
     return !order ? (
       ''
     ) : (
       <div className="cartItemFullDiv">
-        <h4>{id}</h4>
-        Model:<h4>{order.model}</h4>
-        Brand:<h4>{order.brand}</h4>
-        Quantity:<h4>{order.quantity}</h4>
-        Price:
-        <h4>{`$${order.totalPrice
+        <h4 className="cartItemH4">{id}</h4>
+        <h4 className="cartItemH4">Model: {order.model}</h4>
+        <h4 className="cartItemH4">Brand: {order.brand}</h4>
+        <h4 className="cartItemH4">Quantity: {order.quantity}</h4>
+        <h4 className="cartItemH4">{`Price: $${order.totalPrice
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
         <button type="button" onClick={() => this.decrement(order)}>
@@ -56,7 +58,8 @@ const mapDispatchToProps = dispatch => {
   return {
     editNewCartDetail: editCartItem =>
       dispatch(editNewCartDetail(editCartItem)),
-    deleteCartDetail: editCartItem => dispatch(deleteCartDetail(editCartItem))
+    deleteCartDetail: editCartItem => dispatch(deleteCartDetail(editCartItem)),
+    fetchCartDetail: cartId => dispatch(getCartDetail(cartId))
   };
 };
 

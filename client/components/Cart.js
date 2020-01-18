@@ -29,9 +29,6 @@ class Cart extends Component {
         this.props.fetchCartDetail(this.props.cart.id);
       });
     }
-    // if(this.props.cartDetail !== prevProps.cartDetail) {
-    //   // this.props.fetchCartDetail(this.props.cart.id)
-    // }
   }
 
   calcTotalQuantity(cartDetail) {
@@ -72,6 +69,7 @@ class Cart extends Component {
       });
       mergedArr.push(obj);
     });
+
     return mergedArr;
   }
 
@@ -86,6 +84,8 @@ class Cart extends Component {
       : guestProd;
 
     const productDetail = this.mergeCartProd(cartDetail, products);
+
+    // console.log('render -', this.props, productDetail);
 
     return (
       <div className="cartFullDiv">

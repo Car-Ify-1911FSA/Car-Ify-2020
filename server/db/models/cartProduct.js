@@ -3,6 +3,11 @@ const db = require('../db');
 const {Cart, Product} = require('./index');
 
 const CartProduct = db.define('cartProduct', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   cartId: {
     type: Sequelize.INTEGER,
     references: {

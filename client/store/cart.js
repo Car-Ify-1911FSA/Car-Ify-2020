@@ -33,7 +33,6 @@ export const getActiveCart = userId => {
       }
     } else {
       const guestCart = JSON.parse(localStorage.getItem('cart'));
-      console.log('GUEST CART THUNK', guestCart);
       dispatch(getCart(guestCart));
     }
   };
