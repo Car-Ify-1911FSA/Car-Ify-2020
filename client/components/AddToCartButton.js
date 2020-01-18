@@ -30,7 +30,8 @@ class AddToCartButton extends Component {
         totalPrice: productPrice
       };
 
-    let prodIdArr = cartDetail.map(prod => prod.productId);
+    let prodIdArr = [];
+    if (cartDetail) prodIdArr = cartDetail.map(prod => prod.productId);
     if (prodIdArr.includes(productId))
       this.props.editCartItem(isLoggedIn, cartItemObj);
     else this.props.addCartItem(isLoggedIn, cartItemObj);

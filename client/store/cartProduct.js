@@ -30,7 +30,8 @@ export const getCartDetail = cartId => {
         console.error(error);
       }
     } else {
-      dispatch(getCartItems(JSON.parse(localStorage.getItem('cart'))));
+      const guestCart = JSON.parse(localStorage.getItem('cart'));
+      dispatch(getCartItems(guestCart));
     }
   };
 };

@@ -1,15 +1,25 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getActiveCart, addNewCart, loadAllProducts} from '../store';
+import {
+  getActiveCart,
+  addNewCart,
+  loadAllProducts,
+  getCartDetail,
+  addNewCartDetail,
+  editNewCartDetail
+} from '../store';
 
 class UserHome extends Component {
   componentDidMount() {
     this.props.fetchAllProds();
     if (this.props.userId) {
+      // FIRST RETRIEVE THE CART (IF THERE ARE ANY)
       Promise.all([this.props.getCart(this.props.userId)])
         .then(() => {
+          console.log('user mount 1 -', this.props);
           if (!this.props.cart.id) {
+            // IF THERE'S NO ACTIVE CART, ADD A NEW ONE
             const newCart = {
               status: 'active',
               time: Date(),
@@ -19,8 +29,22 @@ class UserHome extends Component {
           }
         })
         .then(() => {
+          console.log('user mount 2 -', this.props);
+          this.props.getCartDetail(this.props.cart.id);
+        })
+        .then(() => {
           const localCart = JSON.parse(localStorage.getItem('cart'));
-          console.log('user mount -', this.props.cartDetail, localCart);
+          console.log('user mount 3 -', this.props, localCart);
+          if (localCart) {
+            let prodIdArr = this.props.cartDetail.map(prod => prod.productId);
+            localCart.map(item => {
+              if (prodIdArr.includes(item.productId)) {
+                console.log('PUT ROUTE!');
+              } else {
+                console.log('POST ROUTE!');
+              }
+            });
+          }
         });
     }
   }
@@ -81,7 +105,12 @@ const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
     addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart)),
-    fetchAllProds: () => dispatch(loadAllProducts())
+    fetchAllProds: () => dispatch(loadAllProducts()),
+    getCartDetail: cartId => dispatch(getCartDetail(cartId)),
+    addCartItem: (isLoggedIn, newCartItem) =>
+      dispatch(addNewCartDetail(isLoggedIn, newCartItem)),
+    editCartItem: (isLoggedIn, editCartItem) =>
+      dispatch(editNewCartDetail(isLoggedIn, editCartItem))
   };
 };
 

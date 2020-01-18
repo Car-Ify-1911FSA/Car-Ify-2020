@@ -105,17 +105,6 @@ const mapDispatchToProps = dispatch => {
     },
     auth: (email, password, formName, name) =>
       dispatch(auth(email, password, formName, name))
-    // handleSubmit(evt) {
-    //   evt.preventDefault();
-    //   const formName = evt.target.name;
-    //   const email = evt.target.email.value;
-    //   const password = evt.target.password.value;
-
-    //   if (formName === 'signup') {
-    //     const name = evt.target.userName.value;
-    //     dispatch(auth(email, password, formName, name));
-    //   } else dispatch(auth(email, password, formName));
-    // }
   };
 };
 
