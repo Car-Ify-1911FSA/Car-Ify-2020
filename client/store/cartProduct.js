@@ -76,11 +76,21 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
 
 export const editNewCartDetail = (isLoggedIn, editCartItem) => {
   return async dispatch => {
-    console.log('thunky -', isLoggedIn, editCartItem);
-    //   !!!!     NEED TO ADD GUEST LOCAL STORAGE FUNCTIONALITY    !!!!
     try {
-      const {data} = await axios.put(`/api/cart-product`, editCartItem);
-      dispatch(addCartItems(data.product));
+      if (isLoggedIn) {
+        const {data} = await axios.put(`/api/cart-product`, editCartItem);
+        dispatch(addCartItems(data.product));
+      } else {
+        // INCREMENTING QUANTITY FOR GUEST LOCAL STORAGE
+        const guestCart = JSON.parse(localStorage.getItem('cart'));
+        const incrementIdx = guestCart.findIndex(
+          item => item.productId === editCartItem.productId
+        );
+        const incrementItem = guestCart[incrementIdx];
+        incrementItem.quantity++;
+        localStorage.setItem('cart', JSON.stringify(guestCart));
+        dispatch(getCartItems(guestCart));
+      }
     } catch (error) {
       console.error(error);
     }

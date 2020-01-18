@@ -22,14 +22,13 @@ class AddToCartButton extends Component {
   }
 
   handleAddClick(productId, productPrice) {
-    const {isLoggedIn, cart, cartDetail} = this.props;
-    console.log('clicking -', cartDetail, cart, cart.id);
-    const cartItemObj = {
-      cartId: cart.id,
-      productId: productId,
-      quantity: 1,
-      totalPrice: productPrice
-    };
+    const {isLoggedIn, cart, cartDetail} = this.props,
+      cartItemObj = {
+        cartId: cart.id,
+        productId: productId,
+        quantity: 1,
+        totalPrice: productPrice
+      };
 
     let prodIdArr = cartDetail.map(prod => prod.productId);
     if (prodIdArr.includes(productId))
