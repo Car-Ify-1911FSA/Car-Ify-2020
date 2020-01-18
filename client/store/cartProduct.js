@@ -30,7 +30,6 @@ export const getCartDetail = cartId => {
         console.error(error);
       }
     } else {
-      // console.log('thunky 1 -', JSON.parse(localStorage.getItem('cart')));
       dispatch(getCartItems(JSON.parse(localStorage.getItem('cart'))));
     }
   };
@@ -75,8 +74,9 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
   };
 };
 
-export const editNewCartDetail = editCartItem => {
+export const editNewCartDetail = (isLoggedIn, editCartItem) => {
   return async dispatch => {
+    console.log('thunky -', isLoggedIn, editCartItem);
     try {
       const {data} = await axios.put(`/api/cart-product`, editCartItem);
       dispatch(addCartItems(data.product));

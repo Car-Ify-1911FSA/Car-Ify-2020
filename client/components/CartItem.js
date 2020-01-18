@@ -17,18 +17,27 @@ class CartItem extends Component {
     if (userId) {
       // LOGGED IN USER SO IMPACT DB
       if (order.quantity > 1) {
+        // DECREMENT QUANTITY SINCE GREATER THAN 1 (PUT REQUEST)
         this.props.editNewCartDetail({
           ...order,
           quantity: -1,
           totalPrice: -order.totalPrice / order.quantity
         });
       } else {
+        // DELETE ITEM SINCE ONLY 1 QUANTITY (DELETE REQUEST)
         this.props.deleteCartDetail(order);
       }
     } else {
       // GUEST USER SO IMPACT LOCAL STORAGE
       const guestCart = JSON.parse(localStorage.getItem('cart'));
-      console.log('guest cart -', guestCart);
+      const decrementIdx = guestCart.findIndex(
+        item => item.productId === order.productId
+      );
+      const decrementItem = guestCart[decrementIdx];
+      decrementItem.quantity--;
+      if (decrementItem.quantity < 1) guestCart.splice(decrementIdx, 1);
+      localStorage.setItem('cart', JSON.stringify(guestCart));
+      this.props.fetchCartDetail();
     }
   }
 
