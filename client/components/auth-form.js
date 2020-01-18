@@ -36,11 +36,15 @@ const AuthForm = props => {
         </div>
 
         <div>
-          <button type="submit">{displayName}</button>
+          <button type="submit" className="authSignInBtn">
+            {displayName}
+          </button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <a href="/auth/google" className="linkText">
+        {displayName} with Google
+      </a>
     </div>
   );
 };

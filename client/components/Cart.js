@@ -10,6 +10,7 @@ class Cart extends Component {
     this.calcTotalQuantity = this.calcTotalQuantity.bind(this);
     this.calcTotalPrice = this.calcTotalPrice.bind(this);
     this.mergeCartProd = this.mergeCartProd.bind(this);
+    this.headerText = this.headerText.bind(this);
   }
 
   componentDidMount() {
@@ -64,13 +65,17 @@ class Cart extends Component {
     return mergedArr;
   }
 
+  headerText(userName) {
+    return userName ? `${userName}'s Cart` : `Guest's Cart`;
+  }
+
   render() {
-    const {userId, cartDetail, allProducts} = this.props;
+    const {userId, userName, cartDetail, allProducts} = this.props;
     const productDetail = this.mergeCartProd(cartDetail, allProducts);
 
     return (
       <div className="cartFullDiv">
-        <h1>{this.props.userName ? this.props.userName : 'Guest'}'s Cart</h1>
+        <h1>{this.headerText(userName)}</h1>
 
         {!productDetail || productDetail.length < 1 ? (
           <div className="cartProductDiv">
@@ -94,13 +99,20 @@ class Cart extends Component {
         <div className="cartBtnDiv">
           {cartDetail && cartDetail.length > 0 ? (
             <Link
-              to={{
-                pathname: '/paymentAccounts',
-                state: {cart: this.props.cart, cartDetail: cartDetail}
-              }}
+              to={
+                userName
+                  ? {
+                      pathname: '/paymentAccounts',
+                      state: {cart: this.props.cart, cartDetail: cartDetail}
+                    }
+                  : {
+                      pathname: '/signIn',
+                      state: {cart: this.props.cart, cartDetail: cartDetail}
+                    }
+              }
               className="paymentLinkBtn linkText"
             >
-              Let's Pay !
+              {userName ? `Let's Pay !` : `Please Sign In !`}
             </Link>
           ) : (
             <Link to="/allProducts" className="paymentLinkBtn linkText">

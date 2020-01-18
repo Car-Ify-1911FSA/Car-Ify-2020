@@ -24,7 +24,7 @@ class AddToCartButton extends Component {
   handleAddClick(productId, productPrice) {
     const {isLoggedIn, cart, cartDetail} = this.props,
       cartItemObj = {
-        cartId: cart.id,
+        cartId: cart ? cart.id : undefined,
         productId: productId,
         quantity: 1,
         totalPrice: productPrice

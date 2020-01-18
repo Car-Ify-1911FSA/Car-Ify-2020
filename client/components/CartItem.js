@@ -13,7 +13,6 @@ class CartItem extends Component {
   }
 
   decrement(userId, order) {
-    console.log('decrementing!', userId, order);
     if (userId) {
       // LOGGED IN USER SO IMPACT DB
       if (order.quantity > 1) {
