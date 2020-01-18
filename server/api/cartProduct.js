@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {CartProduct} = require('../db/models');
+const {CartProduct, Product} = require('../db/models');
 // const {isAdmin} = require('./security');
 
 router.get('/:cartId', async (req, res, next) => {

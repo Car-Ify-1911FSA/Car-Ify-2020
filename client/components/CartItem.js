@@ -12,22 +12,28 @@ class CartItem extends Component {
     this.props.fetchCartDetail(this.props.order.cartId);
   }
 
-  decrement(order) {
-    console.log('decrementing!', order);
-    if (order.quantity > 1) {
-      this.props.editNewCartDetail({
-        ...order,
-        quantity: -1,
-        totalPrice: -order.totalPrice / order.quantity
-      });
+  decrement(userId, order) {
+    console.log('decrementing!', userId, order);
+    if (userId) {
+      // LOGGED IN USER SO IMPACT DB
+      if (order.quantity > 1) {
+        this.props.editNewCartDetail({
+          ...order,
+          quantity: -1,
+          totalPrice: -order.totalPrice / order.quantity
+        });
+      } else {
+        this.props.deleteCartDetail(order);
+      }
     } else {
-      this.props.deleteCartDetail(order);
+      // GUEST USER SO IMPACT LOCAL STORAGE
+      const guestCart = JSON.parse(localStorage.getItem('cart'));
+      console.log('guest cart -', guestCart);
     }
   }
 
   render() {
-    const {order, id} = this.props;
-    // console.log('render item', this.props);
+    const {userId, order, id} = this.props;
 
     return !order ? (
       ''
@@ -40,7 +46,7 @@ class CartItem extends Component {
         <h4 className="cartItemH4">{`Price: $${order.totalPrice
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
-        <button type="button" onClick={() => this.decrement(order)}>
+        <button type="button" onClick={() => this.decrement(userId, order)}>
           Subtract from Cart
         </button>
       </div>
