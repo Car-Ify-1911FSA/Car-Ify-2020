@@ -42,9 +42,9 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
         const {data} = await axios.post(`/api/cart-product`, newCartItem);
         dispatch(addCartItems(data.newOrder));
       } else {
-        console.log('GUEST LOCAL STORAGE!');
+        // IF CART ALREADY EXIST IN LOCAL STORAGE
         let currentCart;
-        // if cart already exist in local storage
+        delete newCartItem.cartId;
         if (localStorage.getItem('cart')) {
           currentCart = JSON.parse(localStorage.getItem('cart'));
 
@@ -57,19 +57,15 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
           if (searchId > -1) {
             currentCart[searchId].quantity += newCartItem.quantity;
             currentCart[searchId].totalPrice += newCartItem.totalPrice;
-          } else {
-            currentCart.push(newCartItem);
-          }
+          } else currentCart.push(newCartItem);
 
-          dispatch(addCartItems(currentCart));
           localStorage.setItem('cart', JSON.stringify(currentCart));
-        }
-        // if not, create a new cart in local storage
-        else {
-          console.log('No LS Cart');
+          dispatch(getCartItems(currentCart));
+        } else {
+          // IF NO EXISTING LOCAL STORAGE, CREATE NEW CART IN LOCAL STORAGE
           currentCart = [newCartItem];
           localStorage.setItem('cart', JSON.stringify(currentCart));
-          dispatch(addCartItems(currentCart));
+          dispatch(getCartItems(currentCart));
         }
       }
     } catch (error) {
@@ -78,8 +74,10 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
   };
 };
 
-export const editNewCartDetail = editCartItem => {
+export const editNewCartDetail = (isLoggedIn, editCartItem) => {
   return async dispatch => {
+    console.log('thunky -', isLoggedIn, editCartItem);
+    //   !!!!     NEED TO ADD GUEST LOCAL STORAGE FUNCTIONALITY    !!!!
     try {
       const {data} = await axios.put(`/api/cart-product`, editCartItem);
       dispatch(addCartItems(data.product));
@@ -92,7 +90,10 @@ export const editNewCartDetail = editCartItem => {
 export const deleteCartDetail = editCartItem => {
   return async dispatch => {
     try {
-      const {data} = await axios.delete(`/api/cart-product`);
+      const {cartId, productId} = editCartItem;
+      const {data} = await axios.delete(
+        `/api/cart-product/${cartId}/${productId}`
+      );
       dispatch(getCartItems(data.cartDetail));
     } catch (error) {
       console.error(error);

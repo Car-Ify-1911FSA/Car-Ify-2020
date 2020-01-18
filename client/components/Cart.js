@@ -29,9 +29,6 @@ class Cart extends Component {
         this.props.fetchCartDetail(this.props.cart.id);
       });
     }
-    // if(this.props.cartDetail !== prevProps.cartDetail) {
-    //   // this.props.fetchCartDetail(this.props.cart.id)
-    // }
   }
 
   calcTotalQuantity(cartDetail) {
@@ -52,40 +49,24 @@ class Cart extends Component {
     return `$${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   }
 
-  getProductDataForGuest(inventory, cartProd) {
-    return cartProd.map(prod => {
-      return inventory.find(el => el.id === prod.productId);
-    });
-  }
-
   mergeCartProd(cartDetail, products) {
-    if (!cartDetail || !products || !products[0]) return [];
+    if (!cartDetail || !products.length) return [];
 
-    let mergedArr = [];
+    const mergedArr = [];
     cartDetail.map(item => {
-      let obj = {...item};
-      products.map(prod => {
-        if (prod.id === item.productId) {
-          obj.brand = prod.brand;
-          obj.model = prod.model;
-        }
-      });
+      const obj = {...item};
+      const match = products.find(car => car.id === item.productId);
+      obj.brand = match.brand;
+      obj.model = match.model;
       mergedArr.push(obj);
     });
+
     return mergedArr;
   }
 
   render() {
-    const {cart, cartDetail, allProducts} = this.props;
-    const guestCart = JSON.parse(localStorage.getItem('cart'));
-    const guestProd = this.getProductDataForGuest(allProducts, guestCart);
-    const products = this.props.userId
-      ? cart
-        ? cart.products
-        : undefined
-      : guestProd;
-
-    const productDetail = this.mergeCartProd(cartDetail, products);
+    const {userId, cartDetail, allProducts} = this.props;
+    const productDetail = this.mergeCartProd(cartDetail, allProducts);
 
     return (
       <div className="cartFullDiv">
@@ -99,7 +80,7 @@ class Cart extends Component {
           <div className="cartProductDiv">
             <h3 className="headerDiv">Cart Items</h3>
             {productDetail.map((order, idx) => (
-              <CartItem key={idx} order={order} id={idx + 1} />
+              <CartItem key={idx} userId={userId} order={order} id={idx + 1} />
             ))}
           </div>
         )}

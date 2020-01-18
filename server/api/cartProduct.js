@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {CartProduct} = require('../db/models');
+const {CartProduct, Product} = require('../db/models');
 // const {isAdmin} = require('./security');
 
 router.get('/:cartId', async (req, res, next) => {
@@ -57,22 +57,21 @@ router.put('/', async (req, res, next) => {
   }
 });
 
-router.delete('/', async (req, res, next) => {
+router.delete('/:cartId/:productId', async (req, res, next) => {
   try {
     await CartProduct.destroy({
       where: {
-        cartId: req.body.cartId,
-        productId: req.body.productId
+        cartId: req.params.cartId,
+        productId: req.params.productId
       }
     });
     const cartDetail = await CartProduct.findAll({
       where: {
-        cartId: req.body.cartId,
-        productId: req.body.productId
+        cartId: req.params.cartId
       }
     });
     res
-      .status(204)
+      .status(200)
       .json({cartDetail, message: 'Deleted cart item successfully!'});
   } catch (error) {
     next(error);

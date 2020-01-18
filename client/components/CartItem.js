@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {editNewCartDetail, deleteCartDetail} from '../store';
+import {editNewCartDetail, deleteCartDetail, getCartDetail} from '../store';
 
 class CartItem extends Component {
   constructor() {
@@ -8,37 +8,54 @@ class CartItem extends Component {
     this.decrement = this.decrement.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.fetchCartDetail(this.props.order.cartId);
+  }
 
-  decrement(order) {
-    console.log('decrementing!', order);
-    if (order.quantity > 1) {
-      this.props.editNewCartDetail({
-        ...order,
-        quantity: -1,
-        totalPrice: -order.totalPrice / order.quantity
-      });
+  decrement(userId, order) {
+    console.log('decrementing!', userId, order);
+    if (userId) {
+      // LOGGED IN USER SO IMPACT DB
+      if (order.quantity > 1) {
+        // DECREMENT QUANTITY SINCE GREATER THAN 1 (PUT REQUEST)
+        this.props.editNewCartDetail({
+          ...order,
+          quantity: -1,
+          totalPrice: -order.totalPrice / order.quantity
+        });
+      } else {
+        // DELETE ITEM SINCE ONLY 1 QUANTITY (DELETE REQUEST)
+        this.props.deleteCartDetail(order);
+      }
     } else {
-      this.props.deleteCartDetail(order);
+      // GUEST USER SO IMPACT LOCAL STORAGE
+      const guestCart = JSON.parse(localStorage.getItem('cart'));
+      const decrementIdx = guestCart.findIndex(
+        item => item.productId === order.productId
+      );
+      const decrementItem = guestCart[decrementIdx];
+      decrementItem.quantity--;
+      if (decrementItem.quantity < 1) guestCart.splice(decrementIdx, 1);
+      localStorage.setItem('cart', JSON.stringify(guestCart));
+      this.props.fetchCartDetail();
     }
   }
 
   render() {
-    const {order, id} = this.props;
-    console.log('render', this.props);
+    const {userId, order, id} = this.props;
+
     return !order ? (
       ''
     ) : (
       <div className="cartItemFullDiv">
-        <h4>{id}</h4>
-        Model:<h4>{order.model}</h4>
-        Brand:<h4>{order.brand}</h4>
-        Quantity:<h4>{order.quantity}</h4>
-        Price:
-        <h4>{`$${order.totalPrice
+        <h4 className="cartItemH4">{id}</h4>
+        <h4 className="cartItemH4">Model: {order.model}</h4>
+        <h4 className="cartItemH4">Brand: {order.brand}</h4>
+        <h4 className="cartItemH4">Quantity: {order.quantity}</h4>
+        <h4 className="cartItemH4">{`Price: $${order.totalPrice
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
-        <button type="button" onClick={() => this.decrement(order)}>
+        <button type="button" onClick={() => this.decrement(userId, order)}>
           Subtract from Cart
         </button>
       </div>
@@ -56,7 +73,8 @@ const mapDispatchToProps = dispatch => {
   return {
     editNewCartDetail: editCartItem =>
       dispatch(editNewCartDetail(editCartItem)),
-    deleteCartDetail: editCartItem => dispatch(deleteCartDetail(editCartItem))
+    deleteCartDetail: editCartItem => dispatch(deleteCartDetail(editCartItem)),
+    fetchCartDetail: cartId => dispatch(getCartDetail(cartId))
   };
 };
 
