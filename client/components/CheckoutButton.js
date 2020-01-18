@@ -54,17 +54,17 @@ class CheckoutButton extends Component {
 
   handleCheckOut() {
     const {userId, allProducts, cart, cartDetail} = this.props;
-    // console.log('CHECK OUT', allProducts, cartDetail);
 
     const test = true; // TEMP ! ONLY USING FOR TESTING PURPOSE
     if (userId && test) {
-      // UPDATING PRODUCT TABLE WITH DECREMENTED QUANTITES (CHECK)
+      // LOGGED IN USER SO IMPACT DB
       let allProdHash = {};
       for (let prod of allProducts) {
         allProdHash[prod.id] = prod;
       }
 
       if (this.checkQuantity(cartDetail, allProdHash)) {
+        // UPDATING PRODUCT TABLE WITH DECREMENTED QUANTITES
         let prodQuantity = this.checkQuantity(cartDetail, allProdHash);
         prodQuantity.map(item => this.props.editProducts(item));
 
@@ -83,21 +83,22 @@ class CheckoutButton extends Component {
         this.props.history.push('/');
       }
     } else {
-      // FOR GUESTS: FORCE LOGIN / SIGNUP?
-      console.log('LOGIC FOR GUESTS CHECKOUT');
+      // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
       this.props.history.push('/');
     }
   }
 
   render() {
+    const {userId} = this.props;
+
     return (
-      <div>
+      <div className="checkoutBtnDiv">
         <button
           type="button"
           className="checkoutBtn linkText"
           onClick={() => this.handleCheckOut()}
         >
-          Check Out !
+          {userId ? `Check Out !` : `Login / Sign-Up`}
         </button>
       </div>
     );

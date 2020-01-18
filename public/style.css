@@ -110,10 +110,14 @@ h4 {
 }
 
 /* ----------------- AUTH FORM ELEMENT ----------------- */
+.signInFullDiv {
+  display: flex;
+}
+
 .authFormDiv {
   margin: 50px auto;
-  width: 30vw;
-  height: 50vh;
+  width: 35vw;
+  height: 65vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -129,10 +133,14 @@ h4 {
   background-color: lightskyblue;
 }
 
-/* ----------------- HOME PAGE ELEMENT ----------------- */
-.homePageDiv {
+.authSignInBtn {
+  font-size: 13px;
+  border-radius: 5px;
+  width: 90px;
+  height: 20px;
 }
 
+/* ----------------- HOME PAGE ELEMENT ----------------- */
 .hpLoggedInWelcome {
   color: rgba(0, 152, 195, 1);
 }

@@ -18,12 +18,18 @@ class PaymentAccounts extends Component {
     return (
       <div className="paymentActsFullDiv">
         <h2>Time to Pay!</h2>
-        <div className="paymentActsDiv">
-          <h3 className="headerDiv">All Payment Accounts</h3>
-          {filterAccounts.map((acct, idx) => (
-            <PaymentCard acct={acct} key={idx} />
-          ))}
-        </div>
+        {!filterAccounts.length ? (
+          <div className="paymentActsDiv">
+            <h3>Currently No Payment Accounts</h3>
+          </div>
+        ) : (
+          <div className="paymentActsDiv">
+            <h3 className="headerDiv">All Payment Accounts</h3>
+            {filterAccounts.map((acct, idx) => (
+              <PaymentCard acct={acct} key={idx} />
+            ))}
+          </div>
+        )}
 
         <div className="paymentActBtnDiv">
           <CheckoutButton />

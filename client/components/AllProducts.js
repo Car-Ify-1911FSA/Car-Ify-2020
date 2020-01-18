@@ -8,17 +8,20 @@ class AllProducts extends Component {
     this.props.fetchAllProducts();
   }
 
-  render() {
-    const state = this.props.location.state,
-      allCars = this.props.allProducts,
-      newState = state ? state.state : false;
-
-    let filteredCars = allCars.filter(car => {
+  filterAllProducts(allCars, newState) {
+    return allCars.filter(car => {
       for (let key in newState) {
         if (newState[key] !== 'All' && car[key] !== newState[key]) return false;
       }
       return true;
     });
+  }
+
+  render() {
+    const state = this.props.location.state,
+      allCars = this.props.allProducts,
+      newState = state ? state.state : false,
+      filteredCars = this.filterAllProducts(allCars, newState);
 
     return (
       <div className="allProductFullDiv">

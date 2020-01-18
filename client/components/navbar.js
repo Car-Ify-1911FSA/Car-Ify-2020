@@ -13,48 +13,30 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
     ) : (
       <h1>Welcome to Car-ify !</h1>
     )}
+
     <nav>
-      {isLoggedIn ? (
-        <div>
-          <Link to="/" className="navBarText linkText">
-            Home
-          </Link>
+      <div>
+        <Link to="/" className="navBarText linkText">
+          Home
+        </Link>
 
-          <Link to="/allProducts" className="navBarText linkText">
-            Products
-          </Link>
+        <Link to="/allProducts" className="navBarText linkText">
+          Products
+        </Link>
 
-          <Link to="/cart" className="navBarText linkText">
-            Cart
-          </Link>
-
+        <Link to="/cart" className="navBarText linkText">
+          Cart
+        </Link>
+        {isLoggedIn ? (
           <a href="#" onClick={handleClick} className="linkText">
             Logout
           </a>
-        </div>
-      ) : (
-        <div>
-          <Link to="/" className="linkText">
-            Home
+        ) : (
+          <Link to="/signIn" className="linkText">
+            Sign In
           </Link>
-
-          <Link to="/allProducts" className="navBarText linkText">
-            Products
-          </Link>
-
-          <Link to="/cart" className="navBarText linkText">
-            Cart
-          </Link>
-
-          <Link to="/login" className="linkText">
-            Login
-          </Link>
-
-          <Link to="/signup" className="linkText">
-            Sign Up
-          </Link>
-        </div>
-      )}
+        )}
+      </div>
     </nav>
   </div>
 );

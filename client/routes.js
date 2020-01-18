@@ -22,8 +22,15 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={UserHome} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route
+          path="/signIn"
+          render={props => (
+            <div className="signInFullDiv">
+              <Login />
+              <Signup />
+            </div>
+          )}
+        />
         <Route path="/allProducts" component={AllProducts} />
         <Route path="/product/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
@@ -35,7 +42,8 @@ class Routes extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    state: state
   };
 };
 
