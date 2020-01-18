@@ -77,6 +77,7 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
 export const editNewCartDetail = (isLoggedIn, editCartItem) => {
   return async dispatch => {
     console.log('thunky -', isLoggedIn, editCartItem);
+    //   !!!!     NEED TO ADD GUEST LOCAL STORAGE FUNCTIONALITY    !!!!
     try {
       const {data} = await axios.put(`/api/cart-product`, editCartItem);
       dispatch(addCartItems(data.product));
