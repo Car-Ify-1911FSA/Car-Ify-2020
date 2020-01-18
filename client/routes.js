@@ -15,12 +15,10 @@ import {me} from './store';
 
 class Routes extends Component {
   componentDidMount() {
-    console.log('ROUTE MOUNT -', this.props.state);
     this.props.loadInitialData();
   }
 
   render() {
-    console.log('ROUTE RENDER -', this.props.state);
     return (
       <Switch>
         <Route exact path="/" component={UserHome} />

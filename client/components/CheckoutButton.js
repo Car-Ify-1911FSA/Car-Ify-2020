@@ -54,7 +54,6 @@ class CheckoutButton extends Component {
 
   handleCheckOut() {
     const {userId, allProducts, cart, cartDetail} = this.props;
-    // console.log('CHECK OUT', allProducts, cartDetail);
 
     const test = true; // TEMP ! ONLY USING FOR TESTING PURPOSE
     if (userId && test) {
@@ -84,8 +83,8 @@ class CheckoutButton extends Component {
         this.props.history.push('/');
       }
     } else {
-      // GUEST CART SO FORCE TO LOGIN OR SIGN UP
-      this.props.history.push('/signIn');
+      // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
+      this.props.history.push('/');
     }
   }
 

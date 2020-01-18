@@ -25,11 +25,9 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method, name) => async dispatch => {
   let res;
   try {
-    if (method === 'signup') {
+    if (method === 'signup')
       res = await axios.post(`/auth/${method}`, {email, name, password});
-    } else {
-      res = await axios.post(`/auth/${method}`, {email, password});
-    }
+    else res = await axios.post(`/auth/${method}`, {email, password});
   } catch (authError) {
     return dispatch(getUser({error: authError}));
   }
@@ -47,7 +45,7 @@ export const logout = () => async dispatch => {
     await axios.post('/auth/logout');
     dispatch(removeUser());
     localStorage.setItem('cart', JSON.stringify([]));
-    history.push('/login');
+    history.push('/signIn');
   } catch (err) {
     console.error(err);
   }

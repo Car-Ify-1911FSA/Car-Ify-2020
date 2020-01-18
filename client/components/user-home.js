@@ -7,16 +7,21 @@ class UserHome extends Component {
   componentDidMount() {
     this.props.fetchAllProds();
     if (this.props.userId) {
-      Promise.all([this.props.getCart(this.props.userId)]).then(() => {
-        if (!this.props.cart.id) {
-          const newCart = {
-            status: 'active',
-            time: Date(),
-            userId: this.props.userId
-          };
-          this.props.addNewCart(this.props.userId, newCart);
-        }
-      });
+      Promise.all([this.props.getCart(this.props.userId)])
+        .then(() => {
+          if (!this.props.cart.id) {
+            const newCart = {
+              status: 'active',
+              time: Date(),
+              userId: this.props.userId
+            };
+            this.props.addNewCart(this.props.userId, newCart);
+          }
+        })
+        .then(() => {
+          const localCart = JSON.parse(localStorage.getItem('cart'));
+          console.log('user mount -', this.props.cartDetail, localCart);
+        });
     }
   }
 
@@ -67,6 +72,7 @@ const mapStateToProps = state => {
     userId: state.user.id,
     name: state.user.name,
     cart: state.cart,
+    cartDetail: state.cartProduct,
     allProduct: state.allProducts
   };
 };
