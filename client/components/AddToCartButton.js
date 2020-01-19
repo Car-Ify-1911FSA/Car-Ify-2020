@@ -12,6 +12,9 @@ class AddToCartButton extends Component {
   constructor() {
     super();
     this.handleAddClick = this.handleAddClick.bind(this);
+    this.state = {
+      added: false
+    };
   }
 
   componentDidMount() {
@@ -35,10 +38,11 @@ class AddToCartButton extends Component {
     if (prodIdArr.includes(productId))
       this.props.editCartItem(isLoggedIn, cartItemObj);
     else this.props.addCartItem(isLoggedIn, cartItemObj);
+    this.setState({added: true});
   }
 
   render() {
-    return (
+    return !this.state.added ? (
       <div className="addBtnDiv">
         <button
           type="button"
@@ -50,6 +54,8 @@ class AddToCartButton extends Component {
           Add to Cart
         </button>
       </div>
+    ) : (
+      <h6>Added</h6>
     );
   }
 }

@@ -46,18 +46,27 @@ class CartItem extends Component {
     return !order ? (
       ''
     ) : (
-      <div className="cartItemFullDiv">
-        <h4 className="cartItemH4">{id}</h4>
-        <h4 className="cartItemH4">Model: {order.model}</h4>
-        <h4 className="cartItemH4">Brand: {order.brand}</h4>
-        <h4 className="cartItemH4">Quantity: {order.quantity}</h4>
-        <h4 className="cartItemH4">{`Price: $${order.totalPrice
+      <tr>
+        <td className="tg-cly1">
+          <img src={order.imageUrl} width="70px" />
+        </td>
+        <td className="tg-cly1">{order.brand}</td>
+        <td className="tg-cly1">{order.model}</td>
+        <td className="tg-cly1 ">
+          <span className="qty-row">{order.quantity}</span>
+
+          <button type="button" onClick={() => this.decrement(userId, order)}>
+            -
+          </button>
+          <button type="button">+</button>
+        </td>
+        <td className="tg-cly1">{`$${order.price
           .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</h4>
-        <button type="button" onClick={() => this.decrement(userId, order)}>
-          Subtract from Cart
-        </button>
-      </div>
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</td>
+        <td className="tg-cly1">{`$${order.totalPrice
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}</td>
+      </tr>
     );
   }
 }

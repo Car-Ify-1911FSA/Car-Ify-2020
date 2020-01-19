@@ -28,6 +28,7 @@ p {
 h2 {
   margin: 0;
 }
+
 h2 {
   margin: 0;
 }
@@ -62,6 +63,7 @@ h4 {
 
 .headerDiv {
   text-decoration: underline;
+  margin-bottom: 15px;
 }
 
 /* ----------------- NAVBAR ELEMENT ----------------- */
@@ -244,10 +246,13 @@ h4 {
 }
 
 .cartTotalDiv {
-  background-color: rgba(0, 152, 195, 0.7);
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 120, 154, 0.927);
   border-radius: 15px;
   padding: 10px;
   margin-bottom: 25px;
+  margin-top: 25px;
 }
 
 .cartBtnDiv {
@@ -330,4 +335,52 @@ h4 {
   padding: 5px;
   margin: 10px 0;
   border-radius: 5px;
+}
+
+/* -----------------TABLE CART ---------------- */
+.tg {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-color: rgb(65, 47, 47);
+  width: 100%;
+}
+
+.tg td {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 10px 5px;
+  border-style: solid;
+  border-width: 0px;
+  overflow: hidden;
+  word-break: normal;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #aaa;
+  color: #333;
+  background-color: #fff;
+}
+
+.tg th {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 10px 5px;
+  border-style: solid;
+  border-width: 0px;
+  overflow: hidden;
+  word-break: normal;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #aaa;
+  color: #fff;
+  background: rgba(0, 120, 154, 0.927);
+}
+
+.tg .tg-cly1 {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.qty-row {
+  margin-right: 5px;
 }

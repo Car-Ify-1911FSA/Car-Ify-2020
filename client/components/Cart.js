@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {getActiveCart, getCartDetail} from '../store';
 import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
+import TableCart from './TableCart';
 
 class Cart extends Component {
   constructor() {
@@ -59,6 +60,8 @@ class Cart extends Component {
       const match = products.find(car => car.id === item.productId);
       obj.brand = match.brand;
       obj.model = match.model;
+      obj.price = match.price;
+      obj.imageUrl = match.imageUrl;
       mergedArr.push(obj);
     });
 
@@ -82,18 +85,13 @@ class Cart extends Component {
             <h3>Cart Currently Has No Items</h3>
           </div>
         ) : (
-          <div className="cartProductDiv">
-            <h3 className="headerDiv">Cart Items</h3>
-            {productDetail.map((order, idx) => (
-              <CartItem key={idx} userId={userId} order={order} id={idx + 1} />
-            ))}
-          </div>
+          <TableCart userId={userId} productDetail={productDetail} />
         )}
 
         <div className="cartTotalDiv">
           <h3 className="headerDiv">Cart Summary</h3>
-          <h5>Total Quantity: {this.calcTotalQuantity(cartDetail)}</h5>
-          <h5>Total Price: {this.calcTotalPrice(cartDetail)}</h5>
+          <h4>Total Quantity: {this.calcTotalQuantity(cartDetail)}</h4>
+          <h4>Total Price: {this.calcTotalPrice(cartDetail)}</h4>
         </div>
 
         <div className="cartBtnDiv">
@@ -122,7 +120,7 @@ class Cart extends Component {
           <button
             type="button"
             onClick={() => this.props.history.push('/allProducts')}
-            className="paymentActBackBtn backBtn linkText"
+            className="paymentLinkBtn linkText"
           >
             Back to Products
           </button>
