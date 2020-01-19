@@ -32,7 +32,6 @@ export const emptyCartItems = () => {
 // THUNKY THUNKS
 export const getCartDetail = (cartId, doNotPullLS) => {
   return async dispatch => {
-    console.log('thunky 1 -', cartId);
     if (cartId) {
       try {
         const {data} = await axios.get(`/api/cart-product/${cartId}`);
