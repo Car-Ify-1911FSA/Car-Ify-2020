@@ -8,3 +8,4 @@ export {default as PaymentAccounts} from './PaymentAccounts';
 export {Login, Signup} from './Auth-Form';
 export {default as AddToCartButton} from './AddToCartButton';
 export {default as CheckoutButton} from './CheckoutButton';
+export {default as Top3Products} from './Top3Products';
