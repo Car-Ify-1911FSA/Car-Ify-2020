@@ -2,7 +2,6 @@ import React from 'react';
 import CartItem from './CartItem';
 
 const TableCart = props => {
-  console.log(props);
   return (
     <table className="tg">
       <thead>

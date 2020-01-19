@@ -47,6 +47,7 @@ h4 {
 }
 
 .routeFullDiv {
+  margin-left: 180px;
   padding: 15px;
   width: 100%;
 }
@@ -80,12 +81,21 @@ h4 {
   margin: 0px;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.cart-img {
+  margin-right: 2em;
+}
+
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarDiv {
-  position: sticky;
+  position: fixed;
   top: 60px;
   background-color: lightpink;
-  width: 180px;
+  width: 150px;
   height: 93vh;
   display: flex;
   flex-direction: column;

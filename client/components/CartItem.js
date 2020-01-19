@@ -5,27 +5,29 @@ import {editNewCartDetail, deleteCartDetail, getCartDetail} from '../store';
 class CartItem extends Component {
   constructor() {
     super();
-    this.decrement = this.decrement.bind(this);
+    this.editQty = this.editQty.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchCartDetail(this.props.order.cartId);
   }
 
-  decrement(userId, order) {
+  editQty(userId, order, operation) {
     if (userId) {
-      console.log(this.props);
       // LOGGED IN USER SO IMPACT DB
-      if (order.quantity > 1) {
+      if (order.quantity === 1 && operation === 'decrement') {
+        // DELETE ITEM SINCE ONLY 1 QUANTITY (DELETE REQUEST)
+        this.props.deleteCartDetail(order);
+      } else {
         // DECREMENT QUANTITY SINCE GREATER THAN 1 (PUT REQUEST)
         this.props.editNewCartDetail({
           ...order,
-          quantity: -1,
-          totalPrice: -order.totalPrice / order.quantity
+          quantity: operation === 'decrement' ? -1 : +1,
+          totalPrice:
+            operation === 'decrement'
+              ? -order.totalPrice / order.quantity
+              : +order.totalPrice / order.quantity
         });
-      } else {
-        // DELETE ITEM SINCE ONLY 1 QUANTITY (DELETE REQUEST)
-        this.props.deleteCartDetail(order);
       }
     } else {
       // GUEST USER SO IMPACT LOCAL STORAGE
@@ -34,7 +36,13 @@ class CartItem extends Component {
         item => item.productId === order.productId
       );
       const decrementItem = guestCart[decrementIdx];
-      decrementItem.quantity--;
+      if (operation === 'decrement') {
+        decrementItem.quantity--;
+        decrementItem.totalPrice -= order.price;
+      } else {
+        decrementItem.quantity++;
+        decrementItem.totalPrice += order.price;
+      }
       if (decrementItem.quantity < 1) guestCart.splice(decrementIdx, 1);
       localStorage.setItem('cart', JSON.stringify(guestCart));
       this.props.fetchCartDetail();
@@ -42,7 +50,7 @@ class CartItem extends Component {
   }
 
   render() {
-    const {userId, order, id} = this.props;
+    const {userId, order} = this.props;
 
     return !order ? (
       ''
@@ -56,10 +64,18 @@ class CartItem extends Component {
         <td className="tg-cly1 ">
           <span className="qty-row">{order.quantity}</span>
 
-          <button type="button" onClick={() => this.decrement(userId, order)}>
+          <button
+            type="button"
+            onClick={() => this.editQty(userId, order, 'decrement')}
+          >
             -
           </button>
-          <button type="button">+</button>
+          <button
+            type="button"
+            onClick={() => this.editQty(userId, order, 'increment')}
+          >
+            +
+          </button>
         </td>
         <td className="tg-cly1">{`$${order.price
           .toString()
@@ -80,8 +96,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editNewCartDetail: editCartItem =>
-      dispatch(editNewCartDetail(editCartItem)),
+    editNewCartDetail: (editCartItem, operation) =>
+      dispatch(editNewCartDetail(true, editCartItem)),
     deleteCartDetail: editCartItem => dispatch(deleteCartDetail(editCartItem)),
     fetchCartDetail: cartId => dispatch(getCartDetail(cartId))
   };
