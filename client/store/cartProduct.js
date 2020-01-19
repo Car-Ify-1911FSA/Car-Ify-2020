@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+// INITIAL STATE
+const defaultCartDetail = [];
+
 // ACTION TYPES
 const GET_CART_ITEMS = 'GET_CART_ITEMS';
 const ADD_CART_ITEMS = 'ADD_CART_ITEMS';
+const EMPTY_CART_ITEMS = 'EMPTY_CART_ITEMS';
 
 // ACTION CREATORS
 const getCartItems = cartDetail => {
@@ -19,8 +23,14 @@ const addCartItems = newCartItem => {
   };
 };
 
+export const emptyCartItems = () => {
+  return {
+    type: EMPTY_CART_ITEMS
+  };
+};
+
 // THUNKY THUNKS
-export const getCartDetail = cartId => {
+export const getCartDetail = (cartId, doNotPullLS) => {
   return async dispatch => {
     if (cartId) {
       try {
@@ -29,7 +39,7 @@ export const getCartDetail = cartId => {
       } catch (error) {
         console.error(error);
       }
-    } else {
+    } else if (!doNotPullLS) {
       const guestCart = JSON.parse(localStorage.getItem('cart'));
       dispatch(getCartItems(guestCart));
     }
@@ -114,12 +124,14 @@ export const deleteCartDetail = editCartItem => {
 };
 
 // REDUCER
-const cartProductReducer = (state = [], action) => {
+const cartProductReducer = (state = defaultCartDetail, action) => {
   switch (action.type) {
     case GET_CART_ITEMS:
       return action.cartDetail;
     case ADD_CART_ITEMS:
       return [...state, action.newCartItem];
+    case EMPTY_CART_ITEMS:
+      return defaultCartDetail;
     default:
       return state;
   }

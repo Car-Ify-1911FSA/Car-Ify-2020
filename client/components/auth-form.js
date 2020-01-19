@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
-import {auth, getCartDetail} from '../store';
+import {auth, emptyCartItems} from '../store';
 
 class AuthForm extends Component {
   constructor() {
@@ -11,7 +11,8 @@ class AuthForm extends Component {
   }
 
   componentDidMount() {
-    this.props.getCartDetail();
+    // EMPTY CARTDETAIL STATE PRIOR TO HOMEPAGE TO DETERMINE IF NEED TO MERGE
+    this.props.emptyCartItems();
   }
 
   componentDidUpdate() {
@@ -100,8 +101,8 @@ const mapSignup = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCartDetail() {
-      dispatch(getCartDetail());
+    emptyCartItems() {
+      dispatch(emptyCartItems());
     },
     auth: (email, password, formName, name) =>
       dispatch(auth(email, password, formName, name))
