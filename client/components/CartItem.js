@@ -14,6 +14,7 @@ class CartItem extends Component {
 
   decrement(userId, order) {
     if (userId) {
+      console.log(this.props);
       // LOGGED IN USER SO IMPACT DB
       if (order.quantity > 1) {
         // DECREMENT QUANTITY SINCE GREATER THAN 1 (PUT REQUEST)
