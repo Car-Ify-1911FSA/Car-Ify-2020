@@ -41,31 +41,30 @@ class UpdateProfile extends React.Component {
 
   render() {
     return (
-      <form
-        onSubmit={() => {
-          this.handleSubmit();
-        }}
-      >
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            onChange={this.handleChange}
-            value={this.state.name}
-          />
-        </label>
-        Email:
-        <input
-          type="text"
-          name="email"
-          onChange={this.handleChange}
-          value={this.state.email}
-        />
-        {/* <Link to='/'> */}
-        <button type="submit">Submit</button>
-        {/* </Link> */}
-      </form>
+      <div className="signInFullDiv">
+        <form onSubmit={this.handleSubmit} className="profile-flex-box">
+          <h2>Update Profile:</h2>
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              onChange={this.handleChange}
+              value={this.state.name}
+            />
+          </label>
+          <label>
+            Email:
+            <input
+              type="text"
+              name="email"
+              onChange={this.handleChange}
+              value={this.state.email}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     );
   }
 }

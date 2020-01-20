@@ -6,16 +6,23 @@ import {updateProfileThunk} from '../store/userProfile';
 class UserProfile extends React.Component {
   render() {
     return (
-      <h1>
+      <div className="profile-flex-box">
+        <h2>Car-ify Profile:</h2>
         <div>Name: {this.props.user.name}</div>
         <div>Email: {this.props.user.email}</div>
         <div>
-          <Link to={`/updateProfile/${this.props.user.id}`}>Edit Profile</Link>
+          <Link
+            to={`/updateProfile/${this.props.user.id}`}
+            className="edit-profile"
+          >
+            Edit Profile
+          </Link>
+          <Link to="/cart" className="edit-cart">
+            View Cart
+          </Link>
         </div>
-        <div>
-          <Link to="/cart">Edit Cart</Link>
-        </div>
-      </h1>
+        <div></div>
+      </div>
     );
   }
 }
