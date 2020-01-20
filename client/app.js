@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import {Navbar, Sidebar} from './components'
-import Routes from './routes'
+import {Navbar, Sidebar} from './components';
+import Routes from './routes';
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

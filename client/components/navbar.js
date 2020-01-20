@@ -27,7 +27,7 @@ const Navbar = ({handleClick, isLoggedIn, name, cartProduct}) => {
             Products
           </Link>
 
-          <Link to="/cart" className="navBarText linkText cart-img ">
+          <Link to="/cart">
             <CartIconQTY cartProduct={cartProduct} />
           </Link>
           {isLoggedIn ? (

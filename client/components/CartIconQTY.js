@@ -16,12 +16,14 @@ class CartIconQTY extends React.Component {
   render() {
     const {cartProduct} = this.props;
     return (
-      <div>
+      <div className="cart-qty-div">
         <img
           src="https://findicons.com/files/icons/1681/siena/128/shopping_cart_blue.png"
           width="30px"
         />
-        <h5>{this.getCartQTY(cartProduct)}</h5>
+        <div className="qty-container">
+          <h4 className="cart-qty">{this.getCartQTY(cartProduct)}</h4>
+        </div>
       </div>
     );
   }
