@@ -45,7 +45,7 @@ export const logout = () => async dispatch => {
     await axios.post('/auth/logout');
     dispatch(removeUser());
     // localStorage.setItem('cart', JSON.stringify([]));
-    localStorage.clear();
+    localStorage.setItem('cart', JSON.stringify([]));
     history.push('/signIn');
   } catch (err) {
     console.error(err);

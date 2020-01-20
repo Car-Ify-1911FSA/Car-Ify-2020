@@ -98,7 +98,9 @@ export const editNewCartDetail = (isLoggedIn, editCartItem) => {
           item => item.productId === editCartItem.productId
         );
         const incrementItem = guestCart[incrementIdx];
+        const price = incrementItem.totalPrice / incrementItem.quantity;
         incrementItem.quantity++;
+        incrementItem.totalPrice = incrementItem.quantity * price;
         localStorage.setItem('cart', JSON.stringify(guestCart));
         dispatch(getCartItems(guestCart));
       }

@@ -90,6 +90,22 @@ h4 {
   margin-right: 2em;
 }
 
+.cart-qty-div {
+  display: flex;
+  align-items: center;
+}
+
+.cart-qty {
+  color: rgb(164, 237, 150);
+  text-align: center;
+}
+
+.qty-container {
+  background-color: rgba(0, 120, 154, 0.927);
+  width: 25px;
+  border-radius: 20px;
+}
+
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarDiv {
   position: fixed;
