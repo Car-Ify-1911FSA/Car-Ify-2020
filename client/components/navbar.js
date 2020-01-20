@@ -5,13 +5,18 @@ import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import CartIconQTY from './CartIconQTY';
 
-const Navbar = ({handleClick, isLoggedIn, name, cartProduct}) => {
-  console.log('CART PRODUCT', cartProduct);
+
+const Navbar = ({handleClick, isLoggedIn, user, cartProduct}) => {
+
   return (
     <div className="navBarDiv">
       {isLoggedIn ? (
         <h1>
-          Welcome back, <span className="hpLoggedInWelcome">{name}</span>!
+          Welcome back,{' '}
+          <Link to={`/userProfile/${user.id}`}>
+            <span className="hpLoggedInWelcome">{user.name}</span>
+          </Link>
+          !
         </h1>
       ) : (
         <h1>Welcome to Car-ify !</h1>
@@ -48,8 +53,10 @@ const Navbar = ({handleClick, isLoggedIn, name, cartProduct}) => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
-    name: state.user.name,
-    cartProduct: state.cartProduct
+
+    user: state.user,
+cartProduct: state.cartProduct
+
   };
 };
 

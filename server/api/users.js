@@ -15,5 +15,18 @@ router.get('/', isAdmin, async (req, res, next) => {
     next(err);
   }
 });
+// isAdmin,
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    user.name = req.body.name;
+    user.email = req.body.email;
+
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

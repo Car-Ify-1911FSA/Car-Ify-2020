@@ -410,3 +410,62 @@ h4 {
 .qty-row {
   margin-right: 5px;
 }
+
+/* ----------------- USER PROFILE----------------- */
+.profile-flex-box {
+  background-color: rgb(179, 101, 114);
+  margin: 50px auto;
+  width: 35vw;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.edit-cart {
+  color: black;
+  float: right;
+  background-color: rgb(151, 151, 151);
+  font-size: medium;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+}
+
+.edit-profile {
+  color: black;
+  float: right;
+  background-color: rgb(151, 151, 151);
+  font-size: medium;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+}
+
+/* ----------------- UPDATE PROFILE ----------------- */
+
+.update-profile {
+  background-color: rgb(179, 101, 114);
+  margin: 50px auto;
+  width: 35vw;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+}

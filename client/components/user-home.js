@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {
   getActiveCart,
   addNewCart,
@@ -62,14 +63,16 @@ class UserHome extends Component {
   }
 
   render() {
-    const {name, isLoggedIn} = this.props;
+    const {name, userId, isLoggedIn} = this.props;
 
     return (
       <div className="homePageDiv">
         {isLoggedIn ? (
           <h3>
             Let's Keep on Shopping,{' '}
-            <span className="hpLoggedInWelcome">{name}!</span>
+            <Link to={`./userProfile/${userId}`}>
+              <span className="hpLoggedInWelcome">{name}</span>
+            </Link>
           </h3>
         ) : (
           <h3>Remember to login or sign-up!</h3>
