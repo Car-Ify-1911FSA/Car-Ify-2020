@@ -4,12 +4,16 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 
-const Navbar = ({handleClick, isLoggedIn, name}) => {
+const Navbar = ({handleClick, isLoggedIn, user}) => {
   return (
     <div className="navBarDiv">
       {isLoggedIn ? (
         <h1>
-          Welcome back, <span className="hpLoggedInWelcome">{name}</span>!
+          Welcome back,{' '}
+          <Link to={`/userProfile/${user.id}`}>
+            <span className="hpLoggedInWelcome">{user.name}</span>
+          </Link>
+          !
         </h1>
       ) : (
         <h1>Welcome to Car-ify !</h1>
@@ -49,7 +53,7 @@ const Navbar = ({handleClick, isLoggedIn, name}) => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
-    name: state.user.name
+    user: state.user
   };
 };
 
