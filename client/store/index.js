@@ -34,3 +34,4 @@ export * from './cart';
 export * from './paymentAccounts';
 export * from './cartProduct';
 export * from './top3Products';
+export * from './userProfile';

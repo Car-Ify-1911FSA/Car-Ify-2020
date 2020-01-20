@@ -9,4 +9,6 @@ export {Login, Signup} from './Auth-Form';
 export {default as AddToCartButton} from './AddToCartButton';
 export {default as CheckoutButton} from './CheckoutButton';
 export {default as Top3Products} from './Top3Products';
+export {default as UserProfile} from './UserProfile';
+export {default as UpdateProfile} from './UpdateProfile';
 export {default as CartIconQTY} from './CartIconQTY';
