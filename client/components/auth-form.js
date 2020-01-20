@@ -12,7 +12,7 @@ class AuthForm extends Component {
 
   componentDidMount() {
     // EMPTY CARTDETAIL STATE PRIOR TO HOMEPAGE TO DETERMINE IF NEED TO MERGE
-    this.props.emptyCartItems();
+    // this.props.emptyCartItems();
   }
 
   componentDidUpdate() {
