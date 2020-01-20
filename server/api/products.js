@@ -10,6 +10,19 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const selectedProduct = await Product.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+    res.status(200).send(selectedProduct);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.put('/', async (req, res, next) => {
   try {
     const {productId, quantity: newQuantity} = req.body;
