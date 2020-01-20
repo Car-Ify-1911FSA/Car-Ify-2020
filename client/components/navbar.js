@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
+import CartIconQTY from './CartIconQTY';
 
-const Navbar = ({handleClick, isLoggedIn, name}) => {
+const Navbar = ({handleClick, isLoggedIn, name, cartProduct}) => {
+  console.log('CART PRODUCT', cartProduct);
   return (
     <div className="navBarDiv">
       {isLoggedIn ? (
@@ -26,10 +28,7 @@ const Navbar = ({handleClick, isLoggedIn, name}) => {
           </Link>
 
           <Link to="/cart" className="navBarText linkText cart-img ">
-            <img
-              src="https://findicons.com/files/icons/1681/siena/128/shopping_cart_blue.png"
-              width="30px"
-            />
+            <CartIconQTY cartProduct={cartProduct} />
           </Link>
           {isLoggedIn ? (
             <a href="#" onClick={handleClick} className="linkText">
@@ -49,7 +48,8 @@ const Navbar = ({handleClick, isLoggedIn, name}) => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
-    name: state.user.name
+    name: state.user.name,
+    cartProduct: state.cartProduct
   };
 };
 
