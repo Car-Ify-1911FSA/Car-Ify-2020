@@ -9,7 +9,7 @@ router.get('/:cartId', async (req, res, next) => {
         cartId: req.params.cartId
       }
     });
-    res.send(cartDetail);
+    res.status(200).send(cartDetail);
   } catch (error) {
     next(error);
   }
