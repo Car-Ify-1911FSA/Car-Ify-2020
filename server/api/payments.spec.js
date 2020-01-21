@@ -4,7 +4,7 @@ const db = require('../db');
 const app = require('../index');
 const Payment = db.model('payment');
 
-describe.only('Payments routes', () => {
+describe('Payments routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
