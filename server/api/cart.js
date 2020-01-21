@@ -30,7 +30,7 @@ router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
     const newOrder = await Cart.create(newCart);
     res.status(201).json(newOrder);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 

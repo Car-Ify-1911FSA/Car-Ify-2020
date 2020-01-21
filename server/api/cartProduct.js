@@ -8,7 +8,7 @@ router.get('/:cartId', async (req, res, next) => {
         cartId: req.params.cartId
       }
     });
-    res.status(200).send(cartDetail);
+    res.status(200).json(cartDetail);
   } catch (error) {
     next(error);
   }
