@@ -10,7 +10,7 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
       },
       include: [{model: Product}]
     });
-    res.send(cart);
+    res.status(200).json(cart);
   } catch (error) {
     next(error);
   }
@@ -33,10 +33,10 @@ router.get('/history/:userId', isUserOrAdmin, async (req, res, next) => {
 
 router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
-    const {status, time, userId, paymentAccountId} = req.body;
+    const {status, userId, paymentAccountId} = req.body;
     const newCart = {
       status: status,
-      time: time,
+      time: Date(),
       userId: userId
     };
     if (paymentAccountId) {
@@ -45,7 +45,7 @@ router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
     const newOrder = await Cart.create(newCart);
     res.status(201).json(newOrder);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 

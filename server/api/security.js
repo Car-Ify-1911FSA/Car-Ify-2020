@@ -6,9 +6,9 @@ function isAdmin(req, res, next) {
 
 //loggedin users and admin rights
 function isUserOrAdmin(req, res, next) {
-  req.params.id == req.user.userId || req.user.admin
-    ? next()
-    : res.sendStatus(403);
+  console.log('req.session------------>', req.session.passport.user);
+  if (req.session.passport.user == req.user.userId || req.user.admin) next();
+  else res.sendStatus(403);
 }
 
 module.exports = {
