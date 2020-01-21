@@ -10,7 +10,7 @@ describe('Payments routes', () => {
   });
 
   describe('/api/payments/', () => {
-    const paymentType = 'venmo';
+    const paymentType = 'visa';
 
     beforeEach(() => {
       return Payment.create({
@@ -24,7 +24,7 @@ describe('Payments routes', () => {
         .expect(200);
 
       expect(res.body).to.be.an('array');
-      expect(res.body[0].type).to.be.equal('venmo');
+      expect(res.body[0].type).to.be.equal('visa');
     });
   });
 });
