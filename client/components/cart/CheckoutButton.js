@@ -7,7 +7,7 @@ import {
   editProducts,
   addNewCart,
   editCart
-} from '../store';
+} from '../../store';
 
 class CheckoutButton extends Component {
   constructor() {

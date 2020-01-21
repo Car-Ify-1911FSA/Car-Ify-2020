@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
-import CartIconQTY from './CartIconQTY';
+import CartIconQTY from './cart/CartIconQTY';
 
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
-
   return (
     <div className="navBarDiv">
       {isLoggedIn ? (

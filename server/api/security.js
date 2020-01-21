@@ -12,8 +12,8 @@ function isLoggedIn(req, res, next) {
 
 //loggedin users and admin rights
 function isUserOrAdmin(req, res, next) {
-  console.log('req.session------------>', req.session);
-  if (req.params.id == req.user.userId || req.user.admin) next();
+  console.log('req.session------------>', req.session.passport.user);
+  if (req.session.passport.user == req.user.userId || req.user.admin) next();
   else res.sendStatus(403);
 }
 

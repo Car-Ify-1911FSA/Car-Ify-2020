@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {getPaymentAccountsThunk} from '../store';
 import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
-import CheckoutButton from './CheckoutButton';
+import CheckoutButton from './cart/CheckoutButton';
 
 class PaymentAccounts extends Component {
   componentDidMount() {

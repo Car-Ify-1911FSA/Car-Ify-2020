@@ -2,16 +2,17 @@ import {expect} from 'chai';
 import React from 'react';
 import enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {TableCart} from './TableCart';
+import TableCart from './cart/TableCart';
+
 
 const adapter = new Adapter();
 enzyme.configure({adapter});
 
 describe('Cart Table', () => {
-  let cartTable;
+  let wrapper;
 
   beforeEach(() => {
-    let testCart = [
+    const testCart = [
       {
         cartId: 3,
         productId: 4,
@@ -43,11 +44,12 @@ describe('Cart Table', () => {
         imageUrl: 'test'
       }
     ];
-    cartTable = shallow(<TableCart userId={1} productDetail={testCart} />);
+
+    wrapper = shallow(<TableCart userId={1} productDetail={testCart} />);
   });
 
   it('renders the right amount of rows in cart table', () => {
-    let trCount = cartTable.find('tr');
-    expect(trCount).to.have.lengthOf(4);
+    let trCount = wrapper.find('tr');
+    expect(trCount).to.have.length(1);
   });
 });

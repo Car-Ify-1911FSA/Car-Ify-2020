@@ -32,9 +32,7 @@ class AuthForm extends Component {
   }
 
   render() {
-
     const {formName, displayName, error} = this.props;
-
 
     return (
       <div className={`${formName}-authFormDiv authFormDiv`}>
