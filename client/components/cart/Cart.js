@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getActiveCart, getCartDetail} from '../store';
+import {getActiveCart, getCartDetail} from '../../store';
 import TableCart from './TableCart';
 
 class Cart extends Component {
@@ -109,7 +109,7 @@ class Cart extends Component {
               }
               className="paymentLinkBtn linkText"
             >
-              {userName ? `Let's Pay !` : `Please Sign In !`}
+              Let's Pay!
             </Link>
           ) : (
             <Link to="/allProducts" className="paymentLinkBtn linkText">
