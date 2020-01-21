@@ -88,19 +88,13 @@ class CartItem extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    state: state
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
-    editNewCartDetail: (editCartItem, operation) =>
+    editNewCartDetail: editCartItem =>
       dispatch(editNewCartDetail(true, editCartItem)),
     deleteCartDetail: editCartItem => dispatch(deleteCartDetail(editCartItem)),
     fetchCartDetail: cartId => dispatch(getCartDetail(cartId))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartItem);
+export default connect(null, mapDispatchToProps)(CartItem);
