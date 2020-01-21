@@ -22,9 +22,16 @@ export const me = () => async dispatch => {
   }
 };
 
-export const auth = (email, password, method, name) => async dispatch => {
+export const auth = (
+  email,
+  password,
+  method,
+  guestCart,
+  name
+) => async dispatch => {
   let res;
   try {
+    console.log('user thunk -', email, method, guestCart);
     if (method === 'signup')
       res = await axios.post(`/auth/${method}`, {email, name, password});
     else res = await axios.post(`/auth/${method}`, {email, password});
