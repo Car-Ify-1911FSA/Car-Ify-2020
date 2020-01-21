@@ -10,7 +10,7 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
       },
       include: [{model: Product}]
     });
-    res.send(cart);
+    res.status(200).json(cart);
   } catch (error) {
     next(error);
   }
@@ -18,10 +18,10 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
 
 router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
-    const {status, time, userId, paymentAccountId} = req.body;
+    const {status, userId, paymentAccountId} = req.body;
     const newCart = {
       status: status,
-      time: time,
+      time: Date(),
       userId: userId
     };
     if (paymentAccountId) {
