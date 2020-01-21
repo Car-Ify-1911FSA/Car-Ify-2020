@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
   try {
     const newPayment = await Payments.create({type: req.body.type});
     if (newPayment) {
-      res.send(newPayment);
+      res.json(newPayment);
     } else {
       res.sendStatus(404);
     }
@@ -47,7 +47,7 @@ router.delete('/:id', async (req, res, next) => {
     const payment = await Payments.findByPk(req.params.id);
     if (payment) {
       await payment.destroy();
-      res.send(payment);
+      res.json(payment);
     } else {
       res.sendStatus(404);
     }
@@ -62,7 +62,7 @@ router.put('/:id', async (req, res, next) => {
     payment.type = req.body.type;
 
     await payment.save();
-    res.send(payment);
+    res.json(payment);
   } catch (error) {
     next(error);
   }

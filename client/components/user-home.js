@@ -23,7 +23,6 @@ class UserHome extends Component {
             // IF THERE'S NO ACTIVE CART, ADD A NEW ONE
             const newCart = {
               status: 'active',
-              time: Date(),
               userId: this.props.userId
             };
             this.props.addNewCart(this.props.userId, newCart);

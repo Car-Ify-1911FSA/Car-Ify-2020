@@ -20,7 +20,7 @@ const Product = db.define('product', {
   condition: {
     type: Sequelize.STRING,
     validate: {
-      isIn: [['new', 'used']]
+      isIn: [['New', 'Used']]
     }
   },
   description: {

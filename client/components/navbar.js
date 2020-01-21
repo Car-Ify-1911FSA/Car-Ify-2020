@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import CartIconQTY from './cart/CartIconQTY';
 
+
 const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
   return (
     <div className="navBarDiv">
