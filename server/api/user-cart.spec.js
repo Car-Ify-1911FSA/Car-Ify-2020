@@ -50,7 +50,6 @@ describe('Logged-In Cart Routes', () => {
       ]);
 
       const result = await Promise.all([promise1, promise2]);
-      console.log('first -', result);
       [CartProduct1, CartProduct2] = result;
     });
   });

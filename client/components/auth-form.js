@@ -32,8 +32,7 @@ class AuthForm extends Component {
   }
 
   render() {
-    const {formName, displayName, error, cartDetail} = this.props;
-    // console.log('signin render -', cartDetail);
+    const {formName, displayName, error} = this.props;
 
     return (
       <div className={`${formName}-authFormDiv authFormDiv`}>
