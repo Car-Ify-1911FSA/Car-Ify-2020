@@ -1,23 +1,24 @@
 import axios from 'axios';
 
-// ACTION TYPES
+//ACTION TYPES
 const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY';
 
-// ACTION CREATORS
-export const getOrderHistory = orderHistory => {
+//ACTION CREATORS
+const getOrderHistory = orderHistory => {
   return {
     type: GET_ORDER_HISTORY,
     orderHistory
   };
 };
 
-// THUNKY THUNKS
-export const gotOrderHistoryThunk = userId => {
+//THUNKY-THUNK
+export const getOrderHistoryThunk = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/cart/history/${userId}`);
-      console.log('Got cart', data);
-      dispatch(getOrderHistory(data));
+      const {data} = await axios.get(`/api/cart/${userId}`);
+      console.log('got data', data);
+      const cartHistory = data.filter(cart => cart.status === 'paid');
+      dispatch(getOrderHistory(cartHistory));
     } catch (error) {
       console.error(error);
     }
@@ -26,10 +27,10 @@ export const gotOrderHistoryThunk = userId => {
 
 // REDUCER
 const orderHistoryReducer = (state = {}, action) => {
-  console.log('state', state, 'action', action);
+  console.log('state', action.orderHistory);
   switch (action.type) {
     case GET_ORDER_HISTORY:
-      return action.orderHistory;
+      return {...state, ...action.orderHistory};
     default:
       return state;
   }
