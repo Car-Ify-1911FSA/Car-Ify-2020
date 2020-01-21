@@ -469,3 +469,72 @@ h4 {
   align-items: center;
   border-radius: 10px;
 }
+
+/* -----------------ADMIN LIST USERS and PRODUCTS ------------------ */
+.user-list-cont {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-col {
+  display: flex;
+  width: 60vw;
+  background-color: rgb(111, 111, 189);
+  height: 30px;
+  align-items: center;
+}
+
+.user-col h3 {
+  width: 20vw;
+  padding: 0 20px;
+}
+
+.user-list-row {
+  display: flex;
+  width: 60vw;
+  justify-content: space-evenly;
+}
+
+.user-list-row h4 {
+  width: 20vw;
+  padding: 0 20px;
+  border-bottom: 2px solid gray;
+}
+
+.prod-list-cont {
+  display: flex;
+  flex-direction: column;
+}
+
+.prod-col {
+  display: flex;
+  width: 72vw;
+  background-color: rgb(111, 111, 189);
+  height: 30px;
+  align-items: center;
+}
+
+.prod-list-row {
+  display: flex;
+  width: 72vw;
+  height: 55px;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+.prod-col h3 {
+  width: 12vw;
+  padding: 0 15px;
+}
+
+.prod-list-row h4 {
+  width: 12vw;
+  padding: 0 15px;
+  border-bottom: 2px solid gray;
+}
+
+.prod-list-row img {
+  width: 6vw;
+  padding: 0 15px;
+  border-bottom: 2px solid gray;
+}

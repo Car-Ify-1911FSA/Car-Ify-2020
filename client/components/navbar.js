@@ -5,7 +5,9 @@ import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import CartIconQTY from './CartIconQTY';
 
-const Navbar = ({handleClick, isLoggedIn, user, cartProduct}) => {
+
+const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
+
   return (
     <div className="navBarDiv">
       {isLoggedIn ? (
@@ -25,11 +27,14 @@ const Navbar = ({handleClick, isLoggedIn, user, cartProduct}) => {
           <Link to="/" className="navBarText linkText">
             Home
           </Link>
-
+          {isAdmin ? (
+            <Link to="/admin" className="navBarText linkText">
+              Admin Panel
+            </Link>
+          ) : null}
           <Link to="/allProducts" className="navBarText linkText">
             Products
           </Link>
-
           <Link to="/cart">
             <CartIconQTY cartProduct={cartProduct} />
           </Link>
@@ -51,7 +56,7 @@ const Navbar = ({handleClick, isLoggedIn, user, cartProduct}) => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
-
+    isAdmin: !!state.user.admin,
     user: state.user,
     cartProduct: state.cartProduct
   };
