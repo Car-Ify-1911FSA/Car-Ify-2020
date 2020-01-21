@@ -40,7 +40,7 @@ router.post('/', async (req, res, next) => {
     };
     const newPaymentAccount = await PaymentAccount.create(postedPaymentAccount);
     if (newPaymentAccount) {
-      res.send(newPaymentAccount);
+      res.json(newPaymentAccount);
     } else {
       res.sendStatus(404);
     }
@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res, next) => {
     const paymentAccount = await PaymentAccount.findByPk(paymentAccountId);
     if (paymentAccount) {
       await paymentAccount.destroy();
-      res.send(paymentAccount);
+      res.json(paymentAccount);
     } else {
       res.sendStatus(404);
     }
@@ -71,7 +71,7 @@ router.put('/:id', async (req, res, next) => {
     paymentAccount.name = req.body.name;
 
     await paymentAccount.save();
-    res.send(paymentAccount);
+    res.json(paymentAccount);
   } catch (error) {
     next(error);
   }
