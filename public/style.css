@@ -469,3 +469,34 @@ h4 {
   align-items: center;
   border-radius: 10px;
 }
+
+/* -----------------ADMIN LIST USERS ------------------ */
+.user-list-cont {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-col {
+  display: flex;
+  width: 60vw;
+  background-color: rgb(111, 111, 189);
+  height: 30px;
+  align-items: center;
+}
+
+.user-col h3 {
+  width: 20vw;
+  padding: 0 20px;
+}
+
+.user-list-row {
+  display: flex;
+  width: 60vw;
+  justify-content: space-evenly;
+}
+
+.user-list-row h4 {
+  width: 20vw;
+  padding: 0 20px;
+  border-bottom: 2px solid gray;
+}
