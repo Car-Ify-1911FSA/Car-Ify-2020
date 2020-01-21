@@ -4,14 +4,14 @@ const db = require('../db');
 const app = require('../index');
 const Cart = db.model('cart');
 
-xdescribe('Cart routes', () => {
+describe('Cart routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
 
   let cart1;
 
-  xdescribe('/api/cart/', () => {
+  describe('/api/cart/', () => {
     beforeEach(async () => {
       let data1 = await Cart.bulkCreate([
         {

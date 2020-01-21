@@ -48,7 +48,7 @@ const Product = db.model('product');
 // })
 //         }
 
-describe.only('Product routes', () => {
+describe('Product routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
