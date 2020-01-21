@@ -9,7 +9,6 @@ class ListOfUsers extends React.Component {
 
   render() {
     const allUsers = this.props.allUsers;
-    console.log('ALL USERS!!!!!', allUsers);
     return allUsers ? (
       <div>
         <h1>All Registered Users:</h1>

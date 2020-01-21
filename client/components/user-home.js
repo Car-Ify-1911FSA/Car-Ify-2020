@@ -19,7 +19,6 @@ class UserHome extends Component {
       // FIRST RETRIEVE THE CART (IF THERE ARE ANY)
       Promise.all([this.props.getCart(this.props.userId)])
         .then(() => {
-          console.log('mount 1 -', this.props);
           if (!this.props.cart.id) {
             // IF THERE'S NO ACTIVE CART, ADD A NEW ONE
             const newCart = {
@@ -32,12 +31,10 @@ class UserHome extends Component {
         })
         .then(() => {
           // PULL EXISTING CART DETAIL FROM DB ONLY (NO LS CART)
-          console.log('mount 2 -', this.props);
           this.props.getCartDetail(this.props.cart.id, true);
         })
         .then(() => {
           // LEVERAGE MERGE FUNCTION TO EVALUATE SITUATION
-          console.log('mount 3 -', this.props);
           this.mergeLocalCart(this.props.userId, this.props.cartDetail);
         });
     }
@@ -47,15 +44,14 @@ class UserHome extends Component {
     if (userId) {
       // ONLY EVALUATE MERGE IF USER SIGNED IN & EXISTING LS CART
       const localCart = JSON.parse(localStorage.getItem('cart'));
-      console.log('merging fn -', currentCart, localCart);
 
       if (localCart) {
         let prodIdArr = this.props.cartDetail.map(prod => prod.productId);
         localCart.map(item => {
           if (prodIdArr.includes(item.productId)) {
-            console.log('PUT ROUTE!');
+            // 'PUT ROUTE!'
           } else {
-            console.log('POST ROUTE!');
+            // 'POST ROUTE!'
           }
         });
       }
