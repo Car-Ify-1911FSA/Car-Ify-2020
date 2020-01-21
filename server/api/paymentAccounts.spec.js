@@ -4,7 +4,7 @@ const db = require('../db');
 const app = require('../index');
 const PaymentAccounts = db.model('paymentAccounts');
 
-describe('PaymentAccounts routes', () => {
+describe('Payment account routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
