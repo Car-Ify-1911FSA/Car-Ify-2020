@@ -4,43 +4,36 @@ const db = require('../db');
 const app = require('../index');
 const PaymentAccounts = db.model('paymentAccounts');
 
-describe('Payment account routes', () => {
+describe.only('Payment account routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
 
-  let paymentAccount1;
-  let paymentAccount2;
   describe('/api/payment-accounts', () => {
+    const accountName = 'account123';
+    let id;
     beforeEach(async () => {
-      let promise1 = PaymentAccounts.create({
-        name: 'account123'
+      let account1 = await PaymentAccounts.create({
+        name: accountName
       });
-      let promise2 = PaymentAccounts.create({
-        name: 'count321'
-      });
-      const result = await Promise.all([promise1, promise2]);
-      [paymentAccount1, paymentAccount2] = result;
+      id = account1.id;
     });
-  });
 
-  describe.only('GET requests', () => {
-    it('api/payments', async () => {
+    it('GET api/payments', async () => {
       const res = await request(app)
         .get('/api/payment-accounts')
         .expect(200);
       expect(res.body).to.be.an('array');
-      expect(res.body).to.have.lengthOf(2);
+      expect(res.body[0].name).to.be.equal(accountName);
     });
 
-    it('api/payments/:id', () => {
-      return request(app)
-        .get(`/api/payment-accounts/${paymentAccount1.id}`)
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body.model).to.be.equal(paymentAccount1.model);
-        });
+    it('GET api/payments/:id', async () => {
+      const res = await request(app)
+        .get(`/api/payment-accounts/${id}`)
+        .expect(200);
+
+      expect(res.body).to.be.an('object');
+      expect(res.body.name).to.be.equal(accountName);
     });
   });
 });
