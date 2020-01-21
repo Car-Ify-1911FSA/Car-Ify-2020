@@ -7,9 +7,13 @@ const CartProduct = require('./cartProduct');
 
 Cart.belongsToMany(Product, {
   through: {model: CartProduct}
+  // through: {model: CartProduct, constraint: false},
+  // unique: false
 });
 Product.belongsToMany(Cart, {
   through: {model: CartProduct}
+  // through: {model: CartProduct, constraint: false},
+  // unique: false
 });
 
 Cart.belongsTo(User);
