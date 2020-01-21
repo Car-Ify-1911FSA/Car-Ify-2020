@@ -15,7 +15,6 @@ export const loadTop3 = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/products');
-      console.log('RATEADEDEDE', data);
       const rated = data
         .sort(
           (a, b) =>
