@@ -10,7 +10,6 @@ class Top3Products extends Component {
   }
 
   render() {
-    console.log('PROPS FROM TOP3', this.props.top3);
     return (
       <div>
         <h2>TOP 3</h2>

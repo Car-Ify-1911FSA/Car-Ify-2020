@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Route, Switch} from 'react-router-dom';
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Login,
@@ -12,9 +12,21 @@ import {
   PaymentAccounts,
   UserProfile,
   UpdateProfile,
-  OrderHistory
+  OrderHistory,
+  AdminHome
 } from './components';
 import {me} from './store';
+
+const AdminRoute = ({component: Comp, condition, redirect, path}) => {
+  return (
+    <Route
+      path={path}
+      render={props =>
+        condition ? <Comp {...props} /> : <Redirect to={redirect} />
+      }
+    />
+  );
+};
 
 class Routes extends Component {
   componentDidMount() {
@@ -22,6 +34,7 @@ class Routes extends Component {
   }
 
   render() {
+    const {isAdmin} = this.props;
     return (
       <Switch>
         <Route exact path="/" component={UserHome} />
@@ -41,6 +54,12 @@ class Routes extends Component {
         <Route path="/userProfile/:id" component={UserProfile} />
         <Route path="/updateProfile/:id" component={UpdateProfile} />
         <Route path="/orderHistory/:id" component={OrderHistory} />
+        <AdminRoute
+          path="/admin"
+          component={AdminHome}
+          condition={isAdmin}
+          redirect="/"
+        />
       </Switch>
     );
   }
@@ -49,6 +68,7 @@ class Routes extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.admin,
     state: state
   };
 };

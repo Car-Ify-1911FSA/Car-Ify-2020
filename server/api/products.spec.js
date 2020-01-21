@@ -47,6 +47,7 @@ describe('Product routes', () => {
       [car1, car2] = result;
     });
   });
+
   describe('GET requests', () => {
     it('api/products', async () => {
       const res = await request(app)
@@ -55,6 +56,7 @@ describe('Product routes', () => {
       expect(res.body).to.be.an('array');
       expect(res.body).to.have.lengthOf(2);
     });
+
     it('api/products/:id', () => {
       return request(app)
         .get(`/api/products/${car1.id}`)

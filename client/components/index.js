@@ -13,3 +13,4 @@ export {default as UserProfile} from './UserProfile';
 export {default as UpdateProfile} from './UpdateProfile';
 export {default as CartIconQTY} from './CartIconQTY';
 export {default as OrderHistory} from './OrderHistory';
+export {default as AdminHome} from './admin/AdminHome';
