@@ -1,14 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-class ListOfAllProducts extends React.Component {
-  componentDidMount() {}
-
-  render() {
-    console.log('PROPS ALLLLLL', this.props.allProducts);
-    return <h1>Hello Products</h1>;
-  }
-}
+const ListOfAllProducts = ({allProducts}) => {
+  console.log(AllProducts);
+  return <h1>Hello Products</h1>;
+};
 
 const mapStateToProps = state => {
   return {
