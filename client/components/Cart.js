@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getActiveCart, getCartDetail} from '../store';
 import {Link} from 'react-router-dom';
-import CartItem from './CartItem';
+import {getActiveCart, getCartDetail} from '../store';
 import TableCart from './TableCart';
 
 class Cart extends Component {

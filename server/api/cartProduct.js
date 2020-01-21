@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const {CartProduct, Product} = require('../db/models');
-// const {isAdmin} = require('./security');
+const {CartProduct} = require('../db/models');
 
 router.get('/:cartId', async (req, res, next) => {
   try {
@@ -9,7 +8,7 @@ router.get('/:cartId', async (req, res, next) => {
         cartId: req.params.cartId
       }
     });
-    res.send(cartDetail);
+    res.status(200).send(cartDetail);
   } catch (error) {
     next(error);
   }

@@ -49,9 +49,9 @@ class UserHome extends Component {
         let prodIdArr = this.props.cartDetail.map(prod => prod.productId);
         localCart.map(item => {
           if (prodIdArr.includes(item.productId)) {
-            // 'PUT ROUTE!'
+            // PUT ROUTE
           } else {
-            // 'POST ROUTE!'
+            // POST ROUTE
           }
         });
       }

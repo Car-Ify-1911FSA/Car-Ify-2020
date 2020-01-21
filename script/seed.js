@@ -196,13 +196,13 @@ const cartProductSeed = [
     cartId: 1,
     productId: 1,
     quantity: 2,
-    totalPrice: 50000
+    totalPrice: 69000
   },
   {
     cartId: 1,
     productId: 2,
     quantity: 1,
-    totalPrice: 30000
+    totalPrice: 24700
   },
   {
     cartId: 2,
@@ -214,37 +214,37 @@ const cartProductSeed = [
     cartId: 3,
     productId: 4,
     quantity: 1,
-    totalPrice: 20000
+    totalPrice: 54000
   },
   {
     cartId: 3,
     productId: 1,
     quantity: 1,
-    totalPrice: 15000
+    totalPrice: 34500
   },
   {
     cartId: 3,
     productId: 3,
     quantity: 2,
-    totalPrice: 45000
+    totalPrice: 78000
   },
   {
     cartId: 4,
     productId: 5,
     quantity: 1,
-    totalPrice: 30000
+    totalPrice: 28000
   },
   {
     cartId: 4,
     productId: 6,
     quantity: 3,
-    totalPrice: 90000
+    totalPrice: 204000
   },
   {
     cartId: 4,
     productId: 3,
     quantity: 2,
-    totalPrice: 60000
+    totalPrice: 78000
   }
 ];
 
