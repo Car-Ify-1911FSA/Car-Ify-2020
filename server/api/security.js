@@ -4,6 +4,12 @@ function isAdmin(req, res, next) {
   else res.sendStatus(403);
 }
 
+// is loggedin user
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) next();
+  else res.sendStatus(403);
+}
+
 //loggedin users and admin rights
 function isUserOrAdmin(req, res, next) {
   console.log('req.session------------>', req.session);
@@ -13,5 +19,6 @@ function isUserOrAdmin(req, res, next) {
 
 module.exports = {
   isAdmin,
+  isLoggedIn,
   isUserOrAdmin
 };

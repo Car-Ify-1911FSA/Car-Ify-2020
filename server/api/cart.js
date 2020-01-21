@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const {Cart, Product} = require('../db/models');
-const {isUserOrAdmin} = require('./security');
+const {isUserOrAdmin, isLoggedIn} = require('./security');
 
-router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
+router.get('/:userId', isLoggedIn, async (req, res, next) => {
   try {
     const cart = await Cart.findAll({
       where: {
