@@ -48,7 +48,7 @@ const Product = db.model('product');
 // })
 //         }
 
-describe('Product routes', () => {
+describe('Backend product routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
@@ -62,7 +62,7 @@ describe('Product routes', () => {
         category: 'SUV',
         color: 'Black',
         price: 34500,
-        condition: 'used',
+        condition: 'Used',
         description:
           'The 2020 Lexus RX 350 is a solid entry in the midsize SUV class, offering a roomy and comfortable cabin and typically excellent build quality.',
         quantity: 10,
