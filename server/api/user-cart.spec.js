@@ -6,12 +6,12 @@ const CartProduct = db.model('cartProduct');
 const Cart = db.model('cart');
 const Product = db.model('product');
 
-describe.only('Logged-In Cart Routes', () => {
+describe('Logged-In Cart Routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
 
-  describe('GET requests', () => {
+  describe('GET requests for cartProducts', () => {
     const cartId = 1;
 
     beforeEach(() => {
@@ -45,7 +45,7 @@ describe.only('Logged-In Cart Routes', () => {
       );
     });
 
-    it('Cart 1: api/cart-product/:cartId', async () => {
+    it('Pull appropriate lenght of database pull', async () => {
       const res = await request(app)
         .get(`/api/cart-product/${cartId}`)
         .expect(200);
@@ -53,7 +53,7 @@ describe.only('Logged-In Cart Routes', () => {
       expect(res.body).to.have.lengthOf(2);
     });
 
-    it('Cart 2: api/cart-product/:cartId', async () => {
+    it('Pull correct cart in the database', async () => {
       const res = await request(app)
         .get(`/api/cart-product/${cartId}`)
         .expect(200);
