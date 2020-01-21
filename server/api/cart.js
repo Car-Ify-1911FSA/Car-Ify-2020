@@ -16,6 +16,21 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
   }
 });
 
+router.get('/history/:userId', isUserOrAdmin, async (req, res, next) => {
+  try {
+    const cart = await Cart.findAll({
+      where: {
+        userId: req.params.userId,
+        status: 'paid'
+      },
+      include: [{model: Product}]
+    });
+    res.send(cart);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post('/:userId', isUserOrAdmin, async (req, res, next) => {
   try {
     const {status, time, userId, paymentAccountId} = req.body;
