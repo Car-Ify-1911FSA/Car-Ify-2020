@@ -158,14 +158,18 @@ router.post('/guest', async (req, res, next) => {
     });
 
     // CREATE NEW DETAIL ITEMS IN NEW CART
-    const promises = cartDetail.map(async item => {
+    const createPromise = cartDetail.map(async item => {
       item.cartId = cart.dataValues.id;
       const response = await CartProduct.create(item);
       return response;
     });
-    await Promise.all(promises);
+    await Promise.all(createPromise);
 
     // DECREMENT QUANTITY FROM PRODUCT TABLE
+    const updatePromise = cartDetail.map(async item => {
+      console.log('WOAH -', item);
+    });
+    await Promise.all(updatePromise);
 
     // SEND SUCCESS MESSAGE (NO NEED FOR DATA SINCE WON'T USE)
     res

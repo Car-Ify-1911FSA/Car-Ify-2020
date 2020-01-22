@@ -105,9 +105,12 @@ class CheckoutButton extends Component {
   }
 
   render() {
+    const {userId, paymentAccountId} = this.props;
+    console.log('render -', this.props);
+
     return (
       <div className="checkoutBtnDiv">
-        {userId && !this.props.paymentAccountId ? null : (
+        {userId && !paymentAccountId ? null : (
           <button
             type="button"
             className="checkoutBtn linkText"
