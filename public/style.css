@@ -355,6 +355,53 @@ h4 {
   width: 30%;
 }
 
+/* ----------------- PAYMENT FORM ----------------- */
+.paymentFormFullDiv {
+  width: 30vw;
+  min-height: 100px;
+  padding: 10px;
+  margin: 15px 0;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+.paymentFormInsideDiv {
+  display: flex;
+  margin: 15px 0;
+  justify-content: space-around;
+}
+
+.paymentFormDropDown {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 170px;
+}
+
+.paymentFormSelect {
+  width: 100px;
+  height: 25px;
+  font-size: 14px;
+}
+
+.paymentFormForm {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 170px;
+}
+
+.paymentFormInput {
+  height: 15px;
+  border-radius: 3px;
+}
+
+.paymentFormButton {
+  border-radius: 5px;
+  width: 150px;
+  font-size: 14px;
+}
+
 /* ----------------- PAYMENT CARD ----------------- */
 .paymentCardFullDiv {
   background-color: lightskyblue;
@@ -475,7 +522,7 @@ h4 {
   border-radius: 10px;
 }
 
-/* -----------------ADMIN LIST USERS and PRODUCTS ------------------ */
+/* -----------------ADMIN LIST USERS AND PRODUCTS ------------------ */
 .user-list-cont {
   display: flex;
   flex-direction: column;

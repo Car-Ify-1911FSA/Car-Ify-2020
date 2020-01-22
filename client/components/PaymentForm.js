@@ -21,9 +21,7 @@ class PaymentForm extends Component {
 
   handlePaymentChange(evt) {
     const newOption = evt.target.value;
-    console.log(evt);
     this.setState({...this.state, payment: newOption});
-    console.log('LOCAL STATE', this.state);
   }
 
   handleInput(evt) {
@@ -55,31 +53,41 @@ class PaymentForm extends Component {
   render() {
     const paymentOptions = this.props.paymentOptions;
     return (
-      <div>
+      <div className="paymentFormFullDiv">
         <h4>Add a payment option:</h4>
 
-        <div>
-          <br />
-          <select
-            value={this.state.payment}
-            onChange={this.handlePaymentChange}
-          >
-            {paymentOptions.map(option => (
-              <option key={option.id}>{option.type}</option>
-            ))}
-          </select>
-        </div>
+        <div className="paymentFormInsideDiv">
+          <div className="paymentFormDropDown">
+            <label>Type: </label>
+            <select
+              className="paymentFormSelect"
+              value={this.state.payment}
+              onChange={this.handlePaymentChange}
+            >
+              {paymentOptions.map(option => (
+                <option key={option.id}>{option.type}</option>
+              ))}
+            </select>
+          </div>
 
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="input">Input:</label>
-          <input
-            name="input"
-            placeholder="Your number"
-            value={this.state.inputField}
-            onChange={this.handleInput}
-          ></input>
-          <button type="submit">Submit</button>
-        </form>
+          <form className="paymentFormForm">
+            <label htmlFor="input">Input: </label>
+            <input
+              name="input"
+              placeholder="Account Name"
+              value={this.state.inputField}
+              onChange={this.handleInput}
+              className="paymentFormInput"
+            ></input>
+          </form>
+          <button
+            type="button"
+            onClick={this.handleSubmit}
+            className="paymentFormButton"
+          >
+            Add Payment Option
+          </button>
+        </div>
       </div>
     );
   }
