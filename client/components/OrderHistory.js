@@ -25,12 +25,15 @@ class orderHistory extends Component {
           return (
             <div>
               <h2 key="cartStatus">{cart.status.toUpperCase()}:</h2>
-              <div key="cartTime">{cart.time}</div>
               <div key="cartProducts">
                 {cart.products.map(product => {
                   return (
                     <div>
-                      <OrderHistoryProduct key="product" product={product} />
+                      <OrderHistoryProduct
+                        key="product"
+                        product={product}
+                        date={cart.time}
+                      />
                     </div>
                   );
                 })}

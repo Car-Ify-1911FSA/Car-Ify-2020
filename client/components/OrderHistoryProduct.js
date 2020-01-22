@@ -1,7 +1,7 @@
 import React from 'react';
 
 const OrderHistoryProduct = props => {
-  console.log(props.product);
+  console.log(props.date);
 
   // return(<div className='tg'>
   //     <div>{props.product.brand}:</div>
@@ -21,6 +21,7 @@ const OrderHistoryProduct = props => {
           <th className="align-words">Color</th>
           <th className="align-words">Category</th>
           <th className="align-words">Price</th>
+          <th className="align-words">Date</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +38,7 @@ const OrderHistoryProduct = props => {
           <td>{props.product.color}</td>
           <td>{props.product.category}</td>
           <td>{props.product.price}</td>
+          <td>{props.date}</td>
         </tr>
       </tbody>
     </table>
