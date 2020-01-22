@@ -12,7 +12,8 @@ class AuthForm extends Component {
 
   componentDidMount() {
     // EMPTY CARTDETAIL STATE PRIOR TO HOMEPAGE TO DETERMINE IF NEED TO MERGE
-    // this.props.emptyCartItems();
+    console.log('auth mount -', this.props);
+    this.props.emptyCartItems();
   }
 
   componentDidUpdate() {
@@ -73,8 +74,10 @@ class AuthForm extends Component {
               {displayName}
             </button>
           </div>
+
           {error && error.response && <div> {error.response.data} </div>}
         </form>
+
         <a href="/auth/google" className="linkText">
           {displayName} with Google
         </a>

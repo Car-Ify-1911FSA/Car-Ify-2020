@@ -4,7 +4,6 @@ module.exports = router;
 
 router.post('/login', async (req, res, next) => {
   try {
-    console.log('user post 1 -', req.body);
     const {email, password, guestCart} = req.body;
     const user = await User.findOne({where: {email: email}});
     if (!user) {
@@ -14,7 +13,7 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', email);
       res.status(401).send('Wrong username and/or password');
     } else {
-      // ---------------- MERGING ACTIVITY ---------------- //
+      // ------------------ MERGING ACTIVITY ------------------ //
       const {id: userId} = user.dataValues;
 
       // SEARCH FOR CART, CREATE ONE IF NOT AVAILABLE
@@ -29,46 +28,48 @@ router.post('/login', async (req, res, next) => {
         });
       }
       const {id: cartId} = cart.dataValues;
-
-      // SEARCH FOR CARTDETAIL AND UPDATE ACCORDINGLY
       let cartDetail = await CartProduct.findAll({where: {cartId: cartId}});
-      if (cartDetail.length) {
-        // EVALUATING EXISTING CART ON UPDATING / CREATING NEW ITEMS
-        const prodIdArr = cartDetail.map(prod => prod.productId);
-        const promises = guestCart.map(async item => {
-          if (prodIdArr.includes(item.productId)) {
-            // UPDATE EXISTING ITEM IN CART DETAIL
-            const targetItem = await CartProduct.findOne({
-              where: {
-                cartId: cartId,
-                productId: item.productId
-              }
-            });
-            await targetItem.update({
-              quantity: targetItem.quantity + item.quantity,
-              totalPrice: targetItem.totalPrice + item.totalPrice
-            });
-            return targetItem;
-          } else {
-            // CREATE NEW ITEM IN CART DETAIL
+
+      // SEARCH FOR CARTDETAIL AND UPDATE ACCORDINGLY IF GUESTCART PRESENT
+      if (guestCart) {
+        if (cartDetail.length) {
+          // EVALUATING EXISTING CART ON UPDATING / CREATING NEW ITEMS
+          const prodIdArr = cartDetail.map(prod => prod.productId);
+          const promises = guestCart.map(async item => {
+            if (prodIdArr.includes(item.productId)) {
+              // UPDATE EXISTING ITEM IN CART DETAIL
+              const targetItem = await CartProduct.findOne({
+                where: {
+                  cartId: cartId,
+                  productId: item.productId
+                }
+              });
+              await targetItem.update({
+                quantity: targetItem.quantity + item.quantity,
+                totalPrice: targetItem.totalPrice + item.totalPrice
+              });
+              return targetItem;
+            } else {
+              // CREATE NEW ITEM IN CART DETAIL
+              item.cartId = cartId;
+              const response = await CartProduct.create(item);
+              return response;
+            }
+          });
+          await Promise.all(promises);
+        } else {
+          // CREATE EVERY ITEM IN CART DETAIL SINCE ZERO EXISTING ITEMS
+          const promises = guestCart.map(async item => {
             item.cartId = cartId;
             const response = await CartProduct.create(item);
             return response;
-          }
+          });
+          await Promise.all(promises);
+        }
+        cartDetail = await CartProduct.findAll({
+          where: {cartId: cartId}
         });
-        await Promise.all(promises);
-      } else {
-        // CREATE EVERY ITEM IN CART DETAIL SINCE ZERO EXISTING ITEMS
-        const promises = guestCart.map(async item => {
-          item.cartId = cartId;
-          const response = await CartProduct.create(item);
-          return response;
-        });
-        await Promise.all(promises);
       }
-      cartDetail = await CartProduct.findAll({
-        where: {cartId: cartId}
-      });
 
       // SEND UPDATED DATA
       req.login(user, err =>
