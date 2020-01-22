@@ -23,6 +23,8 @@ class AllProducts extends Component {
       newState = state ? state.state : false,
       filteredCars = this.filterAllProducts(allCars, newState);
 
+    console.log('all prod render -', this.props.cartDetail, this.props);
+
     return (
       <div className="allProductFullDiv">
         <h1>Our Inventory:</h1>
@@ -30,7 +32,10 @@ class AllProducts extends Component {
           {filteredCars.map(product => {
             return (
               <div key={product.id} className="productCardOutsideDiv">
-                <ProductCard product={product} />
+                <ProductCard
+                  product={product}
+                  cartDetail={this.props.cartDetail}
+                />
               </div>
             );
           })}
@@ -42,7 +47,8 @@ class AllProducts extends Component {
 
 const mapStateToProps = state => {
   return {
-    allProducts: state.allProducts
+    allProducts: state.allProducts,
+    cartDetail: state.cartProduct
   };
 };
 
