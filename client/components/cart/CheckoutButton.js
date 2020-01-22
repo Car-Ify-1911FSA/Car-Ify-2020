@@ -53,7 +53,13 @@ class CheckoutButton extends Component {
   }
 
   handleCheckOut() {
-    const {userId, allProducts, cart, cartDetail} = this.props;
+    const {
+      userId,
+      allProducts,
+      cart,
+      cartDetail,
+      paymentAccountId
+    } = this.props;
 
     if (userId) {
       // LOGGED IN USER SO IMPACT DB
@@ -67,8 +73,8 @@ class CheckoutButton extends Component {
         let prodQuantity = this.checkQuantity(cartDetail, allProdHash);
         prodQuantity.map(item => this.props.editProducts(item));
 
-        // UPDATING CART STATUS TO PAID
-        this.props.editCart(cart.id, this.props.paymentAccountId);
+        // UPDATING CART STATUS TO PAID & PAYMENT ACCOUNT
+        this.props.editCart(cart.id, paymentAccountId);
 
         // CREATE NEW ACTIVE CART WITH USERID
         const newCart = {
@@ -78,7 +84,7 @@ class CheckoutButton extends Component {
         };
         this.props.addNewCart(userId, newCart);
 
-        // PUSHES WEBPAGE TO GO HOME
+        // PUSHES WEBPAGE TO HOMEPAGE
         this.props.history.push('/');
       }
     } else {

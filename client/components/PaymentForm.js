@@ -21,19 +21,24 @@ class PaymentForm extends Component {
 
   handlePaymentChange(evt) {
     const newOption = evt.target.value;
-    this.setState({...this.state, payment: newOption});
+    this.setState({...this.state, payment: newOption}, () =>
+      this.props.updateSetter(this.state.payment, null)
+    );
   }
 
   handleInput(evt) {
-    this.setState({
-      ...this.state,
-      inputField: evt.target.value
-    });
+    this.setState(
+      {
+        ...this.state,
+        inputField: evt.target.value
+      },
+      () => this.props.updateSetter(null, this.state.inputField)
+    );
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    // creating a new payment account
+    // CREATING A NEW PAYMENT ACOUNT
     const {paymentOptions, userId} = this.props;
     const optionId = paymentOptions.filter(
       el => el.type === this.state.payment

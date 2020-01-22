@@ -9,9 +9,12 @@ class PaymentAccounts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      optionSelected: ''
+      optionSelected: '',
+      payment: '',
+      inputField: ''
     };
     this.handlePaymentOption = this.handlePaymentOption.bind(this);
+    this.updateSetter = this.updateSetter.bind(this);
   }
 
   componentDidMount() {
@@ -19,7 +22,15 @@ class PaymentAccounts extends Component {
   }
 
   handlePaymentOption(id) {
-    this.setState({optionSelected: id});
+    this.setState({...this.state, optionSelected: id});
+  }
+
+  updateSetter(type, accountName) {
+    if (!type) {
+      this.setState({...this.state, inputField: accountName});
+    } else {
+      this.setState({...this.state, payment: type});
+    }
   }
 
   render() {
@@ -27,6 +38,8 @@ class PaymentAccounts extends Component {
     const filterAccounts = allAccounts.filter(
       acct => acct.userId === this.props.userId
     );
+
+    console.log('PA render -', this.state);
 
     return (
       <div>
@@ -45,7 +58,7 @@ class PaymentAccounts extends Component {
           </div>
         ) : null}
 
-        <PaymentForm />
+        <PaymentForm updateSetter={this.updateSetter} />
 
         <div className="paymentActBtnDiv">
           <CheckoutButton paymentAccountId={this.state.optionSelected} />
