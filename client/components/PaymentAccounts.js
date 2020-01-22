@@ -4,11 +4,22 @@ import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
 import CheckoutButton from './cart/CheckoutButton';
 import PaymentForm from './PaymentForm';
-import PaymentAccountForm from './PaymentAccountForm';
 
 class PaymentAccounts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      optionSelected: ''
+    };
+    this.handlePaymentOption = this.handlePaymentOption.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchAllPaymentAcct();
+  }
+
+  handlePaymentOption(id) {
+    this.setState({optionSelected: id});
   }
 
   render() {
@@ -17,6 +28,7 @@ class PaymentAccounts extends Component {
       acct => acct.userId === this.props.userId
     );
 
+    console.log('porpsys:  ', this.state.optionSelected);
     return (
       <div>
         <h2>Time to Pay!</h2>
@@ -24,7 +36,11 @@ class PaymentAccounts extends Component {
           <div className="paymentActsDiv">
             <h3 className="headerDiv">Your Payment Accounts</h3>
             {filterAccounts.map((acct, idx) => (
-              <PaymentCard acct={acct} key={idx} />
+              <PaymentCard
+                acct={acct}
+                key={idx}
+                getPaymentAccountId={this.handlePaymentOption}
+              />
             ))}
           </div>
         ) : null}
