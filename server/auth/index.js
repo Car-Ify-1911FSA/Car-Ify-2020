@@ -1,18 +1,63 @@
 const router = require('express').Router();
-const User = require('../db/models/user');
+const {User, Cart, CartProduct} = require('../db/models');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({where: {email: req.body.email}});
+    console.log('user post 1 -', req.body);
+    const {email, password, guestCart} = req.body;
+    const user = await User.findOne({where: {email: email}});
     if (!user) {
-      console.log('No such user found:', req.body.email);
+      console.log('No such user found:', email);
       res.status(401).send('Wrong username and/or password');
-    } else if (!user.correctPassword(req.body.password)) {
-      console.log('Incorrect password for user:', req.body.email);
+    } else if (!user.correctPassword(password)) {
+      console.log('Incorrect password for user:', email);
       res.status(401).send('Wrong username and/or password');
     } else {
-      req.login(user, err => (err ? next(err) : res.json(user)));
+      // ---------------- MERGING ACTIVITY  ---------------- //
+      const {id: userId} = user.dataValues;
+
+      // SEARCH FOR CART, CREATE ONE IF NOT AVAILABLE
+      let cart = await Cart.findOne({
+        where: {userId: userId, status: 'active'}
+      });
+      if (!cart) {
+        cart = await Cart.create({
+          status: 'active',
+          time: Date(),
+          userId: userId
+        });
+      }
+      const {id: cartId} = cart.dataValues;
+
+      // SEARCH FOR CARTDETAIL, UPDATE / CREATE NEW ITEMS WHERE NEEDED
+      let cartDetail = await CartProduct.findAll({where: {cartId: cartId}});
+      console.log('user post 2 -', userId, cartId, cartDetail.length);
+      if (cartDetail.length) {
+        cartDetail.map(item => console.log('WOAH -', item.dataValues));
+      } else {
+        const promises = guestCart.map(async item => {
+          item.cartId = cartId;
+          const response = await CartProduct.create(item);
+          return response;
+        });
+        const result = await Promise.all(promises);
+        result.map(x => console.log('NICE JOB -', x.dataValues));
+      }
+      cartDetail = await CartProduct.findAll({
+        where: {cartId: cartId}
+      });
+      console.log(
+        'user post final -',
+        user.dataValues,
+        cart.dataValues,
+        cartDetail.length
+      );
+
+      // SEND UPDATED DATA
+      req.login(user, err =>
+        err ? next(err) : res.json({user, cart, cartDetail})
+      );
     }
   } catch (err) {
     next(err);
@@ -21,8 +66,14 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
+    console.log('sign up post -', req.body);
     const user = await User.create(req.body);
-    req.login(user, err => (err ? next(err) : res.json(user)));
+    const cart = await Cart.create({
+      status: 'active',
+      time: Date(),
+      userId: user.id
+    });
+    req.login(user, err => (err ? next(err) : res.json({user, cart})));
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists');

@@ -22,25 +22,22 @@ export const me = () => async dispatch => {
   }
 };
 
-export const auth = (
-  email,
-  password,
-  method,
-  guestCart,
-  name
-) => async dispatch => {
+export const auth = userObj => async dispatch => {
   let res;
   try {
-    console.log('user thunk -', email, method, guestCart);
-    if (method === 'signup')
-      res = await axios.post(`/auth/${method}`, {email, name, password});
-    else res = await axios.post(`/auth/${method}`, {email, password});
+    console.log('user thunk 1 -', userObj);
+    const {formName} = userObj;
+    if (formName === 'signup')
+      res = await axios.post(`/auth/${formName}`, userObj);
+    else res = await axios.post(`/auth/${formName}`, userObj);
   } catch (authError) {
     return dispatch(getUser({error: authError}));
   }
 
   try {
-    dispatch(getUser(res.data));
+    console.log('user thunk 2 -', res.data);
+    const {user, cart, CartDetail} = res.data;
+    dispatch(getUser(user));
     history.push('/');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);

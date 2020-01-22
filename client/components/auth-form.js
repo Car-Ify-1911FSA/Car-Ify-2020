@@ -21,16 +21,19 @@ class AuthForm extends Component {
 
   handleSignIn(evt) {
     evt.preventDefault();
-    const formName = evt.target.name,
-      email = evt.target.email.value,
-      password = evt.target.password.value,
-      guestCart = JSON.parse(localStorage.getItem('cart'));
+    const userObj = {
+      formName: evt.target.name,
+      email: evt.target.email.value,
+      password: evt.target.password.value,
+      guestCart: JSON.parse(localStorage.getItem('cart'))
+    };
 
-    if (formName === 'signup') {
+    if (evt.target.name === 'signup') {
       const name = evt.target.userName.value;
+      userObj.name = name;
       if (name.toLowerCase() === 'guest') alert('Please use another name');
-      else this.props.auth(email, password, formName, guestCart, name);
-    } else this.props.auth(email, password, formName, guestCart);
+      else this.props.auth(userObj);
+    } else this.props.auth(userObj);
   }
 
   render() {
@@ -105,8 +108,7 @@ const mapDispatchToProps = dispatch => {
     emptyCartItems() {
       dispatch(emptyCartItems());
     },
-    auth: (email, password, formName, guestCart, name) =>
-      dispatch(auth(email, password, formName, guestCart, name))
+    auth: userObj => dispatch(auth(userObj))
   };
 };
 

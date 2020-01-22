@@ -15,8 +15,10 @@ import {Top3Products} from './';
 class UserHome extends Component {
   componentDidMount() {
     this.props.fetchAllProds();
-    console.log('MOUNTING - ', this.props, this.props.userId);
-    if (this.props.userId) {
+    const test = false;
+    // console.log('MOUNTING - ', this.props, this.props.userId);
+    // if (this.props.userId) {
+    if (test) {
       // FIRST RETRIEVE THE CART (IF THERE ARE ANY)
       // Promise.all([this.props.getCart(this.props.userId)])
       this.props
@@ -46,10 +48,10 @@ class UserHome extends Component {
   }
 
   mergeLocalCart(userId, currentCart) {
-    console.log('merging -', currentCart);
     if (userId) {
       // ONLY EVALUATE MERGE IF USER SIGNED IN & EXISTING LS CART
       const localCart = JSON.parse(localStorage.getItem('cart'));
+      console.log('merging -', localCart, currentCart);
 
       if (localCart) {
         let prodIdArr = this.props.cartDetail.map(prod => prod.productId);
