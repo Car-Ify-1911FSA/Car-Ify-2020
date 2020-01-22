@@ -10,11 +10,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
     <div className="navBarDiv">
       {isLoggedIn ? (
         <h1>
-          Welcome back,{' '}
-          <Link to={`/userProfile/${user.id}`}>
-            <span className="hpLoggedInWelcome">{user.name}</span>
-          </Link>
-          !
+          Welcome back, <span className="hpLoggedInWelcome">{user.name}</span>!
         </h1>
       ) : (
         <h1>Welcome to Car-ify !</h1>
@@ -38,6 +34,13 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
 
           <Link to="/cart">
             <CartIconQTY cartProduct={cartProduct} />
+          </Link>
+
+          <Link to={`/userProfile/${user.id}`}>
+            <img
+              src="https://findicons.com/files/icons/1676/primo/128/user.png"
+              width="30px"
+            />
           </Link>
 
           {isLoggedIn ? (

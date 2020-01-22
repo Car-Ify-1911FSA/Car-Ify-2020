@@ -20,6 +20,12 @@ class UserProfile extends React.Component {
           <Link to="/cart" className="edit-cart">
             View Cart
           </Link>
+          <Link
+            to={`/orderHistory/${this.props.user.id}`}
+            className="edit-cart"
+          >
+            View Order History
+          </Link>
         </div>
         <div></div>
       </div>

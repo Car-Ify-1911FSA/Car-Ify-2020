@@ -10,30 +10,34 @@ class orderHistory extends Component {
     }
   }
 
-  cartSort(time) {}
+  totalSum(arr) {
+    let count = 0;
+    if (arr) {
+      arr.forEach(elem => {
+        count += elem.price * elem.quantity;
+      });
+      return count;
+    }
+  }
 
   render() {
-    const orderHistory = this.props.orderHistory;
-    // console.log('createdAt', orderHistory[0].time);
-    // for(let key in orderHistory[0]){
-    //   console.log(key, orderHistory[0][key])
-    // }
+    const {orderHistory, username} = this.props;
+
     return (
       <div>
-        <h1>Your Order History:</h1>
+        <h1>{username}'s Order History:</h1>
         {orderHistory.map(cart => {
           return (
             <div>
-              <h2 key="cartStatus">{cart.status.toUpperCase()}:</h2>
-              <div key="cartProducts">
+              <div className="cart-center">
+                <div>Total Price: ${this.totalSum(cart.products)}</div>
+                <div>Date: {cart.time}</div>
+              </div>
+              <div className="cart-margin">
                 {cart.products.map(product => {
                   return (
                     <div>
-                      <OrderHistoryProduct
-                        key="product"
-                        product={product}
-                        date={cart.time}
-                      />
+                      <OrderHistoryProduct product={product} date={cart.time} />
                     </div>
                   );
                 })}
@@ -49,6 +53,7 @@ class orderHistory extends Component {
 const mapStateToProps = state => {
   return {
     userId: state.user.id,
+    username: state.user.name,
     orderHistory: state.orderHistory
   };
 };

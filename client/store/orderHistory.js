@@ -24,7 +24,8 @@ export const getOrderHistoryThunk = userId => {
         return elem;
       };
       const filteredData = data.filter(cart => cart.status !== 'active');
-      const cartHistory = filteredData.map(dateConverter);
+      const convertedData = filteredData.map(dateConverter);
+      const cartHistory = convertedData.reverse();
       dispatch(getOrderHistory(cartHistory));
     } catch (error) {
       console.error(error);
