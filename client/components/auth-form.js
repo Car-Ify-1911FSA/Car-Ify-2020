@@ -11,8 +11,9 @@ class AuthForm extends Component {
   }
 
   componentDidMount() {
-    // EMPTY CARTDETAIL STATE PRIOR TO HOMEPAGE TO DETERMINE IF NEED TO MERGE
-    // this.props.emptyCartItems();
+    // EMPTY CART WHEN GOING TO AUTH POST LOGGED-IN (USING GUESTCART AS PROXY)
+    const guestCart = JSON.parse(localStorage.getItem('cart'));
+    if (!guestCart) this.props.emptyCartItems();
   }
 
   componentDidUpdate() {
@@ -21,14 +22,21 @@ class AuthForm extends Component {
 
   handleSignIn(evt) {
     evt.preventDefault();
-    const formName = evt.target.name,
-      email = evt.target.email.value,
-      password = evt.target.password.value;
+    const userObj = {
+      formName: evt.target.name,
+      email: evt.target.email.value,
+      password: evt.target.password.value,
+      guestCart: JSON.parse(localStorage.getItem('cart'))
+    };
 
-    if (formName === 'signup') {
+    if (evt.target.name === 'signup') {
       const name = evt.target.userName.value;
-      this.props.auth(email, password, formName, name);
-    } else this.props.auth(email, password, formName);
+      userObj.name = name;
+      if (name.toLowerCase() === 'guest') {
+        alert('Please use another name');
+        evt.target.userName.value = '';
+      } else this.props.auth(userObj);
+    } else this.props.auth(userObj);
   }
 
   render() {
@@ -68,8 +76,10 @@ class AuthForm extends Component {
               {displayName}
             </button>
           </div>
+
           {error && error.response && <div> {error.response.data} </div>}
         </form>
+
         <a href="/auth/google" className="linkText">
           {displayName} with Google
         </a>
@@ -103,8 +113,7 @@ const mapDispatchToProps = dispatch => {
     emptyCartItems() {
       dispatch(emptyCartItems());
     },
-    auth: (email, password, formName, name) =>
-      dispatch(auth(email, password, formName, name))
+    auth: userObj => dispatch(auth(userObj))
   };
 };
 

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
 import CheckoutButton from './cart/CheckoutButton';
 import PaymentForm from './PaymentForm';
+import PaymentAccountForm from './PaymentAccountForm';
 
 class PaymentAccounts extends Component {
   componentDidMount() {
@@ -31,6 +32,8 @@ class PaymentAccounts extends Component {
             ))}
           </div>
         )}
+
+        <PaymentAccountForm />
 
         <div className="paymentActBtnDiv">
           <CheckoutButton />
