@@ -160,7 +160,9 @@ router.post('/guest', async (req, res, next) => {
     await Promise.all(promises);
 
     // SEND SUCCESS MESSAGE (NO NEED FOR DATA SINCE WON'T USE)
-    res.json({message: 'Guest user and cart managed successfully!'});
+    res
+      .status(200)
+      .json({message: 'Guest user and cart managed successfully!'});
   } catch (err) {
     next(err);
   }

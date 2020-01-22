@@ -130,8 +130,8 @@ export const guestCartCheckout = guestObj => {
     try {
       // NO NEED TO DISPATCH ANYTHING SINCE GUEST
       console.log('Guest 1 -', guestObj);
-      const guestOpt = await axios.post('/auth/guest', guestObj);
-      console.log('GUEST THUNKY -', guestOpt.message);
+      const {data} = await axios.post('/auth/guest', guestObj);
+      console.log('GUEST THUNKY -', data.message);
     } catch (error) {
       console.error(error);
     }
