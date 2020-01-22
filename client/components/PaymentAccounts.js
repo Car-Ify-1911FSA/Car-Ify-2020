@@ -43,8 +43,6 @@ class PaymentAccounts extends Component {
       acct => acct.userId === this.props.userId
     );
 
-    // console.log('PA render -', this.state);
-
     return (
       <div>
         <h2>Time to Pay!</h2>

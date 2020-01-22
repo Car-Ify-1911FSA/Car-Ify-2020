@@ -15,7 +15,6 @@ const getOrderHistory = orderHistory => {
 export const getOrderHistoryThunk = userId => {
   return async dispatch => {
     try {
-      console.log('thunky 1', userId);
       const {data} = await axios.get(`/api/cart/${userId}`);
       const dateConverter = elem => {
         const year = elem.time.slice(0, 4);
@@ -35,7 +34,6 @@ export const getOrderHistoryThunk = userId => {
 
 // REDUCER
 const orderHistoryReducer = (state = [], action) => {
-  console.log('state', action.orderHistory);
   switch (action.type) {
     case GET_ORDER_HISTORY:
       return action.orderHistory;
