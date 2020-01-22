@@ -34,7 +34,33 @@ router.post('/login', async (req, res, next) => {
       let cartDetail = await CartProduct.findAll({where: {cartId: cartId}});
       console.log('user post 2 -', userId, cartId, cartDetail.length);
       if (cartDetail.length) {
-        cartDetail.map(item => console.log('WOAH -', item.dataValues));
+        // cartDetail.map(item => console.log('WOAH -', item.dataValues));
+        const prodIdArr = cartDetail.map(prod => prod.productId);
+        console.log('updating - ', guestCart, prodIdArr, cartDetail);
+        const promises = guestCart.map(async item => {
+          if (prodIdArr.includes(item.productId)) {
+            // PUT ROUTE
+            console.log('PUT || MERGING ROUTE');
+            const targetItem = await CartProduct.findOne({
+              where: {
+                cartId: cartId,
+                productId: item.productId
+              }
+            });
+            await targetItem.update({
+              quantity: targetItem.quantity + item.quantity,
+              totalPrice: targetItem.totalPrice + item.totalPrice
+            });
+            return targetItem;
+          } else {
+            // POST ROUTE
+            console.log('POST || MERGING ROUTE');
+            item.cardId = cartId;
+            const response = await CartProduct.create(item);
+            return response;
+          }
+        });
+        const result = await Promise.all(promises);
       } else {
         const promises = guestCart.map(async item => {
           item.cartId = cartId;
@@ -47,6 +73,7 @@ router.post('/login', async (req, res, next) => {
       cartDetail = await CartProduct.findAll({
         where: {cartId: cartId}
       });
+
       console.log(
         'user post final -',
         user.dataValues,
