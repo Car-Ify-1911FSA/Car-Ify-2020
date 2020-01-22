@@ -58,7 +58,8 @@ class CheckoutButton extends Component {
       {
         optionSelect: paymentAccountId,
         payment: paymentType,
-        inputField: paymentAccount
+        inputField: paymentAccount,
+        paymentTypeId
       } = paymentState;
 
     const test = false;
@@ -90,13 +91,15 @@ class CheckoutButton extends Component {
       }
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
-      console.log('HERE WE GO ! - ', this.props, this.props.state);
+      console.log('HERE WE GO ! - ', this.props);
       const guestObj = {
         paymentAccount,
+        paymentTypeId,
         paymentType,
         cartDetail
       };
       this.props.guestCheckOut(guestObj);
+      localStorage.clear();
       this.props.history.push('/');
     }
   }

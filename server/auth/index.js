@@ -125,7 +125,7 @@ let guestCount = 0;
 router.post('/guest', async (req, res, next) => {
   try {
     console.log('GETTING IT GOING -', req.body);
-    const {paymentType, paymentAccount, cartDetail} = req.body;
+    const {paymentTypeId, paymentAccount, cartDetail} = req.body;
 
     // CREATE NEW USER
     const guestUser = {
@@ -139,13 +139,13 @@ router.post('/guest', async (req, res, next) => {
     // CREATE NEW PAYMENT ACCOUNT
     const guestPayment = await PaymentAccount.create({
       name: paymentAccount,
-      paymentId: paymentType,
+      paymentId: paymentTypeId,
       userId: user.id
     });
 
-    // CREATE NEW CART
+    // CREATE NEW CART WITH AUTOMATIC PAID STATUS
     const cart = await Cart.create({
-      status: 'active',
+      status: 'paid',
       time: Date(),
       userId: user.id,
       paymentAccountId: guestPayment.id
