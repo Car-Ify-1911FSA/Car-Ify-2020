@@ -18,7 +18,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const {handleClick, isLoggedIn, isAdmin, user, cartProduct} = this.props;
+    const {handleClick, isLoggedIn, isAdmin, user, cartDetail} = this.props;
 
     return (
       <div className="navBarDiv">
@@ -51,7 +51,7 @@ class Navbar extends Component {
             </Link>
 
             <Link to="/cart">
-              <CartIconQTY cartProduct={cartProduct} />
+              <CartIconQTY cartDetail={cartDetail} />
             </Link>
 
             {isLoggedIn ? (
@@ -76,7 +76,7 @@ const mapStateToProps = state => {
     isAdmin: !!state.user.admin,
     user: state.user,
     cart: state.cart,
-    cartProduct: state.cartProduct
+    cartDetail: state.cartProduct
   };
 };
 
