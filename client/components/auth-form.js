@@ -11,8 +11,9 @@ class AuthForm extends Component {
   }
 
   componentDidMount() {
-    // EMPTY CARTDETAIL STATE PRIOR TO HOMEPAGE TO DETERMINE IF NEED TO MERGE
-    this.props.emptyCartItems();
+    // EMPTY CART WHEN GOING TO AUTH POST LOGGED-IN (USING GUESTCART AS PROXY)
+    const guestCart = JSON.parse(localStorage.getItem('cart'));
+    if (!guestCart) this.props.emptyCartItems();
   }
 
   componentDidUpdate() {

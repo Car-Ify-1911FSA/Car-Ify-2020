@@ -19,7 +19,7 @@ class UserHome extends Component {
 
   render() {
     const {name, userId, isLoggedIn} = this.props;
-    console.log('user home render -', this.props);
+    // console.log('user home render -', this.props);
 
     return (
       <div className="homePageDiv">
