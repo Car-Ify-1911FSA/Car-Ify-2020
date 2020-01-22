@@ -11,6 +11,7 @@ export {default as CheckoutButton} from './cart/CheckoutButton';
 export {default as Top3Products} from './Top3Products';
 export {default as UserProfile} from './UserProfile';
 export {default as UpdateProfile} from './UpdateProfile';
+export {default as OrderHistory} from './OrderHistory';
 export {default as CartIconQTY} from './cart/CartIconQTY';
 export {default as AdminHome} from './admin/AdminHome';
 export {default as TableCart} from './cart/TableCart';

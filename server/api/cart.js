@@ -13,7 +13,6 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
       },
       include: [{model: Product}]
     });
-
     res.status(200).json(cart);
   } catch (error) {
     next(error);

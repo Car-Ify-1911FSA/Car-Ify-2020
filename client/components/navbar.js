@@ -24,10 +24,7 @@ class Navbar extends Component {
       <div className="navBarDiv">
         {isLoggedIn ? (
           <h1>
-            Welcome back,{' '}
-            <Link to={`/userProfile/${user.id}`}>
-              <span className="hpLoggedInWelcome">{user.name}</span>
-            </Link>
+            Welcome back, <span className="hpLoggedInWelcome">{user.name}</span>
             !
           </h1>
         ) : (
@@ -44,7 +41,9 @@ class Navbar extends Component {
               <Link to="/admin" className="navBarText linkText">
                 Admin Panel
               </Link>
-            ) : null}
+            ) : (
+              ''
+            )}
 
             <Link to="/allProducts" className="navBarText linkText">
               Products
@@ -53,6 +52,17 @@ class Navbar extends Component {
             <Link to="/cart">
               <CartIconQTY cartDetail={cartDetail} />
             </Link>
+
+            {isLoggedIn ? (
+              <Link to={`/userProfile/${user.id}`}>
+                <img
+                  src="https://findicons.com/files/icons/1676/primo/128/user.png"
+                  width="30px"
+                />
+              </Link>
+            ) : (
+              ''
+            )}
 
             {isLoggedIn ? (
               <a href="#" onClick={handleClick} className="linkText">
