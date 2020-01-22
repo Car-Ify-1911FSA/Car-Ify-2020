@@ -14,7 +14,7 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', email);
       res.status(401).send('Wrong username and/or password');
     } else {
-      // ---------------- MERGING ACTIVITY  ---------------- //
+      // ---------------- MERGING ACTIVITY ---------------- //
       const {id: userId} = user.dataValues;
 
       // SEARCH FOR CART, CREATE ONE IF NOT AVAILABLE
@@ -30,17 +30,14 @@ router.post('/login', async (req, res, next) => {
       }
       const {id: cartId} = cart.dataValues;
 
-      // SEARCH FOR CARTDETAIL, UPDATE / CREATE NEW ITEMS WHERE NEEDED
+      // SEARCH FOR CARTDETAIL AND UPDATE ACCORDINGLY
       let cartDetail = await CartProduct.findAll({where: {cartId: cartId}});
-      console.log('user post 2 -', userId, cartId, cartDetail.length);
       if (cartDetail.length) {
-        // cartDetail.map(item => console.log('WOAH -', item.dataValues));
+        // EVALUATING EXISTING CART ON UPDATING / CREATING NEW ITEMS
         const prodIdArr = cartDetail.map(prod => prod.productId);
-        console.log('updating - ', guestCart, prodIdArr, cartDetail);
         const promises = guestCart.map(async item => {
           if (prodIdArr.includes(item.productId)) {
-            // PUT ROUTE
-            console.log('PUT || MERGING ROUTE');
+            // UPDATE EXISTING ITEM IN CART DETAIL
             const targetItem = await CartProduct.findOne({
               where: {
                 cartId: cartId,
@@ -53,33 +50,25 @@ router.post('/login', async (req, res, next) => {
             });
             return targetItem;
           } else {
-            // POST ROUTE
-            console.log('POST || MERGING ROUTE');
-            item.cardId = cartId;
+            // CREATE NEW ITEM IN CART DETAIL
+            item.cartId = cartId;
             const response = await CartProduct.create(item);
             return response;
           }
         });
-        const result = await Promise.all(promises);
+        await Promise.all(promises);
       } else {
+        // CREATE EVERY ITEM IN CART DETAIL SINCE ZERO EXISTING ITEMS
         const promises = guestCart.map(async item => {
           item.cartId = cartId;
           const response = await CartProduct.create(item);
           return response;
         });
-        const result = await Promise.all(promises);
-        result.map(x => console.log('NICE JOB -', x.dataValues));
+        await Promise.all(promises);
       }
       cartDetail = await CartProduct.findAll({
         where: {cartId: cartId}
       });
-
-      console.log(
-        'user post final -',
-        user.dataValues,
-        cart.dataValues,
-        cartDetail
-      );
 
       // SEND UPDATED DATA
       req.login(user, err =>
