@@ -6,7 +6,8 @@ import {
   getCartDetail,
   editProducts,
   addNewCart,
-  editCart
+  editCart,
+  guestCartCheckout
 } from '../../store';
 
 class CheckoutButton extends Component {
@@ -53,15 +54,15 @@ class CheckoutButton extends Component {
   }
 
   handleCheckOut() {
-    const {
-      userId,
-      allProducts,
-      cart,
-      cartDetail,
-      paymentAccountId
-    } = this.props;
+    const {userId, allProducts, cart, cartDetail, paymentState} = this.props,
+      {
+        optionSelect: paymentAccountId,
+        payment: paymentType,
+        inputField: paymentAccount
+      } = paymentState;
 
-    if (userId) {
+    const test = false;
+    if (userId && test) {
       // LOGGED IN USER SO IMPACT DB
       let allProdHash = {};
       for (let prod of allProducts) {
@@ -89,7 +90,13 @@ class CheckoutButton extends Component {
       }
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
-      console.log('HERE WE GO ! - ', this.props);
+      console.log('HERE WE GO ! - ', this.props, this.props.state);
+      const guestObj = {
+        paymentAccount,
+        paymentType,
+        cartDetail
+      };
+      this.props.guestCheckOut(guestObj);
       this.props.history.push('/');
     }
   }
@@ -102,7 +109,6 @@ class CheckoutButton extends Component {
           className="checkoutBtn linkText"
           onClick={() => this.handleCheckOut()}
         >
-          {/* {userId ? `Check Out !` : `Login / Sign-Up`} */}
           Check Out !
         </button>
       </div>
@@ -126,7 +132,8 @@ const mapDispatchToProps = dispatch => {
     editCart: (cartId, paymentAccountId) =>
       dispatch(editCart(cartId, paymentAccountId)),
     addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart)),
-    editProducts: editProduct => dispatch(editProducts(editProduct))
+    editProducts: editProduct => dispatch(editProducts(editProduct)),
+    guestCheckOut: guestObj => dispatch(guestCartCheckout(guestObj))
   };
 };
 

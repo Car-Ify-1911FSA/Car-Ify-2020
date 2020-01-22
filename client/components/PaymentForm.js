@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {getPaymentOptions, addPaymentAcountThunk} from '../store';
 
 class PaymentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      paymentTypeId: 1,
       payment: 'credit card',
       inputField: ''
     };
@@ -21,8 +21,12 @@ class PaymentForm extends Component {
 
   handlePaymentChange(evt) {
     const newOption = evt.target.value;
-    this.setState({...this.state, payment: newOption}, () =>
-      this.props.updateSetter(this.state.payment, null)
+    const optionId = this.props.paymentOptions.filter(
+      el => el.type === this.state.payment
+    )[0].id;
+    this.setState(
+      {...this.state, payment: newOption, paymentTypeId: optionId},
+      () => this.props.updateSetter(this.state.payment, null, optionId)
     );
   }
 

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Cart, CartProduct} = require('../db/models');
+const {User, Cart, CartProduct, PaymentAccount} = require('../db/models');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
@@ -117,6 +117,52 @@ router.post('/signup', async (req, res, next) => {
     } else {
       next(err);
     }
+  }
+});
+
+let guestCount = 0;
+
+router.post('/guest', async (req, res, next) => {
+  try {
+    console.log('GETTING IT GOING -', req.body);
+    const {paymentType, paymentAccount, cartDetail} = req.body;
+
+    // CREATE NEW USER
+    const guestUser = {
+      email: `guest${guestCount}@email.com`,
+      name: 'guest',
+      password: 'guest'
+    };
+    const user = await User.create(guestUser);
+    guestCount++;
+
+    // CREATE NEW PAYMENT ACCOUNT
+    const guestPayment = await PaymentAccount.create({
+      name: paymentAccount,
+      paymentId: paymentType,
+      userId: user.id
+    });
+
+    // CREATE NEW CART
+    const cart = await Cart.create({
+      status: 'active',
+      time: Date(),
+      userId: user.id,
+      paymentAccountId: guestPayment.id
+    });
+
+    // CREATE NEW DETAIL ITEMS IN NEW CART
+    const promises = cartDetail.map(async item => {
+      item.cartId = cart.dataValues.id;
+      const response = await CartProduct.create(item);
+      return response;
+    });
+    await Promise.all(promises);
+
+    // SEND SUCCESS MESSAGE (NO NEED FOR DATA SINCE WON'T USE)
+    res.json({message: 'Guest user and cart managed successfully!'});
+  } catch (err) {
+    next(err);
   }
 });
 

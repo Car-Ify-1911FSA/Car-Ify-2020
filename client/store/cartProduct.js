@@ -125,6 +125,18 @@ export const deleteCartDetail = editCartItem => {
   };
 };
 
+export const guestCartCheckout = guestObj => {
+  return async () => {
+    try {
+      // NO NEED TO DISPATCH ANYTHING SINCE GUEST
+      const guestOpt = await axios.post('/auth/guest', guestObj);
+      console.log('GUEST THUNKY -', guestOpt.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 // REDUCER
 const cartProductReducer = (state = defaultCartDetail, action) => {
   switch (action.type) {
