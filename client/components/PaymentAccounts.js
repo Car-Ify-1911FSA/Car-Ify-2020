@@ -3,6 +3,7 @@ import {getPaymentAccountsThunk} from '../store';
 import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
 import CheckoutButton from './cart/CheckoutButton';
+import PaymentForm from './PaymentForm';
 
 class PaymentAccounts extends Component {
   componentDidMount() {
@@ -20,7 +21,7 @@ class PaymentAccounts extends Component {
         <h2>Time to Pay!</h2>
         {!filterAccounts.length ? (
           <div className="paymentActsDiv">
-            <h3>Currently No Payment Accounts</h3>
+            <PaymentForm />
           </div>
         ) : (
           <div className="paymentActsDiv">
