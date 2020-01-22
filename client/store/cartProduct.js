@@ -134,10 +134,12 @@ const cartProductReducer = (state = defaultCartDetail, action) => {
       return action.cartDetail;
     case ADD_CART_ITEMS:
       console.log('REDUCER UH -', state, action.newCartItem);
-      const newState = state.map(item => {
-        console.log(item);
+      const newState = state.slice();
+      newState.map((item, idx) => {
+        if (item.productId === action.newCartItem.productId)
+          newState.splice(idx, 1);
       });
-      return [...state, action.newCartItem];
+      return [...newState, action.newCartItem];
     case EMPTY_CART_ITEMS:
       return defaultCartDetail;
     default:
