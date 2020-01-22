@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const {Cart, Product} = require('../db/models');
-const {isUserOrAdmin, isLoggedIn} = require('./security');
+const {isUserOrAdmin} = require('./security');
 
 router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
-  // console.log('req.params.userId-------------->', req.params.userId);
-  // console.log('req.user.id----------------->', req.user.id);
   if (req.user.id != req.params.userId) {
     res.send('cannot access data');
   }

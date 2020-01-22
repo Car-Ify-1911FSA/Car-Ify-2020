@@ -25,7 +25,6 @@ export const me = () => async dispatch => {
 export const auth = userObj => async dispatch => {
   let res;
   try {
-    console.log('user thunk 1 -', userObj);
     const {formName} = userObj;
     if (formName === 'signup')
       res = await axios.post(`/auth/${formName}`, userObj);
@@ -35,8 +34,8 @@ export const auth = userObj => async dispatch => {
   }
 
   try {
-    console.log('user thunk 2 -', res.data);
     const {user, cart, CartDetail} = res.data;
+    localStorage.clear();
     dispatch(getUser(user));
     history.push('/');
   } catch (dispatchOrHistoryErr) {

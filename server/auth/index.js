@@ -30,7 +30,7 @@ router.post('/login', async (req, res, next) => {
       const {id: cartId} = cart.dataValues;
       let cartDetail = await CartProduct.findAll({where: {cartId: cartId}});
 
-      // SEARCH FOR CARTDETAIL AND UPDATE ACCORDINGLY IF GUESTCART PRESENT
+      // IF GUESTCART PRESENT, SEARCH FOR CARTDETAIL AND UPDATE ACCORDINGLY
       if (guestCart) {
         if (cartDetail.length) {
           // EVALUATING EXISTING CART ON UPDATING / CREATING NEW ITEMS
