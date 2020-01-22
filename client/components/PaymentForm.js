@@ -51,7 +51,8 @@ class PaymentForm extends Component {
   }
 
   render() {
-    const paymentOptions = this.props.paymentOptions;
+    const {paymentOptions, userId} = this.props;
+
     return (
       <div className="paymentFormFullDiv">
         <h4>Add a payment option:</h4>
@@ -86,13 +87,18 @@ class PaymentForm extends Component {
               }}
             ></input>
           </form>
-          <button
-            type="button"
-            onClick={this.handleSubmit}
-            className="paymentFormButton"
-          >
-            Add Payment Option
-          </button>
+
+          {userId ? (
+            <button
+              type="button"
+              onClick={this.handleSubmit}
+              className="paymentFormButton"
+            >
+              Add Payment Option
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );

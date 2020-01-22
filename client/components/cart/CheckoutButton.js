@@ -55,8 +55,7 @@ class CheckoutButton extends Component {
   handleCheckOut() {
     const {userId, allProducts, cart, cartDetail} = this.props;
 
-    const test = true; // TEMP ! ONLY USING FOR TESTING PURPOSE
-    if (userId && test) {
+    if (userId) {
       // LOGGED IN USER SO IMPACT DB
       let allProdHash = {};
       for (let prod of allProducts) {
@@ -84,13 +83,12 @@ class CheckoutButton extends Component {
       }
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
+      console.log('HERE WE GO ! - ', this.props);
       this.props.history.push('/');
     }
   }
 
   render() {
-    const {userId} = this.props;
-
     return (
       <div className="checkoutBtnDiv">
         <button
@@ -98,7 +96,8 @@ class CheckoutButton extends Component {
           className="checkoutBtn linkText"
           onClick={() => this.handleCheckOut()}
         >
-          {userId ? `Check Out !` : `Login / Sign-Up`}
+          {/* {userId ? `Check Out !` : `Login / Sign-Up`} */}
+          Check Out !
         </button>
       </div>
     );
