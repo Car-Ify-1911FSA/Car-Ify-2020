@@ -78,6 +78,12 @@ class PaymentForm extends Component {
               value={this.state.inputField}
               onChange={this.handleInput}
               className="paymentFormInput"
+              onFocus={e => {
+                e.target.placeholder = '';
+              }}
+              onBlur={e => {
+                e.target.placeholder = 'Account Name';
+              }}
             ></input>
           </form>
           <button
