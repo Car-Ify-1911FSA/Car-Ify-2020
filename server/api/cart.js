@@ -3,10 +3,13 @@ const {Cart, Product} = require('../db/models');
 const {isUserOrAdmin} = require('./security');
 // isUserOrAdmin,
 router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
+  if (req.user.id != req.params.userId) {
+    res.send('cannot access data');
+  }
   try {
     const cart = await Cart.findAll({
       where: {
-        userId: req.params.userId
+        userId: req.user.id
       },
       include: [{model: Product}]
     });

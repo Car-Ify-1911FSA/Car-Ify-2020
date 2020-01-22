@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
-import CartIconQTY from './CartIconQTY';
+import CartIconQTY from './cart/CartIconQTY';
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
   return (
@@ -25,17 +25,21 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
           <Link to="/" className="navBarText linkText">
             Home
           </Link>
+
           {isAdmin ? (
             <Link to="/admin" className="navBarText linkText">
               Admin Panel
             </Link>
           ) : null}
+
           <Link to="/allProducts" className="navBarText linkText">
             Products
           </Link>
+
           <Link to="/cart">
             <CartIconQTY cartProduct={cartProduct} />
           </Link>
+
           {isLoggedIn ? (
             <a href="#" onClick={handleClick} className="linkText">
               Logout
