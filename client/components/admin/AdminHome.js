@@ -13,11 +13,13 @@ class AdminHome extends React.Component {
     this.handleProductsClick = this.handleProductsClick.bind(this);
     this.handleUsersClick = this.handleUsersClick.bind(this);
   }
+
   componentDidMount() {}
 
   handleUsersClick() {
     this.setState({productList: false, userList: !this.state.userList});
   }
+
   handleProductsClick() {
     this.setState({productList: !this.state.productList, userList: false});
   }
