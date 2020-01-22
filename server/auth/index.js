@@ -167,7 +167,13 @@ router.post('/guest', async (req, res, next) => {
 
     // DECREMENT QUANTITY FROM PRODUCT TABLE
     const updatePromise = cartDetail.map(async item => {
-      console.log('WOAH -', item);
+      // console.log('WOAH -', item);
+      const targetProduct = await Product.findOne({
+        where: {id: item.productId}
+      });
+      await targetProduct.update({
+        quantity: targetProduct.quantity - item.quantity
+      });
     });
     await Promise.all(updatePromise);
 

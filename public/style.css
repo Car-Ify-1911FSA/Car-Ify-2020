@@ -349,10 +349,16 @@ h4 {
   background-color: rgba(184, 0, 92, 0.8);
 }
 
+.checkoutBtnDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 45%;
+}
+
 .paymentActBtnDiv {
   display: flex;
   justify-content: space-around;
-  width: 30%;
+  width: 40%;
 }
 
 /* ----------------- PAYMENT FORM ----------------- */

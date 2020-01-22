@@ -85,16 +85,14 @@ class CheckoutButton extends Component {
         payment: paymentType,
         inputField: paymentAccount,
         paymentTypeId
-      } = paymentState;
+      } = paymentState,
+      allProdHash = {};
 
-    const test = false;
+    for (let prod of allProducts) allProdHash[prod.id] = prod;
+
+    const test = true;
     if (userId && test) {
       // LOGGED IN USER SO IMPACT DB
-      let allProdHash = {};
-      for (let prod of allProducts) {
-        allProdHash[prod.id] = prod;
-      }
-
       if (this.checkQuantity(cartDetail, allProdHash)) {
         // UPDATING PRODUCT TABLE WITH DECREMENTED QUANTITES
         let prodQuantity = this.checkQuantity(cartDetail, allProdHash);
@@ -117,6 +115,7 @@ class CheckoutButton extends Component {
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
       console.log('HERE WE GO ! - ', this.props);
+      this.checkQuantity(cartDetail, allProdHash);
       const guestObj = {
         paymentAccount,
         paymentTypeId,
@@ -133,15 +132,6 @@ class CheckoutButton extends Component {
     const {userId, paymentAccountId} = this.props;
     return (
       <div className="checkoutBtnDiv">
-        <StripeCheckout
-          name="Cody"
-          description="description"
-          amount="1000"
-          token={onToken('1000', 'description')}
-          currency={CURRENCY}
-          stripeKey={STRIPE_PUBLISHABLE}
-        />
-
         {userId && !paymentAccountId ? null : (
           <button
             type="button"
@@ -151,6 +141,16 @@ class CheckoutButton extends Component {
             Check Out !
           </button>
         )}
+
+        <StripeCheckout
+          name="Cody"
+          description="description"
+          amount={1000}
+          token={onToken('1000', 'description')}
+          currency={CURRENCY}
+          stripeKey={STRIPE_PUBLISHABLE}
+          className="stripeCheckoutDiv"
+        />
       </div>
     );
   }
