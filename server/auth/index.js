@@ -51,7 +51,7 @@ router.post('/login', async (req, res, next) => {
         'user post final -',
         user.dataValues,
         cart.dataValues,
-        cartDetail.length
+        cartDetail
       );
 
       // SEND UPDATED DATA
