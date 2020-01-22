@@ -21,6 +21,7 @@ class PaymentForm extends Component {
 
   handlePaymentChange(evt) {
     const newOption = evt.target.value;
+
     const optionId = this.props.paymentOptions.filter(
       el => el.type === this.state.payment
     )[0].id;

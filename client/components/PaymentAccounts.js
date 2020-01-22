@@ -45,7 +45,7 @@ class PaymentAccounts extends Component {
 
     return (
       <div>
-        <h2>Time to Pay!</h2>
+        <h2>Please select your payment option or add a new one!</h2>
         {this.props.userId ? (
           <div className="paymentActsDiv">
             <h3 className="headerDiv">Your Payment Accounts</h3>
@@ -84,6 +84,7 @@ class PaymentAccounts extends Component {
           >
             Go Back
           </button>
+          <CheckoutButton paymentAccountId={this.state.optionSelected} />
         </div>
       </div>
     );

@@ -107,13 +107,15 @@ class CheckoutButton extends Component {
   render() {
     return (
       <div className="checkoutBtnDiv">
-        <button
-          type="button"
-          className="checkoutBtn linkText"
-          onClick={() => this.handleCheckOut()}
-        >
-          Check Out !
-        </button>
+        {userId && !this.props.paymentAccountId ? null : (
+          <button
+            type="button"
+            className="checkoutBtn linkText"
+            onClick={() => this.handleCheckOut()}
+          >
+            Check Out !
+          </button>
+        )}
       </div>
     );
   }
