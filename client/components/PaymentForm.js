@@ -21,9 +21,7 @@ class PaymentForm extends Component {
 
   handlePaymentChange(evt) {
     const newOption = evt.target.value;
-    console.log(evt);
     this.setState({...this.state, payment: newOption});
-    console.log('LOCAL STATE', this.state);
   }
 
   handleInput(evt) {
