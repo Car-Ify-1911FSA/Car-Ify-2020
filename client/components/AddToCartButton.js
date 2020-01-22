@@ -21,7 +21,9 @@ class AddToCartButton extends Component {
       });
   }
 
-  handleAddClick(productId, productPrice) {
+  handleAddClick(productId, productPrice, qty) {
+    if (qty < 1) return alert('Sorry, please wait while we restock!');
+
     const {isLoggedIn, cart, cartDetail} = this.props,
       cartItemObj = {
         cartId: cart ? cart.id : undefined,
@@ -43,7 +45,11 @@ class AddToCartButton extends Component {
         <button
           type="button"
           onClick={() =>
-            this.handleAddClick(this.props.product.id, this.props.product.price)
+            this.handleAddClick(
+              this.props.product.id,
+              this.props.product.price,
+              this.props.updatedQty
+            )
           }
           className="addBtn"
         >
