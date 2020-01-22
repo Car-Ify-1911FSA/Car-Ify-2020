@@ -117,7 +117,7 @@ export const deleteCartDetail = editCartItem => {
       const {data} = await axios.delete(
         `/api/cart-product/${cartId}/${productId}`
       );
-      // RECEIVE FULL UPDATED CART WITH DELETED ITEM
+      // RECEIVE FULL UPDATED CART POST DELETING ITEM
       dispatch(getCartItems(data.cartDetail));
     } catch (error) {
       console.error(error);
