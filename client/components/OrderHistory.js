@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getOrderHistoryThunk} from '../store/cart';
+import {getOrderHistoryThunk} from '../store/orderHistory';
 
 class orderHistory extends Component {
   componentDidMount() {
-    if (this.props.userId) {
-      this.props.getOrderHistory(2);
+    if (this.props.id) {
+      this.props.getOrderHistory(this.props.id);
     }
   }
   render() {
-    console.log('userId', this.props.userId);
+    console.log('userId', this.props.id);
 
     console.log('props', this.props);
     return <div>HELLO WORLD</div>;
@@ -18,7 +18,7 @@ class orderHistory extends Component {
 
 const mapStateToProps = state => {
   return {
-    state: state,
+    id: state.user.id,
     orderHistory: state.orderHistory
   };
 };

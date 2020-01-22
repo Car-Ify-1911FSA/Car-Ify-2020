@@ -5,6 +5,7 @@ const GET_ORDER_HISTORY = 'GET_ORDER_HISTORY';
 
 //ACTION CREATORS
 const getOrderHistory = orderHistory => {
+  console.log('action created', orderHistory);
   return {
     type: GET_ORDER_HISTORY,
     orderHistory
@@ -26,11 +27,11 @@ export const getOrderHistoryThunk = userId => {
 };
 
 // REDUCER
-const orderHistoryReducer = (state = {}, action) => {
-  console.log('state', action.orderHistory);
+const orderHistoryReducer = (state = [], action) => {
+  // console.log('state', action.orderHistory);
   switch (action.type) {
     case GET_ORDER_HISTORY:
-      return {...state, ...action.orderHistory};
+      return action.orderHistory;
     default:
       return state;
   }
