@@ -2,19 +2,24 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {logout} from '../store';
+import {logout, getCartDetail, me} from '../store';
 import CartIconQTY from './cart/CartIconQTY';
 
-// const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
 class Navbar extends Component {
+  componentDidMount() {
+    this.props.getUser();
+    this.props.fetchCartDetail(false, false);
+  }
+
   componentDidUpdate(prevProps) {
-    if (this.props.cartProduct !== prevProps.cartProduct)
-      console.log('UPDATING -', this.props.cartProduct, prevProps.cartProduct);
+    if (prevProps.user.id === null && this.props.user.id !== null) {
+      this.props.fetchCartDetail(this.props.cart.id);
+    }
   }
 
   render() {
     const {handleClick, isLoggedIn, isAdmin, user, cartProduct} = this.props;
-    console.log('nav render -', cartProduct);
+
     return (
       <div className="navBarDiv">
         {isLoggedIn ? (
@@ -70,12 +75,16 @@ const mapStateToProps = state => {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.admin,
     user: state.user,
+    cart: state.cart,
     cartProduct: state.cartProduct
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    getUser: () => dispatch(me()),
+    fetchCartDetail: (cartId, doNotPullLS) =>
+      dispatch(getCartDetail(cartId, doNotPullLS)),
     handleClick() {
       dispatch(logout());
     }
