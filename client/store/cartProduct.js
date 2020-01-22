@@ -129,9 +129,7 @@ export const guestCartCheckout = guestObj => {
   return async () => {
     try {
       // NO NEED TO DISPATCH ANYTHING SINCE GUEST
-      console.log('Guest 1 -', guestObj);
       const {data} = await axios.post('/auth/guest', guestObj);
-      console.log('GUEST THUNKY -', data.message);
     } catch (error) {
       console.error(error);
     }

@@ -130,7 +130,6 @@ let guestCount = 0;
 
 router.post('/guest', async (req, res, next) => {
   try {
-    console.log('GETTING IT GOING -', req.body);
     const {paymentTypeId, paymentAccount, cartDetail} = req.body;
 
     // CREATE NEW USER
