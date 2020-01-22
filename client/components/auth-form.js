@@ -12,8 +12,7 @@ class AuthForm extends Component {
 
   componentDidMount() {
     // EMPTY CARTDETAIL STATE PRIOR TO HOMEPAGE TO DETERMINE IF NEED TO MERGE
-    console.log('auth mount -', this.props);
-    this.props.emptyCartItems();
+    // this.props.emptyCartItems();
   }
 
   componentDidUpdate() {
@@ -32,8 +31,10 @@ class AuthForm extends Component {
     if (evt.target.name === 'signup') {
       const name = evt.target.userName.value;
       userObj.name = name;
-      if (name.toLowerCase() === 'guest') alert('Please use another name');
-      else this.props.auth(userObj);
+      if (name.toLowerCase() === 'guest') {
+        alert('Please use another name');
+        evt.target.userName.value = '';
+      } else this.props.auth(userObj);
     } else this.props.auth(userObj);
   }
 

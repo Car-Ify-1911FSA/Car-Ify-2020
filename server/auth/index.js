@@ -83,14 +83,34 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    console.log('sign up post -', req.body);
-    const user = await User.create(req.body);
+    // CREATE NEW USER AND CART
+    const {email, name, password, guestCart} = req.body;
+    const user = await User.create({email, name, password});
     const cart = await Cart.create({
       status: 'active',
       time: Date(),
       userId: user.id
     });
-    req.login(user, err => (err ? next(err) : res.json({user, cart})));
+
+    // IF EXISTING GUEST CART THEN CREATE NEW DETAIL ITEMS IN NEW CART
+    if (guestCart) {
+      const promises = guestCart.map(async item => {
+        item.cartId = cart.dataValues.id;
+        const response = await CartProduct.create(item);
+        return response;
+      });
+      await Promise.all(promises);
+    }
+
+    // PULL CART DETAIL
+    const cartDetail = await CartProduct.findAll({
+      where: {cartId: cart.dataValues.id}
+    });
+
+    // SEND UPDATED DATA
+    req.login(user, err =>
+      err ? next(err) : res.json({user, cart, cartDetail})
+    );
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists');
