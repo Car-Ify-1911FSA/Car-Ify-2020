@@ -7,10 +7,14 @@ import CartIconQTY from './cart/CartIconQTY';
 
 // const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
 class Navbar extends Component {
-  componentDidUpdate(prevProps) {}
+  componentDidUpdate(prevProps) {
+    if (this.props.cartProduct !== prevProps.cartProduct)
+      console.log('UPDATING -', this.props.cartProduct, prevProps.cartProduct);
+  }
 
   render() {
     const {handleClick, isLoggedIn, isAdmin, user, cartProduct} = this.props;
+    console.log('nav render -', cartProduct);
     return (
       <div className="navBarDiv">
         {isLoggedIn ? (

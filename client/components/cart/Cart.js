@@ -74,7 +74,6 @@ class Cart extends Component {
   render() {
     const {userId, userName, cartDetail, allProducts} = this.props;
     const productDetail = this.mergeCartProd(cartDetail, allProducts);
-    console.log('PROPS FROM THE CART +++++', this.props);
 
     return (
       <div className="cartFullDiv">
