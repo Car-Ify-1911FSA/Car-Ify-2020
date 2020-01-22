@@ -19,11 +19,13 @@ class PaymentCard extends React.Component {
       <div>
         {this.props.acct.payment ? (
           <div>
-            <input type="checkbox"></input>
-            <button type="button" onClick={this.handleClick}>
-              <h4>Type: {this.props.acct.payment.type}</h4>
-              <h4>Account: {this.props.acct.name}</h4>
-            </button>
+            <input
+              type="radio"
+              name="button"
+              id={this.props.acct.payment.type}
+              onClick={this.handleClick}
+            ></input>
+            <label>{`Type: ${this.props.acct.payment.type} || Account: ${this.props.acct.name}`}</label>
           </div>
         ) : null}
       </div>
