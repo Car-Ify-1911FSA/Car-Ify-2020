@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
 import CheckoutButton from './cart/CheckoutButton';
 import PaymentForm from './PaymentForm';
+import {CardElement, Elements, injectStripe} from 'react-stripe-elements';
 
 class PaymentAccounts extends Component {
   constructor(props) {
@@ -46,6 +47,10 @@ class PaymentAccounts extends Component {
         ) : null}
 
         <PaymentForm />
+        <Elements>
+          <CardElement />
+        </Elements>
+
         <div className="paymentActBtnDiv">
           <CheckoutButton />
           <button
@@ -74,4 +79,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentAccounts);
+export default injectStripe(
+  connect(mapStateToProps, mapDispatchToProps)(PaymentAccounts)
+);
