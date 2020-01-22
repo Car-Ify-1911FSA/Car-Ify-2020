@@ -18,23 +18,18 @@ class PaymentAccounts extends Component {
     );
 
     return (
-      <div className="paymentActsFullDiv">
+      <div>
         <h2>Time to Pay!</h2>
-        {!filterAccounts.length ? (
+        {this.props.userId ? (
           <div className="paymentActsDiv">
-            <PaymentForm />
-          </div>
-        ) : (
-          <div className="paymentActsDiv">
-            <h3 className="headerDiv">All Payment Accounts</h3>
+            <h3 className="headerDiv">Your Payment Accounts</h3>
             {filterAccounts.map((acct, idx) => (
               <PaymentCard acct={acct} key={idx} />
             ))}
           </div>
-        )}
+        ) : null}
 
-        <PaymentAccountForm />
-
+        <PaymentForm />
         <div className="paymentActBtnDiv">
           <CheckoutButton />
           <button
