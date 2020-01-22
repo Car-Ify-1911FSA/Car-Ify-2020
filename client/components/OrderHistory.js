@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getOrderHistoryThunk} from '../store/orderHistory';
+import OrderHistoryProduct from './OrderHistoryProduct';
 
 class orderHistory extends Component {
   componentDidUpdate(prevProps) {
@@ -18,7 +19,9 @@ class orderHistory extends Component {
     //   console.log(key, orderHistory[0][key])
     // }
     return (
-      <h1>HELLO</h1>
+      <div>
+        <OrderHistoryProduct product={orderHistory} />
+      </div>
       // <div>
       //   {orderHistory.map(cart => {
       //     return (
