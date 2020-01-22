@@ -539,3 +539,31 @@ h4 {
   padding: 0 15px;
   border-bottom: 2px solid gray;
 }
+
+/* -----------------ORDER HISTORY ------------------ */
+
+.order-history-flex {
+  background-color: blue;
+  display: flexbox;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50rem;
+  border-radius: 10px;
+  /* font-size: medium;
+  font-weight: bold;
+  width: 150px;
+  height: 30px;
+  border-radius: 5px; */
+}
+
+.align-words {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.product-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-color: rgb(65, 47, 47);
+  width: 80%;
+}

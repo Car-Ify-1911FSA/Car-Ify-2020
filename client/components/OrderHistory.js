@@ -20,33 +20,25 @@ class orderHistory extends Component {
     // }
     return (
       <div>
-        <OrderHistoryProduct product={orderHistory} />
+        <h1>Your Order History:</h1>
+        {orderHistory.map(cart => {
+          return (
+            <div>
+              <h2 key="cartStatus">{cart.status.toUpperCase()}:</h2>
+              <div key="cartTime">{cart.time}</div>
+              <div key="cartProducts">
+                {cart.products.map(product => {
+                  return (
+                    <div>
+                      <OrderHistoryProduct key="product" product={product} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </div>
-      // <div>
-      //   {orderHistory.map(cart => {
-      //     return (
-      //       <div>
-      //         <div key="cartStatus">{cart.status}</div>
-      //         <div key="cartTime">{cart.time}</div>
-      //         <div key="cartProducts">
-      //           {cart.products.map(product => {
-      //             return (
-      //               <div key="product">
-      //                 <div>{product.brand}:</div>
-      //                 <div>{product.model}</div>
-      //                 <div>{product.categor}y</div>
-      //                 <div>{product.color}</div>
-      //                 <div>{product.price}</div>
-      //                 <div>{product.brand}</div>
-      //                 <img src={product.imageUrl} />
-      //               </div>
-      //             );
-      //           })}
-      //         </div>
-      //       </div>
-      //     );
-      //   })}
-      // </div>
     );
   }
 }
