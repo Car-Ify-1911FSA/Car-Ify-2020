@@ -16,4 +16,3 @@ export {default as CartIconQTY} from './cart/CartIconQTY';
 export {default as AdminHome} from './admin/AdminHome';
 export {default as TableCart} from './cart/TableCart';
 export {default as PaymentForm} from './PaymentForm';
-

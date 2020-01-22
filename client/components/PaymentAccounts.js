@@ -9,9 +9,13 @@ class PaymentAccounts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      optionSelected: ''
+      optionSelected: '',
+      paymentTypeId: 1,
+      payment: 'credit card',
+      inputField: ''
     };
     this.handlePaymentOption = this.handlePaymentOption.bind(this);
+    this.updateSetter = this.updateSetter.bind(this);
   }
 
   componentDidMount() {
@@ -19,7 +23,18 @@ class PaymentAccounts extends Component {
   }
 
   handlePaymentOption(id) {
-    this.setState({optionSelected: id});
+    this.setState({...this.state, optionSelected: id});
+  }
+
+  updateSetter(type, accountName, typeId) {
+    if (!type) {
+      this.setState({
+        ...this.state,
+        inputField: accountName
+      });
+    } else {
+      this.setState({...this.state, payment: type, paymentTypeId: typeId});
+    }
   }
 
   render() {
@@ -27,6 +42,7 @@ class PaymentAccounts extends Component {
     const filterAccounts = allAccounts.filter(
       acct => acct.userId === this.props.userId
     );
+
     return (
       <div>
         <h2>Time to Pay!</h2>
@@ -44,9 +60,23 @@ class PaymentAccounts extends Component {
           </div>
         ) : null}
 
-        <PaymentForm />
+        <PaymentForm updateSetter={this.updateSetter} />
+
         <div className="paymentActBtnDiv">
-          <CheckoutButton paymentAccountId={this.state.optionSelected} />
+          <CheckoutButton paymentState={this.state} />
+
+          {!this.props.userId ? (
+            <button
+              type="button"
+              onClick={() => this.props.history.push('/signIn')}
+              className="paymentActBackBtn backBtn linkText"
+            >
+              Login / Sign-Up
+            </button>
+          ) : (
+            ''
+          )}
+
           <button
             type="button"
             onClick={() => this.props.history.goBack()}

@@ -23,7 +23,6 @@ const reducer = combineReducers({
   orderHistory,
   allUsers,
   paymentOptions
-
 });
 
 const middleware = composeWithDevTools(
