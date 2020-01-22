@@ -16,7 +16,9 @@ class CartIconQTY extends React.Component {
 
   render() {
     const {cartProduct} = this.props;
-    if (cartProduct) console.log('qty render -', cartProduct);
+    if (cartProduct && cartProduct.length)
+      console.log('qty render -', cartProduct);
+
     return (
       <div className="cart-qty-div">
         <img

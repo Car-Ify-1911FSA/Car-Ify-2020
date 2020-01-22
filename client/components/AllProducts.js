@@ -23,8 +23,6 @@ class AllProducts extends Component {
       newState = state ? state.state : false,
       filteredCars = this.filterAllProducts(allCars, newState);
 
-    console.log('all prod render -', this.props.cartDetail, this.props);
-
     return (
       <div className="allProductFullDiv">
         <h1>Our Inventory:</h1>
