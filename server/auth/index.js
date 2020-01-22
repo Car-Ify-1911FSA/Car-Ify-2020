@@ -1,5 +1,11 @@
 const router = require('express').Router();
-const {User, Cart, CartProduct, PaymentAccount} = require('../db/models');
+const {
+  User,
+  Cart,
+  CartProduct,
+  Product,
+  PaymentAccount
+} = require('../db/models');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
@@ -158,6 +164,8 @@ router.post('/guest', async (req, res, next) => {
       return response;
     });
     await Promise.all(promises);
+
+    // DECREMENT QUANTITY FROM PRODUCT TABLE
 
     // SEND SUCCESS MESSAGE (NO NEED FOR DATA SINCE WON'T USE)
     res
