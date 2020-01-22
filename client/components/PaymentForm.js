@@ -29,7 +29,6 @@ class PaymentForm extends Component {
       {...this.state, payment: newOption, paymentTypeId: optionId},
       () => this.props.updateSetter(this.state.payment, null, optionId)
     );
-
   }
 
   handleInput(evt) {
