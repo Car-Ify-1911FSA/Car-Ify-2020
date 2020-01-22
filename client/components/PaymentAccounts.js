@@ -3,11 +3,23 @@ import {getPaymentAccountsThunk} from '../store';
 import {connect} from 'react-redux';
 import PaymentCard from './PaymentCard';
 import CheckoutButton from './cart/CheckoutButton';
-import PaymentAccountForm from './PaymentAccountForm';
+import PaymentForm from './PaymentForm';
 
 class PaymentAccounts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      optionSelected: ''
+    };
+    this.handlePaymentOption = this.handlePaymentOption.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchAllPaymentAcct();
+  }
+
+  handlePaymentOption(id) {
+    this.setState({optionSelected: id});
   }
 
   render() {
@@ -15,27 +27,26 @@ class PaymentAccounts extends Component {
     const filterAccounts = allAccounts.filter(
       acct => acct.userId === this.props.userId
     );
-
     return (
-      <div className="paymentActsFullDiv">
+      <div>
         <h2>Time to Pay!</h2>
-        {!filterAccounts.length ? (
+        {this.props.userId ? (
           <div className="paymentActsDiv">
-            <h3>Currently No Payment Accounts</h3>
-          </div>
-        ) : (
-          <div className="paymentActsDiv">
-            <h3 className="headerDiv">All Payment Accounts</h3>
+            <h3 className="headerDiv">Your Payment Accounts</h3>
             {filterAccounts.map((acct, idx) => (
-              <PaymentCard acct={acct} key={idx} />
+              <PaymentCard
+                acct={acct}
+                key={idx}
+                getPaymentAccountId={this.handlePaymentOption}
+                fetchOptions={this.props.fetchAllPaymentAcct}
+              />
             ))}
           </div>
-        )}
+        ) : null}
 
-        <PaymentAccountForm />
-
+        <PaymentForm />
         <div className="paymentActBtnDiv">
-          <CheckoutButton />
+          <CheckoutButton paymentAccountId={this.state.optionSelected} />
           <button
             type="button"
             onClick={() => this.props.history.goBack()}

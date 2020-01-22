@@ -11,6 +11,7 @@ import cartProduct from './cartProduct';
 import paymentAccounts from './paymentAccounts';
 import orderHistory from './orderHistory';
 import allUsers from './allUsers';
+import paymentOptions from './paymentOptions';
 
 const reducer = combineReducers({
   user,
@@ -20,7 +21,9 @@ const reducer = combineReducers({
   paymentAccounts,
   top3Products,
   orderHistory,
-  allUsers
+  allUsers,
+  paymentOptions
+
 });
 
 const middleware = composeWithDevTools(
@@ -41,3 +44,4 @@ export * from './top3Products';
 export * from './userProfile';
 export * from './orderHistory';
 export * from './allUsers';
+export * from './paymentOptions';

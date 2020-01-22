@@ -15,7 +15,13 @@ class Top3Products extends Component {
         <h2>TOP 3</h2>
         <div className="product-card-container">
           {this.props.top3.map(product => {
-            return <ProductCard product={product} key={product.id} />;
+            return (
+              <ProductCard
+                product={product}
+                key={product.id}
+                cartDetail={this.props.cartDetail}
+              />
+            );
           })}
         </div>
       </div>
@@ -25,7 +31,8 @@ class Top3Products extends Component {
 
 const mapStateToProps = state => {
   return {
-    top3: state.top3Products
+    top3: state.top3Products,
+    cartDetail: state.cartProduct
   };
 };
 

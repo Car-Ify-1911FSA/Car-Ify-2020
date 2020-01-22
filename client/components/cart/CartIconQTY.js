@@ -2,7 +2,7 @@ import React from 'react';
 
 class CartIconQTY extends React.Component {
   componentDidMount() {
-    this.getCartQTY(this.props.cartProduct);
+    this.getCartQTY(this.props.cartDetail);
   }
 
   getCartQTY(cart) {
@@ -14,7 +14,8 @@ class CartIconQTY extends React.Component {
   }
 
   render() {
-    const {cartProduct} = this.props;
+    const {cartDetail} = this.props;
+
     return (
       <div className="cart-qty-div">
         <img
@@ -22,7 +23,7 @@ class CartIconQTY extends React.Component {
           width="30px"
         />
         <div className="qty-container">
-          <h4 className="cart-qty">{this.getCartQTY(cartProduct)}</h4>
+          <h4 className="cart-qty">{this.getCartQTY(cartDetail)}</h4>
         </div>
       </div>
     );

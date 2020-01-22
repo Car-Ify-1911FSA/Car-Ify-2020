@@ -96,17 +96,10 @@ class Cart extends Component {
         <div className="cartBtnDiv">
           {cartDetail && cartDetail.length > 0 ? (
             <Link
-              to={
-                userName
-                  ? {
-                      pathname: '/paymentAccounts',
-                      state: {cart: this.props.cart, cartDetail: cartDetail}
-                    }
-                  : {
-                      pathname: '/signIn',
-                      state: {cart: this.props.cart, cartDetail: cartDetail}
-                    }
-              }
+              to={{
+                pathname: '/paymentAccounts',
+                state: {cart: this.props.cart, cartDetail: cartDetail}
+              }}
               className="paymentLinkBtn linkText"
             >
               Let's Pay!
