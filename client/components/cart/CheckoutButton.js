@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import axios from 'axios';
+import StripeCheckout from 'react-stripe-checkout';
+
 import {
   getActiveCart,
   getCartDetail,
@@ -9,6 +12,28 @@ import {
   editCart,
   guestCartCheckout
 } from '../../store';
+
+const STRIPE_PUBLISHABLE = 'pk_test_SsLdqseuhk6Dgxl4UDF6l2rB00bFbT7aU4';
+const PAYMENT_SERVER_URL = '/api/account-payments/stripe';
+
+const CURRENCY = 'USD';
+
+const successPayment = data => {
+  alert('Payment Successful');
+};
+const errorPayment = data => {
+  alert('Payment Error');
+};
+const onToken = (amount, description) => token =>
+  axios
+    .post(PAYMENT_SERVER_URL, {
+      description,
+      source: token.id,
+      currency: CURRENCY,
+      amount: amount
+    })
+    .then(successPayment)
+    .catch(errorPayment);
 
 class CheckoutButton extends Component {
   constructor() {
@@ -106,10 +131,17 @@ class CheckoutButton extends Component {
 
   render() {
     const {userId, paymentAccountId} = this.props;
-    console.log('render -', this.props);
-
     return (
       <div className="checkoutBtnDiv">
+        <StripeCheckout
+          name="Cody"
+          description="description"
+          amount="1000"
+          token={onToken('1000', 'description')}
+          currency={CURRENCY}
+          stripeKey={STRIPE_PUBLISHABLE}
+        />
+
         {userId && !paymentAccountId ? null : (
           <button
             type="button"
