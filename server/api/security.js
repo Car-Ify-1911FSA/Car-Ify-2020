@@ -6,7 +6,6 @@ function isAdmin(req, res, next) {
 }
 
 function isUserOrAdmin(req, res, next) {
-  // console.log('req.session------------>', req.session.passport.user);
   if (req.user) next();
   else res.sendStatus(403);
 }

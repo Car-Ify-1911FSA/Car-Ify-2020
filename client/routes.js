@@ -12,6 +12,7 @@ import {
   PaymentAccounts,
   UserProfile,
   UpdateProfile,
+  OrderHistory,
   AdminHome
 } from './components';
 import {me} from './store';
@@ -52,6 +53,7 @@ class Routes extends Component {
         <Route path="/paymentAccounts" component={PaymentAccounts} />
         <Route path="/userProfile/:id" component={UserProfile} />
         <Route path="/updateProfile/:id" component={UpdateProfile} />
+        <Route path="/orderHistory/:id" component={OrderHistory} />
         <AdminRoute
           path="/admin"
           component={AdminHome}

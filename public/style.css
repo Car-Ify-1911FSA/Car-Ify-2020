@@ -171,7 +171,7 @@ h4 {
 
 /* ----------------- HOME PAGE ELEMENT ----------------- */
 .hpLoggedInWelcome {
-  color: rgba(0, 152, 195, 1);
+  color: black;
 }
 
 /* ----------------- ALL PRODUCT ------------------ */
@@ -355,6 +355,53 @@ h4 {
   width: 30%;
 }
 
+/* ----------------- PAYMENT FORM ----------------- */
+.paymentFormFullDiv {
+  width: 30vw;
+  min-height: 100px;
+  padding: 10px;
+  margin: 15px 0;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+.paymentFormInsideDiv {
+  display: flex;
+  margin: 15px 0;
+  justify-content: space-around;
+}
+
+.paymentFormDropDown {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 170px;
+}
+
+.paymentFormSelect {
+  width: 100px;
+  height: 25px;
+  font-size: 14px;
+}
+
+.paymentFormForm {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 170px;
+}
+
+.paymentFormInput {
+  height: 15px;
+  border-radius: 3px;
+}
+
+.paymentFormButton {
+  border-radius: 5px;
+  width: 150px;
+  font-size: 14px;
+}
+
 /* ----------------- PAYMENT CARD ----------------- */
 .paymentCardFullDiv {
   background-color: lightskyblue;
@@ -475,7 +522,7 @@ h4 {
   border-radius: 10px;
 }
 
-/* -----------------ADMIN LIST USERS and PRODUCTS ------------------ */
+/* -----------------ADMIN LIST USERS AND PRODUCTS ------------------ */
 .user-list-cont {
   display: flex;
   flex-direction: column;
@@ -542,4 +589,86 @@ h4 {
   width: 6vw;
   padding: 0 15px;
   border-bottom: 2px solid gray;
+}
+
+/* -----------------ORDER HISTORY ------------------ */
+
+.order-history-flex {
+  background-color: blue;
+  display: flexbox;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50rem;
+  border-radius: 10px;
+}
+
+.align-words {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.product-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.product-table td {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 10px 5px;
+  border-style: solid;
+  border-width: 0px;
+  overflow: hidden;
+  word-break: normal;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #aaa;
+  color: #333;
+  background-color: white;
+}
+
+.product-table th {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 10px 5px;
+  border-style: solid;
+  border-width: 0px;
+  overflow: hidden;
+  word-break: normal;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #aaa;
+  color: #fff;
+  background: grey;
+}
+
+.cart-center {
+  text-align: left;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 30px;
+  text-align: center;
+  font-weight: normal;
+  padding: 10px 5px;
+  border-style: solid;
+  border-width: 0px;
+  overflow: hidden;
+  word-break: normal;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  width: 98.9%;
+  background: rgba(102, 50, 36, 0.927);
+}
+
+.cart-margin {
+  margin: 1rem;
 }

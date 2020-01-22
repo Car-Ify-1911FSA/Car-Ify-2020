@@ -6,7 +6,8 @@ import {
   getCartDetail,
   editProducts,
   addNewCart,
-  editCart
+  editCart,
+  guestCartCheckout
 } from '../../store';
 
 class CheckoutButton extends Component {
@@ -53,9 +54,15 @@ class CheckoutButton extends Component {
   }
 
   handleCheckOut() {
-    const {userId, allProducts, cart, cartDetail} = this.props;
+    const {userId, allProducts, cart, cartDetail, paymentState} = this.props,
+      {
+        optionSelect: paymentAccountId,
+        payment: paymentType,
+        inputField: paymentAccount,
+        paymentTypeId
+      } = paymentState;
 
-    const test = true; // TEMP ! ONLY USING FOR TESTING PURPOSE
+    const test = false;
     if (userId && test) {
       // LOGGED IN USER SO IMPACT DB
       let allProdHash = {};
@@ -68,8 +75,8 @@ class CheckoutButton extends Component {
         let prodQuantity = this.checkQuantity(cartDetail, allProdHash);
         prodQuantity.map(item => this.props.editProducts(item));
 
-        // UPDATING CART STATUS TO PAID
-        this.props.editCart(cart.id, this.props.paymentAccountId);
+        // UPDATING CART STATUS TO PAID & PAYMENT ACCOUNT
+        this.props.editCart(cart.id, paymentAccountId);
 
         // CREATE NEW ACTIVE CART WITH USERID
         const newCart = {
@@ -79,29 +86,37 @@ class CheckoutButton extends Component {
         };
         this.props.addNewCart(userId, newCart);
 
-        // PUSHES WEBPAGE TO GO HOME
+        // PUSHES WEBPAGE TO HOMEPAGE
         this.props.history.push('/');
       }
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
+      console.log('HERE WE GO ! - ', this.props);
+      const guestObj = {
+        paymentAccount,
+        paymentTypeId,
+        paymentType,
+        cartDetail
+      };
+      this.props.guestCheckOut(guestObj);
+      localStorage.clear();
       this.props.history.push('/');
     }
   }
 
   render() {
-    const {userId} = this.props;
-
     return (
       <div className="checkoutBtnDiv">
-        {this.props.paymentAccountId ? (
+      {userId && !this.props.paymentAccountId ?
+        null : (
           <button
             type="button"
             className="checkoutBtn linkText"
             onClick={() => this.handleCheckOut()}
           >
-            {userId ? `Check Out !` : `Login / Sign-Up`}
+            Check Out !
           </button>
-        ) : null}
+      )}
       </div>
     );
   }
@@ -123,7 +138,8 @@ const mapDispatchToProps = dispatch => {
     editCart: (cartId, paymentAccountId) =>
       dispatch(editCart(cartId, paymentAccountId)),
     addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart)),
-    editProducts: editProduct => dispatch(editProducts(editProduct))
+    editProducts: editProduct => dispatch(editProducts(editProduct)),
+    guestCheckOut: guestObj => dispatch(guestCartCheckout(guestObj))
   };
 };
 
