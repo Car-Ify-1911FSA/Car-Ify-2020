@@ -2,22 +2,22 @@ import React from 'react';
 
 class CartIconQTY extends React.Component {
   componentDidMount() {
-    this.getCartQTY(this.props.cartProduct);
+    this.getCartQTY(this.props.cartDetail);
   }
 
   getCartQTY(cart) {
     if (cart) {
       return cart.reduce((accum, val) => {
-        console.log('INSIDE -', accum, val);
+        // console.log('INSIDE -', accum, val);
         return accum + val.quantity;
       }, 0);
     }
   }
 
   render() {
-    const {cartProduct} = this.props;
-    if (cartProduct && cartProduct.length)
-      console.log('qty render -', cartProduct);
+    const {cartDetail} = this.props;
+    // if (cartDetail && cartDetail.length)
+    // console.log('qty render -', cartDetail);
 
     return (
       <div className="cart-qty-div">
@@ -26,7 +26,7 @@ class CartIconQTY extends React.Component {
           width="30px"
         />
         <div className="qty-container">
-          <h4 className="cart-qty">{this.getCartQTY(cartProduct)}</h4>
+          <h4 className="cart-qty">{this.getCartQTY(cartDetail)}</h4>
         </div>
       </div>
     );

@@ -51,6 +51,7 @@ export const addNewCartDetail = (isLoggedIn, newCartItem) => {
     try {
       if (isLoggedIn) {
         const {data} = await axios.post(`/api/cart-product`, newCartItem);
+        console.log('thunky ADD -', data.newOrder);
         dispatch(addCartItems(data.newOrder));
       } else {
         // IF CART ALREADY EXIST IN LOCAL STORAGE
@@ -90,6 +91,7 @@ export const editNewCartDetail = (isLoggedIn, editCartItem) => {
     try {
       if (isLoggedIn) {
         const {data} = await axios.put(`/api/cart-product`, editCartItem);
+        console.log('thunky EDIT -', data.product);
         dispatch(addCartItems(data.product));
       } else {
         // INCREMENTING QUANTITY FOR GUEST LOCAL STORAGE
@@ -131,6 +133,10 @@ const cartProductReducer = (state = defaultCartDetail, action) => {
     case GET_CART_ITEMS:
       return action.cartDetail;
     case ADD_CART_ITEMS:
+      console.log('REDUCER UH -', state, action.newCartItem);
+      const newState = state.map(item => {
+        console.log(item);
+      });
       return [...state, action.newCartItem];
     case EMPTY_CART_ITEMS:
       return defaultCartDetail;
