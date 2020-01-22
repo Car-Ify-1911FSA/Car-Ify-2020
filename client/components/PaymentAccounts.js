@@ -27,8 +27,6 @@ class PaymentAccounts extends Component {
     const filterAccounts = allAccounts.filter(
       acct => acct.userId === this.props.userId
     );
-
-    console.log('porpsys:  ', this.state.optionSelected);
     return (
       <div>
         <h2>Time to Pay!</h2>
@@ -39,7 +37,8 @@ class PaymentAccounts extends Component {
               <PaymentCard
                 acct={acct}
                 key={idx}
-                paymentAccountId={this.handlePaymentOption}
+                getPaymentAccountId={this.handlePaymentOption}
+                fetchOptions={this.props.fetchAllPaymentAcct}
               />
             ))}
           </div>
@@ -47,7 +46,7 @@ class PaymentAccounts extends Component {
 
         <PaymentForm />
         <div className="paymentActBtnDiv">
-          <CheckoutButton paymentId={this.state.optionSelected} />
+          <CheckoutButton paymentAccountId={this.state.optionSelected} />
           <button
             type="button"
             onClick={() => this.props.history.goBack()}

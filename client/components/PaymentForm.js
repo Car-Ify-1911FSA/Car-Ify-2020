@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getPaymentOptions} from '../store';
+import {getPaymentOptions, addPaymentAcountThunk} from '../store';
 
 class PaymentForm extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class PaymentForm extends Component {
 
   handlePaymentChange(evt) {
     const newOption = evt.target.value;
-    console.log(newOption);
+    console.log(evt);
     this.setState({...this.state, payment: newOption});
     console.log('LOCAL STATE', this.state);
   }
@@ -35,14 +35,28 @@ class PaymentForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    // more logic!
+    // creating a new payment account
+    const {paymentOptions, userId} = this.props;
+    const optionId = paymentOptions.filter(
+      el => el.type === this.state.payment
+    )[0].id;
+    const newPaymentAccount = {
+      name: this.state.inputField,
+      userId,
+      paymentId: optionId
+    };
+    this.props.addPaymentAccount(newPaymentAccount);
+    this.setState({
+      payment: 'credit card',
+      inputField: ''
+    });
   }
 
   render() {
     const paymentOptions = this.props.paymentOptions;
     return (
       <div>
-        <h4>Select your payment option:</h4>
+        <h4>Add a payment option:</h4>
 
         <div>
           <br />
@@ -73,13 +87,15 @@ class PaymentForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    paymentOptions: state.paymentOptions
+    paymentOptions: state.paymentOptions,
+    userId: state.user.id
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPaymentOptions: () => dispatch(getPaymentOptions())
+    fetchPaymentOptions: () => dispatch(getPaymentOptions()),
+    addPaymentAccount: account => dispatch(addPaymentAcountThunk(account))
   };
 };
 
