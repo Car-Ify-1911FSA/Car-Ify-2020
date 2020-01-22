@@ -1,59 +1,65 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import CartIconQTY from './cart/CartIconQTY';
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
-  return (
-    <div className="navBarDiv">
-      {isLoggedIn ? (
-        <h1>
-          Welcome back,{' '}
-          <Link to={`/userProfile/${user.id}`}>
-            <span className="hpLoggedInWelcome">{user.name}</span>
-          </Link>
-          !
-        </h1>
-      ) : (
-        <h1>Welcome to Car-ify !</h1>
-      )}
+// const Navbar = ({handleClick, isLoggedIn, isAdmin, user, cartProduct}) => {
+class Navbar extends Component {
+  componentDidUpdate(prevProps) {}
 
-      <nav>
-        <div className="nav-links">
-          <Link to="/" className="navBarText linkText">
-            Home
-          </Link>
-
-          {isAdmin ? (
-            <Link to="/admin" className="navBarText linkText">
-              Admin Panel
+  render() {
+    const {handleClick, isLoggedIn, isAdmin, user, cartProduct} = this.props;
+    return (
+      <div className="navBarDiv">
+        {isLoggedIn ? (
+          <h1>
+            Welcome back,{' '}
+            <Link to={`/userProfile/${user.id}`}>
+              <span className="hpLoggedInWelcome">{user.name}</span>
             </Link>
-          ) : null}
+            !
+          </h1>
+        ) : (
+          <h1>Welcome to Car-ify !</h1>
+        )}
 
-          <Link to="/allProducts" className="navBarText linkText">
-            Products
-          </Link>
-
-          <Link to="/cart">
-            <CartIconQTY cartProduct={cartProduct} />
-          </Link>
-
-          {isLoggedIn ? (
-            <a href="#" onClick={handleClick} className="linkText">
-              Logout
-            </a>
-          ) : (
-            <Link to="/signIn" className="linkText sign-in">
-              Sign In
+        <nav>
+          <div className="nav-links">
+            <Link to="/" className="navBarText linkText">
+              Home
             </Link>
-          )}
-        </div>
-      </nav>
-    </div>
-  );
-};
+
+            {isAdmin ? (
+              <Link to="/admin" className="navBarText linkText">
+                Admin Panel
+              </Link>
+            ) : null}
+
+            <Link to="/allProducts" className="navBarText linkText">
+              Products
+            </Link>
+
+            <Link to="/cart">
+              <CartIconQTY cartProduct={cartProduct} />
+            </Link>
+
+            {isLoggedIn ? (
+              <a href="#" onClick={handleClick} className="linkText">
+                Logout
+              </a>
+            ) : (
+              <Link to="/signIn" className="linkText sign-in">
+                Sign In
+              </Link>
+            )}
+          </div>
+        </nav>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
