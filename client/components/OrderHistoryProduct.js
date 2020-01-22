@@ -1,6 +1,7 @@
 import React from 'react';
-import {OrderHistory} from '.';
 
-const OrderHistoryProduct = props => {};
+const OrderHistoryProduct = props => {
+  return <h1>YA TU SABES</h1>;
+};
 
 export default OrderHistoryProduct;
