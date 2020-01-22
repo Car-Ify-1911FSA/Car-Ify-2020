@@ -69,7 +69,7 @@ class CheckoutButton extends Component {
         prodQuantity.map(item => this.props.editProducts(item));
 
         // UPDATING CART STATUS TO PAID
-        this.props.editCart(cart.id);
+        this.props.editCart(cart.id, this.props.paymentAccountId);
 
         // CREATE NEW ACTIVE CART WITH USERID
         const newCart = {
@@ -118,7 +118,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getCart: userId => dispatch(getActiveCart(userId)),
     getCartDetail: cartId => dispatch(getCartDetail(cartId)),
-    editCart: cartId => dispatch(editCart(cartId)),
+    editCart: (cartId, paymentAccountId) =>
+      dispatch(editCart(cartId, paymentAccountId)),
     addNewCart: (userId, newCart) => dispatch(addNewCart(userId, newCart)),
     editProducts: editProduct => dispatch(editProducts(editProduct))
   };

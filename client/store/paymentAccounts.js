@@ -37,7 +37,7 @@ export const addPaymentAcountThunk = paymentAccount => {
       const {data} = await axios.post(`api/payment-accounts`, paymentAccount);
       dispatch(addedPaymentAccount(data));
     } catch (error) {
-      console.errow(error);
+      console.error(error);
     }
   };
 };
@@ -48,7 +48,7 @@ const paymentAccountsReducer = (paymentAccountsState = [], action) => {
     case GET_PAYMENT_ACCOUNTS:
       return action.paymentAccounts;
     case ADDED_PAYMENT_ACCOUNT:
-      return [...paymentAccountsState, action.payment];
+      return [...paymentAccountsState, action.paymentAccount];
     default:
       return paymentAccountsState;
   }
