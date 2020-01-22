@@ -39,7 +39,7 @@ class PaymentAccounts extends Component {
               <PaymentCard
                 acct={acct}
                 key={idx}
-                getPaymentAccountId={this.handlePaymentOption}
+                paymentAccountId={this.handlePaymentOption}
               />
             ))}
           </div>
@@ -47,7 +47,7 @@ class PaymentAccounts extends Component {
 
         <PaymentForm />
         <div className="paymentActBtnDiv">
-          <CheckoutButton />
+          <CheckoutButton paymentId={this.state.optionSelected} />
           <button
             type="button"
             onClick={() => this.props.history.goBack()}
