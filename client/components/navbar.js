@@ -19,8 +19,6 @@ class Navbar extends Component {
 
   render() {
     const {handleClick, isLoggedIn, isAdmin, user, cartDetail} = this.props;
-    if (cartDetail && cartDetail.length)
-      console.log('navbar render -', cartDetail);
 
     return (
       <div className="navBarDiv">

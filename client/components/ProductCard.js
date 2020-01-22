@@ -38,7 +38,7 @@ const ProductCard = props => {
         <h4>
           Price: {`$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
         </h4>
-        {!updatedQty ? (
+        {updatedQty < 1 ? (
           <h4 className="noQtyText">Out of Stock</h4>
         ) : (
           <h4>Quantity: {updatedQty}</h4>

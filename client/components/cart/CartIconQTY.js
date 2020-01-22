@@ -8,7 +8,6 @@ class CartIconQTY extends React.Component {
   getCartQTY(cart) {
     if (cart) {
       return cart.reduce((accum, val) => {
-        // console.log('INSIDE -', accum, val);
         return accum + val.quantity;
       }, 0);
     }
@@ -16,8 +15,6 @@ class CartIconQTY extends React.Component {
 
   render() {
     const {cartDetail} = this.props;
-    // if (cartDetail && cartDetail.length)
-    // console.log('qty render -', cartDetail);
 
     return (
       <div className="cart-qty-div">
