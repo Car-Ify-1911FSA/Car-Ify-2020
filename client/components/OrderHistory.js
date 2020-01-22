@@ -9,35 +9,41 @@ class orderHistory extends Component {
     }
   }
 
+  cartSort(time) {}
+
   render() {
     const orderHistory = this.props.orderHistory;
-    console.log('createdAt', orderHistory[0]);
+    // console.log('createdAt', orderHistory[0].time);
+    // for(let key in orderHistory[0]){
+    //   console.log(key, orderHistory[0][key])
+    // }
     return (
-      <div>
-        {orderHistory.map(cart => {
-          return (
-            <div>
-              <h1 key="hello">{cart.status}</h1>
-              <h1 key="hello">{cart.time}</h1>
-              <h1 key="bye">
-                {cart.products.map(product => {
-                  return (
-                    <div key="o">
-                      <div>{product.brand}</div>
-                      <div>{product.model}</div>
-                      <div>{product.categor}y</div>
-                      <div>{product.color}</div>
-                      <div>{product.price}</div>
-                      <div>{product.brand}</div>
-                      <img src={product.imageUrl} />
-                    </div>
-                  );
-                })}
-              </h1>
-            </div>
-          );
-        })}
-      </div>
+      <h1>HELLO</h1>
+      // <div>
+      //   {orderHistory.map(cart => {
+      //     return (
+      //       <div>
+      //         <div key="cartStatus">{cart.status}</div>
+      //         <div key="cartTime">{cart.time}</div>
+      //         <div key="cartProducts">
+      //           {cart.products.map(product => {
+      //             return (
+      //               <div key="product">
+      //                 <div>{product.brand}:</div>
+      //                 <div>{product.model}</div>
+      //                 <div>{product.categor}y</div>
+      //                 <div>{product.color}</div>
+      //                 <div>{product.price}</div>
+      //                 <div>{product.brand}</div>
+      //                 <img src={product.imageUrl} />
+      //               </div>
+      //             );
+      //           })}
+      //         </div>
+      //       </div>
+      //     );
+      //   })}
+      // </div>
     );
   }
 }

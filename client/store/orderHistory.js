@@ -17,7 +17,14 @@ export const getOrderHistoryThunk = userId => {
     try {
       console.log('thunky 1', userId);
       const {data} = await axios.get(`/api/cart/${userId}`);
-      const cartHistory = data.filter(cart => cart.status !== 'active');
+      const dateConverter = elem => {
+        const year = elem.time.slice(0, 4);
+        const monthAndDay = elem.time.slice(5, 10);
+        elem.time = monthAndDay + '-' + year;
+        return elem;
+      };
+      const filteredData = data.filter(cart => cart.status !== 'active');
+      const cartHistory = filteredData.map(dateConverter);
       dispatch(getOrderHistory(cartHistory));
     } catch (error) {
       console.error(error);
