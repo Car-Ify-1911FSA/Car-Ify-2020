@@ -63,8 +63,6 @@ class PaymentAccounts extends Component {
         <PaymentForm updateSetter={this.updateSetter} />
 
         <div className="paymentActBtnDiv">
-          <CheckoutButton paymentState={this.state} />
-
           {!this.props.userId ? (
             <button
               type="button"
@@ -84,7 +82,8 @@ class PaymentAccounts extends Component {
           >
             Go Back
           </button>
-          <CheckoutButton paymentAccountId={this.state.optionSelected} />
+
+          <CheckoutButton paymentState={this.state} />
         </div>
       </div>
     );

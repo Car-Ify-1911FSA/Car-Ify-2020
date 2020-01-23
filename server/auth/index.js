@@ -1,5 +1,11 @@
 const router = require('express').Router();
-const {User, Cart, CartProduct, PaymentAccount} = require('../db/models');
+const {
+  User,
+  Cart,
+  CartProduct,
+  Product,
+  PaymentAccount
+} = require('../db/models');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
@@ -124,7 +130,6 @@ let guestCount = 0;
 
 router.post('/guest', async (req, res, next) => {
   try {
-    console.log('GETTING IT GOING -', req.body);
     const {paymentTypeId, paymentAccount, cartDetail} = req.body;
 
     // CREATE NEW USER
@@ -152,12 +157,23 @@ router.post('/guest', async (req, res, next) => {
     });
 
     // CREATE NEW DETAIL ITEMS IN NEW CART
-    const promises = cartDetail.map(async item => {
+    const createPromise = cartDetail.map(async item => {
       item.cartId = cart.dataValues.id;
       const response = await CartProduct.create(item);
       return response;
     });
-    await Promise.all(promises);
+    await Promise.all(createPromise);
+
+    // DECREMENT QUANTITY FROM PRODUCT TABLE
+    const updatePromise = cartDetail.map(async item => {
+      const targetProduct = await Product.findOne({
+        where: {id: item.productId}
+      });
+      await targetProduct.update({
+        quantity: targetProduct.quantity - item.quantity
+      });
+    });
+    await Promise.all(updatePromise);
 
     // SEND SUCCESS MESSAGE (NO NEED FOR DATA SINCE WON'T USE)
     res
