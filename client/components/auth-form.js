@@ -32,7 +32,10 @@ class AuthForm extends Component {
     if (evt.target.name === 'signup') {
       const name = evt.target.userName.value;
       userObj.name = name;
-      if (name.toLowerCase() === 'guest') {
+      if (evt.target.email.value.toLowerCase().startsWith('guest')) {
+        alert('Please use another email');
+        evt.target.email.value = '';
+      } else if (name.toLowerCase() === 'guest') {
         alert('Please use another name');
         evt.target.userName.value = '';
       } else this.props.auth(userObj);
