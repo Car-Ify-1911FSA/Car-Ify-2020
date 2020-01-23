@@ -663,9 +663,9 @@ h4 {
   word-break: normal;
   border-top-width: 1px;
   border-bottom-width: 1px;
-  border-color: #aaa;
+  border-color: rgb(151, 151, 151);
   color: #fff;
-  background: grey;
+  background: rgb(151, 151, 151);
 }
 
 .cart-center {
@@ -686,28 +686,39 @@ h4 {
   border-bottom-width: 1px;
   width: 98.9%;
   background: rgba(102, 50, 36, 0.927);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .cart-margin {
-  margin: 1rem;
+  padding: 1rem;
+  background-color: rgb(151, 151, 151);
+  width: 96.8%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .view-full {
-  text-align: center;
   color: black;
-
   background-color: rgb(151, 151, 151);
   font-size: medium;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
+  align-content: center;
   width: 20%;
-  height: 30px;
+  height: 50px;
   border-radius: 5px;
   border-style: solid;
   border-color: black;
 }
+
+.space {
+  background-color: white;
+  padding: 2%;
+}
+
 /* -------------------ADMIN-HOME ----------- */
 
 /* .admin-page {

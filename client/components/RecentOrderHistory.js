@@ -48,6 +48,7 @@ class recentHistory extends Component {
                   );
                 })}
               </div>
+              <div className="space" />
             </div>
           );
         })}

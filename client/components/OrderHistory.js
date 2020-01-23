@@ -56,6 +56,7 @@ class orderHistory extends Component {
                   );
                 })}
               </div>
+              <div className="space" />
             </div>
           );
         })}
