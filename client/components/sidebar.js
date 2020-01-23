@@ -105,7 +105,7 @@ class Sidebar extends Component {
           </select>
         </div>
 
-        <div className="sideBarPriceDiv">
+        {/* <div className="sideBarPriceDiv">
           <strong>Price: </strong>
           <br />
           <select
@@ -118,7 +118,7 @@ class Sidebar extends Component {
             <option>Medium</option>
             <option>High</option>
           </select>
-        </div>
+        </div> */}
 
         <Link
           to={{

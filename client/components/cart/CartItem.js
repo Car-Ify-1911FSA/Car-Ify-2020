@@ -66,12 +66,14 @@ class CartItem extends Component {
 
           <button
             type="button"
+            className="qty-btn"
             onClick={() => this.editQty(userId, order, 'decrement')}
           >
             -
           </button>
           <button
             type="button"
+            className="qty-btn"
             onClick={() => this.editQty(userId, order, 'increment')}
           >
             +

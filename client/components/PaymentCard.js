@@ -16,16 +16,24 @@ class PaymentCard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="paymentCardFullDiv">
         {this.props.acct.payment ? (
-          <div>
+          <div className="paymentCardInsideDiv">
             <input
               type="radio"
               name="button"
               id={this.props.acct.payment.type}
               onClick={this.handleClick}
+              className="paymentCardCheckbox"
             ></input>
-            <label>{`Type: ${this.props.acct.payment.type} || Account: ${this.props.acct.name}`}</label>
+            <label className="paymentCardLabel">
+              <span className="paymentCardSpan">Type: </span>{' '}
+              {this.props.acct.payment.type}
+            </label>
+            <label className="paymentCardLabel">
+              <span className="paymentCardSpan">Account: </span>{' '}
+              {this.props.acct.name}
+            </label>
           </div>
         ) : null}
       </div>

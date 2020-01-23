@@ -113,7 +113,7 @@ h4 {
 .sideBarDiv {
   position: sticky;
   top: 60px;
-  background-color: lightpink;
+  background-color: lightsteelblue;
   width: 10vw;
   min-width: 175px;
   height: 92vh;
@@ -129,7 +129,7 @@ h4 {
 }
 
 .sideBarSubmitBtn {
-  background-color: lightseagreen;
+  background-color: lightskyblue;
   width: 85%;
   height: 30px;
   font-size: medium;
@@ -174,7 +174,18 @@ h4 {
 
 /* ----------------- HOME PAGE ELEMENT ----------------- */
 .hpLoggedInWelcome {
-  color: black;
+  color: rgb(10, 106, 250);
+}
+
+.top3FullDiv {
+  background-color: rgba(234, 234, 234, 1);
+  border-radius: 5px;
+  margin: 0 50px;
+  padding: 20px;
+}
+
+.top3Header {
+  margin-bottom: 15px;
 }
 
 /* ----------------- ALL PRODUCT ------------------ */
@@ -211,6 +222,7 @@ h4 {
 .card-img {
   width: 200px;
   height: 150px;
+  border-radius: 5px;
 }
 
 .noQtyText {
@@ -283,15 +295,16 @@ h4 {
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 120, 154, 0.927);
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 10px;
   margin-bottom: 25px;
   margin-top: 25px;
+  width: 600px;
+  height: 90px;
 }
 
 .cartBtnDiv {
   display: flex;
-  justify-content: space-around;
   width: 30%;
 }
 
@@ -308,6 +321,28 @@ h4 {
   border-width: 1px;
   border-color: gray;
   border-radius: 5px;
+  margin-right: 15px;
+  padding: 0;
+}
+
+.cartTotalItems {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cartTotalTextDiv {
+  background-color: lightgray;
+  margin-right: 10px;
+  width: 250px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.cartTotalText {
+  font-size: 20px;
 }
 
 /* ----------------- CART ITEM ELEMENT ----------------- */
@@ -325,12 +360,18 @@ h4 {
   width: 200px;
 }
 
+.qty-btn {
+  border-radius: 5px;
+  margin-right: 3px;
+  font-size: 14px;
+}
+
 /* ----------------- PAYMENT ACCOUNTS ----------------- */
 .paymentActsDiv {
   display: flex;
   flex-direction: column;
   background-color: lightgray;
-  width: 70%;
+  width: 60%;
   border-radius: 10px;
   padding: 10px;
   margin: 25px 0;
@@ -375,6 +416,9 @@ h4 {
 
 /* ----------------- PAYMENT FORM ----------------- */
 .paymentFormFullDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   width: 45vw;
   min-height: 100px;
   padding: 10px;
@@ -386,7 +430,8 @@ h4 {
 .paymentFormInsideDiv {
   display: flex;
   width: 100%;
-  margin: 15px 0;
+  margin: 10px 0;
+  margin-bottom: 20px;
   justify-content: space-around;
 }
 
@@ -427,11 +472,28 @@ h4 {
   height: 35px;
   width: 90%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
   padding: 5px;
   margin: 10px 0;
   border-radius: 5px;
+}
+
+.paymentCardCheckbox {
+  transform: scale(1.2);
+}
+
+.paymentCardInsideDiv {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.paymentCardSpan {
+  font-weight: bold;
+}
+
+.paymentCardLabel {
+  width: 200px;
 }
 
 /* -----------------TABLE CART ---------------- */
@@ -439,13 +501,14 @@ h4 {
   border-collapse: collapse;
   border-spacing: 0;
   border-color: rgb(65, 47, 47);
+  border-radius: 5px;
   width: 100%;
 }
 
 .tg td {
   font-family: Arial, sans-serif;
   font-size: 14px;
-  padding: 10px 5px;
+  padding: 10px 15px;
   border-style: solid;
   border-width: 0px;
   overflow: hidden;
@@ -459,9 +522,9 @@ h4 {
 
 .tg th {
   font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  padding: 10px 5px;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 8px 5px;
   border-style: solid;
   border-width: 0px;
   overflow: hidden;
@@ -476,6 +539,16 @@ h4 {
 .tg .tg-cly1 {
   text-align: left;
   vertical-align: middle;
+  font-size: 17px;
+}
+
+.tg .tableHeader {
+  text-align: center;
+}
+
+.tg-cly1 {
+  width: 100px;
+  height: 40px;
 }
 
 .qty-row {

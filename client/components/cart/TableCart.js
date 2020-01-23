@@ -5,13 +5,13 @@ const TableCart = props => {
   return (
     <table className="tg">
       <thead>
-        <tr>
-          <th className="tg-cly1">Image</th>
-          <th className="tg-cly1">Make</th>
-          <th className="tg-cly1">Model</th>
-          <th className="tg-cly1">QTY</th>
-          <th className="tg-cly1">Price</th>
-          <th className="tg-cly1">Total</th>
+        <tr className="tableHeader">
+          <th className="tg-cly1 tableHeader">Image</th>
+          <th className="tg-cly1 tableHeader">Make</th>
+          <th className="tg-cly1 tableHeader">Model</th>
+          <th className="tg-cly1 tableHeader">QTY</th>
+          <th className="tg-cly1 tableHeader">Price</th>
+          <th className="tg-cly1 tableHeader">Total</th>
         </tr>
       </thead>
       <tbody>
