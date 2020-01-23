@@ -686,3 +686,26 @@ h4 {
 .cart-margin {
   margin: 1rem;
 }
+
+/* -------------------ADMIN-HOME ----------- */
+
+/* .admin-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 50px;
+} */
+
+.form-prod-cont {
+  width: 30vw;
+  background-color: grey;
+  margin: 2em 0;
+}
+
+.form-prod label {
+  margin: 5px 25px;
+}
+
+.form-input {
+  margin: 0 20px;
+}

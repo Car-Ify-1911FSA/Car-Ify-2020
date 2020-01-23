@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {Product} = require('../db/models');
+const {isAdmin} = require('./security');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -23,7 +24,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/', async (req, res, next) => {
+router.put('/', isAdmin, async (req, res, next) => {
   try {
     const {productId, quantity: newQuantity} = req.body;
     const product = await Product.findByPk(productId);
@@ -34,6 +35,37 @@ router.put('/', async (req, res, next) => {
     res.status(200).json({allProducts, message: 'Edit products successfully!'});
   } catch (err) {
     next(err);
+  }
+});
+
+router.post('/', isAdmin, async (req, res, next) => {
+  try {
+    const {
+      brand,
+      model,
+      category,
+      color,
+      price,
+      condition,
+      description,
+      quantity,
+      imageUrl
+    } = req.body;
+    const newProduct = {
+      brand,
+      model,
+      category,
+      color,
+      price,
+      condition,
+      description,
+      quantity,
+      imageUrl
+    };
+    await Product.create(newProduct);
+    res.status(200).json(newProduct);
+  } catch (error) {
+    next(error);
   }
 });
 
