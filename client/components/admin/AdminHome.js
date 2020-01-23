@@ -7,7 +7,7 @@ class AdminHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userList: false,
+      userList: true,
       productList: false
     };
     this.handleProductsClick = this.handleProductsClick.bind(this);
@@ -28,11 +28,19 @@ class AdminHome extends React.Component {
     return (
       <div className="admin-page">
         <h2>Shhhhhh... Administrator {this.props.name} is working!</h2>
-        <div>
-          <button type="button" onClick={this.handleUsersClick}>
+        <div className="twoNames">
+          <button
+            type="button"
+            onClick={this.handleUsersClick}
+            className="addTwoBtn"
+          >
             Users
           </button>
-          <button type="button" onClick={this.handleProductsClick}>
+          <button
+            type="button"
+            onClick={this.handleProductsClick}
+            className="addTwoBtn"
+          >
             Products
           </button>
         </div>
