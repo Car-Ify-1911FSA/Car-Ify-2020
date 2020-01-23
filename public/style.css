@@ -72,8 +72,7 @@ h4 {
   position: sticky;
   top: 0;
   background-color: rgba(160, 160, 160, 1);
-  height: 7vh;
-  min-height: 60px;
+  height: 8vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -109,11 +108,10 @@ h4 {
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarDiv {
   position: sticky;
-  top: 60px;
   background-color: lightpink;
   width: 10vw;
   min-width: 175px;
-  height: 93vh;
+  height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

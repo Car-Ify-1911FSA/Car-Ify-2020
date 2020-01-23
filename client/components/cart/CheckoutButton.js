@@ -53,7 +53,7 @@ class CheckoutButton extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
-        this.props.getCartDetail(this.props.cart.id);
+        if (this.props.cart) this.props.getCartDetail(this.props.cart.id);
       });
     }
   }
