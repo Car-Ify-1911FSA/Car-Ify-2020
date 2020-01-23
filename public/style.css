@@ -112,6 +112,7 @@ h4 {
 /* ----------------- SIDEBAR ELEMENT ----------------- */
 .sideBarDiv {
   position: sticky;
+  top: 60px;
   background-color: lightpink;
   width: 10vw;
   min-width: 175px;
