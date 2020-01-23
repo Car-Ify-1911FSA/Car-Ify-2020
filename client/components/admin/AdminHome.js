@@ -26,7 +26,7 @@ class AdminHome extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="admin-page">
         <h2>Shhhhhh... Administrator {this.props.name} is working!</h2>
         <div>
           <button type="button" onClick={this.handleUsersClick}>

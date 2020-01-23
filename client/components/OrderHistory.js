@@ -4,6 +4,10 @@ import {getOrderHistoryThunk} from '../store/orderHistory';
 import OrderHistoryProduct from './OrderHistoryProduct';
 
 class orderHistory extends Component {
+  componentDidMount() {
+    this.props.getOrderHistory(this.props.userId);
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       this.props.getOrderHistory(this.props.userId);
