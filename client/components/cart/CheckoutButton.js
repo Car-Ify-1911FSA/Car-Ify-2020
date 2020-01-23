@@ -163,6 +163,7 @@ class CheckoutButton extends Component {
           token={onToken(this.calcTotalPrice(cartDetail), this.description)}
           currency={CURRENCY}
           stripeKey={STRIPE_PUBLISHABLE}
+          className="stripeCheckoutDiv"
         />
       </div>
     );

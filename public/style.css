@@ -339,6 +339,7 @@ h4 {
   font-weight: bold;
   height: 30px;
   width: 150px;
+  margin-right: 15px;
   border-style: solid;
   border-width: 1px;
   border-color: gray;
@@ -351,26 +352,27 @@ h4 {
 
 .checkoutBtnDiv {
   display: flex;
-  justify-content: space-evenly;
-  width: 45%;
 }
 
 .paymentActBtnDiv {
   display: flex;
-  justify-content: space-around;
   width: 50%;
+}
+
+.paymentActBackBtn {
+  margin-right: 15px;
 }
 
 .stripeCheckoutDiv {
   width: 150px;
   height: 30px;
   padding: 0px;
-  margin: 0 5px;
+  margin-right: 10px;
 }
 
 /* ----------------- PAYMENT FORM ----------------- */
 .paymentFormFullDiv {
-  width: 35vw;
+  width: 45vw;
   min-height: 100px;
   padding: 10px;
   margin: 15px 0;
@@ -380,6 +382,7 @@ h4 {
 
 .paymentFormInsideDiv {
   display: flex;
+  width: 100%;
   margin: 15px 0;
   justify-content: space-around;
 }
