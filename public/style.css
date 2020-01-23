@@ -283,7 +283,7 @@ h4 {
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 120, 154, 0.927);
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 10px;
   margin-bottom: 25px;
   margin-top: 25px;
@@ -310,6 +310,15 @@ h4 {
   border-radius: 5px;
 }
 
+.cartTotalItems {
+  display: flex;
+  color: rgba(245, 245, 245, 1);
+}
+
+.cartTotalText {
+  margin-right: 10px;
+}
+
 /* ----------------- CART ITEM ELEMENT ----------------- */
 .cartItemFullDiv {
   display: flex;
@@ -323,6 +332,12 @@ h4 {
 
 .cartItemH4 {
   width: 200px;
+}
+
+.qty-btn {
+  border-radius: 5px;
+  margin-right: 3px;
+  font-size: 14px;
 }
 
 /* ----------------- PAYMENT ACCOUNTS ----------------- */
@@ -439,13 +454,14 @@ h4 {
   border-collapse: collapse;
   border-spacing: 0;
   border-color: rgb(65, 47, 47);
+  border-radius: 5px;
   width: 100%;
 }
 
 .tg td {
   font-family: Arial, sans-serif;
   font-size: 14px;
-  padding: 10px 5px;
+  padding: 10px 15px;
   border-style: solid;
   border-width: 0px;
   overflow: hidden;
@@ -461,7 +477,7 @@ h4 {
   font-family: Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
-  padding: 10px 5px;
+  padding: 8px 5px;
   border-style: solid;
   border-width: 0px;
   overflow: hidden;
@@ -476,6 +492,17 @@ h4 {
 .tg .tg-cly1 {
   text-align: left;
   vertical-align: middle;
+}
+
+.tg-cly1 {
+  width: 100px;
+  height: 40px;
+}
+
+.tg .tableHeader {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
 }
 
 .qty-row {
