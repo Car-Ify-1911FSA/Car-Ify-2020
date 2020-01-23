@@ -557,7 +557,7 @@ h4 {
 
 /* ----------------- USER PROFILE----------------- */
 .profile-flex-box {
-  background-color: rgb(179, 101, 114);
+  background-color: lightgrey;
   margin: 50px auto;
   width: 35vw;
   height: 65vh;
@@ -571,7 +571,7 @@ h4 {
 .edit-cart {
   color: black;
   float: right;
-  background-color: rgb(151, 151, 151);
+  background-color: rgb(179, 101, 114);
   font-size: medium;
   font-weight: bold;
   display: flex;
@@ -587,7 +587,7 @@ h4 {
 .edit-profile {
   color: black;
   float: right;
-  background-color: rgb(151, 151, 151);
+  background-color: rgb(179, 101, 114);
   font-size: medium;
   font-weight: bold;
   display: flex;
