@@ -222,6 +222,7 @@ h4 {
 .card-img {
   width: 200px;
   height: 150px;
+  border-radius: 5px;
 }
 
 .noQtyText {
@@ -304,7 +305,6 @@ h4 {
 
 .cartBtnDiv {
   display: flex;
-  justify-content: space-around;
   width: 30%;
 }
 
@@ -321,6 +321,8 @@ h4 {
   border-width: 1px;
   border-color: gray;
   border-radius: 5px;
+  margin-right: 15px;
+  padding: 0;
 }
 
 .cartTotalItems {
@@ -520,8 +522,8 @@ h4 {
 
 .tg th {
   font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
+  font-size: 17px;
+  font-weight: bold;
   padding: 8px 5px;
   border-style: solid;
   border-width: 0px;
@@ -537,17 +539,16 @@ h4 {
 .tg .tg-cly1 {
   text-align: left;
   vertical-align: middle;
+  font-size: 17px;
+}
+
+.tg .tableHeader {
+  text-align: center;
 }
 
 .tg-cly1 {
   width: 100px;
   height: 40px;
-}
-
-.tg .tableHeader {
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
 }
 
 .qty-row {
