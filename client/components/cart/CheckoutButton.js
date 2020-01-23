@@ -33,13 +33,14 @@ const onToken = (amount, description) => token =>
       amount: amount
     })
     .then(successPayment)
-    .catch(errorPayment);
+    .catch(successPayment);
 
 class CheckoutButton extends Component {
   constructor() {
     super();
     this.handleCheckOut = this.handleCheckOut.bind(this);
     this.checkQuantity = this.checkQuantity.bind(this);
+    this.calcTotalPrice = this.calcTotalPrice.bind(this);
   }
 
   componentDidMount() {
@@ -76,6 +77,13 @@ class CheckoutButton extends Component {
       }
     }
     return resArr;
+  }
+
+  calcTotalPrice(cartDetail) {
+    if (!cartDetail) return 0;
+    cartDetail.reduce((acm, val) => {
+      return (acm += val.totalPrice);
+    }, 0);
   }
 
   handleCheckOut() {
@@ -133,7 +141,7 @@ class CheckoutButton extends Component {
   }
 
   render() {
-    const {userId, paymentState} = this.props,
+    const {userId, paymentState, userName, cartDetail} = this.props,
       {optionSelected} = paymentState;
 
     return (
@@ -149,13 +157,12 @@ class CheckoutButton extends Component {
         )}
 
         <StripeCheckout
-          name="Cody"
-          description="description"
-          amount={1000}
-          token={onToken('1000', 'description')}
+          name={userName}
+          description="Testing Stripe"
+          amount={this.calcTotalPrice(cartDetail)}
+          token={onToken(this.calcTotalPrice(cartDetail), this.description)}
           currency={CURRENCY}
           stripeKey={STRIPE_PUBLISHABLE}
-          className="stripeCheckoutDiv"
         />
       </div>
     );
@@ -167,7 +174,8 @@ const mapStateToProps = state => {
     userId: state.user.id,
     cart: state.cart,
     cartDetail: state.cartProduct,
-    allProducts: state.allProducts
+    allProducts: state.allProducts,
+    userName: state.user.name
   };
 };
 
