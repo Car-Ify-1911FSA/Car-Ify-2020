@@ -114,7 +114,6 @@ class CheckoutButton extends Component {
       }
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
-      console.log('HERE WE GO ! - ', this.props);
       this.checkQuantity(cartDetail, allProdHash);
       const guestObj = {
         paymentAccount,
@@ -124,6 +123,7 @@ class CheckoutButton extends Component {
       };
       this.props.guestCheckOut(guestObj);
       localStorage.clear();
+      this.props.getCartDetail(false, false);
       this.props.history.push('/');
     }
   }

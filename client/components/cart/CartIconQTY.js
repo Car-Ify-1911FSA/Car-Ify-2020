@@ -10,7 +10,7 @@ class CartIconQTY extends React.Component {
       return cart.reduce((accum, val) => {
         return accum + val.quantity;
       }, 0);
-    }
+    } else return 0;
   }
 
   render() {
