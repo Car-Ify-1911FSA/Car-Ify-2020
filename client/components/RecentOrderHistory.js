@@ -5,6 +5,10 @@ import {getOrderHistoryThunk} from '../store/orderHistory';
 import OrderHistoryProduct from './OrderHistoryProduct';
 
 class recentHistory extends Component {
+  componentDidMount() {
+    this.props.getOrderHistory(this.props.userId);
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       this.props.getOrderHistory(this.props.userId);
@@ -44,6 +48,7 @@ class recentHistory extends Component {
                   );
                 })}
               </div>
+              <div className="space" />
             </div>
           );
         })}
