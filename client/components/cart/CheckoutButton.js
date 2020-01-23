@@ -53,7 +53,7 @@ class CheckoutButton extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       Promise.all([this.props.getCart(this.props.userId)]).then(() => {
-        this.props.getCartDetail(this.props.cart.id);
+        if (this.props.cart) this.props.getCartDetail(this.props.cart.id);
       });
     }
   }
@@ -93,16 +93,14 @@ class CheckoutButton extends Component {
         payment: paymentType,
         inputField: paymentAccount,
         paymentTypeId
-      } = paymentState;
+      } = paymentState,
+      allProdHash = {};
 
-    const test = false;
+    for (let prod of allProducts) allProdHash[prod.id] = prod;
+
+    const test = true;
     if (userId && test) {
       // LOGGED IN USER SO IMPACT DB
-      let allProdHash = {};
-      for (let prod of allProducts) {
-        allProdHash[prod.id] = prod;
-      }
-
       if (this.checkQuantity(cartDetail, allProdHash)) {
         // UPDATING PRODUCT TABLE WITH DECREMENTED QUANTITES
         let prodQuantity = this.checkQuantity(cartDetail, allProdHash);
@@ -124,7 +122,11 @@ class CheckoutButton extends Component {
       }
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
-      console.log('HERE WE GO ! - ', this.props);
+      if (!paymentAccount) {
+        alert('Please enter an Account Name');
+        return;
+      }
+      this.checkQuantity(cartDetail, allProdHash);
       const guestObj = {
         paymentAccount,
         paymentTypeId,
@@ -133,25 +135,18 @@ class CheckoutButton extends Component {
       };
       this.props.guestCheckOut(guestObj);
       localStorage.clear();
+      this.props.getCartDetail(false, false);
       this.props.history.push('/');
     }
   }
 
   render() {
-    console.log(this.props.paymentState);
-    const {userId, paymentAccountId, userName, cartDetail} = this.props;
+    const {userId, paymentState, userName, cartDetail} = this.props,
+      {optionSelected} = paymentState;
+
     return (
       <div className="checkoutBtnDiv">
-        <StripeCheckout
-          name={userName}
-          description="Testing Stripe"
-          amount={this.calcTotalPrice(cartDetail)}
-          token={onToken(this.calcTotalPrice(cartDetail), this.description)}
-          currency={CURRENCY}
-          stripeKey={STRIPE_PUBLISHABLE}
-        />
-
-        {userId && !paymentAccountId ? null : (
+        {userId && !optionSelected ? null : (
           <button
             type="button"
             className="checkoutBtn linkText"
@@ -160,6 +155,16 @@ class CheckoutButton extends Component {
             Check Out !
           </button>
         )}
+
+        <StripeCheckout
+          name={userName}
+          description="Testing Stripe"
+          amount={this.calcTotalPrice(cartDetail)}
+          token={onToken(this.calcTotalPrice(cartDetail), this.description)}
+          currency={CURRENCY}
+          stripeKey={STRIPE_PUBLISHABLE}
+          className="stripeCheckoutDiv"
+        />
       </div>
     );
   }

@@ -82,7 +82,7 @@ class PaymentForm extends Component {
           </div>
 
           <form className="paymentFormForm">
-            <label htmlFor="input">Input: </label>
+            <label htmlFor="input">Account Name: </label>
             <input
               name="input"
               placeholder="Account Name"
