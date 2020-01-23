@@ -114,6 +114,10 @@ class CheckoutButton extends Component {
       }
     } else {
       // GUEST SHOULDN'T HAVE ACCESS TO PAYMENT PAGE SO PUSH TO HOME
+      if (!paymentAccount) {
+        alert('Please enter an Account Name');
+        return;
+      }
       this.checkQuantity(cartDetail, allProdHash);
       const guestObj = {
         paymentAccount,
