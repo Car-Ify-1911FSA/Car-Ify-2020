@@ -181,7 +181,11 @@ h4 {
   background-color: rgba(234, 234, 234, 1);
   border-radius: 5px;
   margin: 0 50px;
-  padding: 15px;
+  padding: 20px;
+}
+
+.top3Header {
+  margin-bottom: 15px;
 }
 
 /* ----------------- ALL PRODUCT ------------------ */
@@ -294,6 +298,7 @@ h4 {
   padding: 10px;
   margin-bottom: 25px;
   margin-top: 25px;
+  width: 600px;
 }
 
 .cartBtnDiv {
@@ -319,11 +324,22 @@ h4 {
 
 .cartTotalItems {
   display: flex;
-  color: rgba(245, 245, 245, 1);
+  justify-content: space-around;
+}
+
+.cartTotalTextDiv {
+  background-color: lightgray;
+  margin-right: 10px;
+  width: 250px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 
 .cartTotalText {
-  margin-right: 10px;
+  font-size: 20px;
 }
 
 /* ----------------- CART ITEM ELEMENT ----------------- */

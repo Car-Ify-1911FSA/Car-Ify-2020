@@ -90,12 +90,16 @@ class Cart extends Component {
         <div className="cartTotalDiv">
           <h3 className="headerDiv">Cart Summary</h3>
           <div className="cartTotalItems">
-            <h4 className="cartTotalText">
-              Total Quantity: {this.calcTotalQuantity(cartDetail)}
-            </h4>
-            <h4 className="cartTotalText">
-              Total Price: {this.calcTotalPrice(cartDetail)}
-            </h4>
+            <div className="cartTotalTextDiv">
+              <h4 className="cartTotalText">
+                Total Quantity: {this.calcTotalQuantity(cartDetail)}
+              </h4>
+            </div>
+            <div className="cartTotalTextDiv">
+              <h4 className="cartTotalText">
+                Total Price: {this.calcTotalPrice(cartDetail)}
+              </h4>
+            </div>
           </div>
         </div>
 
