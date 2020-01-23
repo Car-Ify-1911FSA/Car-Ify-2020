@@ -5,7 +5,7 @@ import Routes from './routes';
 
 const App = () => {
   return (
-    <div>
+    <div className="nav-position">
       <Navbar />
       <div className="belowNavDiv">
         <Sidebar />

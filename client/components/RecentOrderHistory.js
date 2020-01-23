@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {getOrderHistoryThunk} from '../store/orderHistory';
 import OrderHistoryProduct from './OrderHistoryProduct';
 
-class orderHistory extends Component {
-  componentDidMount() {
-    this.props.getOrderHistory(this.props.userId);
-  }
-
+class recentHistory extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       this.props.getOrderHistory(this.props.userId);
@@ -24,23 +21,14 @@ class orderHistory extends Component {
     }
   }
 
-  recentThree(cartHistory) {
-    if (cartHistory.length) {
-      if (cartHistory.length > 3) {
-        return cartHistory;
-      } else {
-        return [cartHistory.shift(), cartHistory.shift(), cartHistory.shift()];
-      }
-    }
-  }
-
   render() {
-    const {orderHistory, username} = this.props;
+    console.log(this.props);
+    const {recentHistory, username} = this.props;
 
     return (
       <div>
-        <h1>Full Order History:</h1>
-        {orderHistory.map(cart => {
+        <h1>{username}'s Most Recent History:</h1>
+        {recentHistory.map(cart => {
           return (
             <div>
               <div className="cart-center">
@@ -59,6 +47,9 @@ class orderHistory extends Component {
             </div>
           );
         })}
+        <Link to={`/orderHistory/${this.props.userId}`} className="view-full">
+          <div>View Full Order History</div>
+        </Link>
       </div>
     );
   }
@@ -68,7 +59,7 @@ const mapStateToProps = state => {
   return {
     userId: state.user.id,
     username: state.user.name,
-    orderHistory: state.orderHistory
+    recentHistory: state.orderHistory.slice(0, 3)
   };
 };
 
@@ -78,4 +69,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(orderHistory);
+export default connect(mapStateToProps, mapDispatchToProps)(recentHistory);
