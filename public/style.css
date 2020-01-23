@@ -676,3 +676,20 @@ h4 {
 .cart-margin {
   margin: 1rem;
 }
+
+.view-full {
+  text-align: center;
+  color: black;
+
+  background-color: rgb(151, 151, 151);
+  font-size: medium;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 30px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+}
