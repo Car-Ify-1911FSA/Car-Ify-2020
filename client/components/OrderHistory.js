@@ -20,9 +20,19 @@ class orderHistory extends Component {
     }
   }
 
+  recentThree(cartHistory) {
+    if (cartHistory.length) {
+      if (cartHistory.length > 3) {
+        return cartHistory;
+      } else {
+        return [cartHistory.shift(), cartHistory.shift(), cartHistory.shift()];
+      }
+    }
+  }
+
   render() {
     const {orderHistory, username} = this.props;
-
+    this.recentThree(orderHistory);
     return (
       <div>
         <h1>{username}'s Order History:</h1>
