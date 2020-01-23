@@ -545,12 +545,13 @@ h4 {
 .user-list-cont {
   display: flex;
   flex-direction: column;
+  width: 72vw;
 }
 
 .user-col {
   display: flex;
-  width: 60vw;
-  background-color: rgb(111, 111, 189);
+  width: 72vw;
+  background-color: rgba(0, 120, 154, 0.927);
   height: 30px;
   align-items: center;
 }
@@ -562,7 +563,7 @@ h4 {
 
 .user-list-row {
   display: flex;
-  width: 60vw;
+  width: 72vw;
   justify-content: space-evenly;
 }
 
@@ -580,7 +581,7 @@ h4 {
 .prod-col {
   display: flex;
   width: 72vw;
-  background-color: rgb(111, 111, 189);
+  background-color: rgba(0, 120, 154, 0.927);
   height: 30px;
   align-items: center;
 }
@@ -588,7 +589,7 @@ h4 {
 .prod-list-row {
   display: flex;
   width: 72vw;
-  height: 55px;
+  height: 70px;
   justify-content: space-evenly;
   align-content: center;
 }
@@ -718,15 +719,66 @@ h4 {
 } */
 
 .form-prod-cont {
-  width: 30vw;
-  background-color: grey;
+  width: 27vw;
+  background-color: rgba(0, 120, 154, 0.927);
   margin: 2em 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+}
+
+.form-prod-cont h2 {
+  align-self: center;
+}
+
+.form-prod {
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .form-prod label {
-  margin: 5px 25px;
+  margin-right: 1em;
+}
+.form-prod button {
+  font-size: 16px;
+  font-weight: bold;
+
+  height: 20px;
+  width: 70px;
+  align-self: center;
+  background-color: black;
+  color: rgba(0, 120, 154, 0.927);
+  border-radius: 20px;
+  margin: 0 0 3px 10em;
 }
 
 .form-input {
-  margin: 0 20px;
+  height: 12px;
+  width: 20em;
 }
+
+.form-pair {
+  display: flex;
+}
+
+.form-pair label {
+  width: 5em;
+}
+
+/* .addTwoBtn {
+  background-color: rgba(0, 120, 154, 0.927);
+  width: 10%;
+  height: 30px;
+  font-size: medium;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+  margin-bottom: 2em;
+  padding: 30px;
+}
+
+.twoNames {
+  display: flex;
+  margin-top: 2em;
+  width: 72vw;
+} */

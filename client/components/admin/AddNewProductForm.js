@@ -40,10 +40,10 @@ class AddNewProductForm extends React.Component {
   render() {
     return (
       <div className="form-prod-cont">
+        <h2>Add New Product:</h2>
         <form onSubmit={this.handleSubmit} className="form-prod">
-          <h2>Add New Product:</h2>
-          <label>
-            Make:
+          <div className="form-pair">
+            <label>Make:</label>
             <input
               className="form-input"
               type="text"
@@ -51,9 +51,10 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.brand}
             />
-          </label>
-          <label>
-            Model:
+          </div>
+
+          <div className="form-pair">
+            <label>Model:</label>
             <input
               className="form-input"
               type="text"
@@ -61,9 +62,10 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.model}
             />
-          </label>
-          <label>
-            Category:
+          </div>
+
+          <div className="form-pair">
+            <label>Category:</label>
             <input
               className="form-input"
               type="text"
@@ -71,9 +73,10 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.category}
             />
-          </label>
-          <label>
-            Color:
+          </div>
+
+          <div className="form-pair">
+            <label>Color:</label>
             <input
               className="form-input"
               type="text"
@@ -81,9 +84,10 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.color}
             />
-          </label>
-          <label>
-            Price:
+          </div>
+
+          <div className="form-pair">
+            <label>Price:</label>
             <input
               className="form-input"
               type="text"
@@ -91,9 +95,10 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.price}
             />
-          </label>
-          <label>
-            Quantity:
+          </div>
+
+          <div className="form-pair">
+            <label>Quantity:</label>
             <input
               className="form-input"
               type="text"
@@ -101,9 +106,10 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.quantity}
             />
-          </label>
-          <label>
-            ImageUrl:
+          </div>
+
+          <div className="form-pair">
+            <label>ImageUrl:</label>
             <input
               className="form-input"
               type="text"
@@ -111,9 +117,10 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.imageUrl}
             />
-          </label>
-          <label>
-            Condition:
+          </div>
+
+          <div className="form-pair">
+            <label>Condition:</label>
             <select
               className="form-input"
               value={this.state.condition}
@@ -123,9 +130,10 @@ class AddNewProductForm extends React.Component {
               <option>New</option>
               <option>Used</option>
             </select>
-          </label>
-          <label>
-            Description:
+          </div>
+
+          <div className="form-pair">
+            <label>Description:</label>
             <input
               className="form-input"
               type="text"
@@ -133,7 +141,7 @@ class AddNewProductForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.description}
             />
-          </label>
+          </div>
           <button type="submit">Add</button>
         </form>
       </div>

@@ -31,7 +31,11 @@ class ListOfAllProducts extends React.Component {
       <div>
         <div>
           <h1>Product List:</h1>
-          <button type="button" onClick={this.handleButtonClick}>
+          <button
+            type="button"
+            onClick={this.handleButtonClick}
+            className="addTwoBtn"
+          >
             Add New
           </button>
         </div>
@@ -57,7 +61,6 @@ class ListOfAllProducts extends React.Component {
                   <h4>{product.color}</h4>
                   <h4>{product.price}</h4>
                   <h4>{product.quantity}</h4>
-                  <button type="button">edit</button>
                 </div>
               );
             })}
