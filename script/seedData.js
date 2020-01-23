@@ -59,8 +59,8 @@ const productSeed = [
     quantity: 8,
     imageUrl:
       'https://blogmedia.dealerfire.com/wp-content/uploads/sites/1050/2019/04/Radiant-Red-Metallic_o.jpg',
-    totalRating: 32,
-    numberRating: 8
+    totalRating: 5,
+    numberRating: 5
   },
   {
     brand: 'Volvo',
