@@ -174,7 +174,14 @@ h4 {
 
 /* ----------------- HOME PAGE ELEMENT ----------------- */
 .hpLoggedInWelcome {
-  color: black;
+  color: rgb(10, 106, 250);
+}
+
+.top3FullDiv {
+  background-color: rgba(234, 234, 234, 1);
+  border-radius: 5px;
+  margin: 0 50px;
+  padding: 15px;
 }
 
 /* ----------------- ALL PRODUCT ------------------ */

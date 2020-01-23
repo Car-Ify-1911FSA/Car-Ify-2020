@@ -11,8 +11,8 @@ class Top3Products extends Component {
 
   render() {
     return (
-      <div>
-        <h2>TOP 3</h2>
+      <div className="top3FullDiv">
+        <h2>Top 3 Products Below!</h2>
         <div className="product-card-container">
           {this.props.top3.map(product => {
             return (
