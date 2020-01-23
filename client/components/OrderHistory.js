@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getOrderHistoryThunk} from '../store/orderHistory';
+import {getRecentOrderHistoryThunk} from '../store/recentOrderHistory';
 import OrderHistoryProduct from './OrderHistoryProduct';
 
 class orderHistory extends Component {
@@ -32,7 +33,7 @@ class orderHistory extends Component {
 
   render() {
     const {orderHistory, username} = this.props;
-    this.recentThree(orderHistory);
+
     return (
       <div>
         <h1>{username}'s Order History:</h1>

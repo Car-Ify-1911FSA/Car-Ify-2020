@@ -12,6 +12,7 @@ import paymentAccounts from './paymentAccounts';
 import orderHistory from './orderHistory';
 import allUsers from './allUsers';
 import paymentOptions from './paymentOptions';
+import recentOrderHistory from './recentOrderHistory';
 
 const reducer = combineReducers({
   user,
@@ -22,7 +23,8 @@ const reducer = combineReducers({
   top3Products,
   orderHistory,
   allUsers,
-  paymentOptions
+  paymentOptions,
+  recentOrderHistory
 });
 
 const middleware = composeWithDevTools(
@@ -44,3 +46,4 @@ export * from './userProfile';
 export * from './orderHistory';
 export * from './allUsers';
 export * from './paymentOptions';
+export * from './recentOrderHistory';
