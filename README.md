@@ -1,3 +1,15 @@
+Come car shop to your heart's desire at CAR-IFY!
+
+E-Commerce platform providing guests and users browsing and purchasing capabilities
+Led full cart development for guests and users, schema designs, and frontend testing
+Collaborated with 3 full-stack engineers in a one week sprint using agile workflow
+
+Tech Stack: React, Redux, Node, Passport, Express, PostgreSQL, Mocha, Chai
+
+Deployed: https://car-ify.herokuapp.com/
+
+Github: https://github.com/Car-Ify-1911FSA/Car-Ify-2020
+
 # Boilermaker
 
 _Good things come in pairs_
