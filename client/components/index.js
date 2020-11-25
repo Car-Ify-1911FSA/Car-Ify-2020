@@ -14,6 +14,8 @@ export {default as UpdateProfile} from './UpdateProfile';
 export {default as OrderHistory} from './OrderHistory';
 export {default as CartIconQTY} from './cart/CartIconQTY';
 export {default as AdminHome} from './admin/AdminHome';
+export {default as AddNewProductForm} from './admin/AddNewProductForm';
 export {default as TableCart} from './cart/TableCart';
 export {default as PaymentForm} from './PaymentForm';
 export {default as RecentHistory} from './RecentOrderHistory';
+export {default as LoginOrSignUp} from './LoginOrSignUp';

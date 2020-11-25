@@ -14,7 +14,10 @@ import {
   UpdateProfile,
   OrderHistory,
   AdminHome,
-  RecentHistory
+  RecentHistory,
+  Sidebar,
+  AddNewProductForm,
+  LoginOrSignUp
 } from './components';
 import {me} from './store';
 
@@ -38,17 +41,10 @@ class Routes extends Component {
     const {isAdmin} = this.props;
     return (
       <Switch>
-        <Route exact path="/" component={UserHome} />
-        <Route
-          path="/signIn"
-          render={props => (
-            <div className="signInFullDiv">
-              <Login />
-              <Signup />
-            </div>
-          )}
-        />
         <Route path="/allProducts" component={AllProducts} />
+        <Route path="/signin" component={LoginOrSignUp} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
         <Route path="/product/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
         <Route path="/paymentAccounts" component={PaymentAccounts} />
@@ -56,12 +52,14 @@ class Routes extends Component {
         <Route path="/updateProfile/:id" component={UpdateProfile} />
         <Route path="/orderHistory/:id" component={OrderHistory} />
         <Route path="/recentOrderHistory/:id" component={RecentHistory} />
+        <Route path="/addNewProduct/:id" component={AddNewProductForm} />
         <AdminRoute
           path="/admin"
           component={AdminHome}
           condition={isAdmin}
           redirect="/"
         />
+        <Route path="/" component={UserHome} />
       </Switch>
     );
   }

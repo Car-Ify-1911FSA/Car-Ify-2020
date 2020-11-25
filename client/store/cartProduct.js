@@ -9,7 +9,7 @@ const ADD_CART_ITEMS = 'ADD_CART_ITEMS';
 const EMPTY_CART_ITEMS = 'EMPTY_CART_ITEMS';
 
 // ACTION CREATORS
-const getCartItems = cartDetail => {
+export const getCartItems = (cartDetail, idx1, idx2) => {
   return {
     type: GET_CART_ITEMS,
     cartDetail

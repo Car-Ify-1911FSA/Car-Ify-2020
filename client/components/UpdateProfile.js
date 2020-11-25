@@ -14,6 +14,16 @@ class UpdateProfile extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
+  }
+
+  componentWillUnmount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 1;
+  }
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -41,11 +51,11 @@ class UpdateProfile extends React.Component {
 
   render() {
     return (
-      <div className="signInFullDiv">
-        <form onSubmit={this.handleSubmit} className="profile-flex-box">
-          <h2>Update Profile:</h2>
-          <label>
-            Name:
+      <div>
+        <form onSubmit={this.handleSubmit} className="update-profile-div">
+          <h2 className="updateTitle">Update Profile</h2>
+          <div className="update-name-div">Name</div>
+          <label className="update-name">
             <input
               type="text"
               name="name"
@@ -53,8 +63,8 @@ class UpdateProfile extends React.Component {
               value={this.state.name}
             />
           </label>
-          <label>
-            Email:
+          <div className="update-email-div">Email</div>
+          <label className="update-email">
             <input
               type="text"
               name="email"
@@ -62,7 +72,9 @@ class UpdateProfile extends React.Component {
               value={this.state.email}
             />
           </label>
-          <button type="submit">Submit</button>
+          <button type="submit" className="updateSubmit">
+            Submit
+          </button>
         </form>
       </div>
     );

@@ -22,23 +22,8 @@ class UserHome extends Component {
 
     return (
       <div className="homePageDiv">
-        {isLoggedIn ? (
-          <h3>
-            Let's Keep on Shopping,{' '}
-            <Link to={`./userProfile/${userId}`}>
-              <span className="hpLoggedInWelcome">{name}</span>
-            </Link>
-          </h3>
-        ) : (
-          <h3>Remember to login or sign-up!</h3>
-        )}
-
         <br />
-        <div className="homePagePara">
-          <p>
-            Welcome to Car-Ify! Where your car shopping dreams can come true!
-          </p>
-        </div>
+        <div className="homePagePara"></div>
         <br />
         <Top3Products />
       </div>

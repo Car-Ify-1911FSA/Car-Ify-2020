@@ -53,11 +53,15 @@ class PaymentForm extends Component {
       userId,
       paymentId: optionId
     };
-    this.props.addPaymentAccount(newPaymentAccount);
-    this.setState({
-      payment: 'credit card',
-      inputField: ''
-    });
+    if (!newPaymentAccount.name) {
+      alert('Please add account name!');
+    } else {
+      this.props.addPaymentAccount(newPaymentAccount);
+      this.setState({
+        payment: 'credit card',
+        inputField: ''
+      });
+    }
   }
 
   render() {
@@ -65,11 +69,11 @@ class PaymentForm extends Component {
 
     return (
       <div className="paymentFormFullDiv">
-        <h4>Add a payment option:</h4>
+        <h4 className="add-payment">Add Payment Option</h4>
 
         <div className="paymentFormInsideDiv">
           <div className="paymentFormDropDown">
-            <label>Type: </label>
+            <label className="add-type">Type </label>
             <select
               className="paymentFormSelect"
               value={this.state.payment}
@@ -82,7 +86,9 @@ class PaymentForm extends Component {
           </div>
 
           <form className="paymentFormForm">
-            <label htmlFor="input">Account Name: </label>
+            <label htmlFor="input" className="add-account-name">
+              Account Name{' '}
+            </label>
             <input
               name="input"
               placeholder="Account Name"
@@ -104,7 +110,7 @@ class PaymentForm extends Component {
               onClick={this.handleSubmit}
               className="paymentFormButton"
             >
-              Add Payment Option
+              Add
             </button>
           ) : (
             ''

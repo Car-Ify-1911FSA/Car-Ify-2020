@@ -49,6 +49,7 @@ export const logout = () => async dispatch => {
     dispatch(removeUser());
     localStorage.clear();
     history.push('/signIn');
+    window.location.reload(false);
   } catch (err) {
     console.error(err);
   }

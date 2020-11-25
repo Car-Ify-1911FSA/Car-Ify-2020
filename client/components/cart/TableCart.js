@@ -21,7 +21,7 @@ const TableCart = props => {
             userId={props.userId}
             order={order}
             id={idx + 1}
-          />
+          ></CartItem>
         ))}
       </tbody>
     </table>

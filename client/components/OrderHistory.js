@@ -6,12 +6,19 @@ import OrderHistoryProduct from './OrderHistoryProduct';
 class orderHistory extends Component {
   componentDidMount() {
     this.props.getOrderHistory(this.props.userId);
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.userId !== prevProps.userId) {
       this.props.getOrderHistory(this.props.userId);
     }
+  }
+
+  componentWillUnmount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 1;
   }
 
   totalSum(arr) {
@@ -38,8 +45,7 @@ class orderHistory extends Component {
     const {orderHistory, username} = this.props;
 
     return (
-      <div>
-        <h1>Full Order History:</h1>
+      <div className="fullOrderHistoryDiv">
         {orderHistory.map(cart => {
           return (
             <div>

@@ -20,6 +20,13 @@ class PaymentAccounts extends Component {
 
   componentDidMount() {
     this.props.fetchAllPaymentAcct();
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
+  }
+
+  componentWillUnmount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 1;
   }
 
   handlePaymentOption(id) {
@@ -44,8 +51,8 @@ class PaymentAccounts extends Component {
     );
 
     return (
-      <div>
-        <h2>Please select your payment option or add a new one!</h2>
+      <div className="checkoutFullDiv">
+        <h2 className="payments-title">Payments</h2>
         {this.props.userId ? (
           <div className="paymentActsDiv">
             <h3 className="headerDiv">Your Payment Accounts</h3>

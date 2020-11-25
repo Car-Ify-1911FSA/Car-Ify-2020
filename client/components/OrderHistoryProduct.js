@@ -1,9 +1,11 @@
 import React from 'react';
 
 const OrderHistoryProduct = props => {
+  const element = document.querySelector('.sideBarDiv');
+  if (element) element.style.opacity = 0;
   return (
     <table className="product-table">
-      <thead>
+      <thead className="product-table-head">
         <tr>
           <th className="align-words">Image</th>
           <th className="align-words">Make</th>

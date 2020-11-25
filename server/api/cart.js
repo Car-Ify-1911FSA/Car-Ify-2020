@@ -7,12 +7,20 @@ router.get('/:userId', isUserOrAdmin, async (req, res, next) => {
     res.send('cannot access data');
   }
   try {
-    const cart = await Cart.findAll({
+    let cart = await Cart.findAll({
       where: {
         userId: req.user.id
       },
       include: [{model: Product}]
     });
+    if (!cart.length) {
+      const newCart = {
+        status: 'active',
+        time: Date(),
+        userId: req.user.id
+      };
+      cart = await Cart.create(newCart);
+    }
     res.status(200).json(cart);
   } catch (error) {
     next(error);

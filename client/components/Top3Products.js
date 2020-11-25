@@ -5,16 +5,22 @@ import {loadTop3} from '../store';
 import ProductCard from './ProductCard';
 
 class Top3Products extends Component {
+  constructor() {
+    super();
+    this.startDrag = this.startDrag.bind(this);
+  }
   componentDidMount() {
     this.props.fetchTop3();
+  }
+
+  startDrag(ev) {
+    ev.dataTransfer.setData('drag-item', this.props.dataItem);
   }
 
   render() {
     return (
       <div className="top3FullDiv">
-        <h2 className="top3Header">
-          Please see below for Car-Ify's Top 3 Featured Products!
-        </h2>
+        <h2 className="top3Header">Top Three</h2>
         <div className="product-card-container">
           {this.props.top3.map(product => {
             return (

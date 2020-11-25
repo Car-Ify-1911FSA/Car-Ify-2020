@@ -12,12 +12,20 @@ class AuthForm extends Component {
 
   componentDidMount() {
     // EMPTY CART WHEN GOING TO AUTH POST LOGGED-IN (USING GUESTCART AS PROXY)
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
+
     const guestCart = JSON.parse(localStorage.getItem('cart'));
     if (!guestCart) this.props.emptyCartItems();
   }
 
   componentDidUpdate() {
     if (this.props.user.id) this.props.history.push('/');
+  }
+
+  componentWillUnmount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 1;
   }
 
   handleSignIn(evt) {
@@ -31,13 +39,17 @@ class AuthForm extends Component {
 
     if (evt.target.name === 'signup') {
       const name = evt.target.userName.value;
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
       userObj.name = name;
-      if (evt.target.email.value.toLowerCase().startsWith('guest')) {
+      if (email.toLowerCase().startsWith('guest')) {
         alert('Please use another email');
         evt.target.email.value = '';
       } else if (name.toLowerCase() === 'guest') {
         alert('Please use another name');
         evt.target.userName.value = '';
+      } else if (email === '' || name === '' || password === '') {
+        alert('Please enter email, password and name');
       } else this.props.auth(userObj);
     } else this.props.auth(userObj);
   }
@@ -47,11 +59,11 @@ class AuthForm extends Component {
 
     return (
       <div className={`${formName}-authFormDiv authFormDiv`}>
-        <h2>{displayName}</h2>
-        <form onSubmit={this.handleSignIn} name={formName}>
+        <h2 className="formName">{displayName}</h2>
+        <form onSubmit={this.handleSignIn} name={formName} className="authForm">
           <div>
             <label htmlFor="email">
-              <small>Email:</small>
+              <small className="email">Email</small>
             </label>
             <input name="email" type="email" />
           </div>
@@ -59,7 +71,7 @@ class AuthForm extends Component {
           {formName === 'signup' ? (
             <div>
               <label htmlFor="userName">
-                <small>Name:</small>
+                <small className="name">Name</small>
               </label>
               <input name="userName" type="userName" />
             </div>
@@ -69,7 +81,7 @@ class AuthForm extends Component {
 
           <div>
             <label htmlFor="password">
-              <small>Password:</small>
+              <small className="password">Password</small>
             </label>
             <input name="password" type="password" />
           </div>
@@ -84,7 +96,12 @@ class AuthForm extends Component {
         </form>
 
         <a href="/auth/google" className="linkText">
-          {displayName} with Google
+          <img
+            src="https://cdn0.iconfinder.com/data/icons/social-icons-16/512/Google-2-512.png"
+            width="30px"
+            className="google-icon"
+          />
+          <div>{displayName} with Google </div>
         </a>
       </div>
     );

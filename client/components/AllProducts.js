@@ -25,7 +25,7 @@ class AllProducts extends Component {
 
     return (
       <div className="allProductFullDiv">
-        <h1>Our Inventory:</h1>
+        <h1 className="inventory">Inventory</h1>
         <div className="product-card-container">
           {filteredCars.map(product => {
             return (

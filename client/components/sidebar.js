@@ -58,10 +58,10 @@ class Sidebar extends Component {
 
     return (
       <div className="sideBarDiv">
-        <h4>Filter Your Search</h4>
+        <h2 className="sideBarTitle">Filter</h2>
 
         <div className="sideBarBrandDiv">
-          <strong>Brand: </strong>
+          <strong className="sideBarBrandStrong">Brand </strong>
           <br />
           <select
             className="sideBarSelect"
@@ -76,7 +76,7 @@ class Sidebar extends Component {
         </div>
 
         <div className="sideBarCategoryDiv">
-          <strong>Category: </strong>
+          <strong className="sideBarCategoryStrong">Category </strong>
           <br />
           <select
             className="sideBarSelect"
@@ -91,7 +91,7 @@ class Sidebar extends Component {
         </div>
 
         <div className="sideBarConditionDiv">
-          <strong>Condition: </strong>
+          <strong className="sideBarConditionStrong">Condition </strong>
           <br />
           <select
             className="sideBarSelect"
@@ -105,21 +105,6 @@ class Sidebar extends Component {
           </select>
         </div>
 
-        {/* <div className="sideBarPriceDiv">
-          <strong>Price: </strong>
-          <br />
-          <select
-            className="sideBarSelect"
-            value={this.state.price}
-            onChange={this.handlePriceChange}
-          >
-            <option>All</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-          </select>
-        </div> */}
-
         <Link
           to={{
             pathname: '/allProducts',
@@ -127,7 +112,7 @@ class Sidebar extends Component {
           }}
           className="sideBarSubmitBtn linkText"
         >
-          Find Cars!
+          Search
         </Link>
       </div>
     );

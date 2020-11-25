@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getActiveCart, getCartDetail} from '../../store';
 import TableCart from './TableCart';
+import axios from 'axios';
 
 class Cart extends Component {
   constructor() {
@@ -11,9 +12,12 @@ class Cart extends Component {
     this.calcTotalPrice = this.calcTotalPrice.bind(this);
     this.mergeCartProd = this.mergeCartProd.bind(this);
     this.headerText = this.headerText.bind(this);
+    this.sort = this.sort.bind(this);
   }
 
   componentDidMount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
     if (this.props.userId) {
       Promise.all([this.props.fetchCart(this.props.userId)]).then(() => {
         this.props.fetchCartDetail(this.props.cart.id);
@@ -30,6 +34,11 @@ class Cart extends Component {
         this.props.fetchCartDetail(this.props.cart.id);
       });
     }
+  }
+
+  componentWillUnmount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 1;
   }
 
   calcTotalQuantity(cartDetail) {
@@ -50,9 +59,26 @@ class Cart extends Component {
     return `$${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   }
 
+  sort(array) {
+    let moves = 1;
+    while (moves > 0) {
+      moves = 0;
+      for (let i = 1; i < array.length; i++) {
+        const element = array[i - 1],
+          element2 = array[i];
+        if (element.id > element2.id) {
+          moves++;
+          let temp = array[i - 1];
+          array[i - 1] = array[i];
+          array[i] = temp;
+        }
+      }
+    }
+    return array;
+  }
+
   mergeCartProd(cartDetail, products) {
     if (!cartDetail || !products.length) return [];
-
     const mergedArr = [];
     cartDetail.map(item => {
       const obj = {...item};
@@ -63,21 +89,24 @@ class Cart extends Component {
       obj.imageUrl = match.imageUrl;
       mergedArr.push(obj);
     });
-
     return mergedArr;
   }
 
   headerText(userName) {
-    return userName ? `${userName}'s Cart` : `Guest's Cart`;
+    return userName ? `User's Cart` : `Guest's Cart`;
   }
 
   render() {
     const {userId, userName, cartDetail, allProducts} = this.props;
-    const productDetail = this.mergeCartProd(cartDetail, allProducts);
+    const productDetail = this.sort(
+      this.mergeCartProd(cartDetail, allProducts)
+    );
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
 
     return (
       <div className="cartFullDiv">
-        <h1>{this.headerText(userName)}</h1>
+        <h1 className="cartName">{this.headerText(userName)}</h1>
 
         {!productDetail || productDetail.length < 1 ? (
           <div className="cartProductDiv">
@@ -113,7 +142,7 @@ class Cart extends Component {
                 }}
                 className="paymentLinkBtn linkText"
               >
-                Let's Pay!
+                Proceed to Checkout
               </Link>
 
               <button
@@ -125,7 +154,11 @@ class Cart extends Component {
               </button>
             </div>
           ) : (
-            <Link to="/allProducts" className="paymentLinkBtn linkText">
+            <Link
+              to="/allProducts"
+              className="paymentLinkBtn linkText"
+              id="letsShopButton"
+            >
               Let's Go Shop
             </Link>
           )}

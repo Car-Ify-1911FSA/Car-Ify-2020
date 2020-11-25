@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import AddNewProductForm from './AddNewProductForm';
 import {loadAllProducts} from '../../store';
+import {Link} from 'react-router-dom';
 
 class ListOfAllProducts extends React.Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class ListOfAllProducts extends React.Component {
     this.state = {
       showForm: false
     };
-    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -22,21 +22,20 @@ class ListOfAllProducts extends React.Component {
     }
   }
 
-  handleButtonClick() {
-    this.setState({showForm: !this.state.showForm});
-  }
-
   render() {
+    const userId = this.props.userId;
     return (
       <div>
         <div>
-          <h1>Product List:</h1>
+          <h1 className="product-list">Product List</h1>
           <button
             type="button"
             onClick={this.handleButtonClick}
-            className="addTwoBtn"
+            className="addNewProd"
           >
-            Add New
+            <Link to="/addNewProduct/${userId}" className="addNewProdText">
+              Add New
+            </Link>
           </button>
         </div>
         {this.state.showForm ? (
@@ -73,7 +72,8 @@ class ListOfAllProducts extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    allProducts: state.allProducts
+    allProducts: state.allProducts,
+    userId: state.user.id
   };
 };
 

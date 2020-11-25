@@ -149,10 +149,10 @@ class CheckoutButton extends Component {
         {userId && !optionSelected ? null : (
           <button
             type="button"
-            className="checkoutBtn linkText"
+            className="checkoutBtnBtn"
             onClick={() => this.handleCheckOut()}
           >
-            Check Out !
+            Check Out
           </button>
         )}
 

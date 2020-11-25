@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {editNewCartDetail, deleteCartDetail, getCartDetail} from '../../store';
+import axios from 'axios';
 
 class CartItem extends Component {
   constructor() {
@@ -12,7 +13,7 @@ class CartItem extends Component {
     this.props.fetchCartDetail(this.props.order.cartId);
   }
 
-  editQty(userId, order, operation) {
+  async editQty(userId, order, operation) {
     if (userId) {
       // LOGGED IN USER SO IMPACT DB
       if (order.quantity === 1 && operation === 'decrement') {
@@ -40,8 +41,14 @@ class CartItem extends Component {
         decrementItem.quantity--;
         decrementItem.totalPrice -= order.price;
       } else {
-        decrementItem.quantity++;
-        decrementItem.totalPrice += order.price;
+        const {data} = await axios.get(`/api/products/${order.productId}`);
+        const max = data.quantity;
+        if (decrementItem.quantity >= max) {
+          alert('You have acceeded the limit of this product in our inventory');
+        } else {
+          decrementItem.quantity++;
+          decrementItem.totalPrice += order.price;
+        }
       }
       if (decrementItem.quantity < 1) guestCart.splice(decrementIdx, 1);
       localStorage.setItem('cart', JSON.stringify(guestCart));

@@ -45,7 +45,7 @@ router.put('/', async (req, res, next) => {
         cartId: cartId,
         productId: productId
       }
-    });
+    }); // CART ID IS NEEDED ERROR IS HERE
     await product.update({
       quantity: product.quantity + newQuantity,
       totalPrice: product.totalPrice + newPrice

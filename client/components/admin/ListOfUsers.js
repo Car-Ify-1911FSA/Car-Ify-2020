@@ -11,7 +11,7 @@ class ListOfUsers extends React.Component {
     const allUsers = this.props.allUsers;
     return allUsers ? (
       <div>
-        <h1>All Registered Users:</h1>
+        <h1 className="all-registered-users">All Registered Users</h1>
 
         <div className="user-list-cont">
           <div className="user-col">

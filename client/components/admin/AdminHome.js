@@ -14,25 +14,37 @@ class AdminHome extends React.Component {
     this.handleUsersClick = this.handleUsersClick.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
+    const userBtn = document.querySelector('.addOneBtn');
+    if (userBtn) {
+      userBtn.focus();
+    }
+  }
+
+  componentWillUnmount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 1;
+  }
 
   handleUsersClick() {
-    this.setState({productList: false, userList: !this.state.userList});
+    this.setState({productList: false, userList: true});
   }
 
   handleProductsClick() {
-    this.setState({productList: !this.state.productList, userList: false});
+    this.setState({productList: true, userList: false});
   }
 
   render() {
     return (
       <div className="admin-page">
-        <h2>Shhhhhh... Administrator {this.props.name} is working!</h2>
+        <h1 className="administrator">Administrator</h1>
         <div className="twoNames">
           <button
             type="button"
             onClick={this.handleUsersClick}
-            className="addTwoBtn"
+            className="addOneBtn"
           >
             Users
           </button>

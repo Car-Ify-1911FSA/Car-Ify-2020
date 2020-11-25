@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {element} from 'prop-types';
+import {Link} from 'react-router-dom';
 
 class AddNewProductForm extends React.Component {
   constructor() {
@@ -13,12 +15,21 @@ class AddNewProductForm extends React.Component {
       price: '',
       description: '',
       quantity: '',
-      imageUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpaOexXQpRpu85_Xz8xHnJOL6nycw-pZZ1bezgK1Fp8VptDdBk',
+      imageUrl: '',
       condition: 'New'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const elem = document.querySelector('.sideBarDiv');
+    if (elem) elem.style.opacity = 0;
+  }
+
+  componentWillUnmount() {
+    const elem = document.querySelector('.sideBarDiv');
+    if (elem) elem.style.opacity = 1;
   }
 
   handleChange(event) {
@@ -34,13 +45,13 @@ class AddNewProductForm extends React.Component {
     } catch (error) {
       console.error(error);
     }
-    this.props.handleButton();
+    this.props.history.push('/admin');
   }
 
   render() {
     return (
       <div className="form-prod-cont">
-        <h2>Add New Product:</h2>
+        <h1 className="add-new-prod-title">Add New Product</h1>
         <form onSubmit={this.handleSubmit} className="form-prod">
           <div className="form-pair">
             <label>Make:</label>
@@ -123,6 +134,7 @@ class AddNewProductForm extends React.Component {
             <label>Condition:</label>
             <select
               className="form-input"
+              id="condition"
               value={this.state.condition}
               onChange={this.handleChange}
               name="condition"

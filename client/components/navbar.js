@@ -22,15 +22,7 @@ class Navbar extends Component {
 
     return (
       <div className="navBarDiv">
-        {isLoggedIn ? (
-          <h1>
-            Welcome back, <span className="hpLoggedInWelcome">{user.name}</span>
-            !
-          </h1>
-        ) : (
-          <h1>Welcome to Car-ify !</h1>
-        )}
-
+        <h1 className="navBarWelcome">Welcome to Carify</h1>
         <nav>
           <div className="nav-links">
             <Link to="/" className="navBarText linkText">
@@ -58,6 +50,7 @@ class Navbar extends Component {
                 <img
                   src="https://findicons.com/files/icons/1676/primo/128/user.png"
                   width="30px"
+                  className="user-icon"
                 />
               </Link>
             ) : (
@@ -65,11 +58,16 @@ class Navbar extends Component {
             )}
 
             {isLoggedIn ? (
-              <a href="#" onClick={handleClick} className="linkText">
+              <a
+                href="#"
+                onClick={handleClick}
+                className="linkText"
+                id="logout"
+              >
                 Logout
               </a>
             ) : (
-              <Link to="/signIn" className="linkText sign-in">
+              <Link to="/signin" className="linkText sign-in">
                 Sign In
               </Link>
             )}

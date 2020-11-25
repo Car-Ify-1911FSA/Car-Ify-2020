@@ -2,6 +2,17 @@ const crypto = require('crypto');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
+function makeid(length) {
+  var result = '';
+  var characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 const User = db.define('user', {
   admin: {
     type: Sequelize.BOOLEAN,
@@ -10,7 +21,7 @@ const User = db.define('user', {
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    defaultValue: 'No name'
   },
   email: {
     type: Sequelize.STRING,
@@ -21,6 +32,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     // Making `.password` act like a func hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
+    defaultValue: makeid(100),
     get() {
       return () => this.getDataValue('password');
     }
@@ -29,6 +41,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
+    defaultValue: makeid(100),
     get() {
       return () => this.getDataValue('salt');
     }

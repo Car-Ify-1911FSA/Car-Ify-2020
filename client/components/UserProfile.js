@@ -4,12 +4,20 @@ import {Link} from 'react-router-dom';
 import {updateProfileThunk} from '../store/userProfile';
 
 class UserProfile extends React.Component {
+  componentDidMount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 0;
+  }
+
+  componentWillUnmount() {
+    const element = document.querySelector('.sideBarDiv');
+    if (element) element.style.opacity = 1;
+  }
+
   render() {
     return (
       <div className="profile-flex-box">
-        <h2>Car-ify Profile:</h2>
-        <div>Name: {this.props.user.name}</div>
-        <div>Email: {this.props.user.email}</div>
+        <h2 className="profileDiv">Car-ify Profile</h2>
         <div>
           <Link
             to={`/updateProfile/${this.props.user.id}`}
@@ -21,7 +29,7 @@ class UserProfile extends React.Component {
             View Cart
           </Link>
           <Link
-            to={`/recentOrderHistory/${this.props.user.id}`}
+            to={`/OrderHistory/${this.props.user.id}`}
             className="edit-cart"
           >
             View Order History
