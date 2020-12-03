@@ -20,6 +20,7 @@ const {
 
 async function seed() {
   try {
+    console.log('trying....');
     await db.sync({force: true});
     console.log('db synced!');
 
@@ -40,10 +41,8 @@ async function seed() {
 async function runSeed() {
   console.log('seeding...');
   try {
-    console.log('trying...');
     await seed();
   } catch (err) {
-    console.log('error...');
     console.error(err);
     process.exitCode = 1;
   } finally {
