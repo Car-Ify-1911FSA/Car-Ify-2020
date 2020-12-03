@@ -19,17 +19,22 @@ const {
 } = require('./seedData');
 
 async function seed() {
-  await db.sync({force: true});
-  console.log('db synced!');
+  try {
+    await db.sync({force: true});
+    console.log('db synced!');
 
-  await User.bulkCreate(userSeed);
-  await Payment.bulkCreate(paymentSeed);
-  await Product.bulkCreate(productSeed);
-  await PaymentAccount.bulkCreate(paymentAccountSeed); // TEMP REMOVE
-  await Cart.bulkCreate(cartSeed); // TEMP REMOVE
-  await CartProduct.bulkCreate(cartProductSeed); // TEMP REMOVE
+    await User.bulkCreate(userSeed);
+    await Payment.bulkCreate(paymentSeed);
+    await Product.bulkCreate(productSeed);
+    await PaymentAccount.bulkCreate(paymentAccountSeed); // TEMP REMOVE
+    await Cart.bulkCreate(cartSeed); // TEMP REMOVE
+    await CartProduct.bulkCreate(cartProductSeed); // TEMP REMOVE
 
-  console.log(`seeded successfully`);
+    console.log(`seeded successfully`);
+  } catch (err) {
+    console.log('db did not sync!');
+    console.log(err);
+  }
 }
 
 async function runSeed() {
