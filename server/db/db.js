@@ -5,12 +5,13 @@ const databaseName =
   pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '');
 
 console.log(databaseName, 'databaseName');
-console.log(process.env.DATABASE_URL, 'databaseName');
+console.log(process.env, 'databaseUrl');
 
+// ${databaseName}
 const db = new Sequelize(
-  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
+  process.env.DATABASE_URL || `postgres://localhost:5432/d4c3f7b45klt8b`,
   {
-    logging: true
+    logging: console.log
   }
 );
 module.exports = db;
