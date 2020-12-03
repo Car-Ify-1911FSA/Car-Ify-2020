@@ -13,6 +13,6 @@ const Cart = db.define('cart', {
   }
 });
 
-console.log(Cart, 'cart');
+console.log(db.define, Cart, typeof Cart, 'cart');
 
 module.exports = Cart;

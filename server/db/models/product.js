@@ -44,6 +44,6 @@ const Product = db.define('product', {
   }
 });
 
-console.log(Product, 'product');
+console.log(Product, typeof Product, 'product');
 
 module.exports = Product;
