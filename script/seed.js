@@ -20,8 +20,13 @@ const {
 
 async function seed() {
   try {
-    console.log('trying....');
-    await db.sync({force: true});
+    console.log('trying to sync....');
+    try {
+      await db.sync({force: false});
+    } catch (err) {
+      console.log('error while syncing!');
+      console.log(err);
+    }
     console.log('db synced!');
 
     await User.bulkCreate(userSeed);
