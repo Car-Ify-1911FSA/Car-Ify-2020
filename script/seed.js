@@ -20,8 +20,6 @@ const {
 
 async function seed() {
   try {
-    console.log('trying to sync....');
-    console.log(db);
     await db.sync({force: true});
     console.log('db synced!');
 
