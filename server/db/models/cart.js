@@ -13,4 +13,6 @@ const Cart = db.define('cart', {
   }
 });
 
+console.log(Cart, 'cart');
+
 module.exports = Cart;

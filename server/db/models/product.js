@@ -44,4 +44,6 @@ const Product = db.define('product', {
   }
 });
 
+console.log(Product, 'product');
+
 module.exports = Product;
