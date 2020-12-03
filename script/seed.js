@@ -47,7 +47,7 @@ async function runSeed() {
     process.exitCode = 1;
   } finally {
     console.log('closing db connection');
-    await db.close();
+    // await db.close();
     console.log('db connection closed');
   }
 }
@@ -56,4 +56,4 @@ if (module === require.main) {
   runSeed();
 }
 
-module.exports = seed;
+// module.exports = seed;
