@@ -26,13 +26,7 @@ const ProductCard = props => {
 
   return (
     <div className="product-card">
-      <Link
-        to={{
-          pathname: `/product/${prodId}`,
-          state: {state: props.product}
-        }}
-        className="productCardInsideDiv"
-      >
+      <div className="productCardInsideDiv">
         <h4>{`${brand} ${model}`}</h4>
         <img src={imageUrl} className="card-img" />
         <h4>
@@ -44,7 +38,7 @@ const ProductCard = props => {
           <h4>Quantity: {updatedQty}</h4>
         )}
         <h4>Rating: {avgRating.toFixed(1)}</h4>
-      </Link>
+      </div>
       <AddToCartButton product={props.product} updatedQty={updatedQty} />
     </div>
   );

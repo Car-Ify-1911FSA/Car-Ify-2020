@@ -8,6 +8,11 @@ class orderHistory extends Component {
     this.props.getOrderHistory(this.props.userId);
     const element = document.querySelector('.sideBarDiv');
     if (element) element.style.opacity = 0;
+    const {orderHistory, username, userId} = this.props;
+    if (!orderHistory.length) {
+      this.props.history.push(`/userProfile/${userId}`);
+      alert('"You currently do not have any order history to display');
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -42,8 +47,7 @@ class orderHistory extends Component {
   }
 
   render() {
-    const {orderHistory, username} = this.props;
-
+    const {orderHistory, username, userId} = this.props;
     return (
       <div className="fullOrderHistoryDiv">
         {orderHistory.map(cart => {

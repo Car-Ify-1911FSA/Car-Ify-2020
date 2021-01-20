@@ -458,10 +458,21 @@ img.google-icon {
 
 /* ----------------- SINGLE PRODUCT----------------- */
 .single-prod-cont {
-  background-color: lightgrey;
+  background: linear-gradient(
+    rgba(221, 221, 228, 0.7),
+    rgba(243, 241, 241, 0.7)
+  );
+  opacity: 1;
+  border-radius: 50px;
+  box-shadow: 1.5px 1.5px rgb(107, 106, 106);
+  margin: 0 50px;
+  padding: 20px;
+  position: relative;
+  top: 10%;
+  right: 10%;
   display: flex;
-  width: 70%;
-  height: 80%;
+  width: 40%;
+  height: 120%;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -470,7 +481,8 @@ img.google-icon {
 }
 
 .single-image {
-  width: 400px;
+  position: relative;
+  width: 200px;
 }
 
 .singleProdBtnDiv {
@@ -888,7 +900,7 @@ button.paymentLinkBtn.linkText {
 thead {
   background: linear-gradient(
     rgba(172, 172, 206, 0.7),
-    rgba(145, 145, 145, 0.7)
+    rgba(224, 224, 224, 0.7)
   );
 }
 
@@ -899,7 +911,6 @@ table.tg {
 .tg {
   border-collapse: collapse;
   border-spacing: 0;
-  border-color: rgb(65, 47, 47);
   border-radius: 1px;
   width: 100%;
 }
@@ -930,9 +941,6 @@ table.tg {
   word-break: normal;
   border-top-width: 1px;
   border-bottom-width: 1px;
-  border-color: #aaa;
-  color: #fff;
-  background: rgba(0, 120, 154, 0.927);
 }
 
 .tg .tg-cly1 {

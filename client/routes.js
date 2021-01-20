@@ -8,7 +8,6 @@ import {
   UserHome,
   AllProducts,
   Cart,
-  SingleProduct,
   PaymentAccounts,
   UserProfile,
   UpdateProfile,
@@ -45,7 +44,6 @@ class Routes extends Component {
         <Route path="/signin" component={LoginOrSignUp} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/product/:id" component={SingleProduct} />
         <Route path="/cart" component={Cart} />
         <Route path="/paymentAccounts" component={PaymentAccounts} />
         <Route path="/userProfile/:id" component={UserProfile} />
